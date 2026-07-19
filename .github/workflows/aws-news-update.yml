@@ -1,0 +1,64 @@
+name: Weekly AWS News Update
+
+on:
+  schedule:
+    - cron: '0 8 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  fetch-aws-news:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - run: pip install feedparser python-dateutil
+
+      - name: Fetch AWS What's New
+        run: |
+          python3 << 'PYEOF'
+          import feedparser, json, os, re
+          from datetime import datetime, timezone
+          from dateutil import parser as dp
+
+          feed = feedparser.parse("https://aws.amazon.com/about-aws/whats-new/recent/feed/")
+          items = []
+          for entry in feed.entries[:10]:
+              try: date = dp.parse(entry.get('published','')).strftime('%Y-%m-%d')
+              except: date = 'Unknown'
+              desc = re.sub(r'<[^>]+>','',entry.get('summary','')).strip()[:300]
+              items.append({"title":entry.get('title',''),"link":entry.get('link','#'),"date":date,"summary":desc})
+
+          os.makedirs('data',exist_ok=True)
+          with open('data/aws-news.json','w') as f:
+              json.dump({"updated":datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC'),"items":items},f,indent=2)
+          print(f"Fetched {len(items)} items")
+          PYEOF
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet data/aws-news.json; then
+            echo "No changes"
+          else
+            BRANCH="auto/aws-news-$(date +%Y%m%d)"
+            git checkout -b "$BRANCH"
+            git add data/aws-news.json
+            git commit -m "chore: update AWS What's New feed $(date +%Y-%m-%d)"
+            git push origin "$BRANCH"
+            curl -s -X POST \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Content-Type: application/json" \
+              https://api.github.com/repos/${{ github.repository }}/pulls \
+              -d "{\"title\":\"chore: AWS news update $(date +%Y-%m-%d)\",\"body\":\"Auto-generated weekly AWS What's New update.\",\"head\":\"$BRANCH\",\"base\":\"main\"}"
+          fi

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Practice Labs & Questions — AWS Study Hub</title>
+  <meta name="description" content="Free AWS hands-on labs, practice questions with answers, architecture challenges, and exam strategies.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/components.js"></script>
+</head><body>
+<div class="container" style="padding-top:2rem"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Labs &amp; Practice</span></div></div>
+<div class="page-header"><div class="container">
+  <span class="badge badge-green">Practice &amp; Labs</span>
+  <h1 style="margin-top:0.75rem">&#129514; Practice Labs &amp; Exam Questions</h1>
+  <p>Hands-on labs, practice questions with answers, architecture challenges, and proven exam strategies.</p>
+  <div class="flex-wrap mt-1"><span class="badge badge-green">Free Labs</span><span class="badge badge-blue">Practice Questions + Answers</span><span class="badge badge-orange">Architecture Challenges</span></div>
+</div></div>
+<div class="container" style="padding-bottom:4rem"><div class="doc-layout">
+<aside class="sidebar"><h4>Contents</h4>
+  <a href="#lab-platforms">Free Lab Platforms</a>
+  <a href="#questions">Practice Questions</a>
+  <a href="#arch">Architecture Challenges</a>
+  <a href="#strategy">Exam Strategy</a>
+  <a href="#patterns">Question Patterns</a>
+  <a href="#lab-checklist">Lab Checklist</a>
+</aside>
+<main>
+
+<section id="lab-platforms"><h2>&#127358; Free Hands-On Lab Platforms</h2>
+<div class="grid-2">
+  <div class="card" style="border-color:var(--aws-orange)"><h3>&#129351; AWS Free Tier</h3><p>Practice in a real AWS account:</p><ul><li>750 hrs/month EC2 t3.micro</li><li>5 GB S3 storage</li><li>750 hrs RDS (MySQL/PostgreSQL)</li><li>1 million Lambda invocations/month</li><li>25 GB DynamoDB storage</li></ul><a href="https://aws.amazon.com/free/" target="_blank" class="btn btn-primary" style="margin-top:1rem;font-size:0.85rem">Create Free Account &#8594;</a></div>
+  <div class="card"><h3>&#127891; AWS Skill Builder Labs</h3><p>Official guided labs in real AWS accounts. No credit card needed for sandbox environments.</p><ul><li>Step-by-step instructions</li><li>Temporary AWS sandbox</li><li>Covers most certification topics</li><li>Requires Skill Builder subscription ($29/mo)</li></ul><a href="https://explore.skillbuilder.aws/" target="_blank" class="btn btn-outline" style="margin-top:1rem;font-size:0.85rem">Access Labs &#8594;</a></div>
+  <div class="card"><h3>&#127968; AWS Well-Architected Labs</h3><p>Free official labs for each WA pillar: Security, Reliability, Performance, Cost, Operations, Sustainability.</p><a href="https://www.wellarchitectedlabs.com/" target="_blank" class="btn btn-outline" style="margin-top:1rem;font-size:0.85rem">Start Labs &#8594;</a></div>
+  <div class="card"><h3>&#127947; AWS Workshops</h3><p>200+ community and official workshops for specific services. EKS Workshop, Serverless Workshop, Security Workshop, and more.</p><a href="https://workshops.aws/" target="_blank" class="btn btn-outline" style="margin-top:1rem;font-size:0.85rem">Browse &#8594;</a></div>
+  <div class="card"><h3>&#128039; LocalStack</h3><p>Run AWS services locally on your machine. Free tier covers S3, Lambda, DynamoDB, SQS, SNS, IAM. No AWS account needed.</p><a href="https://localstack.cloud/" target="_blank" class="btn btn-outline" style="margin-top:1rem;font-size:0.85rem">Get LocalStack &#8594;</a></div>
+  <div class="card"><h3>&#128218; ExamPro (Andrew Brown)</h3><p>Free AWS courses on freeCodeCamp YouTube. Full CLF, SAA, DVA courses in one video each.</p><a href="https://www.youtube.com/@ExamProChannel" target="_blank" class="btn btn-outline" style="margin-top:1rem;font-size:0.85rem">Watch &#8594;</a></div>
+</div></section>
+
+<section id="questions"><h2>&#128221; Practice Questions</h2>
+<div class="callout info"><div class="callout-title">How to Use These</div><p>Cover the answers, think through your answer first, then reveal and read the explanation — especially for wrong answers. Understanding <em>why</em> wrong answers are wrong is just as important.</p></div>
+
+<h3>CLF-C02 Questions</h3>
+<div class="card" style="margin-bottom:1rem"><p><strong>Q1.</strong> A company needs to run a workload that can be interrupted and restarted without data loss. It must complete within 24 hours. Which EC2 pricing option provides the most cost savings?</p>
+<details style="margin-top:0.75rem"><summary style="cursor:pointer;color:var(--aws-orange);font-weight:600">Reveal Answer</summary>
+<div style="margin-top:0.75rem;padding:1rem;background:var(--bg-hover);border-radius:8px">
+<p><strong>&#9989; Spot Instances</strong></p><p>Up to 90% discount over On-Demand. Since the workload can be interrupted (and restarted), and has a 24-hour window, Spot is perfect. On-Demand is most expensive. Reserved requires 1-3 year commitment. Savings Plans apply to consistent usage.</p>
+</div></details></div>
+
+<div class="card" style="margin-bottom:1rem"><p><strong>Q2.</strong> Under the AWS Shared Responsibility Model, which is the customer's responsibility when using Amazon RDS?<br>A) Patching the database engine &nbsp; B) Managing the underlying EC2 instances &nbsp; C) Configuring security groups and network access &nbsp; D) Replacing failed storage hardware</p>
+<details style="margin-top:0.75rem"><summary style="cursor:pointer;color:var(--aws-orange);font-weight:600">Reveal Answer</summary>
+<div style="margin-top:0.75rem;padding:1rem;background:var(--bg-hover);border-radius:8px">
+<p><strong>&#9989; C) Configuring security groups and network access</strong></p><p>With managed services like RDS, AWS handles: OS patching, DB engine patches, hardware replacement. The customer is responsible for: security groups, NACLs, IAM, encryption settings, backup configuration, and the data itself.</p>
+</div></details></div>
+
+<h3>SAA-C03 Questions</h3>
+<div class="card" style="margin-bottom:1rem"><p><strong>Q3.</strong> A web application experiences high read traffic on its MySQL database. The team wants to improve performance without changing application code. What is the MOST cost-effective solution?<br>A) Migrate to Aurora &nbsp; B) Add RDS Read Replicas &nbsp; C) Use ElastiCache &nbsp; D) Enable Multi-AZ</p>
+<details style="margin-top:0.75rem"><summary style="cursor:pointer;color:var(--aws-orange);font-weight:600">Reveal Answer</summary>
+<div style="margin-top:0.75rem;padding:1rem;background:var(--bg-hover);border-radius:8px">
+<p><strong>&#9989; B) Add RDS Read Replicas</strong></p><p>Read Replicas offload read traffic. No app code changes needed if configured at the connection string level. ElastiCache (C) requires app code changes to check cache first. Multi-AZ (D) is for HA, not performance — standby is not readable. Aurora (A) requires migration effort.</p>
+</div></details></div>
+
+<div class="card" style="margin-bottom:1rem"><p><strong>Q4.</strong> A company wants S3 objects accessible ONLY through CloudFront, not directly via S3 URL. What should they configure?<br>A) S3 bucket ACL = private &nbsp; B) CloudFront Signed URLs &nbsp; C) Origin Access Control (OAC) &nbsp; D) S3 Transfer Acceleration</p>
+<details style="margin-top:0.75rem"><summary style="cursor:pointer;color:var(--aws-orange);font-weight:600">Reveal Answer</summary>
+<div style="margin-top:0.75rem;padding:1rem;background:var(--bg-hover);border-radius:8px">
+<p><strong>&#9989; C) Origin Access Control (OAC)</strong></p><p>OAC restricts S3 bucket access so only CloudFront can read it. The bucket policy is updated to allow only the CloudFront service principal. Signed URLs (B) restrict who can access CloudFront content, not how CloudFront accesses S3.</p>
+</div></details></div>
+
+<h3>DVA-C02 Questions</h3>
+<div class="card" style="margin-bottom:1rem"><p><strong>Q5.</strong> A Lambda function has S3 read permission in its IAM role. It gets AccessDenied on an S3 bucket that has a bucket policy with an explicit Deny all. Why?</p>
+<details style="margin-top:0.75rem"><summary style="cursor:pointer;color:var(--aws-orange);font-weight:600">Reveal Answer</summary>
+<div style="margin-top:0.75rem;padding:1rem;background:var(--bg-hover);border-radius:8px">
+<p><strong>&#9989; The explicit Deny in the bucket policy overrides the Allow in the IAM role.</strong></p><p>IAM evaluation order: an <strong>explicit Deny always wins</strong>, regardless of any Allow policies. The bucket policy must be updated to remove the explicit Deny or add an exception for the Lambda execution role ARN. This is one of the most tested IAM concepts.</p>
+</div></details></div>
+
+<div class="callout tip"><div class="callout-title">&#128161; Want 500+ More Practice Questions?</div><p>Visit <a href="https://tutorialsdojo.com/" target="_blank">Tutorials Dojo</a> for the most realistic practice exams per certification, or use the official <a href="https://explore.skillbuilder.aws/" target="_blank">AWS Skill Builder</a> practice question sets.</p></div></section>
+
+<section id="arch"><h2>&#127959; Architecture Challenges</h2>
+<p>Try designing these architectures yourself before looking at the solution. Use <a href="https://draw.io" target="_blank">draw.io</a> or paper.</p>
+
+<div class="card" style="margin-bottom:1rem"><h3>Challenge 1: Three-Tier Web Application (SAA level)</h3>
+<p><strong>Requirements:</strong> Highly available, fault-tolerant, auto-scaling web app. Web tier, application tier, MySQL database. Handles 10,000 concurrent users. RTO &lt; 1 hour.</p>
+<details style="margin-top:0.75rem"><summary style="cursor:pointer;color:var(--aws-orange);font-weight:600">Show Reference Architecture</summary>
+<div style="margin-top:0.75rem;padding:1rem;background:var(--bg-hover);border-radius:8px"><pre><code>Internet → Route 53 → CloudFront (CDN)
+                           ↓
+               Application Load Balancer (Multi-AZ)
+                  ↙              ↘
+         AZ-A                    AZ-B
+    EC2 Auto Scaling         EC2 Auto Scaling (Web Tier)
+         ↓                         ↓
+    EC2 Auto Scaling         EC2 Auto Scaling (App Tier)
+         ↓                         ↓
+    RDS MySQL Multi-AZ Primary ←→ RDS Standby
+         ↓
+    ElastiCache (session store)
+    S3 (static assets) + Secrets Manager (DB credentials)</code></pre></div></details></div>
+
+<div class="card" style="margin-bottom:1rem"><h3>Challenge 2: Serverless Event-Driven Pipeline (DVA level)</h3>
+<p><strong>Requirements:</strong> Users upload images to S3. Auto-resize to 3 thumbnail sizes, store metadata in DynamoDB, notify subscribers. Handle 1000 uploads/minute.</p>
+<details style="margin-top:0.75rem"><summary style="cursor:pointer;color:var(--aws-orange);font-weight:600">Show Reference Architecture</summary>
+<div style="margin-top:0.75rem;padding:1rem;background:var(--bg-hover);border-radius:8px"><pre><code>S3 PutObject Event
+       ↓
+Lambda (Image Processor)
+   → Resize to 3 sizes → Store thumbnails in S3
+   → Write metadata to DynamoDB
+   → Publish to SNS Topic
+          ↓
+    ┌─────┼──────┐
+   SQS   Email  Lambda (webhook)
+  Queue  Sub
+    ↓
+  Lambda (downstream processing)
+
+DLQ attached to Lambda for failed events
+X-Ray tracing enabled + CloudWatch alarms on errors</code></pre></div></details></div>
+
+<div class="card" style="margin-bottom:1rem"><h3>Challenge 3: Disaster Recovery (SAP level)</h3>
+<p><strong>Requirements:</strong> Financial app in us-east-1. RTO &lt; 15 min, RPO &lt; 5 min. Data must stay in US regions. Moderate budget.</p>
+<details style="margin-top:0.75rem"><summary style="cursor:pointer;color:var(--aws-orange);font-weight:600">Show Reference Architecture</summary>
+<div style="margin-top:0.75rem;padding:1rem;background:var(--bg-hover);border-radius:8px"><pre><code>Strategy: Warm Standby (meets RTO 15 min, RPO 5 min within budget)
+
+Primary (us-east-1):
+  ALB → EC2 ASG (full scale) → RDS MySQL Multi-AZ
+  Route 53 Failover routing (health check on ALB)
+
+DR (us-west-2):
+  ALB → EC2 ASG (2 instances — warm) → RDS Read Replica
+  (async replication ~5 min lag = RPO ✓)
+
+Failover:
+1. Route 53 detects unhealthy primary (60s TTL)
+2. DNS fails over to us-west-2 ALB
+3. Read Replica promoted to primary (2-3 min)
+4. ASG scales up in us-west-2 (5-10 min)
+Total RTO: ~10-15 minutes ✓</code></pre></div></details></div></section>
+
+<section id="strategy"><h2>&#127919; Exam Strategy</h2>
+<div class="grid-2">
+  <div class="card"><h3>Before the Exam</h3><ul><li>Score 75%+ on Tutorials Dojo before booking</li><li>Review all wrong answers — understand WHY they're wrong</li><li>Read the official exam guide domains the week before</li><li>Review your weak areas using our cert checklists</li><li>Get a good night's sleep — don't cram the night before</li></ul></div>
+  <div class="card"><h3>During the Exam</h3><ul><li>Read every word — key qualifiers matter</li><li>Look for: "MOST cost-effective", "LEAST operational overhead"</li><li>Eliminate obviously wrong answers first</li><li>Flag difficult questions and return later</li><li>Trust your first instinct — don't second-guess without reason</li></ul></div>
+</div></section>
+
+<section id="patterns"><h2>&#128218; Question Pattern Recognition</h2>
+<div class="table-wrap"><table><thead><tr><th>If the question says...</th><th>Think about...</th></tr></thead><tbody>
+  <tr><td>"MOST cost-effective" / "cheapest"</td><td>Spot, Reserved, Savings Plans, S3 Glacier, serverless, Fargate Spot</td></tr>
+  <tr><td>"LEAST operational overhead" / "fully managed"</td><td>RDS, Lambda, Fargate, DynamoDB, ElastiCache, Aurora Serverless</td></tr>
+  <tr><td>"highly available" across AZs</td><td>Multi-AZ RDS, ALB, EFS, DynamoDB Global Tables, ASG multi-AZ</td></tr>
+  <tr><td>"decoupled" / "loose coupling"</td><td>SQS, SNS, EventBridge, Step Functions</td></tr>
+  <tr><td>"near real-time analytics"</td><td>Kinesis Data Streams, Kinesis Analytics, OpenSearch</td></tr>
+  <tr><td>"millions of users" / "global"</td><td>CloudFront, Global Accelerator, Route 53 latency, DynamoDB Global Tables</td></tr>
+  <tr><td>"compliance" / "audit"</td><td>CloudTrail, Config, Macie, Security Hub, Artifact</td></tr>
+  <tr><td>"temporary credentials"</td><td>STS AssumeRole, IAM Roles, Cognito Identity Pools</td></tr>
+  <tr><td>"on-premises to AWS"</td><td>Site-to-Site VPN, Direct Connect, DataSync, DMS, MGN, Snowball</td></tr>
+  <tr><td>"encrypt existing unencrypted EBS"</td><td>Snapshot → Copy snapshot with encryption → New volume from encrypted snapshot</td></tr>
+</tbody></table></div></section>
+
+<section id="lab-checklist" class="progress-section"><h2>&#129514; Hands-On Lab Checklist</h2>
+<div class="progress-wrap"><div class="progress-label"><span>Labs Completed</span><span class="progress-pct">0%</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div>
+<h3>Core Labs (Do These First)</h3>
+<ul class="checklist">
+  <li><input type="checkbox"><span>Launch an EC2 instance, SSH in, install nginx, configure Security Groups</span></li>
+  <li><input type="checkbox"><span>Create an S3 bucket, upload files, enable versioning, configure lifecycle policy</span></li>
+  <li><input type="checkbox"><span>Create a VPC with public + private subnets, IGW, NAT Gateway, route tables</span></li>
+  <li><input type="checkbox"><span>Launch RDS MySQL in private subnet, connect from EC2 in public subnet</span></li>
+  <li><input type="checkbox"><span>Create a Lambda function triggered by S3 upload</span></li>
+  <li><input type="checkbox"><span>Set up an ALB with 2 EC2 targets in different AZs</span></li>
+  <li><input type="checkbox"><span>Configure Auto Scaling Group with target tracking scaling policy</span></li>
+  <li><input type="checkbox"><span>Create IAM roles and test with STS assume-role cross-account</span></li>
+  <li><input type="checkbox"><span>Deploy a CloudFormation stack with EC2, SG, and outputs</span></li>
+  <li><input type="checkbox"><span>Set up CloudWatch alarms and send SNS notifications</span></li>
+</ul>
+<h3>Intermediate Labs</h3>
+<ul class="checklist">
+  <li><input type="checkbox"><span>Deploy a serverless app: API Gateway + Lambda + DynamoDB</span></li>
+  <li><input type="checkbox"><span>Set up SQS queue with Lambda consumer and DLQ</span></li>
+  <li><input type="checkbox"><span>Configure S3 Cross-Region Replication</span></li>
+  <li><input type="checkbox"><span>Set up CloudFront distribution with S3 origin and OAC</span></li>
+  <li><input type="checkbox"><span>Implement SSM Session Manager for SSH-less EC2 access</span></li>
+  <li><input type="checkbox"><span>Enable CloudTrail and query logs with Athena</span></li>
+  <li><input type="checkbox"><span>Configure KMS customer-managed key and encrypt EBS volume</span></li>
+  <li><input type="checkbox"><span>Deploy a container on ECS Fargate with ECR image</span></li>
+  <li><input type="checkbox"><span>Create a CodePipeline: CodeCommit → CodeBuild → CodeDeploy</span></li>
+  <li><input type="checkbox"><span>Configure Route 53 failover routing with health checks</span></li>
+</ul>
+<h3>Advanced Labs</h3>
+<ul class="checklist">
+  <li><input type="checkbox"><span>Set up VPC Peering between two VPCs and test connectivity</span></li>
+  <li><input type="checkbox"><span>Configure Transit Gateway with 3 VPCs and route table segmentation</span></li>
+  <li><input type="checkbox"><span>Set up Kinesis Data Streams with Lambda consumer and error handling</span></li>
+  <li><input type="checkbox"><span>Train a SageMaker ML model with built-in XGBoost algorithm</span></li>
+  <li><input type="checkbox"><span>Build a Glue ETL pipeline: S3 CSV → Parquet → Athena query</span></li>
+  <li><input type="checkbox"><span>Implement GuardDuty + EventBridge + Lambda auto-remediation</span></li>
+  <li><input type="checkbox"><span>Deploy multi-region active-passive with Route 53 failover</span></li>
+  <li><input type="checkbox"><span>Configure cross-account IAM role and use from another account</span></li>
+  <li><input type="checkbox"><span>Set up AWS Config rules with automatic SSM remediation</span></li>
+  <li><input type="checkbox"><span>Deploy a CDK stack to create infrastructure from Python code</span></li>
+</ul></section>
+
+</main></div></div>
+<script src="../assets/js/main.js"></script></body></html>

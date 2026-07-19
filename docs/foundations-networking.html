@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Networking Fundamentals — AWS Study Hub</title>
+  <meta name="description" content="OSI model, TCP/IP, DNS, CIDR, subnetting, AWS VPC concepts for AWS certifications.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/components.js"></script>
+</head><body>
+<div class="container" style="padding-top:2rem"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Foundations</span> / <span>Networking Fundamentals</span></div></div>
+<div class="page-header"><div class="container">
+  <span class="badge badge-blue">Foundations</span>
+  <h1 style="margin-top:0.75rem">&#127760; Networking Fundamentals</h1>
+  <p>Deep understanding of networking is essential for AWS. VPCs, subnets, routing, load balancers, DNS — all rooted in networking basics.</p>
+  <div class="flex-wrap mt-1"><span class="badge badge-green">Essential for SAA / ANS / SCS</span><span class="badge badge-blue">25+ Topics</span></div>
+</div></div>
+<div class="container" style="padding-bottom:4rem;"><div class="doc-layout"><aside class="sidebar"><h4>Contents</h4><a href="#osi">OSI Model</a>
+<a href="#tcpip">TCP/IP</a>
+<a href="#ip">IP Addressing</a>
+<a href="#cidr">CIDR & Subnetting</a>
+<a href="#ports">Key Protocols & Ports</a>
+<a href="#dns">DNS</a>
+<a href="#nat">NAT</a>
+<a href="#lb">Load Balancers</a>
+<a href="#firewalls">Firewalls & ACLs</a>
+<a href="#vpc-intro">AWS VPC Overview</a>
+<a href="#checklist">Checklist</a>
+</aside><main>
+<section id="osi"><h2>The OSI Model</h2>
+<div class="table-wrap"><table><thead><tr><th>Layer</th><th>Name</th><th>Examples</th><th>AWS Service</th></tr></thead><tbody>
+  <tr><td>7</td><td>Application</td><td>HTTP, HTTPS, FTP, DNS</td><td>API Gateway, CloudFront</td></tr>
+  <tr><td>6</td><td>Presentation</td><td>SSL/TLS, JPEG</td><td>ACM (TLS certs)</td></tr>
+  <tr><td>5</td><td>Session</td><td>NetBIOS, RPC</td><td>—</td></tr>
+  <tr><td>4</td><td>Transport</td><td>TCP, UDP</td><td>NLB (Layer 4)</td></tr>
+  <tr><td>3</td><td>Network</td><td>IP, ICMP</td><td>VPC, Route Tables</td></tr>
+  <tr><td>2</td><td>Data Link</td><td>Ethernet, MAC</td><td>Direct Connect (physical)</td></tr>
+  <tr><td>1</td><td>Physical</td><td>Cables, fiber</td><td>Direct Connect</td></tr>
+</tbody></table></div>
+<div class="callout warn"><div class="callout-title">&#9888; AWS Exam Tip</div><p>ALB = Layer 7. NLB = Layer 4. GLB = Layer 3. Frequently tested!</p></div></section>
+
+<section id="tcpip"><h2>TCP vs UDP</h2>
+<div class="grid-2">
+  <div class="card"><h3>TCP</h3><ul><li>Connection-oriented (3-way handshake)</li><li>Reliable, ordered delivery</li><li>Flow control &amp; congestion control</li><li>Use for: HTTP, SSH, FTP, SMTP</li></ul></div>
+  <div class="card"><h3>UDP</h3><ul><li>Connectionless — fire and forget</li><li>No guarantee of delivery or order</li><li>Very low latency overhead</li><li>Use for: DNS, VoIP, video streaming, gaming</li></ul></div>
+</div></section>
+
+<section id="ip"><h2>IP Addressing</h2>
+<p>32-bit IPv4 address in 4 octets: <code>192.168.1.100</code></p>
+<h3>Private IP Ranges (RFC 1918)</h3>
+<pre><code>10.0.0.0/8        → AWS VPC default range
+172.16.0.0/12     → AWS default VPC (172.31.0.0/16)
+192.168.0.0/16    → Home networks</code></pre>
+<div class="callout info"><div class="callout-title">&#9729;&#65039; AWS Context</div><p>AWS VPCs must use private IP ranges. The default VPC uses <code>172.31.0.0/16</code>.</p></div></section>
+
+<section id="cidr"><h2>CIDR &amp; Subnetting</h2>
+<p>CIDR notation combines an IP with a prefix length: <code>10.0.0.0/16</code></p>
+<div class="table-wrap"><table><thead><tr><th>CIDR</th><th>Total IPs</th><th>AWS Usable</th></tr></thead><tbody>
+  <tr><td>/16</td><td>65,536</td><td>65,531</td></tr>
+  <tr><td>/24</td><td>256</td><td>251</td></tr>
+  <tr><td>/25</td><td>128</td><td>123</td></tr>
+  <tr><td>/26</td><td>64</td><td>59</td></tr>
+  <tr><td>/27</td><td>32</td><td>27</td></tr>
+  <tr><td>/28</td><td>16</td><td>11</td></tr>
+</tbody></table></div>
+<div class="callout warn"><div class="callout-title">&#9888; AWS Reserves 5 IPs Per Subnet</div><p>Network address, VPC router, DNS, future use, and broadcast. A /24 gives 251 usable IPs, not 254. <strong>Frequently tested!</strong></p></div>
+<pre><code># Quick formula: Total IPs = 2^(32 - prefix)
+/24 = 2^8 = 256 IPs
+/16 = 2^16 = 65,536 IPs</code></pre></section>
+
+<section id="ports"><h2>Key Protocols &amp; Ports</h2>
+<div class="table-wrap"><table><thead><tr><th>Protocol</th><th>Port</th><th>Transport</th></tr></thead><tbody>
+  <tr><td>HTTP</td><td>80</td><td>TCP</td></tr><tr><td>HTTPS</td><td>443</td><td>TCP</td></tr>
+  <tr><td>SSH</td><td>22</td><td>TCP</td></tr><tr><td>RDP</td><td>3389</td><td>TCP</td></tr>
+  <tr><td>DNS</td><td>53</td><td>UDP/TCP</td></tr><tr><td>DHCP</td><td>67/68</td><td>UDP</td></tr>
+  <tr><td>SMTP</td><td>25/587</td><td>TCP</td></tr>
+  <tr><td>MySQL/Aurora</td><td>3306</td><td>TCP</td></tr><tr><td>PostgreSQL</td><td>5432</td><td>TCP</td></tr>
+  <tr><td>Redis (ElastiCache)</td><td>6379</td><td>TCP</td></tr>
+  <tr><td>NFS (EFS)</td><td>2049</td><td>TCP</td></tr>
+</tbody></table></div></section>
+
+<section id="dns"><h2>DNS Record Types</h2>
+<div class="table-wrap"><table><thead><tr><th>Record</th><th>Purpose</th><th>Example</th></tr></thead><tbody>
+  <tr><td>A</td><td>Domain → IPv4</td><td>example.com → 93.184.216.34</td></tr>
+  <tr><td>CNAME</td><td>Alias to another domain</td><td>www → example.com</td></tr>
+  <tr><td>MX</td><td>Mail server</td><td>mail.example.com</td></tr>
+  <tr><td>TXT</td><td>Text info (SPF, verification)</td><td>"v=spf1..."</td></tr>
+  <tr><td>NS</td><td>Name servers for zone</td><td>ns1.aws.com</td></tr>
+  <tr><td>Alias (Route 53)</td><td>AWS-specific; map to AWS resource</td><td>apex.com → ALB DNS</td></tr>
+</tbody></table></div>
+<div class="callout warn"><div class="callout-title">&#9888; CNAME vs Alias</div><p>You <strong>cannot</strong> use CNAME at the zone apex (naked domain like <code>example.com</code>). Use Route 53 <strong>Alias records</strong> instead — they point to AWS resources and are free of charge.</p></div></section>
+
+<section id="nat"><h2>NAT Gateway vs NAT Instance</h2>
+<div class="grid-2">
+  <div class="card"><h3>NAT Gateway (Managed)</h3><ul><li>Fully managed, highly available per AZ</li><li>Private subnet → internet outbound only</li><li>Requires Elastic IP in public subnet</li><li>Scales to 45 Gbps automatically</li></ul></div>
+  <div class="card"><h3>NAT Instance (Legacy)</h3><ul><li>EC2 instance doing NAT manually</li><li>Must disable Source/Destination Check</li><li>You manage patching and HA</li><li>Can double as a bastion host</li></ul></div>
+</div></section>
+
+<section id="lb"><h2>Load Balancers</h2>
+<div class="table-wrap"><table><thead><tr><th>Type</th><th>OSI Layer</th><th>Protocol</th><th>Best For</th></tr></thead><tbody>
+  <tr><td>ALB</td><td>7</td><td>HTTP, HTTPS, gRPC</td><td>Web apps, microservices, path-based routing</td></tr>
+  <tr><td>NLB</td><td>4</td><td>TCP, UDP, TLS</td><td>Ultra-low latency, static IP, gaming, IoT</td></tr>
+  <tr><td>GLB</td><td>3</td><td>IP</td><td>Inline virtual appliances (firewalls, IDS)</td></tr>
+</tbody></table></div></section>
+
+<section id="firewalls"><h2>Security Groups vs Network ACLs</h2>
+<div class="grid-2">
+  <div class="card"><h3>Security Groups</h3><ul><li>Instance level (ENI)</li><li><strong>Stateful</strong> — return traffic auto-allowed</li><li>ALLOW rules only</li><li>Default: deny all inbound, allow all outbound</li></ul></div>
+  <div class="card"><h3>Network ACLs</h3><ul><li>Subnet level</li><li><strong>Stateless</strong> — must allow both directions</li><li>ALLOW and DENY rules</li><li>Rules evaluated lowest number first</li></ul></div>
+</div></section>
+
+<section id="vpc-intro"><h2>AWS VPC Overview</h2>
+<p>A VPC (Virtual Private Cloud) is your isolated network in AWS.</p>
+<ul><li><strong>VPC</strong> — logical isolation; CIDR block (e.g., 10.0.0.0/16)</li>
+<li><strong>Subnets</strong> — subdivide VPC; tied to one AZ</li>
+<li><strong>Internet Gateway (IGW)</strong> — enables internet access for public subnets</li>
+<li><strong>Route Tables</strong> — control where traffic goes</li>
+<li><strong>NAT Gateway</strong> — outbound internet for private subnets</li>
+<li><strong>VPC Peering</strong> — connect two VPCs (no transitive routing)</li>
+<li><strong>Transit Gateway</strong> — hub-and-spoke for many VPCs (transitive)</li>
+<li><strong>VPC Endpoints</strong> — private access to AWS services (no internet)</li></ul>
+<div class="callout tip"><div class="callout-title">&#128161; Public vs Private Subnet</div><p>A <strong>public subnet</strong> has a route to an Internet Gateway (<code>0.0.0.0/0 → igw-xxx</code>). A <strong>private subnet</strong> has no such route. It's all in the route table!</p></div></section>
+<section id="checklist" class="progress-section"><h2>&#128203; Study Checklist</h2><div class="progress-wrap"><div class="progress-label"><span>Progress</span><span class="progress-pct">0%</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div><ul class="checklist"><li><input type="checkbox"><span>Name all 7 OSI layers and their functions</span></li><li><input type="checkbox"><span>Explain the difference between TCP and UDP</span></li><li><input type="checkbox"><span>Calculate the number of IPs in a CIDR block</span></li><li><input type="checkbox"><span>Identify private IP ranges (RFC 1918)</span></li><li><input type="checkbox"><span>Know why AWS reserves 5 IPs per subnet</span></li><li><input type="checkbox"><span>Explain DNS record types: A, CNAME, MX, TXT, Alias</span></li><li><input type="checkbox"><span>Know common ports: 22, 80, 443, 3306, 5432, 3389</span></li><li><input type="checkbox"><span>Explain NAT Gateway vs NAT Instance</span></li><li><input type="checkbox"><span>Explain ALB vs NLB vs GLB differences</span></li><li><input type="checkbox"><span>Explain Security Groups vs Network ACLs (stateful vs stateless)</span></li><li><input type="checkbox"><span>Understand VPC components: IGW, Route Tables, Subnets</span></li><li><input type="checkbox"><span>Explain VPC Peering vs Transit Gateway</span></li><li><input type="checkbox"><span>Understand VPC Endpoints (Gateway vs Interface)</span></li><li><input type="checkbox"><span>Explain Site-to-Site VPN vs Direct Connect</span></li><li><input type="checkbox"><span>Know what makes a subnet public vs private</span></li></ul><div class="mt-2"><a href="clf-c02.html" class="btn btn-primary">Next: Cloud Practitioner (CLF-C02) &rarr;</a></div></section></main></div></div><script src="../assets/js/main.js"></script></body></html>

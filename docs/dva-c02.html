@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>DVA-C02 — AWS Certified Developer Associate — AWS Study Hub</title>
+  <meta name="description" content="Develop, deploy, and debug cloud-based apps on AWS. Lambda, DynamoDB, API Gateway, CI/CD, X-Ray.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/components.js"></script>
+</head><body><div class="container" style="padding-top:2rem;"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Certifications</span> / <span>DVA-C02</span></div></div><div class="page-header"><div class="container"><span class="badge badge-blue">Associate</span><h1 style="margin-top:0.75rem;">&#128187; DVA-C02 — AWS Certified Developer Associate</h1><p>Develop, deploy, and debug cloud-based apps on AWS. Lambda, DynamoDB, API Gateway, CI/CD, X-Ray.</p><div class="flex-wrap mt-1"><span class="badge badge-green">130 min | 65 questions</span><span class="badge badge-blue">Passing: 720/1000</span></div></div></div><div class="container" style="padding-bottom:4rem;"><div class="doc-layout"><aside class="sidebar"><h4>Contents</h4><a href="#overview">Exam Overview</a>
+<a href="#lambda">Lambda Deep Dive</a>
+<a href="#dynamodb">DynamoDB</a>
+<a href="#cicd">CI/CD</a>
+<a href="#api-gw">API Gateway</a>
+<a href="#xray">Monitoring &amp; X-Ray</a>
+<a href="#checklist">Checklist</a>
+</aside><main><section id="overview"><h2>Exam Overview</h2>
+<div class="grid-2">
+  <div class="card"><h3>Exam Details</h3><ul>
+    <li><strong>Duration:</strong> 130 minutes</li><li><strong>Questions:</strong> 65</li>
+    <li><strong>Passing Score:</strong> 720/1000</li>
+    <li><strong>Format:</strong> Multiple choice &amp; multiple response</li>
+    <li><strong>Cost:</strong> ~$150-300 USD</li><li><strong>Validity:</strong> 3 years</li>
+  </ul></div>
+  <div class="card"><h3>&#127891; Official Resources</h3><ul>
+    <li><a href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/764/developing-on-aws" target="_blank" rel="noopener">Free Skill Builder: Developing on AWS</a></li>
+    <li><a href="https://d1.awsstatic.com/training-and-certification/docs-dev-associate/AWS-Certified-Developer-Associate_Exam-Guide.pdf" target="_blank" rel="noopener">Official Exam Guide (PDF)</a></li>
+    <li><a href="https://d1.awsstatic.com/training-and-certification/docs-dev-associate/AWS-Certified-Developer-Associate_Sample-Questions.pdf" target="_blank" rel="noopener">Official Sample Questions (PDF)</a></li>
+    <li><a href="https://aws.amazon.com/certification/" target="_blank" rel="noopener">Schedule Your Exam</a></li>
+    <li><a href="https://tutorialsdojo.com/" target="_blank" rel="noopener">Tutorials Dojo Practice Exams</a></li>
+    <li><a href="https://www.udemy.com/user/stephane-maarek/" target="_blank" rel="noopener">Stephane Maarek on Udemy</a></li>
+  </ul></div>
+</div>
+<h3>Exam Domains</h3>
+<div class="table-wrap"><table><thead><tr><th>Domain</th><th>Weight</th></tr></thead><tbody><tr><td>Development with AWS Services</td><td>32%</td></tr><tr><td>Security</td><td>26%</td></tr><tr><td>Deployment</td><td>24%</td></tr><tr><td>Troubleshooting &amp; Optimization</td><td>18%</td></tr></tbody></table></div>
+</section>
+<section id="lambda"><h2>Lambda Deep Dive</h2>
+<div class="grid-2">
+  <div class="card"><h3>Limits</h3><ul><li>Memory: 128 MB – 10,240 MB</li><li>Timeout: max <strong>15 minutes</strong></li><li>Temp storage (/tmp): 512 MB – 10 GB</li><li>Concurrent executions: 1,000 (soft limit)</li><li>Package: 50 MB zipped, 250 MB unzipped</li></ul></div>
+  <div class="card"><h3>Invocation Types</h3><ul><li><strong>Synchronous</strong> &mdash; wait for result (API Gateway, ALB)</li><li><strong>Asynchronous</strong> &mdash; no wait (S3, SNS, EventBridge); retries 2x; DLQ</li><li><strong>Poll-based</strong> &mdash; Lambda polls (SQS, Kinesis, DynamoDB Streams)</li></ul></div>
+</div>
+<h3>Lambda Features</h3>
+<ul><li><strong>Versions</strong> &mdash; immutable snapshots of code + config</li><li><strong>Aliases</strong> &mdash; named pointers to versions (PROD, DEV)</li><li><strong>Canary / Linear deployments</strong> &mdash; gradual traffic shifts with CodeDeploy</li><li><strong>Layers</strong> &mdash; reusable dependencies shared across functions</li><li><strong>Container Images</strong> &mdash; up to 10 GB; use Lambda base images</li></ul></section>
+
+<section id="dynamodb"><h2>DynamoDB for Developers</h2>
+<div class="table-wrap"><table><thead><tr><th>Concept</th><th>Description</th></tr></thead><tbody>
+  <tr><td>Primary Key</td><td>Partition Key only (simple) OR Partition Key + Sort Key (composite)</td></tr>
+  <tr><td>GSI</td><td>Global Secondary Index &mdash; different partition key; eventual consistency</td></tr>
+  <tr><td>LSI</td><td>Local Secondary Index &mdash; same partition key, different sort key; must be at creation</td></tr>
+  <tr><td>Read Consistency</td><td>Eventually Consistent (default, cheaper) vs Strongly Consistent</td></tr>
+  <tr><td>DynamoDB Streams</td><td>Ordered record of item changes; trigger Lambda</td></tr>
+  <tr><td>TTL</td><td>Auto-delete items after expiry timestamp (free)</td></tr>
+  <tr><td>DAX</td><td>In-memory cache; microsecond read latency; write-through</td></tr>
+  <tr><td>Transactions</td><td>ACID transactions across multiple items/tables</td></tr>
+</tbody></table></div></section>
+
+<section id="cicd"><h2>CI/CD on AWS</h2>
+<div class="table-wrap"><table><thead><tr><th>Service</th><th>Purpose</th><th>Like</th></tr></thead><tbody>
+  <tr><td>CodeCommit</td><td>Private Git repositories</td><td>GitHub/GitLab</td></tr>
+  <tr><td>CodeBuild</td><td>Build &amp; test (compile, run tests, create artifacts)</td><td>Jenkins, GitHub Actions</td></tr>
+  <tr><td>CodeDeploy</td><td>Deploy to EC2, Lambda, ECS, on-premises</td><td>Spinnaker</td></tr>
+  <tr><td>CodePipeline</td><td>Orchestrate full CI/CD pipeline</td><td>GitLab CI</td></tr>
+  <tr><td>CodeArtifact</td><td>Artifact repository (npm, Maven, PyPI)</td><td>Nexus</td></tr>
+</tbody></table></div>
+<h3>CodeDeploy Deployment Strategies</h3>
+<div class="table-wrap"><table><thead><tr><th>Strategy</th><th>Behavior</th></tr></thead><tbody>
+  <tr><td>In-Place (EC2)</td><td>Deploy to existing instances; brief downtime per instance</td></tr>
+  <tr><td>Blue/Green (EC2)</td><td>New instances; shift traffic via LB; zero downtime</td></tr>
+  <tr><td>All-at-once (Lambda)</td><td>Immediate 100% shift</td></tr>
+  <tr><td>Canary (Lambda/ECS)</td><td>X% traffic for N minutes, then 100%</td></tr>
+  <tr><td>Linear (Lambda/ECS)</td><td>Gradual shift X% every N minutes</td></tr>
+</tbody></table></div></section>
+
+<section id="api-gw"><h2>API Gateway</h2>
+<ul>
+  <li><strong>REST API</strong> &mdash; full features, 29s timeout, edge-optimized or regional</li>
+  <li><strong>HTTP API</strong> &mdash; simpler, 70% cheaper than REST API</li>
+  <li><strong>WebSocket API</strong> &mdash; bidirectional; real-time apps, chat, gaming</li>
+  <li><strong>CORS</strong> &mdash; must be enabled for browser cross-origin calls</li>
+  <li><strong>Stages</strong> &mdash; dev, staging, prod; each can have throttling/canary settings</li>
+  <li><strong>Usage Plans &amp; API Keys</strong> &mdash; throttle and monetize APIs</li>
+  <li><strong>Caching</strong> &mdash; reduce backend calls; TTL 0-3600s</li>
+</ul></section>
+
+<section id="xray"><h2>Monitoring &amp; X-Ray</h2>
+<div class="grid-2">
+  <div class="card"><h3>CloudWatch</h3><ul><li>Metrics &mdash; every service sends metrics (CPU, requests, errors)</li><li>Alarms &mdash; trigger SNS/ASG when threshold breached</li><li>Logs &mdash; Lambda writes here automatically</li><li>Log Insights &mdash; SQL-like query language for logs</li></ul></div>
+  <div class="card"><h3>X-Ray</h3><ul><li>Distributed tracing for microservices &amp; Lambda</li><li>Service Map &mdash; visual of all components</li><li>Requires: X-Ray SDK + X-Ray Daemon (EC2) or active tracing (Lambda)</li><li>Annotations (indexed) vs Metadata (not indexed)</li><li>Sampling rules &mdash; control % of requests to trace</li></ul></div>
+</div></section><section id="checklist" class="progress-section"><h2>&#128203; Study Checklist</h2><div class="progress-wrap"><div class="progress-label"><span>Progress</span><span class="progress-pct">0%</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div><ul class="checklist"><li><input type="checkbox"><span>Configure AWS CLI with profiles</span></li><li><input type="checkbox"><span>Know SDK credential resolution order</span></li><li><input type="checkbox"><span>Understand Lambda invocation types (sync, async, poll)</span></li><li><input type="checkbox"><span>Know Lambda limits: 15 min, 10 GB memory, 250 MB package</span></li><li><input type="checkbox"><span>Explain Lambda versions, aliases, canary deployments</span></li><li><input type="checkbox"><span>Know DynamoDB primary keys, GSI vs LSI</span></li><li><input type="checkbox"><span>Understand DynamoDB capacity modes (provisioned vs on-demand)</span></li><li><input type="checkbox"><span>Explain DAX, Streams, TTL, Transactions</span></li><li><input type="checkbox"><span>Know CodeCommit, CodeBuild, CodeDeploy, CodePipeline</span></li><li><input type="checkbox"><span>Explain blue/green, canary, linear deployment strategies</span></li><li><input type="checkbox"><span>Configure API Gateway REST vs HTTP API</span></li><li><input type="checkbox"><span>Enable CORS in API Gateway</span></li><li><input type="checkbox"><span>Use CloudWatch Logs, Metrics, and Alarms</span></li><li><input type="checkbox"><span>Implement distributed tracing with X-Ray</span></li><li><input type="checkbox"><span>Use SSM Parameter Store vs Secrets Manager</span></li><li><input type="checkbox"><span>Understand SQS visibility timeout and DLQs</span></li><li><input type="checkbox"><span>Know Kinesis Data Streams shards and partition keys</span></li><li><input type="checkbox"><span>Use Elastic Beanstalk deployment policies</span></li><li><input type="checkbox"><span>Understand Cognito User Pools vs Identity Pools</span></li><li><input type="checkbox"><span>Know S3 pre-signed URLs for temporary access</span></li></ul><div class="mt-2"><a href="soa-c02.html" class="btn btn-primary">Next: SysOps Administrator (SOA-C02) &rarr;</a></div></section></main></div></div><script src="../assets/js/main.js"></script></body></html>

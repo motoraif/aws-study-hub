@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>SAP-C02 — AWS Certified Solutions Architect Professional — AWS Study Hub</title>
+  <meta name="description" content="Advanced multi-account architectures, migration planning, cost optimization, complex hybrid designs.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/components.js"></script>
+</head><body><div class="container" style="padding-top:2rem;"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Certifications</span> / <span>SAP-C02</span></div></div><div class="page-header"><div class="container"><span class="badge badge-purple">Professional</span><h1 style="margin-top:0.75rem;">&#129504; SAP-C02 — AWS Certified Solutions Architect Professional</h1><p>Advanced multi-account architectures, migration planning, cost optimization, complex hybrid designs.</p><div class="flex-wrap mt-1"><span class="badge badge-green">180 min | 75 questions</span><span class="badge badge-purple">Passing: 750/1000</span><span class="badge badge-red">Hardest AWS exam</span></div></div></div><div class="container" style="padding-bottom:4rem;"><div class="doc-layout"><aside class="sidebar"><h4>Contents</h4><a href="#overview">Exam Overview</a>
+<a href="#prereq">Prerequisites</a>
+<a href="#orgs">Organizations & Multi-Account</a>
+<a href="#advanced-net">Advanced Networking</a>
+<a href="#migration">Migration (7 Rs)</a>
+<a href="#cost">Cost Optimization</a>
+<a href="#checklist">Checklist</a>
+</aside><main><section id="overview"><h2>Exam Overview</h2>
+<div class="grid-2">
+  <div class="card"><h3>Exam Details</h3><ul>
+    <li><strong>Duration:</strong> 180 minutes</li><li><strong>Questions:</strong> 75</li>
+    <li><strong>Passing Score:</strong> 750/1000</li>
+    <li><strong>Format:</strong> Multiple choice &amp; multiple response</li>
+    <li><strong>Cost:</strong> ~$150-300 USD</li><li><strong>Validity:</strong> 3 years</li>
+  </ul></div>
+  <div class="card"><h3>&#127891; Official Resources</h3><ul>
+    <li><a href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/1313/aws-certified-solutions-architect-professional-official-practice-question-set-sap-c02-english" target="_blank" rel="noopener">Free Skill Builder: AWS Advanced Architecting</a></li>
+    <li><a href="https://d1.awsstatic.com/training-and-certification/docs-sa-pro/AWS-Certified-Solutions-Architect-Professional_Exam-Guide.pdf" target="_blank" rel="noopener">Official Exam Guide (PDF)</a></li>
+    <li><a href="https://d1.awsstatic.com/training-and-certification/docs-sa-pro/AWS-Certified-Solutions-Architect-Professional_Sample-Questions.pdf" target="_blank" rel="noopener">Official Sample Questions (PDF)</a></li>
+    <li><a href="https://aws.amazon.com/certification/" target="_blank" rel="noopener">Schedule Your Exam</a></li>
+    <li><a href="https://tutorialsdojo.com/" target="_blank" rel="noopener">Tutorials Dojo Practice Exams</a></li>
+    <li><a href="https://www.udemy.com/user/stephane-maarek/" target="_blank" rel="noopener">Stephane Maarek on Udemy</a></li>
+  </ul></div>
+</div>
+<h3>Exam Domains</h3>
+<div class="table-wrap"><table><thead><tr><th>Domain</th><th>Weight</th></tr></thead><tbody><tr><td>Design for Org Complexity</td><td>26%</td></tr><tr><td>Design for New Solutions</td><td>29%</td></tr><tr><td>Migration Planning</td><td>15%</td></tr><tr><td>Cost Control</td><td>20%</td></tr><tr><td>Continuous Improvement</td><td>10%</td></tr></tbody></table></div>
+</section>
+<section id="prereq"><h2>Prerequisites & Study Tips</h2>
+<div class="callout warn"><div class="callout-title">Hardest AWS Exam</div><p>SAP-C02 is widely considered the hardest AWS cert. Questions present complex multi-service architectures with subtle trade-offs. You need deep SAA-level experience.</p></div>
+<h3>Recommended Before Attempting</h3><ul>
+  <li>Active SAA-C03 + 2+ years real AWS experience</li>
+  <li>Adrian Cantrill SAP course or Stephane Maarek SAP course on Udemy</li>
+  <li>Complete all Tutorials Dojo SAP practice exams (target 75%+ before booking)</li>
+</ul></section>
+
+<section id="orgs"><h2>AWS Organizations & Multi-Account</h2>
+<ul><li><strong>SCPs</strong> - org-level guardrails; restrict max permissions; never grant permissions</li>
+<li><strong>OUs</strong> - group accounts hierarchically; SCPs inherit down the tree</li>
+<li><strong>Control Tower</strong> - sets up governed multi-account landing zones; uses SCPs + Config Rules</li>
+<li><strong>RAM (Resource Access Manager)</strong> - share subnets, TGWs, Route 53 rules across accounts without VPC Peering</li>
+<li><strong>Delegated Admin</strong> - member account manages a service (e.g., GuardDuty) for the org</li></ul>
+<h3>Identity Federation</h3>
+<div class="table-wrap"><table><thead><tr><th>Pattern</th><th>When to Use</th></tr></thead><tbody>
+  <tr><td>IAM Identity Center (SSO)</td><td>Internal employees, multiple AWS accounts; SAML 2.0 with corporate IdP</td></tr>
+  <tr><td>Web Identity Federation</td><td>Mobile/web app users (millions); Cognito → AWS STS tokens</td></tr>
+  <tr><td>SAML 2.0 Federation</td><td>Enterprise with existing IdP; STS AssumeRoleWithSAML</td></tr>
+</tbody></table></div></section>
+
+<section id="advanced-net"><h2>Advanced Networking</h2>
+<h3>Transit Gateway (TGW)</h3>
+<ul><li>Regional hub; connect VPCs and on-premises at scale</li>
+<li>Transitive routing — VPC A → TGW → VPC B (unlike VPC Peering)</li>
+<li>TGW Route Tables — isolate VPC groups (prod vs dev)</li>
+<li>Inter-Region Peering — connect TGWs across regions</li></ul>
+<h3>Direct Connect</h3>
+<ul><li>Dedicated Connection: 1/10/100 Gbps — physical port at DX location</li>
+<li>Hosted Connection: 50 Mbps – 10 Gbps via DX partner</li>
+<li>VIF Types: Private VIF (VPC), Public VIF (AWS public services), Transit VIF (TGW)</li>
+<li>DX Gateway: Connect one DX to multiple VPCs across regions</li>
+<li>Resilience: 2 DX locations + Site-to-Site VPN backup for critical workloads</li></ul></section>
+
+<section id="migration"><h2>Migration Strategies (7 Rs)</h2>
+<div class="table-wrap"><table><thead><tr><th>Strategy</th><th>Description</th><th>Effort</th></tr></thead><tbody>
+  <tr><td>Retire</td><td>Decommission — app no longer needed</td><td>None</td></tr>
+  <tr><td>Retain</td><td>Keep on-premises for now</td><td>None</td></tr>
+  <tr><td>Rehost (Lift &amp; Shift)</td><td>Move to EC2 with no changes</td><td>Low</td></tr>
+  <tr><td>Replatform (Lift &amp; Reshape)</td><td>Minor optimizations (move DB to RDS)</td><td>Low-Medium</td></tr>
+  <tr><td>Repurchase (Drop &amp; Shop)</td><td>Move to SaaS (Salesforce, ServiceNow)</td><td>Medium</td></tr>
+  <tr><td>Refactor / Re-architect</td><td>Rebuild for cloud-native (microservices)</td><td>High</td></tr>
+  <tr><td>Relocate</td><td>Move VMware VMs to VMware Cloud on AWS</td><td>Low</td></tr>
+</tbody></table></div>
+<h3>Migration Tools</h3>
+<div class="table-wrap"><table><thead><tr><th>Tool</th><th>Use For</th></tr></thead><tbody>
+  <tr><td>Application Migration Service (MGN)</td><td>Continuous replication; cutover with minimal downtime</td></tr>
+  <tr><td>Database Migration Service (DMS)</td><td>Migrate databases; supports heterogeneous (Oracle → Aurora)</td></tr>
+  <tr><td>DataSync</td><td>Migrate/sync NFS/SMB data to S3/EFS/FSx</td></tr>
+  <tr><td>Snowball / Snowmobile</td><td>Physical data transfer for large datasets (TB – EB)</td></tr>
+</tbody></table></div></section>
+
+<section id="cost"><h2>Cost Optimization</h2>
+<ul><li><strong>Compute Optimizer</strong> — ML-based right-sizing for EC2, EBS, Lambda, ECS</li>
+<li><strong>Cost Allocation Tags</strong> — see cost breakdown per team/project</li>
+<li><strong>S3 Lifecycle</strong> — auto-move to cheaper storage classes</li>
+<li><strong>Spot for fault-tolerant workloads</strong> — up to 90% savings</li>
+<li><strong>Reserved Instances for steady-state</strong> — up to 72% savings</li>
+<li><strong>Savings Plans</strong> — Compute (most flexible), EC2 Instance (most discount)</li></ul></section><section id="checklist" class="progress-section"><h2>&#128203; Study Checklist</h2><div class="progress-wrap"><div class="progress-label"><span>Progress</span><span class="progress-pct">0%</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div><ul class="checklist"><li><input type="checkbox"><span>Explain AWS Organizations: OUs, SCPs, delegated admin, Control Tower</span></li><li><input type="checkbox"><span>Know all identity federation patterns and when to use each</span></li><li><input type="checkbox"><span>Understand RAM — what can be shared and how</span></li><li><input type="checkbox"><span>Design Transit Gateway with route table isolation</span></li><li><input type="checkbox"><span>Know Direct Connect: connection types, VIFs, DX Gateway</span></li><li><input type="checkbox"><span>Design Route 53 hybrid DNS with Resolver Endpoints</span></li><li><input type="checkbox"><span>Know the 7 Rs of migration and when to use each</span></li><li><input type="checkbox"><span>Understand Application Migration Service (MGN) vs DMS vs DataSync</span></li><li><input type="checkbox"><span>Design cost-optimized architectures with Savings Plans and Spot</span></li><li><input type="checkbox"><span>Use Compute Optimizer for right-sizing</span></li><li><input type="checkbox"><span>Design event-driven patterns: fan-out, CQRS, Saga, Strangler Fig</span></li><li><input type="checkbox"><span>Understand Step Functions Standard vs Express workflows</span></li><li><input type="checkbox"><span>Design multi-region active-active architectures</span></li><li><input type="checkbox"><span>Understand Global Accelerator vs CloudFront use cases</span></li><li><input type="checkbox"><span>Design disaster recovery: pilot light, warm standby, active-active</span></li><li><input type="checkbox"><span>Know Kinesis Data Streams vs Firehose vs MSK</span></li><li><input type="checkbox"><span>Understand AWS Service Catalog for governed self-service</span></li><li><input type="checkbox"><span>Know Lake Formation for data lake governance</span></li><li><input type="checkbox"><span>Design EKS/ECS advanced deployment patterns</span></li><li><input type="checkbox"><span>Understand Outposts and Local Zones for edge scenarios</span></li></ul><div class="mt-2"><a href="dop-c02.html" class="btn btn-primary">Next: DevOps Engineer Professional (DOP-C02) &rarr;</a></div></section></main></div></div><script src="../assets/js/main.js"></script></body></html>
