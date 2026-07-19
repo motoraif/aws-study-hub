@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>CLF-C02 — AWS Cloud Practitioner — AWS Study Hub</title>
+  <meta name="description" content="Complete CLF-C02 study guide. Cloud concepts, shared responsibility, IAM, core services, billing, and support plans.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/components.js"></script>
+</head><body><div class="container" style="padding-top:2rem;"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Certifications</span> / <span>CLF-C02</span></div></div><div class="page-header"><div class="container"><span class="badge badge-orange">Foundational</span><h1 style="margin-top:0.75rem;">&#127885; CLF-C02 — AWS Certified Cloud Practitioner</h1><p>The entry-level AWS certification. Cloud concepts, core services, security, billing, and support. No technical background required.</p><div class="flex-wrap mt-1"><span class="badge badge-green">90 min | 65 questions</span><span class="badge badge-blue">Passing: 700/1000</span><span class="badge badge-teal">No prerequisites</span></div></div></div><div class="container" style="padding-bottom:4rem;"><div class="doc-layout"><aside class="sidebar"><h4>Contents</h4><a href="#overview">Exam Overview</a>
+<a href="#cloud-concepts">Cloud Concepts</a>
+<a href="#shared-resp">Shared Responsibility</a>
+<a href="#global-infra">Global Infrastructure</a>
+<a href="#iam">IAM</a>
+<a href="#core-services">Core Services</a>
+<a href="#billing">Billing &amp; Pricing</a>
+<a href="#checklist">Checklist</a>
+</aside><main><section id="overview"><h2>Exam Overview</h2>
+<div class="grid-2">
+  <div class="card"><h3>Exam Details</h3><ul>
+    <li><strong>Duration:</strong> 90 minutes</li><li><strong>Questions:</strong> 65</li>
+    <li><strong>Passing Score:</strong> 700/1000</li>
+    <li><strong>Format:</strong> Multiple choice &amp; multiple response</li>
+    <li><strong>Cost:</strong> ~$150-300 USD</li><li><strong>Validity:</strong> 3 years</li>
+  </ul></div>
+  <div class="card"><h3>&#127891; Official Resources</h3><ul>
+    <li><a href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/134/aws-cloud-practitioner-essentials" target="_blank" rel="noopener">Free Skill Builder: AWS Cloud Practitioner Essentials</a></li>
+    <li><a href="https://d1.awsstatic.com/training-and-certification/docs-cloud-practitioner/AWS-Certified-Cloud-Practitioner_Exam-Guide.pdf" target="_blank" rel="noopener">Official Exam Guide (PDF)</a></li>
+    <li><a href="https://d1.awsstatic.com/training-and-certification/docs-cloud-practitioner/AWS-Certified-Cloud-Practitioner_Sample-Questions.pdf" target="_blank" rel="noopener">Official Sample Questions (PDF)</a></li>
+    <li><a href="https://aws.amazon.com/certification/" target="_blank" rel="noopener">Schedule Your Exam</a></li>
+    <li><a href="https://tutorialsdojo.com/" target="_blank" rel="noopener">Tutorials Dojo Practice Exams</a></li>
+    <li><a href="https://www.udemy.com/user/stephane-maarek/" target="_blank" rel="noopener">Stephane Maarek on Udemy</a></li>
+  </ul></div>
+</div>
+<h3>Exam Domains</h3>
+<div class="table-wrap"><table><thead><tr><th>Domain</th><th>Weight</th></tr></thead><tbody><tr><td>Cloud Concepts</td><td>24%</td></tr><tr><td>Security &amp; Compliance</td><td>30%</td></tr><tr><td>Cloud Technology &amp; Services</td><td>34%</td></tr><tr><td>Billing, Pricing &amp; Support</td><td>12%</td></tr></tbody></table></div>
+</section>
+<section id="cloud-concepts"><h2>Cloud Concepts</h2>
+<h3>The 6 Advantages of Cloud Computing</h3>
+<div class="grid-2">
+  <div class="card"><h4>1. Trade CapEx for Variable Expense</h4><p>Pay only for what you consume instead of investing upfront in data centers and servers.</p></div>
+  <div class="card"><h4>2. Massive Economies of Scale</h4><p>AWS pools usage from hundreds of thousands of customers &mdash; passes savings to you.</p></div>
+  <div class="card"><h4>3. Stop Guessing Capacity</h4><p>Scale up or down in minutes. No over/under provisioning ever again.</p></div>
+  <div class="card"><h4>4. Increase Speed &amp; Agility</h4><p>Deploy resources in minutes vs weeks. Experiment faster, fail cheaper.</p></div>
+  <div class="card"><h4>5. Stop Spending on Data Centers</h4><p>Focus on your business, not racking servers and running cables.</p></div>
+  <div class="card"><h4>6. Go Global in Minutes</h4><p>Deploy in multiple Regions worldwide instantly. Low latency globally.</p></div>
+</div>
+<h3>Cloud Service Models</h3>
+<div class="table-wrap"><table><thead><tr><th>Model</th><th>You Manage</th><th>AWS Manages</th><th>AWS Examples</th></tr></thead><tbody>
+  <tr><td><strong>IaaS</strong></td><td>OS, runtime, apps, data</td><td>Servers, storage, networking, virtualization</td><td>EC2, VPC, EBS</td></tr>
+  <tr><td><strong>PaaS</strong></td><td>Apps, data</td><td>OS, runtime, middleware</td><td>Elastic Beanstalk, RDS</td></tr>
+  <tr><td><strong>SaaS</strong></td><td>Nothing (just use it)</td><td>Everything</td><td>WorkMail, Chime</td></tr>
+</tbody></table></div></section>
+
+<section id="shared-resp"><h2>Shared Responsibility Model</h2>
+<div class="callout warn"><div class="callout-title">&#9888; Most Tested CLF Topic</div><p>The Shared Responsibility Model is the most commonly tested concept on CLF. Know it perfectly.</p></div>
+<div class="grid-2">
+  <div class="card" style="border-color:var(--aws-orange)"><h3>AWS &mdash; "Security OF the Cloud"</h3><ul>
+    <li>Physical data center security</li><li>Hardware &amp; global network infrastructure</li>
+    <li>Hypervisor / virtualization layer</li><li>Managed service OS patching (RDS, Lambda)</li>
+  </ul></div>
+  <div class="card" style="border-color:var(--aws-blue)"><h3>Customer &mdash; "Security IN the Cloud"</h3><ul>
+    <li>EC2 OS patching &amp; updates</li><li>Application code security</li>
+    <li>IAM users, roles, policies</li><li>Data encryption &amp; backups</li>
+    <li>Security Groups &amp; Network ACLs</li>
+  </ul></div>
+</div>
+<div class="callout tip"><div class="callout-title">&#128161; Quick Rule</div><p>"If you can configure it in the AWS Console, it's your responsibility." EC2 OS = you. RDS OS = AWS (managed). S3 bucket policy = you. S3 physical hardware = AWS.</p></div></section>
+
+<section id="global-infra"><h2>AWS Global Infrastructure</h2>
+<div class="grid-3">
+  <div class="card"><h3>&#127757; Regions</h3><p>Geographically separate areas (e.g., us-east-1). Each has 2+ AZs. Choose by: latency, compliance, cost, services available. AWS has 34+ Regions.</p></div>
+  <div class="card"><h3>&#127968; Availability Zones</h3><p>One or more data centers in a Region with redundant power/networking. Deploy across 2+ AZs for high availability. 108+ AZs globally.</p></div>
+  <div class="card"><h3>&#127760; Edge Locations</h3><p>400+ CDN endpoints globally for CloudFront &amp; Route 53. Cache content close to users for low latency.</p></div>
+</div></section>
+
+<section id="iam"><h2>IAM &mdash; Identity &amp; Access Management</h2>
+<div class="grid-2">
+  <div><h3>Components</h3><ul>
+    <li><strong>Root User</strong> &mdash; master account; enable MFA; never use for daily tasks</li>
+    <li><strong>Users</strong> &mdash; individual people or service accounts</li>
+    <li><strong>Groups</strong> &mdash; collections of users sharing policies</li>
+    <li><strong>Roles</strong> &mdash; temporary permissions assumed by services/users</li>
+    <li><strong>Policies</strong> &mdash; JSON documents defining Allow/Deny</li>
+  </ul></div>
+  <div><h3>Best Practices</h3><ul>
+    <li>&#128274; Never use root for daily tasks</li><li>&#128274; Enable MFA on root and admins</li>
+    <li>&#128274; Grant least privilege</li><li>&#128274; Use IAM Roles for EC2/Lambda (not keys)</li>
+    <li>&#128274; Rotate access keys regularly</li><li>&#128274; Use Organizations for multi-account</li>
+  </ul></div>
+</div></section>
+
+<section id="core-services"><h2>Core Services Cheat Sheet</h2>
+<div class="table-wrap"><table><thead><tr><th>Service</th><th>Category</th><th>What It Does</th></tr></thead><tbody>
+  <tr><td>EC2</td><td>Compute</td><td>Virtual servers. Many types: General, Compute, Memory, Storage, GPU.</td></tr>
+  <tr><td>Lambda</td><td>Serverless</td><td>Run code without servers. Pay per invocation. Max 15 min timeout.</td></tr>
+  <tr><td>S3</td><td>Storage</td><td>Object storage. Unlimited capacity. 11 9s durability (99.999999999%).</td></tr>
+  <tr><td>EBS</td><td>Storage</td><td>Block storage for EC2. Like a hard drive attached to your server.</td></tr>
+  <tr><td>RDS</td><td>Database</td><td>Managed relational DB. MySQL, PostgreSQL, Aurora, Oracle, SQL Server.</td></tr>
+  <tr><td>DynamoDB</td><td>Database</td><td>Serverless NoSQL. Single-digit ms latency. Auto-scaling.</td></tr>
+  <tr><td>VPC</td><td>Networking</td><td>Isolated virtual network. Subnets, route tables, security groups, NACLs.</td></tr>
+  <tr><td>CloudFront</td><td>CDN</td><td>Content delivery network. 400+ edge locations globally.</td></tr>
+  <tr><td>Route 53</td><td>DNS</td><td>Scalable DNS service. Domain registration. Health checking.</td></tr>
+  <tr><td>SNS</td><td>Messaging</td><td>Pub/sub. Push to email, SMS, Lambda, SQS.</td></tr>
+  <tr><td>SQS</td><td>Messaging</td><td>Message queue. Decouple microservices. Standard &amp; FIFO.</td></tr>
+  <tr><td>CloudWatch</td><td>Monitoring</td><td>Metrics, logs, alarms, dashboards. Monitor everything.</td></tr>
+  <tr><td>CloudTrail</td><td>Governance</td><td>Audit log of all API calls. Who did what, when, from where.</td></tr>
+</tbody></table></div></section>
+
+<section id="billing"><h2>Billing &amp; Pricing</h2>
+<h3>EC2 Pricing Models</h3>
+<div class="grid-2">
+  <div class="card"><h4>On-Demand</h4><p>Pay per hour/second. No commitment. Best for: testing, unpredictable workloads.</p></div>
+  <div class="card"><h4>Reserved (1 or 3 year)</h4><p>Up to 72% off. Best for: steady-state predictable workloads.</p></div>
+  <div class="card"><h4>Spot Instances</h4><p>Up to 90% off spare capacity. Can be interrupted with 2-min notice. Best for: fault-tolerant batch jobs.</p></div>
+  <div class="card"><h4>Savings Plans</h4><p>Commit to $/hr for 1-3 years. Flexible. Covers EC2, Lambda, Fargate.</p></div>
+</div>
+<h3>AWS Support Plans</h3>
+<div class="table-wrap"><table><thead><tr><th>Plan</th><th>Price</th><th>Critical Response</th><th>Key Features</th></tr></thead><tbody>
+  <tr><td>Basic</td><td>Free</td><td>No tech support</td><td>7 Trusted Advisor checks, docs, forums</td></tr>
+  <tr><td>Developer</td><td>$29+/mo</td><td>Business hours</td><td>Email, general guidance</td></tr>
+  <tr><td>Business</td><td>$100+/mo</td><td>24/7, 1 hour</td><td>Phone, all TA checks, Health API</td></tr>
+  <tr><td>Enterprise On-Ramp</td><td>$5,500+/mo</td><td>30 minutes</td><td>Pool of TAMs, concierge</td></tr>
+  <tr><td>Enterprise</td><td>$15,000+/mo</td><td>15 minutes</td><td>Dedicated TAM, architectural reviews</td></tr>
+</tbody></table></div></section>
+<section id="checklist" class="progress-section"><h2>&#128203; Study Checklist</h2><div class="progress-wrap"><div class="progress-label"><span>Progress</span><span class="progress-pct">0%</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div><ul class="checklist"><li><input type="checkbox"><span>Explain the 6 advantages of cloud computing</span></li><li><input type="checkbox"><span>Describe IaaS, PaaS, SaaS with AWS examples</span></li><li><input type="checkbox"><span>Explain the Shared Responsibility Model perfectly</span></li><li><input type="checkbox"><span>Know Regions, AZs, Edge Locations differences</span></li><li><input type="checkbox"><span>Understand IAM: Users, Groups, Roles, Policies</span></li><li><input type="checkbox"><span>Know IAM best practices (MFA, least privilege, no root)</span></li><li><input type="checkbox"><span>Know core services: EC2, S3, RDS, Lambda, VPC, DynamoDB</span></li><li><input type="checkbox"><span>Explain S3 storage classes (Standard, IA, Glacier)</span></li><li><input type="checkbox"><span>Know EC2 pricing: On-Demand, Reserved, Spot, Savings Plans</span></li><li><input type="checkbox"><span>Explain AWS Support plans and response times</span></li><li><input type="checkbox"><span>Know AWS Organizations and SCPs</span></li><li><input type="checkbox"><span>Know AWS Well-Architected Framework 6 pillars</span></li><li><input type="checkbox"><span>Understand Trusted Advisor 5 categories</span></li><li><input type="checkbox"><span>Know cost tools: Cost Explorer, Budgets, Pricing Calculator</span></li><li><input type="checkbox"><span>Know difference between CloudTrail vs CloudWatch</span></li><li><input type="checkbox"><span>Understand AWS Shield, WAF, Inspector, Macie</span></li><li><input type="checkbox"><span>Know the AWS Free Tier limits</span></li><li><input type="checkbox"><span>Explain SNS vs SQS use cases</span></li><li><input type="checkbox"><span>Understand Auto Scaling and Elastic Load Balancing</span></li><li><input type="checkbox"><span>Know AWS Artifact and compliance programs</span></li></ul><div class="mt-2"><a href="saa-c03.html" class="btn btn-primary">Next: Solutions Architect Associate (SAA-C03) &rarr;</a></div></section></main></div></div><script src="../assets/js/main.js"></script></body></html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>SAA-C03 — Solutions Architect Associate — AWS Study Hub</title>
+  <meta name="description" content="Complete SAA-C03 study guide. EC2, S3, VPC, RDS, serverless, HA design patterns, security.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/components.js"></script>
+</head><body><div class="container" style="padding-top:2rem;"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Certifications</span> / <span>SAA-C03</span></div></div><div class="page-header"><div class="container"><span class="badge badge-blue">Associate</span><h1 style="margin-top:0.75rem;">&#127959; SAA-C03 — AWS Certified Solutions Architect Associate</h1><p>The most popular AWS certification. Design resilient, performant, secure, cost-optimized architectures.</p><div class="flex-wrap mt-1"><span class="badge badge-green">130 min | 65 questions</span><span class="badge badge-blue">Passing: 720/1000</span></div></div></div><div class="container" style="padding-bottom:4rem;"><div class="doc-layout"><aside class="sidebar"><h4>Contents</h4><a href="#overview">Exam Overview</a>
+<a href="#ec2">EC2 Deep Dive</a>
+<a href="#s3">S3 Deep Dive</a>
+<a href="#vpc">VPC &amp; Networking</a>
+<a href="#ha">HA &amp; Resilient Design</a>
+<a href="#serverless">Serverless</a>
+<a href="#security">Security</a>
+<a href="#checklist">Checklist</a>
+</aside><main><section id="overview"><h2>Exam Overview</h2>
+<div class="grid-2">
+  <div class="card"><h3>Exam Details</h3><ul>
+    <li><strong>Duration:</strong> 130 minutes</li><li><strong>Questions:</strong> 65</li>
+    <li><strong>Passing Score:</strong> 720/1000</li>
+    <li><strong>Format:</strong> Multiple choice &amp; multiple response</li>
+    <li><strong>Cost:</strong> ~$150-300 USD</li><li><strong>Validity:</strong> 3 years</li>
+  </ul></div>
+  <div class="card"><h3>&#127891; Official Resources</h3><ul>
+    <li><a href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/1044/aws-certified-solutions-architect-associate-official-practice-question-set-saa-c03-english" target="_blank" rel="noopener">Free Skill Builder: AWS Solutions Architect Associate</a></li>
+    <li><a href="https://d1.awsstatic.com/training-and-certification/docs-sa-assoc/AWS-Certified-Solutions-Architect-Associate_Exam-Guide.pdf" target="_blank" rel="noopener">Official Exam Guide (PDF)</a></li>
+    <li><a href="https://d1.awsstatic.com/training-and-certification/docs-sa-assoc/AWS-Certified-Solutions-Architect-Associate_Sample-Questions.pdf" target="_blank" rel="noopener">Official Sample Questions (PDF)</a></li>
+    <li><a href="https://aws.amazon.com/certification/" target="_blank" rel="noopener">Schedule Your Exam</a></li>
+    <li><a href="https://tutorialsdojo.com/" target="_blank" rel="noopener">Tutorials Dojo Practice Exams</a></li>
+    <li><a href="https://www.udemy.com/user/stephane-maarek/" target="_blank" rel="noopener">Stephane Maarek on Udemy</a></li>
+  </ul></div>
+</div>
+<h3>Exam Domains</h3>
+<div class="table-wrap"><table><thead><tr><th>Domain</th><th>Weight</th></tr></thead><tbody><tr><td>Design Secure Architectures</td><td>30%</td></tr><tr><td>Design Resilient Architectures</td><td>26%</td></tr><tr><td>Design High-Performing Architectures</td><td>24%</td></tr><tr><td>Design Cost-Optimized Architectures</td><td>20%</td></tr></tbody></table></div>
+</section>
+<section id="ec2"><h2>EC2 Deep Dive</h2>
+<h3>Instance Type Families</h3>
+<div class="table-wrap"><table><thead><tr><th>Family</th><th>Types</th><th>Use Cases</th></tr></thead><tbody>
+  <tr><td>General Purpose</td><td>T, M</td><td>Web servers, dev, code repos</td></tr>
+  <tr><td>Compute Optimized</td><td>C</td><td>Batch processing, ML, HPC, gaming</td></tr>
+  <tr><td>Memory Optimized</td><td>R, X, z</td><td>In-memory DBs, big data analytics</td></tr>
+  <tr><td>Storage Optimized</td><td>I, D, H</td><td>NoSQL DBs, data warehousing, Hadoop</td></tr>
+  <tr><td>Accelerated</td><td>P, G, Inf</td><td>GPU-based ML, video encoding</td></tr>
+</tbody></table></div>
+<h3>EC2 Storage Options</h3>
+<div class="table-wrap"><table><thead><tr><th>Storage</th><th>Type</th><th>Persistence</th><th>Key Facts</th></tr></thead><tbody>
+  <tr><td>EBS gp3</td><td>Block</td><td>Persistent</td><td>Default SSD; 3,000 IOPS baseline; 16,000 max IOPS</td></tr>
+  <tr><td>EBS io2</td><td>Block</td><td>Persistent</td><td>High IOPS; 64,000 IOPS; Multi-Attach capable</td></tr>
+  <tr><td>EBS st1</td><td>Block</td><td>Persistent</td><td>Throughput HDD; big data, log processing</td></tr>
+  <tr><td>Instance Store</td><td>Block</td><td>Ephemeral</td><td>Physically attached; lost on stop; very high IOPS</td></tr>
+  <tr><td>EFS</td><td>File (NFS)</td><td>Persistent</td><td>Shared across many EC2; auto-scales; Linux only</td></tr>
+</tbody></table></div></section>
+
+<section id="s3"><h2>S3 Deep Dive</h2>
+<h3>Storage Classes</h3>
+<div class="table-wrap"><table><thead><tr><th>Class</th><th>Availability</th><th>Retrieval</th><th>Use Case</th></tr></thead><tbody>
+  <tr><td>S3 Standard</td><td>99.99%</td><td>Instant</td><td>Frequently accessed data</td></tr>
+  <tr><td>S3 Intelligent-Tiering</td><td>99.9%</td><td>Instant</td><td>Unknown access patterns</td></tr>
+  <tr><td>S3 Standard-IA</td><td>99.9%</td><td>Instant</td><td>Infrequent, rapid retrieval</td></tr>
+  <tr><td>S3 One Zone-IA</td><td>99.5%</td><td>Instant</td><td>Reproducible infrequent data</td></tr>
+  <tr><td>S3 Glacier Instant</td><td>99.9%</td><td>Milliseconds</td><td>Archive, instant retrieval</td></tr>
+  <tr><td>S3 Glacier Flexible</td><td>99.99%</td><td>1-12 hours</td><td>Archive, flexible retrieval</td></tr>
+  <tr><td>S3 Glacier Deep Archive</td><td>99.99%</td><td>12-48 hours</td><td>Compliance archive, cheapest</td></tr>
+</tbody></table></div>
+<div class="callout tip"><div class="callout-title">&#128161; S3 Key Facts to Memorize</div><ul>
+  <li>Max object size: <strong>5 TB</strong> (multipart upload required for &gt;5 GB)</li>
+  <li>Durability: <strong>11 9s</strong> (99.999999999%)</li>
+  <li>S3 is <strong>region-scoped</strong>, bucket names are <strong>globally unique</strong></li>
+  <li>Enable versioning to protect against accidental deletes</li>
+  <li>S3 Transfer Acceleration uses CloudFront edges to speed up uploads</li>
+</ul></div></section>
+
+<section id="vpc"><h2>VPC &amp; Networking</h2>
+<div class="table-wrap"><table><thead><tr><th>Component</th><th>Function</th><th>Key Details</th></tr></thead><tbody>
+  <tr><td>VPC</td><td>Isolated virtual network</td><td>Region-scoped; CIDR /16 to /28</td></tr>
+  <tr><td>Public Subnet</td><td>Has route to IGW</td><td>Resources can have public IPs</td></tr>
+  <tr><td>Private Subnet</td><td>No IGW route</td><td>Use NAT Gateway for outbound internet</td></tr>
+  <tr><td>Internet Gateway</td><td>Public subnet &harr; internet</td><td>Highly available; attach one per VPC</td></tr>
+  <tr><td>NAT Gateway</td><td>Private subnet &rarr; internet</td><td>Managed, per-AZ; needs Elastic IP</td></tr>
+  <tr><td>Security Group</td><td>Stateful firewall (instance)</td><td>Allow only; return traffic auto-allowed</td></tr>
+  <tr><td>NACL</td><td>Stateless firewall (subnet)</td><td>Allow &amp; Deny; numbered rules</td></tr>
+  <tr><td>VPC Peering</td><td>Connect two VPCs</td><td>No transitive routing</td></tr>
+  <tr><td>Transit Gateway</td><td>Hub-and-spoke for VPCs</td><td>Transitive routing; scales to thousands</td></tr>
+  <tr><td>VPC Endpoint (Gateway)</td><td>Private S3/DynamoDB access</td><td>No NAT needed; free</td></tr>
+  <tr><td>VPC Endpoint (Interface)</td><td>Private access to 150+ services</td><td>PrivateLink; costs money</td></tr>
+</tbody></table></div></section>
+
+<section id="ha"><h2>High Availability &amp; Resilient Design</h2>
+<h3>Load Balancers</h3>
+<div class="table-wrap"><table><thead><tr><th>Type</th><th>Layer</th><th>Protocols</th><th>Features</th></tr></thead><tbody>
+  <tr><td>ALB</td><td>7</td><td>HTTP, HTTPS, gRPC</td><td>Path/host-based routing, Lambda targets, WAF</td></tr>
+  <tr><td>NLB</td><td>4</td><td>TCP, UDP, TLS</td><td>Static IP, ultra-low latency, PrivateLink</td></tr>
+  <tr><td>GLB</td><td>3</td><td>All IP</td><td>Inline inspection; route through firewalls/IDS</td></tr>
+</tbody></table></div>
+<h3>RDS Multi-AZ vs Read Replicas</h3>
+<div class="grid-2">
+  <div class="card"><h4>Multi-AZ (HA)</h4><ul><li>Synchronous replication to standby</li><li>Automatic failover (~1-2 min)</li><li>Same Region only</li><li>Standby is NOT readable</li><li>For: disaster recovery</li></ul></div>
+  <div class="card"><h4>Read Replicas (Performance)</h4><ul><li>Asynchronous replication</li><li>Up to 15 replicas (Aurora), 5 (RDS)</li><li>Cross-Region possible</li><li>Replicas ARE readable</li><li>For: read-heavy workloads</li></ul></div>
+</div></section>
+
+<section id="serverless"><h2>Serverless Architecture</h2>
+<div class="table-wrap"><table><thead><tr><th>Service</th><th>Purpose</th><th>Key Limits</th></tr></thead><tbody>
+  <tr><td>Lambda</td><td>Event-driven functions</td><td>15 min timeout, 10 GB memory, 1000 concurrent</td></tr>
+  <tr><td>API Gateway</td><td>HTTP API front door</td><td>29s timeout (REST), 10MB payload</td></tr>
+  <tr><td>DynamoDB</td><td>NoSQL database</td><td>400KB max item; unlimited storage</td></tr>
+  <tr><td>S3</td><td>Object storage</td><td>5TB max object; unlimited buckets</td></tr>
+  <tr><td>SQS</td><td>Message queue</td><td>256KB max message; 14-day retention</td></tr>
+  <tr><td>SNS</td><td>Pub/Sub notifications</td><td>256KB message; 10M subscribers per topic</td></tr>
+  <tr><td>EventBridge</td><td>Event bus</td><td>Schedule or pattern-based routing to 20+ targets</td></tr>
+  <tr><td>Step Functions</td><td>Workflow orchestration</td><td>Visual workflow; Lambda chaining; error handling</td></tr>
+</tbody></table></div></section>
+
+<section id="security"><h2>Security Services</h2>
+<div class="table-wrap"><table><thead><tr><th>Service</th><th>What It Does</th><th>Think of It As</th></tr></thead><tbody>
+  <tr><td>KMS</td><td>Key Management Service &mdash; encryption keys</td><td>Encryption key vault</td></tr>
+  <tr><td>Secrets Manager</td><td>Store/rotate secrets, DB passwords, API keys</td><td>Password manager for apps (auto-rotation)</td></tr>
+  <tr><td>ACM</td><td>SSL/TLS certificate management</td><td>Free HTTPS certificates</td></tr>
+  <tr><td>WAF</td><td>Block SQLi, XSS, rate limiting at Layer 7</td><td>Web application firewall</td></tr>
+  <tr><td>Shield</td><td>DDoS protection (Standard=free, Advanced=paid)</td><td>DDoS protection</td></tr>
+  <tr><td>GuardDuty</td><td>Threat detection &mdash; analyzes VPC/DNS/CloudTrail logs</td><td>Automated threat detective</td></tr>
+  <tr><td>Inspector</td><td>Vulnerability scanning for EC2/ECR/Lambda</td><td>Security scanner</td></tr>
+  <tr><td>Macie</td><td>Discover sensitive data (PII) in S3</td><td>S3 data privacy guard</td></tr>
+</tbody></table></div></section>
+<section id="checklist" class="progress-section"><h2>&#128203; Study Checklist</h2><div class="progress-wrap"><div class="progress-label"><span>Progress</span><span class="progress-pct">0%</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div><ul class="checklist"><li><input type="checkbox"><span>Design a multi-tier web app (VPC, ALB, EC2/ASG, RDS Multi-AZ)</span></li><li><input type="checkbox"><span>Explain S3 storage classes and when to use each</span></li><li><input type="checkbox"><span>Understand EBS volume types (gp3, io2, st1, sc1)</span></li><li><input type="checkbox"><span>Design a highly available RDS setup (Multi-AZ + Read Replicas)</span></li><li><input type="checkbox"><span>Explain VPC: IGW, NAT Gateway, Route Tables, SGs, NACLs</span></li><li><input type="checkbox"><span>Know VPC Peering vs Transit Gateway vs PrivateLink</span></li><li><input type="checkbox"><span>Design a serverless architecture (API Gateway + Lambda + DynamoDB)</span></li><li><input type="checkbox"><span>Explain S3 security: bucket policies, pre-signed URLs, MFA Delete</span></li><li><input type="checkbox"><span>Know CloudFront origins, behaviors, and cache invalidation</span></li><li><input type="checkbox"><span>Explain SQS standard vs FIFO queues</span></li><li><input type="checkbox"><span>Know SNS fan-out pattern with SQS</span></li><li><input type="checkbox"><span>Understand KMS CMK types (AWS-managed vs customer-managed)</span></li><li><input type="checkbox"><span>Explain ALB vs NLB differences and use cases</span></li><li><input type="checkbox"><span>Know Auto Scaling policies and cooldown periods</span></li><li><input type="checkbox"><span>Understand CloudWatch Metrics, Alarms, and Logs</span></li><li><input type="checkbox"><span>Explain Route 53 routing policies: Weighted, Failover, Latency, Geolocation</span></li><li><input type="checkbox"><span>Know Aurora vs RDS differences (5x MySQL speed, 15 replicas)</span></li><li><input type="checkbox"><span>Understand ElastiCache Redis vs Memcached</span></li><li><input type="checkbox"><span>Know IAM roles for cross-account access</span></li><li><input type="checkbox"><span>Explain AWS Organizations SCPs and account structure</span></li></ul><div class="mt-2"><a href="dva-c02.html" class="btn btn-primary">Next: Developer Associate (DVA-C02) &rarr;</a></div></section></main></div></div><script src="../assets/js/main.js"></script></body></html>

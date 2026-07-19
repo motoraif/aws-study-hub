@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>MLS-C01 — AWS Certified Machine Learning Specialty — AWS Study Hub</title>
+  <meta name="description" content="Design, build, train, and deploy ML solutions. SageMaker deep dive, AI services, MLOps, data engineering.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/components.js"></script>
+</head><body><div class="container" style="padding-top:2rem;"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Certifications</span> / <span>MLS-C01</span></div></div><div class="page-header"><div class="container"><span class="badge badge-red">Specialty</span><h1 style="margin-top:0.75rem;">&#129302; MLS-C01 — AWS Certified Machine Learning Specialty</h1><p>Design, build, train, and deploy ML solutions. SageMaker deep dive, AI services, MLOps, data engineering.</p><div class="flex-wrap mt-1"><span class="badge badge-green">180 min | 65 questions</span><span class="badge badge-red">Passing: 750/1000</span></div></div></div><div class="container" style="padding-bottom:4rem;"><div class="doc-layout"><aside class="sidebar"><h4>Contents</h4><a href="#overview">Exam Overview</a>
+<a href="#s0"></a>
+<a href="#s1"></a>
+</aside><main><section id="overview"><h2>Exam Overview</h2>
+<div class="grid-2">
+  <div class="card"><h3>Exam Details</h3><ul>
+    <li><strong>Duration:</strong> 180 minutes</li><li><strong>Questions:</strong> 65</li>
+    <li><strong>Passing Score:</strong> 750/1000</li>
+    <li><strong>Format:</strong> Multiple choice &amp; multiple response</li>
+    <li><strong>Cost:</strong> ~$150-300 USD</li><li><strong>Validity:</strong> 3 years</li>
+  </ul></div>
+  <div class="card"><h3>&#127891; Official Resources</h3><ul>
+    <li><a href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/1340/aws-certified-machine-learning-specialty-official-practice-question-set-mls-c01-english" target="_blank" rel="noopener">Free Skill Builder: Machine Learning on AWS</a></li>
+    <li><a href="https://d1.awsstatic.com/training-and-certification/docs-ml/AWS-Certified-Machine-Learning-Specialty_Exam-Guide.pdf" target="_blank" rel="noopener">Official Exam Guide (PDF)</a></li>
+    <li><a href="https://d1.awsstatic.com/training-and-certification/docs-ml/AWS-Certified-Machine-Learning-Specialty_Sample-Questions.pdf" target="_blank" rel="noopener">Official Sample Questions (PDF)</a></li>
+    <li><a href="https://aws.amazon.com/certification/" target="_blank" rel="noopener">Schedule Your Exam</a></li>
+    <li><a href="https://tutorialsdojo.com/" target="_blank" rel="noopener">Tutorials Dojo Practice Exams</a></li>
+    <li><a href="https://www.udemy.com/user/stephane-maarek/" target="_blank" rel="noopener">Stephane Maarek on Udemy</a></li>
+  </ul></div>
+</div>
+<h3>Exam Domains</h3>
+<div class="table-wrap"><table><thead><tr><th>Domain</th><th>Weight</th></tr></thead><tbody><tr><td>Data Engineering</td><td>24%</td></tr><tr><td>Exploratory Data Analysis</td><td>26%</td></tr><tr><td>Modeling</td><td>36%</td></tr><tr><td>ML Implementation & Operations</td><td>14%</td></tr></tbody></table></div>
+</section><section id="ml-services"><h2>AWS ML Services Overview</h2>
+<div class="table-wrap"><table><thead><tr><th>Service</th><th>Category</th><th>Use Case</th></tr></thead><tbody>
+  <tr><td><strong>SageMaker</strong></td><td>Full ML Platform</td><td>Build, train, deploy any ML model end-to-end</td></tr>
+  <tr><td><strong>Rekognition</strong></td><td>Vision AI</td><td>Image/video: objects, faces, text, content moderation</td></tr>
+  <tr><td><strong>Comprehend</strong></td><td>NLP</td><td>Sentiment, entities, key phrases, language detection</td></tr>
+  <tr><td><strong>Textract</strong></td><td>Document AI</td><td>Extract text and data from scanned forms and documents</td></tr>
+  <tr><td><strong>Transcribe</strong></td><td>Speech-to-Text</td><td>Automatic speech recognition; call center transcription</td></tr>
+  <tr><td><strong>Polly</strong></td><td>Text-to-Speech</td><td>Convert text to lifelike speech; SSML support</td></tr>
+  <tr><td><strong>Lex</strong></td><td>Conversational AI</td><td>Chatbots and voice interfaces (same tech as Alexa)</td></tr>
+  <tr><td><strong>Forecast</strong></td><td>Time Series</td><td>ML-based demand/inventory forecasting</td></tr>
+  <tr><td><strong>Personalize</strong></td><td>Recommendations</td><td>Real-time personalized recommendations</td></tr>
+  <tr><td><strong>Bedrock</strong></td><td>Generative AI</td><td>Foundation models via API (Claude, Llama, Titan, Stable Diffusion)</td></tr>
+</tbody></table></div></section>
+<section id="sagemaker"><h2>SageMaker Deep Dive</h2>
+<div class="table-wrap"><table><thead><tr><th>Component</th><th>Purpose</th></tr></thead><tbody>
+  <tr><td>Studio</td><td>Web-based IDE for complete ML lifecycle</td></tr>
+  <tr><td>Ground Truth</td><td>Data labeling with human reviewers + ML auto-labeling</td></tr>
+  <tr><td>Data Wrangler</td><td>Data prep and transformation; 300+ transforms; no-code</td></tr>
+  <tr><td>Feature Store</td><td>Centralized features; online (real-time) + offline (batch)</td></tr>
+  <tr><td>Training Jobs</td><td>Managed training; spot training for 70% cost savings</td></tr>
+  <tr><td>Automatic Model Tuning</td><td>Hyperparameter optimization (Bayesian/random/grid)</td></tr>
+  <tr><td>Endpoints (Real-time)</td><td>Low-latency inference; auto-scaling; multi-model endpoints</td></tr>
+  <tr><td>Batch Transform</td><td>Offline bulk inference on S3 data</td></tr>
+  <tr><td>Pipelines</td><td>MLOps CI/CD for ML workflows</td></tr>
+  <tr><td>Clarify</td><td>Detect bias and explain model predictions</td></tr>
+  <tr><td>Model Monitor</td><td>Detect data drift and model quality degradation in production</td></tr>
+</tbody></table></div>
+<h3>Built-in Algorithms</h3>
+<div class="table-wrap"><table><thead><tr><th>Algorithm</th><th>Problem Type</th><th>Use Case</th></tr></thead><tbody>
+  <tr><td>XGBoost</td><td>Classification/Regression</td><td>Tabular data; most popular for structured data</td></tr>
+  <tr><td>Linear Learner</td><td>Classification/Regression</td><td>Large sparse datasets; fast training</td></tr>
+  <tr><td>K-Means</td><td>Clustering</td><td>Customer segmentation</td></tr>
+  <tr><td>BlazingText</td><td>NLP</td><td>Text classification; word embeddings</td></tr>
+  <tr><td>DeepAR</td><td>Time Series Forecasting</td><td>Multiple related time series</td></tr>
+  <tr><td>Random Cut Forest</td><td>Anomaly Detection</td><td>Detect anomalies in streaming data</td></tr>
+  <tr><td>Image Classification</td><td>Vision</td><td>Classify images (ResNet)</td></tr>
+</tbody></table></div></section><section id="checklist" class="progress-section"><h2>&#128203; Study Checklist</h2><div class="progress-wrap"><div class="progress-label"><span>Progress</span><span class="progress-pct">0%</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div><ul class="checklist"><li><input type="checkbox"><span>Know all AWS AI/ML managed services and their use cases</span></li><li><input type="checkbox"><span>Understand SageMaker components: Studio, Data Wrangler, Feature Store</span></li><li><input type="checkbox"><span>Know SageMaker built-in algorithms and when to use each</span></li><li><input type="checkbox"><span>Explain SageMaker training: CPU vs GPU instance types</span></li><li><input type="checkbox"><span>Know SageMaker Spot Training for cost savings</span></li><li><input type="checkbox"><span>Design end-to-end ML pipeline with SageMaker Pipelines</span></li><li><input type="checkbox"><span>Understand hyperparameter tuning strategies</span></li><li><input type="checkbox"><span>Know SageMaker Model Monitor for drift detection</span></li><li><input type="checkbox"><span>Understand A/B testing and shadow deployment for models</span></li><li><input type="checkbox"><span>Know data formats: CSV, RecordIO-Protobuf, Parquet, Pipe Mode</span></li><li><input type="checkbox"><span>Design data pipelines with Glue, Athena, Kinesis for ML</span></li><li><input type="checkbox"><span>Understand bias detection with SageMaker Clarify</span></li><li><input type="checkbox"><span>Know Rekognition: image analysis, facial analysis, content moderation</span></li><li><input type="checkbox"><span>Understand Comprehend for NLP tasks</span></li><li><input type="checkbox"><span>Know when to use Forecast vs DeepAR</span></li><li><input type="checkbox"><span>Understand Bedrock: foundation models, RAG, Agents</span></li><li><input type="checkbox"><span>Know SageMaker endpoints: real-time, serverless, batch, async</span></li><li><input type="checkbox"><span>Understand Feature Store: online vs offline store</span></li><li><input type="checkbox"><span>Design cost-optimized ML with managed spot training</span></li><li><input type="checkbox"><span>Know evaluation metrics: accuracy, F1, AUC-ROC, RMSE</span></li></ul><div class="mt-2"><a href="das-c01.html" class="btn btn-primary">Next: Data Analytics Specialty (DAS-C01) &rarr;</a></div></section></main></div></div><script src="../assets/js/main.js"></script></body></html>
