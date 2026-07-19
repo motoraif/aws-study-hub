@@ -37,7 +37,7 @@
       <p class="footer-desc">Community-driven, open-source study platform for all AWS certifications. Free forever.</p>
       <div class="flex-wrap mt-1">
         <a href="https://github.com/motoraif/aws-study-hub" target="_blank" class="btn btn-outline" style="font-size:0.8rem;padding:0.4rem 0.9rem">&#11088; Star on GitHub</a>
-        <a href="${root}CONTRIBUTING.md" target="_blank" class="btn btn-outline" style="font-size:0.8rem;padding:0.4rem 0.9rem">&#129309; Contribute</a>
+        <a href="https://github.com/motoraif/aws-study-hub/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:0.8rem;padding:0.4rem 0.9rem">&#129309; Contribute</a>
       </div>
     </div>
     <div>
