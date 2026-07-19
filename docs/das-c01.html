@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>DAS-C01 — AWS Certified Data Analytics Specialty — AWS Study Hub</title>
+  <meta name="description" content="Design scalable analytics solutions. Kinesis, Glue, Redshift, Athena, Lake Formation, QuickSight.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/components.js"></script>
+</head><body><div class="container" style="padding-top:2rem;"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Certifications</span> / <span>DAS-C01</span></div></div><div class="page-header"><div class="container"><span class="badge badge-red">Specialty</span><h1 style="margin-top:0.75rem;">&#128202; DAS-C01 — AWS Certified Data Analytics Specialty</h1><p>Design scalable analytics solutions. Kinesis, Glue, Redshift, Athena, Lake Formation, QuickSight.</p><div class="flex-wrap mt-1"><span class="badge badge-green">180 min | 65 questions</span><span class="badge badge-red">Passing: 750/1000</span></div></div></div><div class="container" style="padding-bottom:4rem;"><div class="doc-layout"><aside class="sidebar"><h4>Contents</h4><a href="#overview">Exam Overview</a>
+<a href="#s0"></a>
+<a href="#s1"></a>
+<a href="#s2"></a>
+<a href="#s3"></a>
+</aside><main><section id="overview"><h2>Exam Overview</h2>
+<div class="grid-2">
+  <div class="card"><h3>Exam Details</h3><ul>
+    <li><strong>Duration:</strong> 180 minutes</li><li><strong>Questions:</strong> 65</li>
+    <li><strong>Passing Score:</strong> 750/1000</li>
+    <li><strong>Format:</strong> Multiple choice &amp; multiple response</li>
+    <li><strong>Cost:</strong> ~$150-300 USD</li><li><strong>Validity:</strong> 3 years</li>
+  </ul></div>
+  <div class="card"><h3>&#127891; Official Resources</h3><ul>
+    <li><a href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/3498/data-analytics-fundamentals" target="_blank" rel="noopener">Free Skill Builder: Data Analytics on AWS</a></li>
+    <li><a href="https://d1.awsstatic.com/training-and-certification/docs-data-analytics-specialty/AWS-Certified-Data-Analytics-Specialty_Exam-Guide.pdf" target="_blank" rel="noopener">Official Exam Guide (PDF)</a></li>
+    <li><a href="https://d1.awsstatic.com/training-and-certification/docs-data-analytics-specialty/AWS-Certified-Data-Analytics-Specialty_Sample-Questions.pdf" target="_blank" rel="noopener">Official Sample Questions (PDF)</a></li>
+    <li><a href="https://aws.amazon.com/certification/" target="_blank" rel="noopener">Schedule Your Exam</a></li>
+    <li><a href="https://tutorialsdojo.com/" target="_blank" rel="noopener">Tutorials Dojo Practice Exams</a></li>
+    <li><a href="https://www.udemy.com/user/stephane-maarek/" target="_blank" rel="noopener">Stephane Maarek on Udemy</a></li>
+  </ul></div>
+</div>
+<h3>Exam Domains</h3>
+<div class="table-wrap"><table><thead><tr><th>Domain</th><th>Weight</th></tr></thead><tbody><tr><td>Collection</td><td>18%</td></tr><tr><td>Storage</td><td>22%</td></tr><tr><td>Processing</td><td>24%</td></tr><tr><td>Analysis & Visualization</td><td>18%</td></tr><tr><td>Security</td><td>18%</td></tr></tbody></table></div>
+</section><section id="kinesis"><h2>Amazon Kinesis Family</h2>
+<div class="table-wrap"><table><thead><tr><th>Service</th><th>Purpose</th><th>Key Details</th></tr></thead><tbody>
+  <tr><td>Kinesis Data Streams</td><td>Real-time streaming</td><td>Shards (1 MB/s in, 2 MB/s out); retention 1-365 days; consumers: Lambda, KDA, KCL</td></tr>
+  <tr><td>Kinesis Data Firehose</td><td>Load streaming data to destinations</td><td>Managed; near real-time (60s buffer); destinations: S3, Redshift, OpenSearch, Splunk</td></tr>
+  <tr><td>Kinesis Data Analytics</td><td>SQL/Flink on streaming data</td><td>Real-time analytics; output to Firehose or streams</td></tr>
+  <tr><td>MSK (Managed Kafka)</td><td>Apache Kafka managed service</td><td>Full Kafka compatibility; MSK Serverless</td></tr>
+</tbody></table></div>
+<div class="callout warn"><div class="callout-title">&#9888; Kinesis vs SQS</div><ul>
+  <li>Use <strong>Kinesis</strong> when: multiple consumers, replay needed, ordered per shard, real-time analytics</li>
+  <li>Use <strong>SQS</strong> when: decoupling, one consumer, simplicity</li>
+</ul></div></section>
+<section id="glue"><h2>AWS Glue</h2>
+<div class="table-wrap"><table><thead><tr><th>Component</th><th>Purpose</th></tr></thead><tbody>
+  <tr><td>Data Catalog</td><td>Metadata repository; tables, schemas, partitions; integrates with Athena, EMR, Redshift</td></tr>
+  <tr><td>Crawlers</td><td>Auto-discover schema from S3, RDS, DynamoDB; update Data Catalog</td></tr>
+  <tr><td>ETL Jobs</td><td>PySpark/Python scripts; serverless; transform data between sources</td></tr>
+  <tr><td>DataBrew</td><td>No-code data preparation; visual transformations; 250+ transforms</td></tr>
+  <tr><td>Streaming ETL</td><td>Continuous ETL from Kinesis/Kafka to S3/Redshift</td></tr>
+</tbody></table></div></section>
+<section id="redshift"><h2>Amazon Redshift</h2>
+<ul><li><strong>Columnar storage</strong> — optimized for OLAP aggregations</li>
+<li><strong>MPP</strong> — Massively Parallel Processing; leader node + compute nodes</li>
+<li><strong>Redshift Spectrum</strong> — query S3 directly without loading into Redshift</li>
+<li><strong>Redshift Serverless</strong> — no cluster management; auto-scaling; pay per compute</li>
+<li><strong>Distribution Styles</strong>: EVEN, KEY, ALL — control data distribution across nodes</li>
+<li><strong>Sort Keys</strong>: COMPOUND or INTERLEAVED — optimize query predicates</li></ul></section>
+<section id="lake-formation"><h2>Lake Formation</h2>
+<ul><li>Simplifies building secure data lakes on S3</li>
+<li>Fine-grained access: table, column, row, cell-level permissions</li>
+<li>Governed Tables — ACID transactions on S3 with automatic compaction</li>
+<li>Tag-Based Access Control (LF-TBAC) — scale permissions with tags</li>
+<li>Cross-account sharing of databases/tables</li></ul>
+<h3>Data Lake Architecture</h3>
+<pre><code>Bronze (Raw)      → Glue Crawlers → Data Catalog
+       ↓
+Silver (Cleansed) → Glue ETL → Parquet/ORC partitioned by date
+       ↓
+Gold (Curated)    → Redshift / Athena for analytics
+       ↓
+Visualization     → QuickSight / Grafana dashboards</code></pre></section><section id="checklist" class="progress-section"><h2>&#128203; Study Checklist</h2><div class="progress-wrap"><div class="progress-label"><span>Progress</span><span class="progress-pct">0%</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div><ul class="checklist"><li><input type="checkbox"><span>Design end-to-end analytics pipelines on AWS</span></li><li><input type="checkbox"><span>Know Kinesis: Streams, Firehose, Analytics</span></li><li><input type="checkbox"><span>Understand Kinesis shard sizing and partition keys</span></li><li><input type="checkbox"><span>Know when to use Kinesis vs SQS vs MSK</span></li><li><input type="checkbox"><span>Use Glue Crawlers and Data Catalog for schema management</span></li><li><input type="checkbox"><span>Write Glue ETL jobs in PySpark</span></li><li><input type="checkbox"><span>Design Redshift cluster: node types, distribution, sort keys</span></li><li><input type="checkbox"><span>Use Redshift Spectrum to query S3</span></li><li><input type="checkbox"><span>Design a data lake with Bronze/Silver/Gold layers</span></li><li><input type="checkbox"><span>Configure Lake Formation for fine-grained access control</span></li><li><input type="checkbox"><span>Use Athena with partitioning and columnar formats for cost efficiency</span></li><li><input type="checkbox"><span>Know OpenSearch: indexing, shards, replicas</span></li><li><input type="checkbox"><span>Design real-time dashboards with QuickSight</span></li><li><input type="checkbox"><span>Understand EMR: cluster types, Spark on EMR</span></li><li><input type="checkbox"><span>Know DynamoDB Streams → Lambda → Kinesis for CDC</span></li><li><input type="checkbox"><span>Understand S3 lifecycle + Intelligent-Tiering for data lake cost</span></li><li><input type="checkbox"><span>Configure CloudTrail data events for S3 analytics access logging</span></li><li><input type="checkbox"><span>Know encryption for data at rest and in transit</span></li><li><input type="checkbox"><span>Understand QuickSight SPICE vs direct query mode</span></li><li><input type="checkbox"><span>Design for compliance: data residency, encryption, audit</span></li></ul><div class="mt-2"><a href="resources.html" class="btn btn-primary">Next: Resources Page &rarr;</a></div></section></main></div></div><script src="../assets/js/main.js"></script></body></html>

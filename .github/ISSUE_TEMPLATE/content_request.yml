@@ -1,0 +1,24 @@
+name: 📝 Content Request
+description: Request new content or expansion of existing content
+labels: ["content", "enhancement"]
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: What type of content?
+      options: [New AWS service section, New practice question, New hands-on lab, New resource link, New foundation topic, New cert page, Expand existing section]
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe what you'd like to see
+    validations:
+      required: true
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Would you like to contribute this yourself?
+      options:
+        - label: Yes, I can write this and open a PR
+        - label: No, requesting someone else add it

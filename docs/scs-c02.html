@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>SCS-C02 — AWS Certified Security Specialty — AWS Study Hub</title>
+  <meta name="description" content="Threat detection, identity management, data protection, infrastructure security, and compliance governance.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/components.js"></script>
+</head><body><div class="container" style="padding-top:2rem;"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Certifications</span> / <span>SCS-C02</span></div></div><div class="page-header"><div class="container"><span class="badge badge-red">Specialty</span><h1 style="margin-top:0.75rem;">&#128274; SCS-C02 — AWS Certified Security Specialty</h1><p>Threat detection, identity management, data protection, infrastructure security, and compliance governance.</p><div class="flex-wrap mt-1"><span class="badge badge-green">170 min | 65 questions</span><span class="badge badge-red">Passing: 750/1000</span></div></div></div><div class="container" style="padding-bottom:4rem;"><div class="doc-layout"><aside class="sidebar"><h4>Contents</h4><a href="#overview">Exam Overview</a>
+<a href="#threat">Threat Detection</a>
+<a href="#iam-sec">IAM Deep Dive</a>
+<a href="#encryption">Data Encryption</a>
+<a href="#netsec">Network Security</a>
+<a href="#checklist">Checklist</a>
+</aside><main><section id="overview"><h2>Exam Overview</h2>
+<div class="grid-2">
+  <div class="card"><h3>Exam Details</h3><ul>
+    <li><strong>Duration:</strong> 170 minutes</li><li><strong>Questions:</strong> 65</li>
+    <li><strong>Passing Score:</strong> 750/1000</li>
+    <li><strong>Format:</strong> Multiple choice &amp; multiple response</li>
+    <li><strong>Cost:</strong> ~$150-300 USD</li><li><strong>Validity:</strong> 3 years</li>
+  </ul></div>
+  <div class="card"><h3>&#127891; Official Resources</h3><ul>
+    <li><a href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/97/security-engineering-on-aws" target="_blank" rel="noopener">Free Skill Builder: Security Engineering on AWS</a></li>
+    <li><a href="https://d1.awsstatic.com/training-and-certification/docs-security-spec/AWS-Certified-Security-Specialty_Exam-Guide.pdf" target="_blank" rel="noopener">Official Exam Guide (PDF)</a></li>
+    <li><a href="https://d1.awsstatic.com/training-and-certification/docs-security-spec/AWS-Certified-Security-Specialty_Sample-Questions.pdf" target="_blank" rel="noopener">Official Sample Questions (PDF)</a></li>
+    <li><a href="https://aws.amazon.com/certification/" target="_blank" rel="noopener">Schedule Your Exam</a></li>
+    <li><a href="https://tutorialsdojo.com/" target="_blank" rel="noopener">Tutorials Dojo Practice Exams</a></li>
+    <li><a href="https://www.udemy.com/user/stephane-maarek/" target="_blank" rel="noopener">Stephane Maarek on Udemy</a></li>
+  </ul></div>
+</div>
+<h3>Exam Domains</h3>
+<div class="table-wrap"><table><thead><tr><th>Domain</th><th>Weight</th></tr></thead><tbody><tr><td>Threat Detection & Incident Response</td><td>14%</td></tr><tr><td>Security Logging & Monitoring</td><td>18%</td></tr><tr><td>Infrastructure Security</td><td>20%</td></tr><tr><td>Identity & Access Management</td><td>16%</td></tr><tr><td>Data Protection</td><td>18%</td></tr><tr><td>Security Governance</td><td>14%</td></tr></tbody></table></div>
+</section>
+<section id="threat"><h2>Threat Detection Services</h2>
+<div class="table-wrap"><table><thead><tr><th>Service</th><th>What It Detects</th><th>Data Sources</th></tr></thead><tbody>
+  <tr><td><strong>GuardDuty</strong></td><td>Threats: crypto-mining, credential theft, C2 comms, port scans</td><td>VPC Flow Logs, DNS logs, CloudTrail events</td></tr>
+  <tr><td><strong>Security Hub</strong></td><td>Aggregates findings from all security services; compliance scores</td><td>GuardDuty, Inspector, Macie, Config, partners</td></tr>
+  <tr><td><strong>Inspector</strong></td><td>Vulnerabilities in EC2 OS, Lambda, ECR images</td><td>SSM Agent, ECR scans, Lambda code</td></tr>
+  <tr><td><strong>Macie</strong></td><td>Sensitive data (PII, credit cards) in S3</td><td>S3 object metadata &amp; content</td></tr>
+  <tr><td><strong>Detective</strong></td><td>Root cause analysis; investigate security findings</td><td>VPC Flow Logs, CloudTrail, GuardDuty findings</td></tr>
+</tbody></table></div></section>
+
+<section id="iam-sec"><h2>IAM & Access Control Deep Dive</h2>
+<h3>Policy Types</h3>
+<div class="table-wrap"><table><thead><tr><th>Policy Type</th><th>Attached To</th><th>Purpose</th></tr></thead><tbody>
+  <tr><td>Identity Policy</td><td>Users, Groups, Roles</td><td>What the identity can do</td></tr>
+  <tr><td>Resource Policy</td><td>S3, KMS, SQS, Lambda...</td><td>Who can access the resource</td></tr>
+  <tr><td>SCP</td><td>AWS Org OU/Account</td><td>Max permissions guardrail (never grants)</td></tr>
+  <tr><td>Permission Boundary</td><td>Users, Roles</td><td>Max permissions an admin can grant</td></tr>
+  <tr><td>Session Policy</td><td>AssumeRole calls</td><td>Further restrict a temporary session</td></tr>
+</tbody></table></div></section>
+
+<section id="encryption"><h2>Data Encryption</h2>
+<h3>KMS Key Types</h3>
+<div class="table-wrap"><table><thead><tr><th>Key Type</th><th>Control</th><th>Cost</th></tr></thead><tbody>
+  <tr><td>AWS Managed Keys (aws/s3, aws/rds)</td><td>Minimal</td><td>Free</td></tr>
+  <tr><td>Customer Managed Keys (CMK)</td><td>Full (key policy, grants, rotation)</td><td>$1/month + API calls</td></tr>
+  <tr><td>Customer-Provided (SSE-C)</td><td>Complete (you store key)</td><td>No KMS cost</td></tr>
+  <tr><td>CloudHSM</td><td>Dedicated HSM hardware</td><td>High</td></tr>
+</tbody></table></div>
+<h3>S3 Encryption Options</h3>
+<ul><li><strong>SSE-S3</strong> — AWS manages keys; AES-256; default for new buckets</li>
+<li><strong>SSE-KMS</strong> — CMK; audit via CloudTrail; possible KMS throttling</li>
+<li><strong>SSE-C</strong> — customer provides key per request; HTTPS only</li>
+<li><strong>Client-Side</strong> — encrypt before upload; AWS never sees plaintext</li></ul>
+<h3>Secrets Manager vs Parameter Store</h3>
+<div class="grid-2">
+  <div class="card"><h4>Secrets Manager</h4><ul><li>Built-in automatic rotation (Lambda)</li><li>Native RDS/Redshift integration</li><li>$0.40/secret/month</li><li>Cross-account sharing via resource policy</li></ul></div>
+  <div class="card"><h4>Parameter Store</h4><ul><li>Standard tier: free; Advanced: $0.05/param/month</li><li>SecureString uses KMS encryption</li><li>Hierarchical naming (/app/db/password)</li><li>No automatic rotation (use Lambda + EventBridge)</li></ul></div>
+</div></section>
+
+<section id="netsec"><h2>Network Security</h2>
+<ul><li><strong>AWS WAF</strong> — Layer 7; block SQLi, XSS, rate limiting; attach to ALB, CloudFront, API Gateway</li>
+<li><strong>AWS Shield Standard</strong> — free; automatic DDoS protection Layer 3/4</li>
+<li><strong>AWS Shield Advanced</strong> — $3,000/month; DRT team; cost protection</li>
+<li><strong>Firewall Manager</strong> — centrally manage WAF, Shield, Security Groups across org</li>
+<li><strong>Network Firewall</strong> — stateful managed firewall in VPC; deep packet inspection; IDS/IPS</li>
+<li><strong>VPC Traffic Mirroring</strong> — copy traffic from ENIs to intrusion detection appliances</li></ul></section><section id="checklist" class="progress-section"><h2>&#128203; Study Checklist</h2><div class="progress-wrap"><div class="progress-label"><span>Progress</span><span class="progress-pct">0%</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div><ul class="checklist"><li><input type="checkbox"><span>Know all threat detection services: GuardDuty, Inspector, Macie, Security Hub, Detective</span></li><li><input type="checkbox"><span>Explain all IAM policy types and evaluation logic</span></li><li><input type="checkbox"><span>Configure S3 security: Block Public Access, bucket policies, pre-signed URLs, WORM</span></li><li><input type="checkbox"><span>Know KMS key types: AWS-managed, CMK, SSE-C, CloudHSM</span></li><li><input type="checkbox"><span>Explain S3 encryption: SSE-S3, SSE-KMS, SSE-C, client-side</span></li><li><input type="checkbox"><span>Know when to use Secrets Manager vs Parameter Store</span></li><li><input type="checkbox"><span>Understand automatic secret rotation with Secrets Manager</span></li><li><input type="checkbox"><span>Configure WAF rules: SQLi, XSS, rate limiting, IP reputation</span></li><li><input type="checkbox"><span>Know Shield Standard vs Advanced differences</span></li><li><input type="checkbox"><span>Understand Firewall Manager centralized policy management</span></li><li><input type="checkbox"><span>Configure Network Firewall for deep packet inspection</span></li><li><input type="checkbox"><span>Enable CloudTrail in all regions with log file integrity validation</span></li><li><input type="checkbox"><span>Configure S3 Access Analyzer and IAM Access Analyzer</span></li><li><input type="checkbox"><span>Understand KMS key policies and grants for cross-account access</span></li><li><input type="checkbox"><span>Use Config Conformance Packs for compliance standards</span></li><li><input type="checkbox"><span>Design incident response playbooks with EventBridge + Lambda</span></li><li><input type="checkbox"><span>Know ACM: public vs private CAs</span></li><li><input type="checkbox"><span>Know Cognito User Pools vs Identity Pools security implications</span></li><li><input type="checkbox"><span>Configure GuardDuty with automated remediation</span></li><li><input type="checkbox"><span>Understand VPC Traffic Mirroring for intrusion detection</span></li></ul><div class="mt-2"><a href="ans-c01.html" class="btn btn-primary">Next: Advanced Networking Specialty (ANS-C01) &rarr;</a></div></section></main></div></div><script src="../assets/js/main.js"></script></body></html>

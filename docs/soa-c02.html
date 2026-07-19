@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>SOA-C02 — AWS Certified SysOps Administrator Associate — AWS Study Hub</title>
+  <meta name="description" content="Deploy, manage, and operate workloads on AWS at scale. Monitoring, automation, reliability, compliance.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/components.js"></script>
+</head><body><div class="container" style="padding-top:2rem;"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Certifications</span> / <span>SOA-C02</span></div></div><div class="page-header"><div class="container"><span class="badge badge-blue">Associate</span><h1 style="margin-top:0.75rem;">&#9881; SOA-C02 — AWS Certified SysOps Administrator Associate</h1><p>Deploy, manage, and operate workloads on AWS at scale. Monitoring, automation, reliability, compliance.</p><div class="flex-wrap mt-1"><span class="badge badge-green">180 min | 65 questions + exam lab</span><span class="badge badge-blue">Passing: 720/1000</span></div></div></div><div class="container" style="padding-bottom:4rem;"><div class="doc-layout"><aside class="sidebar"><h4>Contents</h4><a href="#overview">Exam Overview</a>
+<a href="#cloudwatch">CloudWatch Deep Dive</a>
+<a href="#ssm">Systems Manager</a>
+<a href="#dr">Backup &amp; DR</a>
+<a href="#cfn">CloudFormation</a>
+<a href="#checklist">Checklist</a>
+</aside><main><section id="overview"><h2>Exam Overview</h2>
+<div class="grid-2">
+  <div class="card"><h3>Exam Details</h3><ul>
+    <li><strong>Duration:</strong> 180 minutes</li><li><strong>Questions:</strong> 65 + exam lab</li>
+    <li><strong>Passing Score:</strong> 720/1000</li>
+    <li><strong>Format:</strong> Multiple choice &amp; multiple response</li>
+    <li><strong>Cost:</strong> ~$150-300 USD</li><li><strong>Validity:</strong> 3 years</li>
+  </ul></div>
+  <div class="card"><h3>&#127891; Official Resources</h3><ul>
+    <li><a href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/1573/aws-certified-sysops-administrator-associate-official-practice-question-set-soa-c02-english" target="_blank" rel="noopener">Free Skill Builder: AWS SysOps Admin</a></li>
+    <li><a href="https://d1.awsstatic.com/training-and-certification/docs-sysops-associate/AWS-Certified-SysOps-Administrator-Associate_Exam-Guide.pdf" target="_blank" rel="noopener">Official Exam Guide (PDF)</a></li>
+    <li><a href="https://d1.awsstatic.com/training-and-certification/docs-sysops-associate/AWS-Certified-SysOps-Administrator-Associate_Sample-Questions.pdf" target="_blank" rel="noopener">Official Sample Questions (PDF)</a></li>
+    <li><a href="https://aws.amazon.com/certification/" target="_blank" rel="noopener">Schedule Your Exam</a></li>
+    <li><a href="https://tutorialsdojo.com/" target="_blank" rel="noopener">Tutorials Dojo Practice Exams</a></li>
+    <li><a href="https://www.udemy.com/user/stephane-maarek/" target="_blank" rel="noopener">Stephane Maarek on Udemy</a></li>
+  </ul></div>
+</div>
+<h3>Exam Domains</h3>
+<div class="table-wrap"><table><thead><tr><th>Domain</th><th>Weight</th></tr></thead><tbody><tr><td>Monitoring, Logging &amp; Remediation</td><td>20%</td></tr><tr><td>Reliability &amp; Business Continuity</td><td>16%</td></tr><tr><td>Deployment, Provisioning &amp; Automation</td><td>18%</td></tr><tr><td>Security &amp; Compliance</td><td>16%</td></tr><tr><td>Networking &amp; Content Delivery</td><td>18%</td></tr><tr><td>Cost &amp; Performance Optimization</td><td>12%</td></tr></tbody></table></div>
+</section>
+<section id="cloudwatch"><h2>CloudWatch Deep Dive</h2>
+<div class="table-wrap"><table><thead><tr><th>Feature</th><th>Description</th><th>Key Details</th></tr></thead><tbody>
+  <tr><td>Metrics</td><td>Numerical data over time</td><td>Default 1-min resolution; custom up to 1-second; retained 15 months</td></tr>
+  <tr><td>Alarms</td><td>Act on metric thresholds</td><td>States: OK, ALARM, INSUFFICIENT_DATA; notify SNS, trigger ASG</td></tr>
+  <tr><td>Logs</td><td>Centralized log storage</td><td>Log Groups &rarr; Streams; retention 1 day to indefinite</td></tr>
+  <tr><td>Log Insights</td><td>Query logs with SQL-like syntax</td><td>Query across multiple log groups</td></tr>
+  <tr><td>CloudWatch Agent</td><td>Collect OS-level metrics</td><td>Memory, disk usage (NOT default EC2 metrics)</td></tr>
+</tbody></table></div>
+<div class="callout warn"><div class="callout-title">&#9888; Memory &amp; Disk are NOT default EC2 metrics!</div><p>CPU, Network, and EBS metrics ARE default. To get <strong>memory usage</strong> and <strong>disk space</strong>, install the CloudWatch Agent on the EC2 instance.</p></div></section>
+
+<section id="ssm"><h2>AWS Systems Manager (SSM)</h2>
+<div class="table-wrap"><table><thead><tr><th>Feature</th><th>What It Does</th><th>Use Case</th></tr></thead><tbody>
+  <tr><td>Session Manager</td><td>Browser-based SSH/RDP without port 22/3389</td><td>Secure shell access; audit trail in CloudTrail</td></tr>
+  <tr><td>Run Command</td><td>Run scripts on many EC2 at once without SSH</td><td>Patch, configure, update many instances</td></tr>
+  <tr><td>Patch Manager</td><td>Automated OS patching</td><td>Schedule patching windows; compliance reporting</td></tr>
+  <tr><td>Parameter Store</td><td>Store config and secrets (strings, SecureString)</td><td>App config, non-critical secrets</td></tr>
+  <tr><td>Inventory</td><td>Collect software/hardware inventory</td><td>Compliance, auditing</td></tr>
+</tbody></table></div></section>
+
+<section id="dr"><h2>Backup &amp; Disaster Recovery</h2>
+<h3>Recovery Strategies (Cost vs RTO)</h3>
+<div class="table-wrap"><table><thead><tr><th>Strategy</th><th>RTO</th><th>RPO</th><th>Cost</th><th>Description</th></tr></thead><tbody>
+  <tr><td>Backup &amp; Restore</td><td>Hours</td><td>Hours</td><td>$</td><td>Cheapest. Backup to S3/Glacier; restore on disaster.</td></tr>
+  <tr><td>Pilot Light</td><td>Minutes-Hours</td><td>Minutes</td><td>$$</td><td>Core systems in AWS; scale up on disaster.</td></tr>
+  <tr><td>Warm Standby</td><td>Minutes</td><td>Seconds-Minutes</td><td>$$$</td><td>Scaled-down version of prod running; scale up fast.</td></tr>
+  <tr><td>Multi-Site Active/Active</td><td>Real-time</td><td>~0</td><td>$$$$</td><td>Full duplicate; DNS routes to both. Zero downtime.</td></tr>
+</tbody></table></div></section>
+
+<section id="cfn"><h2>CloudFormation</h2>
+<div class="table-wrap"><table><thead><tr><th>Section</th><th>Purpose</th><th>Required?</th></tr></thead><tbody>
+  <tr><td>AWSTemplateFormatVersion</td><td>Always "2010-09-09"</td><td>No</td></tr>
+  <tr><td>Parameters</td><td>Input values at deploy time</td><td>No</td></tr>
+  <tr><td>Mappings</td><td>Static key-value lookup (e.g., AMI by region)</td><td>No</td></tr>
+  <tr><td>Conditions</td><td>Create resources conditionally</td><td>No</td></tr>
+  <tr><td><strong>Resources</strong></td><td>AWS resources to create</td><td><strong>YES</strong></td></tr>
+  <tr><td>Outputs</td><td>Values to export or display</td><td>No</td></tr>
+</tbody></table></div>
+<ul><li><strong>StackSets</strong> &mdash; deploy stacks to multiple accounts/regions</li><li><strong>Nested Stacks</strong> &mdash; reusable stacks as components</li><li><strong>Change Sets</strong> &mdash; preview changes before applying</li><li><strong>Drift Detection</strong> &mdash; find resources changed outside CloudFormation</li></ul></section><section id="checklist" class="progress-section"><h2>&#128203; Study Checklist</h2><div class="progress-wrap"><div class="progress-label"><span>Progress</span><span class="progress-pct">0%</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div><ul class="checklist"><li><input type="checkbox"><span>Install CloudWatch Agent for memory/disk metrics</span></li><li><input type="checkbox"><span>Create CloudWatch Alarms connected to Auto Scaling or SNS</span></li><li><input type="checkbox"><span>Use SSM Session Manager for SSH without port 22</span></li><li><input type="checkbox"><span>Use SSM Run Command for mass instance management</span></li><li><input type="checkbox"><span>Configure SSM Patch Manager with maintenance windows</span></li><li><input type="checkbox"><span>Know all 4 DR strategies and their RTO/RPO</span></li><li><input type="checkbox"><span>Configure AWS Backup with cross-region copy</span></li><li><input type="checkbox"><span>Understand IAM policy evaluation order (deny &gt; allow &gt; implicit deny)</span></li><li><input type="checkbox"><span>Explain SCPs vs Permission Boundaries vs Resource Policies</span></li><li><input type="checkbox"><span>Create cross-account IAM roles with sts:AssumeRole</span></li><li><input type="checkbox"><span>Write a CloudFormation template with Parameters, Resources, Outputs</span></li><li><input type="checkbox"><span>Use Change Sets and Drift Detection</span></li><li><input type="checkbox"><span>Understand CloudFormation StackSets</span></li><li><input type="checkbox"><span>Configure S3 lifecycle policies for cost optimization</span></li><li><input type="checkbox"><span>Know EC2 Health Check vs ELB Health Check differences</span></li><li><input type="checkbox"><span>Understand Auto Scaling lifecycle hooks</span></li><li><input type="checkbox"><span>Use AWS Config for compliance checking</span></li><li><input type="checkbox"><span>Configure CloudTrail for API audit logging</span></li><li><input type="checkbox"><span>Know Trusted Advisor check categories</span></li><li><input type="checkbox"><span>Understand AWS Cost Explorer and Compute Optimizer</span></li></ul><div class="mt-2"><a href="sap-c02.html" class="btn btn-primary">Next: Solutions Architect Professional (SAP-C02) &rarr;</a></div></section></main></div></div><script src="../assets/js/main.js"></script></body></html>

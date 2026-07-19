@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Linux Fundamentals — AWS Study Hub</title>
+  <meta name="description" content="Complete Linux guide for AWS certification candidates.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/components.js"></script>
+</head><body>
+<div class="container" style="padding-top:2rem"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Foundations</span> / <span>Linux Fundamentals</span></div></div>
+<div class="page-header"><div class="container">
+  <span class="badge badge-teal">Foundations</span>
+  <h1 style="margin-top:0.75rem">&#128039; Linux Fundamentals</h1>
+  <p>Master essential Linux skills needed for every AWS certification and real-world cloud engineering. From basic commands to shell scripting and system administration.</p>
+  <div class="flex-wrap mt-1"><span class="badge badge-green">Beginner Friendly</span><span class="badge badge-blue">20+ Topics</span><span class="badge badge-orange">Essential for all AWS Certs</span></div>
+</div></div>
+<div class="container" style="padding-bottom:4rem;"><div class="doc-layout"><aside class="sidebar"><h4>Contents</h4><a href="#why">Why Linux for AWS?</a>
+<a href="#filesystem">File System</a>
+<a href="#permissions">Permissions</a>
+<a href="#commands">Essential Commands</a>
+<a href="#processes">Processes</a>
+<a href="#networking">Networking</a>
+<a href="#scripting">Shell Scripting</a>
+<a href="#ssh">SSH & EC2</a>
+<a href="#systemd">Systemd</a>
+<a href="#checklist">Checklist</a>
+</aside><main>
+<section id="why"><h2>Why Linux for AWS?</h2>
+<p>Over <strong>90% of cloud workloads</strong> run on Linux. EC2 instances, ECS containers, Lambda environments — all Linux. Understanding Linux means you can:</p>
+<ul><li>Debug EC2 instances via SSH</li><li>Write UserData bootstrap scripts</li><li>Create and manage Docker containers</li><li>Answer scenario questions on SOA-C02 &amp; DVA-C02 exams</li></ul>
+<div class="callout tip"><div class="callout-title">&#128161; Tip</div><p>On EC2: <code>/var/log/cloud-init.log</code> contains your UserData script output — critical for debugging bootstrap issues.</p></div></section>
+
+<section id="filesystem"><h2>Linux File System</h2>
+<div class="table-wrap"><table><thead><tr><th>Directory</th><th>Purpose</th></tr></thead><tbody>
+  <tr><td><code>/</code></td><td>Root of the entire filesystem</td></tr>
+  <tr><td><code>/bin</code></td><td>Essential user binaries (ls, cp, mv)</td></tr>
+  <tr><td><code>/etc</code></td><td>Configuration files</td></tr>
+  <tr><td><code>/home</code></td><td>User home directories</td></tr>
+  <tr><td><code>/var</code></td><td>Variable data (logs, databases, mail)</td></tr>
+  <tr><td><code>/tmp</code></td><td>Temporary files (cleared on reboot)</td></tr>
+  <tr><td><code>/proc</code></td><td>Virtual filesystem for kernel/process info</td></tr>
+  <tr><td><code>/opt</code></td><td>Optional software packages</td></tr>
+</tbody></table></div></section>
+
+<section id="permissions"><h2>File Permissions</h2>
+<pre><code>-rwxr-xr-- 1 ubuntu aws-team 1234 Jul 10 12:00 deploy.sh
+ │└──┬──┘└──┬──┘└──┬──┘
+ │   │      │      └── Other: r-- (4)
+ │   │      └───────── Group: r-x (5)
+ │   └──────────────── Owner: rwx (7)</code></pre>
+<div class="table-wrap"><table><thead><tr><th>Permission</th><th>Symbol</th><th>Octal</th></tr></thead><tbody>
+  <tr><td>Read</td><td>r</td><td>4</td></tr><tr><td>Write</td><td>w</td><td>2</td></tr>
+  <tr><td>Execute</td><td>x</td><td>1</td></tr><tr><td>None</td><td>-</td><td>0</td></tr>
+</tbody></table></div>
+<pre><code>chmod 755 script.sh        # rwxr-xr-x
+chmod +x script.sh         # Add execute for all
+chown ubuntu:team file.txt # Change owner:group</code></pre>
+<div class="callout warn"><div class="callout-title">&#9888; AWS Exam Tip</div><p>SSH key pairs must have <code>chmod 400</code> permissions. AWS refuses connection if the .pem file is too permissive.</p></div></section>
+
+<section id="commands"><h2>Essential Commands</h2>
+<pre><code># Navigation
+pwd; ls -la; cd /var/log; cd ~; cd -
+
+# Files
+cp source dest; mv file newname; rm -rf dir/
+mkdir -p a/b/c; touch file.txt
+cat file.txt; less file.txt; tail -f /var/log/syslog
+
+# Search
+find / -name "*.log" -type f
+grep -r "ERROR" /var/log/
+grep -i "warning" app.log
+which python3; whereis nginx
+
+# Archives
+tar -czvf archive.tar.gz /mydir
+tar -xzvf archive.tar.gz
+zip -r backup.zip /mydir; unzip backup.zip</code></pre></section>
+
+<section id="processes"><h2>Processes &amp; System Info</h2>
+<pre><code>ps aux                  # All running processes
+ps aux | grep nginx     # Filter for nginx
+top                     # Real-time process viewer
+kill PID                # Graceful stop (SIGTERM)
+kill -9 PID             # Force kill (SIGKILL)
+free -h                 # Memory usage
+df -h                   # Disk usage
+uname -a                # Kernel info
+uptime                  # System uptime and load</code></pre></section>
+
+<section id="networking"><h2>Linux Networking Commands</h2>
+<pre><code>ip addr show                  # Show IP addresses
+ping -c 4 8.8.8.8             # ICMP ping
+traceroute google.com         # Trace route to host
+nslookup example.com          # DNS lookup
+dig example.com               # Detailed DNS query
+netstat -tulnp                # All listening ports
+ss -tulnp                     # Modern netstat
+curl -I https://example.com   # HTTP headers
+curl -v https://api.example.com  # Verbose HTTP</code></pre>
+<div class="callout warn"><div class="callout-title">&#9888; AWS Exam Tip</div><p>If you can ping an EC2 but can't connect on port 22, check the <strong>Security Group inbound rules</strong> — AWS Security Groups are applied before traffic reaches the OS firewall.</p></div></section>
+
+<section id="scripting"><h2>Shell Scripting</h2>
+<pre><code>#!/bin/bash
+# EC2 UserData example
+REGION="us-east-1"
+INSTANCE_ID=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
+
+if [ -f "/etc/nginx/nginx.conf" ]; then
+  echo "Nginx config exists"
+fi
+
+for FILE in /var/log/*.log; do
+  echo "Processing: $FILE"
+done
+
+# Error handling
+set -e          # Exit on first error
+set -u          # Treat unset vars as error
+
+# UserData script pattern
+yum update -y
+yum install -y nginx
+systemctl start nginx
+systemctl enable nginx</code></pre></section>
+
+<section id="ssh"><h2>SSH &amp; EC2 Access</h2>
+<pre><code># Connect to EC2
+chmod 400 my-key.pem
+ssh -i my-key.pem ec2-user@54.123.45.67   # Amazon Linux
+ssh -i my-key.pem ubuntu@54.123.45.67     # Ubuntu
+
+# SSH config (~/.ssh/config)
+Host my-ec2
+    HostName 54.123.45.67
+    User ec2-user
+    IdentityFile ~/.ssh/my-key.pem
+# Then just: ssh my-ec2
+
+# SCP — copy files
+scp -i key.pem file.txt ec2-user@IP:/home/ec2-user/
+
+# Port forwarding (tunnel to private RDS)
+ssh -i key.pem -L 5432:rds-endpoint:5432 ec2-user@IP</code></pre>
+<div class="callout tip"><div class="callout-title">&#128161; EC2 Instance Connect</div><p>Provides browser-based SSH access without key pairs — uses IAM permissions instead. Great for exam questions about "SSH access without managing key pairs".</p></div></section>
+
+<section id="systemd"><h2>Systemd &amp; Services</h2>
+<pre><code>systemctl start nginx     # Start service
+systemctl stop nginx      # Stop service
+systemctl restart nginx   # Restart
+systemctl enable nginx    # Auto-start on boot
+systemctl status nginx    # Current status
+journalctl -u nginx -f    # Follow service logs
+journalctl -xe            # Recent errors</code></pre></section>
+<section id="checklist" class="progress-section"><h2>&#128203; Study Checklist</h2><div class="progress-wrap"><div class="progress-label"><span>Progress</span><span class="progress-pct">0%</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div><ul class="checklist"><li><input type="checkbox"><span>Understand the Linux directory structure</span></li><li><input type="checkbox"><span>Know how file permissions work (rwx / octal)</span></li><li><input type="checkbox"><span>Use chmod, chown commands</span></li><li><input type="checkbox"><span>Navigate with cd, ls, pwd, find</span></li><li><input type="checkbox"><span>Edit files with nano or vim</span></li><li><input type="checkbox"><span>Manage processes with ps, top, kill</span></li><li><input type="checkbox"><span>Use grep, awk, sed for text processing</span></li><li><input type="checkbox"><span>Write a basic bash script with variables and loops</span></li><li><input type="checkbox"><span>Install packages with yum/apt</span></li><li><input type="checkbox"><span>Manage services with systemctl</span></li><li><input type="checkbox"><span>Connect to EC2 via SSH with key pair</span></li><li><input type="checkbox"><span>Set and use environment variables</span></li><li><input type="checkbox"><span>Schedule tasks with cron</span></li><li><input type="checkbox"><span>Use networking commands (ping, netstat, curl, dig)</span></li><li><input type="checkbox"><span>View and tail logs with tail -f and journalctl</span></li><li><input type="checkbox"><span>Use pipes and redirects (|, >, >>, 2>&1)</span></li><li><input type="checkbox"><span>Understand EC2 UserData scripts</span></li><li><input type="checkbox"><span>Know where AWS credential files are stored (~/.aws/)</span></li><li><input type="checkbox"><span>Understand IMDS (Instance Metadata Service at 169.254.169.254)</span></li><li><input type="checkbox"><span>Know the difference between yum (Amazon Linux) and apt (Ubuntu)</span></li></ul><div class="mt-2"><a href="foundations-networking.html" class="btn btn-primary">Next: Networking Fundamentals &rarr;</a></div></section></main></div></div><script src="../assets/js/main.js"></script></body></html>

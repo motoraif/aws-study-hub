@@ -1,0 +1,29 @@
+name: 🐛 Bug Report
+description: Report a broken link, wrong information, or display issue
+labels: ["bug"]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Which page?
+      placeholder: "docs/clf-c02.html"
+    validations:
+      required: true
+  - type: dropdown
+    id: type
+    attributes:
+      label: Issue type
+      options: [Broken link, Wrong information, Outdated content, Display issue, Typo]
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the issue
+    validations:
+      required: true
+  - type: input
+    id: correct
+    attributes:
+      label: Correct information (if known)
+      placeholder: "Correct URL/value: ... (Source: AWS docs)"

@@ -1,0 +1,30 @@
+name: 💡 Share an Exam Tip
+description: Passed an AWS exam? Share your tips to help others!
+labels: ["exam-tip", "community"]
+body:
+  - type: dropdown
+    id: cert
+    attributes:
+      label: Which certification?
+      options: [CLF-C02, SAA-C03, DVA-C02, SOA-C02, SAP-C02, DOP-C02, SCS-C02, ANS-C01, MLS-C01, DAS-C01]
+    validations:
+      required: true
+  - type: textarea
+    id: tips
+    attributes:
+      label: Your exam tips
+      placeholder: |
+        - The shared responsibility model was tested heavily
+        - Focus on scenario-based SQS/SNS decoupling questions
+    validations:
+      required: true
+  - type: input
+    id: resources
+    attributes:
+      label: Resources you used
+      placeholder: "Stephane Maarek + Tutorials Dojo (2 full runs)"
+  - type: input
+    id: credit
+    attributes:
+      label: How should we credit you? (optional)
+      placeholder: "GitHub: @yourusername  or  Anonymous"

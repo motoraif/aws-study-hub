@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>ANS-C01 — AWS Certified Advanced Networking Specialty — AWS Study Hub</title>
+  <meta name="description" content="Complex AWS networking: VPC design, Direct Connect, Transit Gateway, Route 53, CloudFront.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/components.js"></script>
+</head><body><div class="container" style="padding-top:2rem;"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Certifications</span> / <span>ANS-C01</span></div></div><div class="page-header"><div class="container"><span class="badge badge-red">Specialty</span><h1 style="margin-top:0.75rem;">&#127760; ANS-C01 — AWS Certified Advanced Networking Specialty</h1><p>Complex AWS networking: VPC design, Direct Connect, Transit Gateway, Route 53, CloudFront.</p><div class="flex-wrap mt-1"><span class="badge badge-green">170 min | 65 questions</span><span class="badge badge-red">Passing: 750/1000</span></div></div></div><div class="container" style="padding-bottom:4rem;"><div class="doc-layout"><aside class="sidebar"><h4>Contents</h4><a href="#overview">Exam Overview</a>
+<a href="#s0"></a>
+<a href="#s1"></a>
+<a href="#s2"></a>
+</aside><main><section id="overview"><h2>Exam Overview</h2>
+<div class="grid-2">
+  <div class="card"><h3>Exam Details</h3><ul>
+    <li><strong>Duration:</strong> 170 minutes</li><li><strong>Questions:</strong> 65</li>
+    <li><strong>Passing Score:</strong> 750/1000</li>
+    <li><strong>Format:</strong> Multiple choice &amp; multiple response</li>
+    <li><strong>Cost:</strong> ~$150-300 USD</li><li><strong>Validity:</strong> 3 years</li>
+  </ul></div>
+  <div class="card"><h3>&#127891; Official Resources</h3><ul>
+    <li><a href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/2833/advanced-networking-on-aws" target="_blank" rel="noopener">Free Skill Builder: Advanced Networking on AWS</a></li>
+    <li><a href="https://d1.awsstatic.com/training-and-certification/docs-advnetworking-spec/AWS-Certified-Advanced-Networking-Specialty_Exam-Guide.pdf" target="_blank" rel="noopener">Official Exam Guide (PDF)</a></li>
+    <li><a href="https://d1.awsstatic.com/training-and-certification/docs-advnetworking-spec/AWS-Certified-Advanced-Networking-Specialty_Sample-Questions.pdf" target="_blank" rel="noopener">Official Sample Questions (PDF)</a></li>
+    <li><a href="https://aws.amazon.com/certification/" target="_blank" rel="noopener">Schedule Your Exam</a></li>
+    <li><a href="https://tutorialsdojo.com/" target="_blank" rel="noopener">Tutorials Dojo Practice Exams</a></li>
+    <li><a href="https://www.udemy.com/user/stephane-maarek/" target="_blank" rel="noopener">Stephane Maarek on Udemy</a></li>
+  </ul></div>
+</div>
+<h3>Exam Domains</h3>
+<div class="table-wrap"><table><thead><tr><th>Domain</th><th>Weight</th></tr></thead><tbody><tr><td>Network Design</td><td>30%</td></tr><tr><td>Network Implementation</td><td>26%</td></tr><tr><td>Network Management & Operations</td><td>20%</td></tr><tr><td>Network Security & Governance</td><td>24%</td></tr></tbody></table></div>
+</section><section id="vpc-adv"><h2>Advanced VPC Design</h2>
+<ul><li>Use /16 VPCs — 65,536 IPs; /24 subnets — 251 usable IPs (AWS reserves 5)</li>
+<li>Non-overlapping CIDRs across all VPCs required for peering/TGW</li>
+<li>Secondary CIDRs — add up to 5 CIDR blocks to a VPC (e.g., EKS pods)</li>
+<li>VPC Sharing (RAM) — share subnets from central VPC to multiple accounts</li></ul>
+<h3>VPC Endpoints Deep Dive</h3>
+<div class="table-wrap"><table><thead><tr><th>Type</th><th>Services</th><th>Cost</th></tr></thead><tbody>
+  <tr><td>Gateway Endpoint</td><td>S3, DynamoDB only</td><td>Free</td></tr>
+  <tr><td>Interface Endpoint (PrivateLink)</td><td>150+ AWS services</td><td>$0.01/hr + data</td></tr>
+  <tr><td>GWLB Endpoint</td><td>Third-party appliances</td><td>$0.01/hr + data</td></tr>
+</tbody></table></div></section>
+<section id="route53-adv"><h2>Route 53 Routing Policies</h2>
+<div class="table-wrap"><table><thead><tr><th>Policy</th><th>Use Case</th><th>Key Detail</th></tr></thead><tbody>
+  <tr><td>Simple</td><td>Single resource</td><td>Can return multiple values; client picks</td></tr>
+  <tr><td>Weighted</td><td>A/B testing, gradual migration</td><td>Assign weights 0-255; 0 = stop traffic</td></tr>
+  <tr><td>Latency</td><td>Route to lowest-latency region</td><td>Based on AWS latency data</td></tr>
+  <tr><td>Failover</td><td>Active-passive DR</td><td>Primary/Secondary; health check required</td></tr>
+  <tr><td>Geolocation</td><td>Route by user's geography</td><td>Country/continent; default for unmatched</td></tr>
+  <tr><td>Geoproximity</td><td>Route by proximity with bias</td><td>Traffic Flow only; bias expands/shrinks regions</td></tr>
+  <tr><td>Multi-Value</td><td>Simple load balancing</td><td>Up to 8 records; health checked</td></tr>
+  <tr><td>IP-Based</td><td>Route by client CIDR</td><td>Map IP ranges to endpoints</td></tr>
+</tbody></table></div></section>
+<section id="cf-adv"><h2>CloudFront Advanced</h2>
+<ul><li><strong>OAC (Origin Access Control)</strong> — restricts S3 to CloudFront only (replaces OAI)</li>
+<li><strong>Lambda@Edge</strong> — all 4 request/response phases; 5-30s timeout; Node.js/Python</li>
+<li><strong>CloudFront Functions</strong> — viewer req/res only; sub-millisecond; JavaScript; cheapest</li>
+<li><strong>Signed URLs</strong> — single file access; <strong>Signed Cookies</strong> — multiple files (video streaming)</li>
+<li><strong>Origin Groups</strong> — primary + failover origin; auto-failover</li></ul></section><section id="checklist" class="progress-section"><h2>&#128203; Study Checklist</h2><div class="progress-wrap"><div class="progress-label"><span>Progress</span><span class="progress-pct">0%</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div><ul class="checklist"><li><input type="checkbox"><span>Design multi-VPC architectures with non-overlapping CIDRs</span></li><li><input type="checkbox"><span>Know all 3 VPC Endpoint types and when to use each</span></li><li><input type="checkbox"><span>Design DX with primary + backup VPN</span></li><li><input type="checkbox"><span>Understand BGP: AS_PATH prepending, Local Preference, MED</span></li><li><input type="checkbox"><span>Design TGW with route table segmentation and Appliance Mode</span></li><li><input type="checkbox"><span>Know all 8 Route 53 routing policies and use cases</span></li><li><input type="checkbox"><span>Design hybrid DNS with Route 53 Resolver endpoints</span></li><li><input type="checkbox"><span>Configure CloudFront with OAC, Lambda@Edge, signed URLs</span></li><li><input type="checkbox"><span>Know Network Firewall stateful vs stateless rule groups</span></li><li><input type="checkbox"><span>Design IPv6 dual-stack VPCs with Egress-Only IGW</span></li><li><input type="checkbox"><span>Know VPC Flow Log format and Athena analysis</span></li><li><input type="checkbox"><span>Design multi-region active-active with Route 53 + health checks</span></li><li><input type="checkbox"><span>Understand AWS Global Accelerator for TCP/UDP workloads</span></li><li><input type="checkbox"><span>Know PrivateLink and VPC Endpoint Services</span></li><li><input type="checkbox"><span>Understand prefix lists for CIDR management</span></li><li><input type="checkbox"><span>Know ELB cross-zone load balancing behavior</span></li><li><input type="checkbox"><span>Design AWS Global Network vs public internet routing</span></li><li><input type="checkbox"><span>Understand BGP communities for DX routing</span></li><li><input type="checkbox"><span>Configure Transit Gateway Connect with GRE tunnels</span></li><li><input type="checkbox"><span>Know Direct Connect Gateway for multi-region VPC access</span></li></ul><div class="mt-2"><a href="mls-c01.html" class="btn btn-primary">Next: Machine Learning Specialty (MLS-C01) &rarr;</a></div></section></main></div></div><script src="../assets/js/main.js"></script></body></html>
