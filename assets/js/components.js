@@ -102,7 +102,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>&copy; 2025 AWS Study Hub - MIT License</span>
+    <span>&copy; 2026 AWS Study Hub - MIT License</span>
     <span>Not affiliated with Amazon Web Services.</span>
   </div>
 </div></footer>
