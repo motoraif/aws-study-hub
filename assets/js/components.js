@@ -11,15 +11,19 @@
     <a href="${root}docs/foundations-linux.html">Linux</a>
     <a href="${root}docs/foundations-networking.html">Networking</a>
     <a href="${root}docs/clf-c02.html">CLF</a>
+    <a href="${root}docs/aif-c01.html">AI Practitioner</a>
     <a href="${root}docs/saa-c03.html">SAA</a>
     <a href="${root}docs/dva-c02.html">DVA</a>
     <a href="${root}docs/soa-c02.html">SOA</a>
+    <a href="${root}docs/dea-c01.html">Data Eng</a>
+    <a href="${root}docs/mla-c01.html">ML Eng</a>
     <a href="${root}docs/sap-c02.html">SAP</a>
     <a href="${root}docs/dop-c02.html">DOP</a>
+    <a href="${root}docs/aip-c01.html">GenAI Dev</a>
     <a href="${root}docs/scs-c02.html">Security</a>
     <a href="${root}docs/ans-c01.html">Networking+</a>
-    <a href="${root}docs/mls-c01.html">ML</a>
-    <a href="${root}docs/das-c01.html">Data</a>
+    <a href="${root}docs/mls-c01.html">ML (retired)</a>
+    <a href="${root}docs/das-c01.html">Data (retired)</a>
     <a href="${root}docs/resources.html">Resources</a>
     <a href="${root}docs/labs.html">Labs</a>
     <a href="${root}docs/news.html">News</a>
@@ -52,15 +56,19 @@
       <h5>Certifications</h5>
       <ul>
         <li><a href="${root}docs/clf-c02.html">Cloud Practitioner</a></li>
+        <li><a href="${root}docs/aif-c01.html">AI Practitioner &#127381;</a></li>
         <li><a href="${root}docs/saa-c03.html">Solutions Architect Assoc.</a></li>
         <li><a href="${root}docs/dva-c02.html">Developer Associate</a></li>
         <li><a href="${root}docs/soa-c02.html">SysOps Associate</a></li>
+        <li><a href="${root}docs/dea-c01.html">Data Engineer Assoc. &#127381;</a></li>
+        <li><a href="${root}docs/mla-c01.html">ML Engineer Assoc. &#127381;</a></li>
         <li><a href="${root}docs/sap-c02.html">SA Professional</a></li>
         <li><a href="${root}docs/dop-c02.html">DevOps Professional</a></li>
+        <li><a href="${root}docs/aip-c01.html">GenAI Developer Pro &#127381;</a></li>
         <li><a href="${root}docs/scs-c02.html">Security Specialty</a></li>
         <li><a href="${root}docs/ans-c01.html">Networking Specialty</a></li>
-        <li><a href="${root}docs/mls-c01.html">ML Specialty</a></li>
-        <li><a href="${root}docs/das-c01.html">Data Analytics Specialty</a></li>
+        <li><a href="${root}docs/mls-c01.html">ML Specialty (retired)</a></li>
+        <li><a href="${root}docs/das-c01.html">Data Analytics (retired)</a></li>
       </ul>
     </div>
     <div>
