@@ -78,10 +78,39 @@
     <div class="card"><div class="card-icon">&#127963;</div><h3>Official First</h3><p style="color:var(--text-muted);font-size:0.9rem">All content links back to AWS Skill Builder, official whitepapers, and exam guides.</p></div>
     <div class="card"><div class="card-icon">&#129309;</div><h3>Community Driven</h3><p style="color:var(--text-muted);font-size:0.9rem">Open source on GitHub. Anyone can contribute. PRs and issues welcome!</p></div>
     <div class="card"><div class="card-icon">&#9989;</div><h3>Progress Tracking</h3><p style="color:var(--text-muted);font-size:0.9rem">Interactive checklists saved in your browser. No account needed.</p></div>
-    <div class="card"><div class="card-icon">&#128260;</div><h3>Auto-Updated</h3><p style="color:var(--text-muted);font-size:0.9rem">GitHub Actions pulls the latest AWS news weekly so content stays fresh.</p></div>
+    <a href="docs/news.html" class="card" style="text-decoration:none;color:var(--text)"><div class="card-icon">&#128260;</div><h3>Auto-Updated</h3><p style="color:var(--text-muted);font-size:0.9rem">GitHub Actions pulls the latest AWS news weekly so content stays fresh. <span style="color:var(--aws-orange)">View news &rarr;</span></p></a>
     <div class="card"><div class="card-icon">&#129139;</div><h3>Full-Stack Learning</h3><p style="color:var(--text-muted);font-size:0.9rem">Linux basics &rarr; Networking &rarr; AWS Associate &rarr; Professional &rarr; Specialty.</p></div>
   </div>
 </div></section>
+
+<section class="section"><div class="container">
+  <div class="text-center mb-2"><h2>&#128240; Latest AWS News</h2><p style="color:var(--text-muted);max-width:600px;margin:0 auto">Fresh from the official AWS What's New feed, updated automatically every week.</p></div>
+  <div id="home-news" class="grid-3">
+    <div class="card"><p style="color:var(--text-muted)">Loading latest AWS news&hellip;</p></div>
+  </div>
+  <div class="text-center mt-2"><a href="docs/news.html" class="btn btn-outline">View All AWS News &rarr;</a></div>
+</div></section>
+<script>
+(function(){
+  var el = document.getElementById("home-news");
+  if(!el) return;
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]; }); }
+  fetch("data/aws-news.json",{cache:"no-cache"})
+    .then(function(r){ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
+    .then(function(data){
+      var items=((data&&data.items)||[]).slice(0,3);
+      if(!items.length){ el.innerHTML='<div class="card"><p style="color:var(--text-muted)">No news items yet.</p></div>'; return; }
+      el.innerHTML=items.map(function(it){
+        return '<a href="'+esc(it.link||"#")+'" target="_blank" rel="noopener" class="card" style="text-decoration:none;color:var(--text);display:block">'+
+               '<div class="flex-wrap" style="margin-bottom:0.5rem"><span class="badge badge-orange">'+esc(it.date||"")+'</span></div>'+
+               '<h3 style="font-size:1rem;margin:0 0 0.4rem">'+esc(it.title||"")+'</h3>'+
+               '<p style="color:var(--text-muted);font-size:0.85rem;margin:0">'+esc((it.summary||"").slice(0,140))+'</p></a>';
+      }).join("");
+    })
+    .catch(function(){ el.innerHTML='<div class="card"><p style="color:var(--text-muted)">Could not load news. <a href="docs/news.html">Open the News page &rarr;</a></p></div>'; });
+})();
+</script>
 
 <section class="section" style="background:var(--bg-card);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
 <div class="container">

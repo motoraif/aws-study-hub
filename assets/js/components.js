@@ -22,6 +22,7 @@
     <a href="${root}docs/das-c01.html">Data</a>
     <a href="${root}docs/resources.html">Resources</a>
     <a href="${root}docs/labs.html">Labs</a>
+    <a href="${root}docs/news.html">News</a>
     <a href="https://github.com/motoraif/aws-study-hub" target="_blank" rel="noopener">GitHub &#11088;</a>
   </div>
   <div class="nav-search">
@@ -67,6 +68,7 @@
       <ul>
         <li><a href="${root}docs/resources.html">All Resources</a></li>
         <li><a href="${root}docs/labs.html">Labs &amp; Practice</a></li>
+        <li><a href="${root}docs/news.html">AWS News</a></li>
         <li><a href="https://explore.skillbuilder.aws/" target="_blank">AWS Skill Builder</a></li>
         <li><a href="https://www.udemy.com/user/stephane-maarek/" target="_blank">Stephane Maarek</a></li>
         <li><a href="https://tutorialsdojo.com/" target="_blank">Tutorials Dojo</a></li>
