@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>DOP-C02 — AWS Certified DevOps Engineer Professional — AWS Study Hub</title>
+  <title>DOP-C02 - AWS Certified DevOps Engineer Professional - AWS Study Hub</title>
   <meta name="description" content="CI/CD automation, IaC, containers, monitoring, compliance, and incident response at professional level.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/style.css">
   <script src="../assets/js/components.js"></script>
-</head><body><div class="container" style="padding-top:2rem;"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Certifications</span> / <span>DOP-C02</span></div></div><div class="page-header"><div class="container"><span class="badge badge-purple">Professional</span><h1 style="margin-top:0.75rem;">&#128260; DOP-C02 — AWS Certified DevOps Engineer Professional</h1><p>CI/CD automation, IaC, containers, monitoring, compliance, and incident response at professional level.</p><div class="flex-wrap mt-1"><span class="badge badge-green">180 min | 75 questions</span><span class="badge badge-purple">Passing: 750/1000</span></div></div></div><div class="container" style="padding-bottom:4rem;"><div class="doc-layout"><aside class="sidebar"><h4>Contents</h4><a href="#overview">Exam Overview</a>
+</head><body><div class="container" style="padding-top:2rem;"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Certifications</span> / <span>DOP-C02</span></div></div><div class="page-header"><div class="container"><span class="badge badge-purple">Professional</span><h1 style="margin-top:0.75rem;">&#128260; DOP-C02 - AWS Certified DevOps Engineer Professional</h1><p>CI/CD automation, IaC, containers, monitoring, compliance, and incident response at professional level.</p><div class="flex-wrap mt-1"><span class="badge badge-green">180 min | 75 questions</span><span class="badge badge-purple">Passing: 750/1000</span></div></div></div><div class="container" style="padding-bottom:4rem;"><div class="doc-layout"><aside class="sidebar"><h4>Contents</h4><a href="#overview">Exam Overview</a>
 <a href="#cicd-pro">Advanced CI/CD</a>
 <a href="#iac-pro">IaC at Scale</a>
 <a href="#containers-devops">Containers</a>
@@ -37,9 +37,9 @@
 </section>
 <section id="cicd-pro"><h2>Advanced CI/CD</h2>
 <h3>CodePipeline Advanced Patterns</h3>
-<ul><li><strong>Manual Approval</strong> — pause pipeline; require human sign-off before prod deploy</li>
-<li><strong>Cross-Account Pipeline</strong> — deploy from one account's pipeline to another account's environment</li>
-<li><strong>Multi-Region Deploy</strong> — parallel deploy to multiple regions simultaneously</li></ul>
+<ul><li><strong>Manual Approval</strong> - pause pipeline; require human sign-off before prod deploy</li>
+<li><strong>Cross-Account Pipeline</strong> - deploy from one account's pipeline to another account's environment</li>
+<li><strong>Multi-Region Deploy</strong> - parallel deploy to multiple regions simultaneously</li></ul>
 <h3>CodeBuild buildspec.yml</h3>
 <pre><code>version: 0.2
 env:
@@ -61,11 +61,11 @@ reports:
 
 <section id="iac-pro"><h2>Infrastructure as Code at Scale</h2>
 <h3>CloudFormation Advanced</h3>
-<ul><li><strong>StackSets</strong> — deploy to multiple accounts/regions from management account</li>
-<li><strong>Nested Stacks</strong> — reusable stack modules</li>
-<li><strong>Custom Resources</strong> — extend CFN with Lambda for anything not natively supported</li>
-<li><strong>Hooks</strong> — pre/post-provision validation via Lambda</li>
-<li><strong>Drift Detection</strong> — compare stack's actual state to expected template state</li></ul>
+<ul><li><strong>StackSets</strong> - deploy to multiple accounts/regions from management account</li>
+<li><strong>Nested Stacks</strong> - reusable stack modules</li>
+<li><strong>Custom Resources</strong> - extend CFN with Lambda for anything not natively supported</li>
+<li><strong>Hooks</strong> - pre/post-provision validation via Lambda</li>
+<li><strong>Drift Detection</strong> - compare stack's actual state to expected template state</li></ul>
 <h3>AWS CDK</h3>
 <pre><code>from aws_cdk import Stack, aws_s3 as s3, aws_lambda as lambda_
 class MyStack(Stack):
@@ -80,7 +80,7 @@ class MyStack(Stack):
 
 <section id="containers-devops"><h2>Containers at Scale</h2>
 <div class="table-wrap"><table><thead><tr><th>Factor</th><th>ECS</th><th>EKS</th></tr></thead><tbody>
-  <tr><td>Learning curve</td><td>Low — AWS native</td><td>High — Kubernetes expertise needed</td></tr>
+  <tr><td>Learning curve</td><td>Low - AWS native</td><td>High - Kubernetes expertise needed</td></tr>
   <tr><td>Control plane</td><td>Managed by AWS (free)</td><td>Managed by AWS ($0.10/hr)</td></tr>
   <tr><td>Portability</td><td>AWS-only</td><td>Run anywhere Kubernetes runs</td></tr>
   <tr><td>Fargate support</td><td>Excellent</td><td>Supported (EKS Fargate profiles)</td></tr>
@@ -95,7 +95,7 @@ Account C → CloudWatch Logs → Kinesis Firehose ↗
                           OpenSearch (search/visualize)
                           Athena (SQL queries)</code></pre>
 <h3>AWS Config for Continuous Compliance</h3>
-<ul><li><strong>Config Rules</strong> — evaluate resource configs (managed or custom Lambda)</li>
-<li><strong>Conformance Packs</strong> — bundle of rules for compliance standards (PCI-DSS, HIPAA)</li>
-<li><strong>Remediation</strong> — auto-fix non-compliant resources via SSM Automation</li>
-<li><strong>Aggregator</strong> — centralize Config data from all accounts/regions</li></ul></section><section id="checklist" class="progress-section"><h2>&#128203; Study Checklist</h2><div class="progress-wrap"><div class="progress-label"><span>Progress</span><span class="progress-pct">0%</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div><ul class="checklist"><li><input type="checkbox"><span>Build CodePipeline with manual approval and cross-account deploy</span></li><li><input type="checkbox"><span>Write advanced buildspec.yml with Parameter Store and Secrets Manager</span></li><li><input type="checkbox"><span>Design blue/green ECS deployment with CodeDeploy</span></li><li><input type="checkbox"><span>Use CloudFormation StackSets for multi-account deployments</span></li><li><input type="checkbox"><span>Write CDK code to define AWS infrastructure</span></li><li><input type="checkbox"><span>Know Terraform state management with S3 + DynamoDB locking</span></li><li><input type="checkbox"><span>Decide between ECS and EKS for containerized workloads</span></li><li><input type="checkbox"><span>Design centralized logging with Kinesis Firehose</span></li><li><input type="checkbox"><span>Configure X-Ray sampling rules and trace groups</span></li><li><input type="checkbox"><span>Use AWS Config Conformance Packs for compliance</span></li><li><input type="checkbox"><span>Build EventBridge auto-remediation rules</span></li><li><input type="checkbox"><span>Configure OpsCenter and Incident Manager</span></li><li><input type="checkbox"><span>Know CloudWatch Contributor Insights and Synthetics Canaries</span></li><li><input type="checkbox"><span>Implement canary deployments with Lambda aliases and CodeDeploy</span></li><li><input type="checkbox"><span>Design zero-downtime deployments with ALB weighted target groups</span></li><li><input type="checkbox"><span>Understand chaos engineering with Fault Injection Simulator</span></li><li><input type="checkbox"><span>Use Service Catalog for governed self-service infrastructure</span></li><li><input type="checkbox"><span>Design GitOps workflows with CodePipeline + CodeCommit</span></li><li><input type="checkbox"><span>Know service quotas and how to request increases</span></li><li><input type="checkbox"><span>Use Systems Manager Automation documents for remediation</span></li></ul><div class="mt-2"><a href="scs-c02.html" class="btn btn-primary">Next: Security Specialty (SCS-C02) &rarr;</a></div></section></main></div></div><script src="../assets/js/main.js"></script></body></html>
+<ul><li><strong>Config Rules</strong> - evaluate resource configs (managed or custom Lambda)</li>
+<li><strong>Conformance Packs</strong> - bundle of rules for compliance standards (PCI-DSS, HIPAA)</li>
+<li><strong>Remediation</strong> - auto-fix non-compliant resources via SSM Automation</li>
+<li><strong>Aggregator</strong> - centralize Config data from all accounts/regions</li></ul></section><section id="checklist" class="progress-section"><h2>&#128203; Study Checklist</h2><div class="progress-wrap"><div class="progress-label"><span>Progress</span><span class="progress-pct">0%</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div><ul class="checklist"><li><input type="checkbox"><span>Build CodePipeline with manual approval and cross-account deploy</span></li><li><input type="checkbox"><span>Write advanced buildspec.yml with Parameter Store and Secrets Manager</span></li><li><input type="checkbox"><span>Design blue/green ECS deployment with CodeDeploy</span></li><li><input type="checkbox"><span>Use CloudFormation StackSets for multi-account deployments</span></li><li><input type="checkbox"><span>Write CDK code to define AWS infrastructure</span></li><li><input type="checkbox"><span>Know Terraform state management with S3 + DynamoDB locking</span></li><li><input type="checkbox"><span>Decide between ECS and EKS for containerized workloads</span></li><li><input type="checkbox"><span>Design centralized logging with Kinesis Firehose</span></li><li><input type="checkbox"><span>Configure X-Ray sampling rules and trace groups</span></li><li><input type="checkbox"><span>Use AWS Config Conformance Packs for compliance</span></li><li><input type="checkbox"><span>Build EventBridge auto-remediation rules</span></li><li><input type="checkbox"><span>Configure OpsCenter and Incident Manager</span></li><li><input type="checkbox"><span>Know CloudWatch Contributor Insights and Synthetics Canaries</span></li><li><input type="checkbox"><span>Implement canary deployments with Lambda aliases and CodeDeploy</span></li><li><input type="checkbox"><span>Design zero-downtime deployments with ALB weighted target groups</span></li><li><input type="checkbox"><span>Understand chaos engineering with Fault Injection Simulator</span></li><li><input type="checkbox"><span>Use Service Catalog for governed self-service infrastructure</span></li><li><input type="checkbox"><span>Design GitOps workflows with CodePipeline + CodeCommit</span></li><li><input type="checkbox"><span>Know service quotas and how to request increases</span></li><li><input type="checkbox"><span>Use Systems Manager Automation documents for remediation</span></li></ul><div class="mt-2"><a href="scs-c02.html" class="btn btn-primary">Next: Security Specialty (SCS-C02) &rarr;</a></div></section></main></div></div><script src="../assets/js/main.js"></script></body></html>

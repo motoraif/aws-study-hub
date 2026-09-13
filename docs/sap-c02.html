@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>SAP-C02 — AWS Certified Solutions Architect Professional — AWS Study Hub</title>
+  <title>SAP-C02 - AWS Certified Solutions Architect Professional - AWS Study Hub</title>
   <meta name="description" content="Advanced multi-account architectures, migration planning, cost optimization, complex hybrid designs.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/style.css">
   <script src="../assets/js/components.js"></script>
-</head><body><div class="container" style="padding-top:2rem;"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Certifications</span> / <span>SAP-C02</span></div></div><div class="page-header"><div class="container"><span class="badge badge-purple">Professional</span> <span class="badge" style="background:#5a4a00;color:#ffe08a;border:1px solid #b89100">&#9888;&#65039; Updating &mdash; last day for SAP-C02: Nov 16, 2026</span><h1 style="margin-top:0.75rem;">&#129504; SAP-C02 — AWS Certified Solutions Architect Professional</h1><p>Advanced multi-account architectures, migration planning, cost optimization, complex hybrid designs.</p><div class="flex-wrap mt-1"><span class="badge badge-green">180 min | 75 questions</span><span class="badge badge-purple">Passing: 750/1000</span><span class="badge badge-red">Hardest AWS exam</span></div></div></div><div class="container" style="padding-top:1.5rem"><div class="card" style="border:1px solid #b89100;background:rgba(180,145,0,0.12)">
+</head><body><div class="container" style="padding-top:2rem;"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Certifications</span> / <span>SAP-C02</span></div></div><div class="page-header"><div class="container"><span class="badge badge-purple">Professional</span> <span class="badge" style="background:#5a4a00;color:#ffe08a;border:1px solid #b89100">&#9888;&#65039; Updating - last day for SAP-C02: Nov 16, 2026</span><h1 style="margin-top:0.75rem;">&#129504; SAP-C02 - AWS Certified Solutions Architect Professional</h1><p>Advanced multi-account architectures, migration planning, cost optimization, complex hybrid designs.</p><div class="flex-wrap mt-1"><span class="badge badge-green">180 min | 75 questions</span><span class="badge badge-purple">Passing: 750/1000</span><span class="badge badge-red">Hardest AWS exam</span></div></div></div><div class="container" style="padding-top:1.5rem"><div class="card" style="border:1px solid #b89100;background:rgba(180,145,0,0.12)">
   <h3 style="margin-top:0">&#9888;&#65039; A new version is coming: SAP-C03</h3>
   <p style="color:var(--text-muted);margin:0">AWS is updating this exam. Registration for <strong>SAP-C03</strong> opens <strong>Oct 27, 2026</strong>, with GA delivery on <strong>Nov 17, 2026</strong>. The last day to take the current <strong>SAP-C02</strong> is <strong>Nov 16, 2026</strong>. SAP-C03 adds GenAI/agentic AI architectures (Amazon Bedrock, Bedrock AgentCore, RAG, Guardrails), resilience engineering (FIS, Resilience Hub, ARC), cloud-native patterns, DevSecOps, data lakehouse, and post-quantum cryptography. This guide covers SAP-C02; core architecture content still applies.</p>
 </div></div><div class="container" style="padding-bottom:4rem;"><div class="doc-layout"><aside class="sidebar"><h4>Contents</h4><a href="#overview">Exam Overview</a>
@@ -63,11 +63,11 @@
 <section id="advanced-net"><h2>Advanced Networking</h2>
 <h3>Transit Gateway (TGW)</h3>
 <ul><li>Regional hub; connect VPCs and on-premises at scale</li>
-<li>Transitive routing — VPC A → TGW → VPC B (unlike VPC Peering)</li>
-<li>TGW Route Tables — isolate VPC groups (prod vs dev)</li>
-<li>Inter-Region Peering — connect TGWs across regions</li></ul>
+<li>Transitive routing - VPC A → TGW → VPC B (unlike VPC Peering)</li>
+<li>TGW Route Tables - isolate VPC groups (prod vs dev)</li>
+<li>Inter-Region Peering - connect TGWs across regions</li></ul>
 <h3>Direct Connect</h3>
-<ul><li>Dedicated Connection: 1/10/100 Gbps — physical port at DX location</li>
+<ul><li>Dedicated Connection: 1/10/100 Gbps - physical port at DX location</li>
 <li>Hosted Connection: 50 Mbps – 10 Gbps via DX partner</li>
 <li>VIF Types: Private VIF (VPC), Public VIF (AWS public services), Transit VIF (TGW)</li>
 <li>DX Gateway: Connect one DX to multiple VPCs across regions</li>
@@ -75,7 +75,7 @@
 
 <section id="migration"><h2>Migration Strategies (7 Rs)</h2>
 <div class="table-wrap"><table><thead><tr><th>Strategy</th><th>Description</th><th>Effort</th></tr></thead><tbody>
-  <tr><td>Retire</td><td>Decommission — app no longer needed</td><td>None</td></tr>
+  <tr><td>Retire</td><td>Decommission - app no longer needed</td><td>None</td></tr>
   <tr><td>Retain</td><td>Keep on-premises for now</td><td>None</td></tr>
   <tr><td>Rehost (Lift &amp; Shift)</td><td>Move to EC2 with no changes</td><td>Low</td></tr>
   <tr><td>Replatform (Lift &amp; Reshape)</td><td>Minor optimizations (move DB to RDS)</td><td>Low-Medium</td></tr>
@@ -92,9 +92,9 @@
 </tbody></table></div></section>
 
 <section id="cost"><h2>Cost Optimization</h2>
-<ul><li><strong>Compute Optimizer</strong> — ML-based right-sizing for EC2, EBS, Lambda, ECS</li>
-<li><strong>Cost Allocation Tags</strong> — see cost breakdown per team/project</li>
-<li><strong>S3 Lifecycle</strong> — auto-move to cheaper storage classes</li>
-<li><strong>Spot for fault-tolerant workloads</strong> — up to 90% savings</li>
-<li><strong>Reserved Instances for steady-state</strong> — up to 72% savings</li>
-<li><strong>Savings Plans</strong> — Compute (most flexible), EC2 Instance (most discount)</li></ul></section><section id="checklist" class="progress-section"><h2>&#128203; Study Checklist</h2><div class="progress-wrap"><div class="progress-label"><span>Progress</span><span class="progress-pct">0%</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div><ul class="checklist"><li><input type="checkbox"><span>Explain AWS Organizations: OUs, SCPs, delegated admin, Control Tower</span></li><li><input type="checkbox"><span>Know all identity federation patterns and when to use each</span></li><li><input type="checkbox"><span>Understand RAM — what can be shared and how</span></li><li><input type="checkbox"><span>Design Transit Gateway with route table isolation</span></li><li><input type="checkbox"><span>Know Direct Connect: connection types, VIFs, DX Gateway</span></li><li><input type="checkbox"><span>Design Route 53 hybrid DNS with Resolver Endpoints</span></li><li><input type="checkbox"><span>Know the 7 Rs of migration and when to use each</span></li><li><input type="checkbox"><span>Understand Application Migration Service (MGN) vs DMS vs DataSync</span></li><li><input type="checkbox"><span>Design cost-optimized architectures with Savings Plans and Spot</span></li><li><input type="checkbox"><span>Use Compute Optimizer for right-sizing</span></li><li><input type="checkbox"><span>Design event-driven patterns: fan-out, CQRS, Saga, Strangler Fig</span></li><li><input type="checkbox"><span>Understand Step Functions Standard vs Express workflows</span></li><li><input type="checkbox"><span>Design multi-region active-active architectures</span></li><li><input type="checkbox"><span>Understand Global Accelerator vs CloudFront use cases</span></li><li><input type="checkbox"><span>Design disaster recovery: pilot light, warm standby, active-active</span></li><li><input type="checkbox"><span>Know Kinesis Data Streams vs Firehose vs MSK</span></li><li><input type="checkbox"><span>Understand AWS Service Catalog for governed self-service</span></li><li><input type="checkbox"><span>Know Lake Formation for data lake governance</span></li><li><input type="checkbox"><span>Design EKS/ECS advanced deployment patterns</span></li><li><input type="checkbox"><span>Understand Outposts and Local Zones for edge scenarios</span></li></ul><div class="mt-2"><a href="dop-c02.html" class="btn btn-primary">Next: DevOps Engineer Professional (DOP-C02) &rarr;</a></div></section></main></div></div><script src="../assets/js/main.js"></script></body></html>
+<ul><li><strong>Compute Optimizer</strong> - ML-based right-sizing for EC2, EBS, Lambda, ECS</li>
+<li><strong>Cost Allocation Tags</strong> - see cost breakdown per team/project</li>
+<li><strong>S3 Lifecycle</strong> - auto-move to cheaper storage classes</li>
+<li><strong>Spot for fault-tolerant workloads</strong> - up to 90% savings</li>
+<li><strong>Reserved Instances for steady-state</strong> - up to 72% savings</li>
+<li><strong>Savings Plans</strong> - Compute (most flexible), EC2 Instance (most discount)</li></ul></section><section id="checklist" class="progress-section"><h2>&#128203; Study Checklist</h2><div class="progress-wrap"><div class="progress-label"><span>Progress</span><span class="progress-pct">0%</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div><ul class="checklist"><li><input type="checkbox"><span>Explain AWS Organizations: OUs, SCPs, delegated admin, Control Tower</span></li><li><input type="checkbox"><span>Know all identity federation patterns and when to use each</span></li><li><input type="checkbox"><span>Understand RAM - what can be shared and how</span></li><li><input type="checkbox"><span>Design Transit Gateway with route table isolation</span></li><li><input type="checkbox"><span>Know Direct Connect: connection types, VIFs, DX Gateway</span></li><li><input type="checkbox"><span>Design Route 53 hybrid DNS with Resolver Endpoints</span></li><li><input type="checkbox"><span>Know the 7 Rs of migration and when to use each</span></li><li><input type="checkbox"><span>Understand Application Migration Service (MGN) vs DMS vs DataSync</span></li><li><input type="checkbox"><span>Design cost-optimized architectures with Savings Plans and Spot</span></li><li><input type="checkbox"><span>Use Compute Optimizer for right-sizing</span></li><li><input type="checkbox"><span>Design event-driven patterns: fan-out, CQRS, Saga, Strangler Fig</span></li><li><input type="checkbox"><span>Understand Step Functions Standard vs Express workflows</span></li><li><input type="checkbox"><span>Design multi-region active-active architectures</span></li><li><input type="checkbox"><span>Understand Global Accelerator vs CloudFront use cases</span></li><li><input type="checkbox"><span>Design disaster recovery: pilot light, warm standby, active-active</span></li><li><input type="checkbox"><span>Know Kinesis Data Streams vs Firehose vs MSK</span></li><li><input type="checkbox"><span>Understand AWS Service Catalog for governed self-service</span></li><li><input type="checkbox"><span>Know Lake Formation for data lake governance</span></li><li><input type="checkbox"><span>Design EKS/ECS advanced deployment patterns</span></li><li><input type="checkbox"><span>Understand Outposts and Local Zones for edge scenarios</span></li></ul><div class="mt-2"><a href="dop-c02.html" class="btn btn-primary">Next: DevOps Engineer Professional (DOP-C02) &rarr;</a></div></section></main></div></div><script src="../assets/js/main.js"></script></body></html>

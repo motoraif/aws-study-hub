@@ -9,7 +9,7 @@ HEAD = lambda t,d: f"""<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>{t} — AWS Study Hub</title>
+  <title>{t} - AWS Study Hub</title>
   <meta name="description" content="{d}">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +22,7 @@ HEAD_ROOT = lambda t,d: f"""<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>{t} — AWS Study Hub</title>
+  <title>{t} - AWS Study Hub</title>
   <meta name="description" content="{d}">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -83,7 +83,7 @@ index_body = """
 <section class="hero"><div class="container">
   <div class="hero-eyebrow">&#128640; Open Source &middot; Community Driven &middot; Always Free</div>
   <h1>The Ultimate AWS<br>Certification Study Hub</h1>
-  <p class="subtitle">Everything you need to pass every AWS certification &mdash; official Skill Builder courses, curated Udemy courses, hands-on labs, practice questions, Linux &amp; networking foundations. All free, all in one place.</p>
+  <p class="subtitle">Everything you need to pass every AWS certification - official Skill Builder courses, curated Udemy courses, hands-on labs, practice questions, Linux &amp; networking foundations. All free, all in one place.</p>
   <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
     <a href="docs/clf-c02.html" class="btn btn-primary">&#127891; Start Learning</a>
     <a href="docs/resources.html" class="btn btn-outline">&#128218; Browse Resources</a>
@@ -113,12 +113,12 @@ index_body = """
   <div class="grid-2">
     <a href="docs/foundations-linux.html" class="card" style="text-decoration:none;color:var(--text)">
       <div class="card-icon">&#128039;</div><h3>Linux Fundamentals</h3>
-      <p style="color:var(--text-muted);font-size:0.92rem">File system, permissions, processes, networking, shell scripting, systemd — everything for AWS exams.</p>
+      <p style="color:var(--text-muted);font-size:0.92rem">File system, permissions, processes, networking, shell scripting, systemd - everything for AWS exams.</p>
       <div class="flex-wrap mt-1"><span class="badge badge-teal">Beginner Friendly</span><span class="badge badge-green">20 Topics</span></div>
     </a>
     <a href="docs/foundations-networking.html" class="card" style="text-decoration:none;color:var(--text)">
       <div class="card-icon">&#127760;</div><h3>Networking Fundamentals</h3>
-      <p style="color:var(--text-muted);font-size:0.92rem">OSI model, TCP/IP, DNS, CIDR, subnetting, routing, load balancers, firewalls &mdash; the backbone of every AWS service.</p>
+      <p style="color:var(--text-muted);font-size:0.92rem">OSI model, TCP/IP, DNS, CIDR, subnetting, routing, load balancers, firewalls - the backbone of every AWS service.</p>
       <div class="flex-wrap mt-1"><span class="badge badge-blue">Essential</span><span class="badge badge-green">25 Topics</span></div>
     </a>
   </div>
@@ -130,20 +130,20 @@ index_body = """
   <h3 style="color:var(--aws-orange);margin-bottom:1rem">Foundational</h3>
   <a href="docs/clf-c02.html" class="cert-path" style="margin-bottom:2rem">
     <div class="cert-path-icon">&#127885;</div>
-    <div><div class="cert-path-title">CLF-C02 &mdash; AWS Certified Cloud Practitioner</div>
+    <div><div class="cert-path-title">CLF-C02 - AWS Certified Cloud Practitioner</div>
     <div class="cert-path-meta">The perfect entry point. No technical background required. Cloud concepts, core services, security &amp; billing.</div>
     <div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-orange">Foundational</span><span class="badge badge-green">~6 hrs study</span></div></div>
   </a>
   <h3 style="color:var(--aws-orange);margin-bottom:1rem;margin-top:2rem">Associate</h3>
   <div class="grid-3" style="margin-bottom:2rem">
-    <a href="docs/saa-c03.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#127959;</div><div><div class="cert-path-title">SAA-C03</div><div class="cert-path-meta">Solutions Architect Associate &mdash; Most popular AWS cert.</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-blue">Associate</span></div></div></a>
-    <a href="docs/dva-c02.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#128104;&#8205;&#128187;</div><div><div class="cert-path-title">DVA-C02</div><div class="cert-path-meta">Developer Associate &mdash; Lambda, DynamoDB, CI/CD.</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-blue">Associate</span></div></div></a>
-    <a href="docs/soa-c02.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#9881;</div><div><div class="cert-path-title">SOA-C02</div><div class="cert-path-meta">SysOps Administrator &mdash; Monitoring, automation, DR.</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-blue">Associate</span></div></div></a>
+    <a href="docs/saa-c03.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#127959;</div><div><div class="cert-path-title">SAA-C03</div><div class="cert-path-meta">Solutions Architect Associate - Most popular AWS cert.</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-blue">Associate</span></div></div></a>
+    <a href="docs/dva-c02.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#128104;&#8205;&#128187;</div><div><div class="cert-path-title">DVA-C02</div><div class="cert-path-meta">Developer Associate - Lambda, DynamoDB, CI/CD.</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-blue">Associate</span></div></div></a>
+    <a href="docs/soa-c02.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#9881;</div><div><div class="cert-path-title">SOA-C02</div><div class="cert-path-meta">SysOps Administrator - Monitoring, automation, DR.</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-blue">Associate</span></div></div></a>
   </div>
   <h3 style="color:var(--aws-orange);margin-bottom:1rem">Professional</h3>
   <div class="grid-2" style="margin-bottom:2rem">
-    <a href="docs/sap-c02.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#129504;</div><div><div class="cert-path-title">SAP-C02 &mdash; Solutions Architect Professional</div><div class="cert-path-meta">Advanced architecture, org complexity, migration planning.</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-purple">Professional</span></div></div></a>
-    <a href="docs/dop-c02.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#128260;</div><div><div class="cert-path-title">DOP-C02 &mdash; DevOps Engineer Professional</div><div class="cert-path-meta">CI/CD, IaC, containers, monitoring at professional level.</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-purple">Professional</span></div></div></a>
+    <a href="docs/sap-c02.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#129504;</div><div><div class="cert-path-title">SAP-C02 - Solutions Architect Professional</div><div class="cert-path-meta">Advanced architecture, org complexity, migration planning.</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-purple">Professional</span></div></div></a>
+    <a href="docs/dop-c02.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#128260;</div><div><div class="cert-path-title">DOP-C02 - DevOps Engineer Professional</div><div class="cert-path-meta">CI/CD, IaC, containers, monitoring at professional level.</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-purple">Professional</span></div></div></a>
   </div>
   <h3 style="color:var(--aws-orange);margin-bottom:1rem">Specialty</h3>
   <div class="grid-4">
@@ -190,16 +190,16 @@ index_body = """
   </div>
 </div></section>
 """
-write(f"{BASE}/index.html", HEAD_ROOT("AWS Study Hub — Ultimate AWS Certification Study Platform","Free open-source study hub for all AWS certifications. Official resources, labs, practice questions, Linux and networking foundations.")+index_body+FOOT_ROOT)
+write(f"{BASE}/index.html", HEAD_ROOT("AWS Study Hub - Ultimate AWS Certification Study Platform","Free open-source study hub for all AWS certifications. Official resources, labs, practice questions, Linux and networking foundations.")+index_body+FOOT_ROOT)
 print("  index.html done")
 
 
 # ── index.html ──────────────────────────────────────────────
-index_html = HEAD_ROOT("AWS Study Hub — Ultimate AWS Certification Study Platform","Free community-driven study hub for all AWS certifications.") + """
+index_html = HEAD_ROOT("AWS Study Hub - Ultimate AWS Certification Study Platform","Free community-driven study hub for all AWS certifications.") + """
 <section class="hero"><div class="container">
   <div class="hero-eyebrow">&#128640; Open Source &middot; Community Driven &middot; Always Free</div>
   <h1>The Ultimate AWS<br>Certification Study Hub</h1>
-  <p class="subtitle">Everything you need to pass every AWS certification &mdash; official Skill Builder courses, curated Udemy courses, hands-on labs, practice questions, Linux &amp; networking foundations. All free, all in one place.</p>
+  <p class="subtitle">Everything you need to pass every AWS certification - official Skill Builder courses, curated Udemy courses, hands-on labs, practice questions, Linux &amp; networking foundations. All free, all in one place.</p>
   <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
     <a href="docs/clf-c02.html" class="btn btn-primary">&#127891; Start Learning</a>
     <a href="docs/resources.html" class="btn btn-outline">&#128218; Browse Resources</a>
@@ -236,7 +236,7 @@ index_html = HEAD_ROOT("AWS Study Hub — Ultimate AWS Certification Study Platf
 <div class="container">
   <div class="text-center mb-2"><h2>&#9729;&#65039; AWS Certifications</h2><p style="color:var(--text-muted);max-width:600px;margin:0 auto">From beginner to expert. Each page includes official Skill Builder links, key topics, cheat sheets, and practice questions.</p></div>
   <h3 style="color:var(--aws-orange);margin-bottom:1rem">Foundational</h3>
-  <a href="docs/clf-c02.html" class="cert-path" style="margin-bottom:2rem"><div class="cert-path-icon">&#127885;</div><div><div class="cert-path-title">CLF-C02 &mdash; AWS Certified Cloud Practitioner</div><div class="cert-path-meta">The perfect entry point. No technical background required. Cloud concepts, core services, security &amp; billing.</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-orange">Foundational</span><span class="badge badge-green">~6 hrs study</span></div></div></a>
+  <a href="docs/clf-c02.html" class="cert-path" style="margin-bottom:2rem"><div class="cert-path-icon">&#127885;</div><div><div class="cert-path-title">CLF-C02 - AWS Certified Cloud Practitioner</div><div class="cert-path-meta">The perfect entry point. No technical background required. Cloud concepts, core services, security &amp; billing.</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-orange">Foundational</span><span class="badge badge-green">~6 hrs study</span></div></div></a>
   <h3 style="color:var(--aws-orange);margin:2rem 0 1rem">Associate</h3>
   <div class="grid-3" style="margin-bottom:2rem">
     <a href="docs/saa-c03.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#127959;</div><div><div class="cert-path-title">SAA-C03</div><div class="cert-path-meta">Solutions Architect Associate</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-blue">Associate</span></div></div></a>
@@ -245,8 +245,8 @@ index_html = HEAD_ROOT("AWS Study Hub — Ultimate AWS Certification Study Platf
   </div>
   <h3 style="color:var(--aws-orange);margin-bottom:1rem">Professional</h3>
   <div class="grid-2" style="margin-bottom:2rem">
-    <a href="docs/sap-c02.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#129504;</div><div><div class="cert-path-title">SAP-C02 &mdash; Solutions Architect Professional</div><div class="cert-path-meta">Advanced architecture, org complexity, migration planning.</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-purple">Professional</span></div></div></a>
-    <a href="docs/dop-c02.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#128260;</div><div><div class="cert-path-title">DOP-C02 &mdash; DevOps Engineer Professional</div><div class="cert-path-meta">CI/CD, IaC, containers, monitoring at professional level.</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-purple">Professional</span></div></div></a>
+    <a href="docs/sap-c02.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#129504;</div><div><div class="cert-path-title">SAP-C02 - Solutions Architect Professional</div><div class="cert-path-meta">Advanced architecture, org complexity, migration planning.</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-purple">Professional</span></div></div></a>
+    <a href="docs/dop-c02.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#128260;</div><div><div class="cert-path-title">DOP-C02 - DevOps Engineer Professional</div><div class="cert-path-meta">CI/CD, IaC, containers, monitoring at professional level.</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-purple">Professional</span></div></div></a>
   </div>
   <h3 style="color:var(--aws-orange);margin-bottom:1rem">Specialty</h3>
   <div class="grid-4">
@@ -297,14 +297,14 @@ write(f"{BASE}/index.html", index_html)
 
 
 # ── CLF-C02 ─────────────────────────────────────────────────
-clf = HEAD("CLF-C02 — AWS Cloud Practitioner","Complete CLF-C02 study guide. Cloud concepts, shared responsibility, IAM, core services, billing, and support plans.") + crumb("CLF-C02") + phdr("badge-orange","Foundational","&#127885;","CLF-C02 — AWS Certified Cloud Practitioner","The entry-level AWS certification. Cloud concepts, core services, security, billing, and support. No technical background required.",'<span class="badge badge-green">90 min | 65 questions</span><span class="badge badge-blue">Passing: 700/1000</span><span class="badge badge-teal">No prerequisites</span>') + wrap([
+clf = HEAD("CLF-C02 - AWS Cloud Practitioner","Complete CLF-C02 study guide. Cloud concepts, shared responsibility, IAM, core services, billing, and support plans.") + crumb("CLF-C02") + phdr("badge-orange","Foundational","&#127885;","CLF-C02 - AWS Certified Cloud Practitioner","The entry-level AWS certification. Cloud concepts, core services, security, billing, and support. No technical background required.",'<span class="badge badge-green">90 min | 65 questions</span><span class="badge badge-blue">Passing: 700/1000</span><span class="badge badge-teal">No prerequisites</span>') + wrap([
 ("overview","Exam Overview"),("cloud-concepts","Cloud Concepts"),("shared-resp","Shared Responsibility"),("global-infra","Global Infrastructure"),("iam","IAM"),("core-services","Core Services"),("billing","Billing &amp; Pricing"),("checklist","Checklist")],
 exam("AWS Cloud Practitioner Essentials","https://explore.skillbuilder.aws/learn/course/external/view/elearning/134/aws-cloud-practitioner-essentials","https://d1.awsstatic.com/training-and-certification/docs-cloud-practitioner/AWS-Certified-Cloud-Practitioner_Exam-Guide.pdf","https://d1.awsstatic.com/training-and-certification/docs-cloud-practitioner/AWS-Certified-Cloud-Practitioner_Sample-Questions.pdf","90 minutes","65","700",[("Cloud Concepts","24"),("Security &amp; Compliance","30"),("Cloud Technology &amp; Services","34"),("Billing, Pricing &amp; Support","12")])+"""
 <section id="cloud-concepts"><h2>Cloud Concepts</h2>
 <h3>The 6 Advantages of Cloud Computing</h3>
 <div class="grid-2">
   <div class="card"><h4>1. Trade CapEx for Variable Expense</h4><p>Pay only for what you consume instead of investing upfront in data centers and servers.</p></div>
-  <div class="card"><h4>2. Massive Economies of Scale</h4><p>AWS pools usage from hundreds of thousands of customers &mdash; passes savings to you.</p></div>
+  <div class="card"><h4>2. Massive Economies of Scale</h4><p>AWS pools usage from hundreds of thousands of customers - passes savings to you.</p></div>
   <div class="card"><h4>3. Stop Guessing Capacity</h4><p>Scale up or down in minutes. No over/under provisioning ever again.</p></div>
   <div class="card"><h4>4. Increase Speed &amp; Agility</h4><p>Deploy resources in minutes vs weeks. Experiment faster, fail cheaper.</p></div>
   <div class="card"><h4>5. Stop Spending on Data Centers</h4><p>Focus on your business, not racking servers and running cables.</p></div>
@@ -320,11 +320,11 @@ exam("AWS Cloud Practitioner Essentials","https://explore.skillbuilder.aws/learn
 <section id="shared-resp"><h2>Shared Responsibility Model</h2>
 <div class="callout warn"><div class="callout-title">&#9888; Most Tested CLF Topic</div><p>The Shared Responsibility Model is the most commonly tested concept on CLF. Know it perfectly.</p></div>
 <div class="grid-2">
-  <div class="card" style="border-color:var(--aws-orange)"><h3>AWS &mdash; "Security OF the Cloud"</h3><ul>
+  <div class="card" style="border-color:var(--aws-orange)"><h3>AWS - "Security OF the Cloud"</h3><ul>
     <li>Physical data center security</li><li>Hardware &amp; global network infrastructure</li>
     <li>Hypervisor / virtualization layer</li><li>Managed service OS patching (RDS, Lambda)</li>
   </ul></div>
-  <div class="card" style="border-color:var(--aws-blue)"><h3>Customer &mdash; "Security IN the Cloud"</h3><ul>
+  <div class="card" style="border-color:var(--aws-blue)"><h3>Customer - "Security IN the Cloud"</h3><ul>
     <li>EC2 OS patching &amp; updates</li><li>Application code security</li>
     <li>IAM users, roles, policies</li><li>Data encryption &amp; backups</li>
     <li>Security Groups &amp; Network ACLs</li>
@@ -339,14 +339,14 @@ exam("AWS Cloud Practitioner Essentials","https://explore.skillbuilder.aws/learn
   <div class="card"><h3>&#127760; Edge Locations</h3><p>400+ CDN endpoints globally for CloudFront &amp; Route 53. Cache content close to users for low latency.</p></div>
 </div></section>
 
-<section id="iam"><h2>IAM &mdash; Identity &amp; Access Management</h2>
+<section id="iam"><h2>IAM - Identity &amp; Access Management</h2>
 <div class="grid-2">
   <div><h3>Components</h3><ul>
-    <li><strong>Root User</strong> &mdash; master account; enable MFA; never use for daily tasks</li>
-    <li><strong>Users</strong> &mdash; individual people or service accounts</li>
-    <li><strong>Groups</strong> &mdash; collections of users sharing policies</li>
-    <li><strong>Roles</strong> &mdash; temporary permissions assumed by services/users</li>
-    <li><strong>Policies</strong> &mdash; JSON documents defining Allow/Deny</li>
+    <li><strong>Root User</strong> - master account; enable MFA; never use for daily tasks</li>
+    <li><strong>Users</strong> - individual people or service accounts</li>
+    <li><strong>Groups</strong> - collections of users sharing policies</li>
+    <li><strong>Roles</strong> - temporary permissions assumed by services/users</li>
+    <li><strong>Policies</strong> - JSON documents defining Allow/Deny</li>
   </ul></div>
   <div><h3>Best Practices</h3><ul>
     <li>&#128274; Never use root for daily tasks</li><li>&#128274; Enable MFA on root and admins</li>
@@ -393,7 +393,7 @@ write(f"{DOCS}/clf-c02.html", clf)
 
 
 # ── SAA-C03 ──────────────────────────────────────────────────
-saa = HEAD("SAA-C03 — Solutions Architect Associate","Complete SAA-C03 study guide. EC2, S3, VPC, RDS, serverless, HA design patterns, security.") + crumb("SAA-C03") + phdr("badge-blue","Associate","&#127959;","SAA-C03 — AWS Certified Solutions Architect Associate","The most popular AWS certification. Design resilient, performant, secure, cost-optimized architectures.",'<span class="badge badge-green">130 min | 65 questions</span><span class="badge badge-blue">Passing: 720/1000</span>') + wrap([("overview","Exam Overview"),("ec2","EC2 Deep Dive"),("s3","S3 Deep Dive"),("vpc","VPC &amp; Networking"),("ha","HA &amp; Resilient Design"),("serverless","Serverless"),("security","Security"),("checklist","Checklist")],
+saa = HEAD("SAA-C03 - Solutions Architect Associate","Complete SAA-C03 study guide. EC2, S3, VPC, RDS, serverless, HA design patterns, security.") + crumb("SAA-C03") + phdr("badge-blue","Associate","&#127959;","SAA-C03 - AWS Certified Solutions Architect Associate","The most popular AWS certification. Design resilient, performant, secure, cost-optimized architectures.",'<span class="badge badge-green">130 min | 65 questions</span><span class="badge badge-blue">Passing: 720/1000</span>') + wrap([("overview","Exam Overview"),("ec2","EC2 Deep Dive"),("s3","S3 Deep Dive"),("vpc","VPC &amp; Networking"),("ha","HA &amp; Resilient Design"),("serverless","Serverless"),("security","Security"),("checklist","Checklist")],
 exam("AWS Solutions Architect Associate","https://explore.skillbuilder.aws/learn/course/external/view/elearning/1044/aws-certified-solutions-architect-associate-official-practice-question-set-saa-c03-english","https://d1.awsstatic.com/training-and-certification/docs-sa-assoc/AWS-Certified-Solutions-Architect-Associate_Exam-Guide.pdf","https://d1.awsstatic.com/training-and-certification/docs-sa-assoc/AWS-Certified-Solutions-Architect-Associate_Sample-Questions.pdf","130 minutes","65","720",[("Design Secure Architectures","30"),("Design Resilient Architectures","26"),("Design High-Performing Architectures","24"),("Design Cost-Optimized Architectures","20")])+"""
 <section id="ec2"><h2>EC2 Deep Dive</h2>
 <h3>Instance Type Families</h3>
@@ -474,12 +474,12 @@ exam("AWS Solutions Architect Associate","https://explore.skillbuilder.aws/learn
 
 <section id="security"><h2>Security Services</h2>
 <div class="table-wrap"><table><thead><tr><th>Service</th><th>What It Does</th><th>Think of It As</th></tr></thead><tbody>
-  <tr><td>KMS</td><td>Key Management Service &mdash; encryption keys</td><td>Encryption key vault</td></tr>
+  <tr><td>KMS</td><td>Key Management Service - encryption keys</td><td>Encryption key vault</td></tr>
   <tr><td>Secrets Manager</td><td>Store/rotate secrets, DB passwords, API keys</td><td>Password manager for apps (auto-rotation)</td></tr>
   <tr><td>ACM</td><td>SSL/TLS certificate management</td><td>Free HTTPS certificates</td></tr>
   <tr><td>WAF</td><td>Block SQLi, XSS, rate limiting at Layer 7</td><td>Web application firewall</td></tr>
   <tr><td>Shield</td><td>DDoS protection (Standard=free, Advanced=paid)</td><td>DDoS protection</td></tr>
-  <tr><td>GuardDuty</td><td>Threat detection &mdash; analyzes VPC/DNS/CloudTrail logs</td><td>Automated threat detective</td></tr>
+  <tr><td>GuardDuty</td><td>Threat detection - analyzes VPC/DNS/CloudTrail logs</td><td>Automated threat detective</td></tr>
   <tr><td>Inspector</td><td>Vulnerability scanning for EC2/ECR/Lambda</td><td>Security scanner</td></tr>
   <tr><td>Macie</td><td>Discover sensitive data (PII) in S3</td><td>S3 data privacy guard</td></tr>
 </tbody></table></div></section>
@@ -491,7 +491,7 @@ write(f"{DOCS}/saa-c03.html", saa)
 # (concise but complete pages for each)
 
 def cert_page(code, level_cls, level_txt, icon, title, desc, badges, exam_args, toc, body_html, checklist_items, next_file, next_label):
-    return (HEAD(f"{code} — {title}", desc) + crumb(code) + phdr(level_cls, level_txt, icon, f"{code} — {title}", desc, badges)
+    return (HEAD(f"{code} - {title}", desc) + crumb(code) + phdr(level_cls, level_txt, icon, f"{code} - {title}", desc, badges)
             + wrap(toc, exam(*exam_args) + body_html + chk(checklist_items, next_file, next_label)) + FOOT)
 
 # DVA-C02
@@ -499,16 +499,16 @@ dva_body = """
 <section id="lambda"><h2>Lambda Deep Dive</h2>
 <div class="grid-2">
   <div class="card"><h3>Limits</h3><ul><li>Memory: 128 MB – 10,240 MB</li><li>Timeout: max <strong>15 minutes</strong></li><li>Temp storage (/tmp): 512 MB – 10 GB</li><li>Concurrent executions: 1,000 (soft limit)</li><li>Package: 50 MB zipped, 250 MB unzipped</li></ul></div>
-  <div class="card"><h3>Invocation Types</h3><ul><li><strong>Synchronous</strong> &mdash; wait for result (API Gateway, ALB)</li><li><strong>Asynchronous</strong> &mdash; no wait (S3, SNS, EventBridge); retries 2x; DLQ</li><li><strong>Poll-based</strong> &mdash; Lambda polls (SQS, Kinesis, DynamoDB Streams)</li></ul></div>
+  <div class="card"><h3>Invocation Types</h3><ul><li><strong>Synchronous</strong> - wait for result (API Gateway, ALB)</li><li><strong>Asynchronous</strong> - no wait (S3, SNS, EventBridge); retries 2x; DLQ</li><li><strong>Poll-based</strong> - Lambda polls (SQS, Kinesis, DynamoDB Streams)</li></ul></div>
 </div>
 <h3>Lambda Features</h3>
-<ul><li><strong>Versions</strong> &mdash; immutable snapshots of code + config</li><li><strong>Aliases</strong> &mdash; named pointers to versions (PROD, DEV)</li><li><strong>Canary / Linear deployments</strong> &mdash; gradual traffic shifts with CodeDeploy</li><li><strong>Layers</strong> &mdash; reusable dependencies shared across functions</li><li><strong>Container Images</strong> &mdash; up to 10 GB; use Lambda base images</li></ul></section>
+<ul><li><strong>Versions</strong> - immutable snapshots of code + config</li><li><strong>Aliases</strong> - named pointers to versions (PROD, DEV)</li><li><strong>Canary / Linear deployments</strong> - gradual traffic shifts with CodeDeploy</li><li><strong>Layers</strong> - reusable dependencies shared across functions</li><li><strong>Container Images</strong> - up to 10 GB; use Lambda base images</li></ul></section>
 
 <section id="dynamodb"><h2>DynamoDB for Developers</h2>
 <div class="table-wrap"><table><thead><tr><th>Concept</th><th>Description</th></tr></thead><tbody>
   <tr><td>Primary Key</td><td>Partition Key only (simple) OR Partition Key + Sort Key (composite)</td></tr>
-  <tr><td>GSI</td><td>Global Secondary Index &mdash; different partition key; eventual consistency</td></tr>
-  <tr><td>LSI</td><td>Local Secondary Index &mdash; same partition key, different sort key; must be at creation</td></tr>
+  <tr><td>GSI</td><td>Global Secondary Index - different partition key; eventual consistency</td></tr>
+  <tr><td>LSI</td><td>Local Secondary Index - same partition key, different sort key; must be at creation</td></tr>
   <tr><td>Read Consistency</td><td>Eventually Consistent (default, cheaper) vs Strongly Consistent</td></tr>
   <tr><td>DynamoDB Streams</td><td>Ordered record of item changes; trigger Lambda</td></tr>
   <tr><td>TTL</td><td>Auto-delete items after expiry timestamp (free)</td></tr>
@@ -535,19 +535,19 @@ dva_body = """
 
 <section id="api-gw"><h2>API Gateway</h2>
 <ul>
-  <li><strong>REST API</strong> &mdash; full features, 29s timeout, edge-optimized or regional</li>
-  <li><strong>HTTP API</strong> &mdash; simpler, 70% cheaper than REST API</li>
-  <li><strong>WebSocket API</strong> &mdash; bidirectional; real-time apps, chat, gaming</li>
-  <li><strong>CORS</strong> &mdash; must be enabled for browser cross-origin calls</li>
-  <li><strong>Stages</strong> &mdash; dev, staging, prod; each can have throttling/canary settings</li>
-  <li><strong>Usage Plans &amp; API Keys</strong> &mdash; throttle and monetize APIs</li>
-  <li><strong>Caching</strong> &mdash; reduce backend calls; TTL 0-3600s</li>
+  <li><strong>REST API</strong> - full features, 29s timeout, edge-optimized or regional</li>
+  <li><strong>HTTP API</strong> - simpler, 70% cheaper than REST API</li>
+  <li><strong>WebSocket API</strong> - bidirectional; real-time apps, chat, gaming</li>
+  <li><strong>CORS</strong> - must be enabled for browser cross-origin calls</li>
+  <li><strong>Stages</strong> - dev, staging, prod; each can have throttling/canary settings</li>
+  <li><strong>Usage Plans &amp; API Keys</strong> - throttle and monetize APIs</li>
+  <li><strong>Caching</strong> - reduce backend calls; TTL 0-3600s</li>
 </ul></section>
 
 <section id="xray"><h2>Monitoring &amp; X-Ray</h2>
 <div class="grid-2">
-  <div class="card"><h3>CloudWatch</h3><ul><li>Metrics &mdash; every service sends metrics (CPU, requests, errors)</li><li>Alarms &mdash; trigger SNS/ASG when threshold breached</li><li>Logs &mdash; Lambda writes here automatically</li><li>Log Insights &mdash; SQL-like query language for logs</li></ul></div>
-  <div class="card"><h3>X-Ray</h3><ul><li>Distributed tracing for microservices &amp; Lambda</li><li>Service Map &mdash; visual of all components</li><li>Requires: X-Ray SDK + X-Ray Daemon (EC2) or active tracing (Lambda)</li><li>Annotations (indexed) vs Metadata (not indexed)</li><li>Sampling rules &mdash; control % of requests to trace</li></ul></div>
+  <div class="card"><h3>CloudWatch</h3><ul><li>Metrics - every service sends metrics (CPU, requests, errors)</li><li>Alarms - trigger SNS/ASG when threshold breached</li><li>Logs - Lambda writes here automatically</li><li>Log Insights - SQL-like query language for logs</li></ul></div>
+  <div class="card"><h3>X-Ray</h3><ul><li>Distributed tracing for microservices &amp; Lambda</li><li>Service Map - visual of all components</li><li>Requires: X-Ray SDK + X-Ray Daemon (EC2) or active tracing (Lambda)</li><li>Annotations (indexed) vs Metadata (not indexed)</li><li>Sampling rules - control % of requests to trace</li></ul></div>
 </div></section>"""
 dva = cert_page("DVA-C02","badge-blue","Associate","&#128187;","AWS Certified Developer Associate","Develop, deploy, and debug cloud-based apps on AWS. Lambda, DynamoDB, API Gateway, CI/CD, X-Ray.",'<span class="badge badge-green">130 min | 65 questions</span><span class="badge badge-blue">Passing: 720/1000</span>',("Developing on AWS","https://explore.skillbuilder.aws/learn/course/external/view/elearning/764/developing-on-aws","https://d1.awsstatic.com/training-and-certification/docs-dev-associate/AWS-Certified-Developer-Associate_Exam-Guide.pdf","https://d1.awsstatic.com/training-and-certification/docs-dev-associate/AWS-Certified-Developer-Associate_Sample-Questions.pdf","130 minutes","65","720",[("Development with AWS Services","32"),("Security","26"),("Deployment","24"),("Troubleshooting &amp; Optimization","18")]),
 [("overview","Exam Overview"),("lambda","Lambda Deep Dive"),("dynamodb","DynamoDB"),("cicd","CI/CD"),("api-gw","API Gateway"),("xray","Monitoring &amp; X-Ray"),("checklist","Checklist")],
@@ -594,7 +594,7 @@ soa_body = """
   <tr><td><strong>Resources</strong></td><td>AWS resources to create</td><td><strong>YES</strong></td></tr>
   <tr><td>Outputs</td><td>Values to export or display</td><td>No</td></tr>
 </tbody></table></div>
-<ul><li><strong>StackSets</strong> &mdash; deploy stacks to multiple accounts/regions</li><li><strong>Nested Stacks</strong> &mdash; reusable stacks as components</li><li><strong>Change Sets</strong> &mdash; preview changes before applying</li><li><strong>Drift Detection</strong> &mdash; find resources changed outside CloudFormation</li></ul></section>"""
+<ul><li><strong>StackSets</strong> - deploy stacks to multiple accounts/regions</li><li><strong>Nested Stacks</strong> - reusable stacks as components</li><li><strong>Change Sets</strong> - preview changes before applying</li><li><strong>Drift Detection</strong> - find resources changed outside CloudFormation</li></ul></section>"""
 soa = cert_page("SOA-C02","badge-blue","Associate","&#9881;","AWS Certified SysOps Administrator Associate","Deploy, manage, and operate workloads on AWS at scale. Monitoring, automation, reliability, compliance.",'<span class="badge badge-green">180 min | 65 questions + exam lab</span><span class="badge badge-blue">Passing: 720/1000</span>',("AWS SysOps Admin","https://explore.skillbuilder.aws/learn/course/external/view/elearning/1573/aws-certified-sysops-administrator-associate-official-practice-question-set-soa-c02-english","https://d1.awsstatic.com/training-and-certification/docs-sysops-associate/AWS-Certified-SysOps-Administrator-Associate_Exam-Guide.pdf","https://d1.awsstatic.com/training-and-certification/docs-sysops-associate/AWS-Certified-SysOps-Administrator-Associate_Sample-Questions.pdf","180 minutes","65 + exam lab","720",[("Monitoring, Logging &amp; Remediation","20"),("Reliability &amp; Business Continuity","16"),("Deployment, Provisioning &amp; Automation","18"),("Security &amp; Compliance","16"),("Networking &amp; Content Delivery","18"),("Cost &amp; Performance Optimization","12")]),
 [("overview","Exam Overview"),("cloudwatch","CloudWatch Deep Dive"),("ssm","Systems Manager"),("dr","Backup &amp; DR"),("cfn","CloudFormation"),("checklist","Checklist")],
 soa_body,["Install CloudWatch Agent for memory/disk metrics","Create CloudWatch Alarms connected to Auto Scaling or SNS","Use SSM Session Manager for SSH without port 22","Use SSM Run Command for mass instance management","Configure SSM Patch Manager with maintenance windows","Know all 4 DR strategies and their RTO/RPO","Configure AWS Backup with cross-region copy","Understand IAM policy evaluation order (deny &gt; allow &gt; implicit deny)","Explain SCPs vs Permission Boundaries vs Resource Policies","Create cross-account IAM roles with sts:AssumeRole","Write a CloudFormation template with Parameters, Resources, Outputs","Use Change Sets and Drift Detection","Understand CloudFormation StackSets","Configure S3 lifecycle policies for cost optimization","Know EC2 Health Check vs ELB Health Check differences","Understand Auto Scaling lifecycle hooks","Use AWS Config for compliance checking","Configure CloudTrail for API audit logging","Know Trusted Advisor check categories","Understand AWS Cost Explorer and Compute Optimizer"],"sap-c02.html","Solutions Architect Professional (SAP-C02)")
@@ -626,11 +626,11 @@ sap_body = """
 <section id="advanced-net"><h2>Advanced Networking</h2>
 <h3>Transit Gateway (TGW)</h3>
 <ul><li>Regional hub; connect VPCs and on-premises at scale</li>
-<li>Transitive routing — VPC A → TGW → VPC B (unlike VPC Peering)</li>
-<li>TGW Route Tables — isolate VPC groups (prod vs dev)</li>
-<li>Inter-Region Peering — connect TGWs across regions</li></ul>
+<li>Transitive routing - VPC A → TGW → VPC B (unlike VPC Peering)</li>
+<li>TGW Route Tables - isolate VPC groups (prod vs dev)</li>
+<li>Inter-Region Peering - connect TGWs across regions</li></ul>
 <h3>Direct Connect</h3>
-<ul><li>Dedicated Connection: 1/10/100 Gbps — physical port at DX location</li>
+<ul><li>Dedicated Connection: 1/10/100 Gbps - physical port at DX location</li>
 <li>Hosted Connection: 50 Mbps – 10 Gbps via DX partner</li>
 <li>VIF Types: Private VIF (VPC), Public VIF (AWS public services), Transit VIF (TGW)</li>
 <li>DX Gateway: Connect one DX to multiple VPCs across regions</li>
@@ -638,7 +638,7 @@ sap_body = """
 
 <section id="migration"><h2>Migration Strategies (7 Rs)</h2>
 <div class="table-wrap"><table><thead><tr><th>Strategy</th><th>Description</th><th>Effort</th></tr></thead><tbody>
-  <tr><td>Retire</td><td>Decommission — app no longer needed</td><td>None</td></tr>
+  <tr><td>Retire</td><td>Decommission - app no longer needed</td><td>None</td></tr>
   <tr><td>Retain</td><td>Keep on-premises for now</td><td>None</td></tr>
   <tr><td>Rehost (Lift &amp; Shift)</td><td>Move to EC2 with no changes</td><td>Low</td></tr>
   <tr><td>Replatform (Lift &amp; Reshape)</td><td>Minor optimizations (move DB to RDS)</td><td>Low-Medium</td></tr>
@@ -655,24 +655,24 @@ sap_body = """
 </tbody></table></div></section>
 
 <section id="cost"><h2>Cost Optimization</h2>
-<ul><li><strong>Compute Optimizer</strong> — ML-based right-sizing for EC2, EBS, Lambda, ECS</li>
-<li><strong>Cost Allocation Tags</strong> — see cost breakdown per team/project</li>
-<li><strong>S3 Lifecycle</strong> — auto-move to cheaper storage classes</li>
-<li><strong>Spot for fault-tolerant workloads</strong> — up to 90% savings</li>
-<li><strong>Reserved Instances for steady-state</strong> — up to 72% savings</li>
-<li><strong>Savings Plans</strong> — Compute (most flexible), EC2 Instance (most discount)</li></ul></section>"""
+<ul><li><strong>Compute Optimizer</strong> - ML-based right-sizing for EC2, EBS, Lambda, ECS</li>
+<li><strong>Cost Allocation Tags</strong> - see cost breakdown per team/project</li>
+<li><strong>S3 Lifecycle</strong> - auto-move to cheaper storage classes</li>
+<li><strong>Spot for fault-tolerant workloads</strong> - up to 90% savings</li>
+<li><strong>Reserved Instances for steady-state</strong> - up to 72% savings</li>
+<li><strong>Savings Plans</strong> - Compute (most flexible), EC2 Instance (most discount)</li></ul></section>"""
 sap = cert_page("SAP-C02","badge-purple","Professional","&#129504;","AWS Certified Solutions Architect Professional","Advanced multi-account architectures, migration planning, cost optimization, complex hybrid designs.",'<span class="badge badge-green">180 min | 75 questions</span><span class="badge badge-purple">Passing: 750/1000</span><span class="badge badge-red">Hardest AWS exam</span>',("AWS Advanced Architecting","https://explore.skillbuilder.aws/learn/course/external/view/elearning/1313/aws-certified-solutions-architect-professional-official-practice-question-set-sap-c02-english","https://d1.awsstatic.com/training-and-certification/docs-sa-pro/AWS-Certified-Solutions-Architect-Professional_Exam-Guide.pdf","https://d1.awsstatic.com/training-and-certification/docs-sa-pro/AWS-Certified-Solutions-Architect-Professional_Sample-Questions.pdf","180 minutes","75","750",[("Design for Org Complexity","26"),("Design for New Solutions","29"),("Migration Planning","15"),("Cost Control","20"),("Continuous Improvement","10")]),
 [("overview","Exam Overview"),("prereq","Prerequisites"),("orgs","Organizations & Multi-Account"),("advanced-net","Advanced Networking"),("migration","Migration (7 Rs)"),("cost","Cost Optimization"),("checklist","Checklist")],
-sap_body,["Explain AWS Organizations: OUs, SCPs, delegated admin, Control Tower","Know all identity federation patterns and when to use each","Understand RAM — what can be shared and how","Design Transit Gateway with route table isolation","Know Direct Connect: connection types, VIFs, DX Gateway","Design Route 53 hybrid DNS with Resolver Endpoints","Know the 7 Rs of migration and when to use each","Understand Application Migration Service (MGN) vs DMS vs DataSync","Design cost-optimized architectures with Savings Plans and Spot","Use Compute Optimizer for right-sizing","Design event-driven patterns: fan-out, CQRS, Saga, Strangler Fig","Understand Step Functions Standard vs Express workflows","Design multi-region active-active architectures","Understand Global Accelerator vs CloudFront use cases","Design disaster recovery: pilot light, warm standby, active-active","Know Kinesis Data Streams vs Firehose vs MSK","Understand AWS Service Catalog for governed self-service","Know Lake Formation for data lake governance","Design EKS/ECS advanced deployment patterns","Understand Outposts and Local Zones for edge scenarios"],"dop-c02.html","DevOps Engineer Professional (DOP-C02)")
+sap_body,["Explain AWS Organizations: OUs, SCPs, delegated admin, Control Tower","Know all identity federation patterns and when to use each","Understand RAM - what can be shared and how","Design Transit Gateway with route table isolation","Know Direct Connect: connection types, VIFs, DX Gateway","Design Route 53 hybrid DNS with Resolver Endpoints","Know the 7 Rs of migration and when to use each","Understand Application Migration Service (MGN) vs DMS vs DataSync","Design cost-optimized architectures with Savings Plans and Spot","Use Compute Optimizer for right-sizing","Design event-driven patterns: fan-out, CQRS, Saga, Strangler Fig","Understand Step Functions Standard vs Express workflows","Design multi-region active-active architectures","Understand Global Accelerator vs CloudFront use cases","Design disaster recovery: pilot light, warm standby, active-active","Know Kinesis Data Streams vs Firehose vs MSK","Understand AWS Service Catalog for governed self-service","Know Lake Formation for data lake governance","Design EKS/ECS advanced deployment patterns","Understand Outposts and Local Zones for edge scenarios"],"dop-c02.html","DevOps Engineer Professional (DOP-C02)")
 write(f"{DOCS}/sap-c02.html", sap)
 
 # DOP-C02
 dop_body = """
 <section id="cicd-pro"><h2>Advanced CI/CD</h2>
 <h3>CodePipeline Advanced Patterns</h3>
-<ul><li><strong>Manual Approval</strong> — pause pipeline; require human sign-off before prod deploy</li>
-<li><strong>Cross-Account Pipeline</strong> — deploy from one account's pipeline to another account's environment</li>
-<li><strong>Multi-Region Deploy</strong> — parallel deploy to multiple regions simultaneously</li></ul>
+<ul><li><strong>Manual Approval</strong> - pause pipeline; require human sign-off before prod deploy</li>
+<li><strong>Cross-Account Pipeline</strong> - deploy from one account's pipeline to another account's environment</li>
+<li><strong>Multi-Region Deploy</strong> - parallel deploy to multiple regions simultaneously</li></ul>
 <h3>CodeBuild buildspec.yml</h3>
 <pre><code>version: 0.2
 env:
@@ -694,11 +694,11 @@ reports:
 
 <section id="iac-pro"><h2>Infrastructure as Code at Scale</h2>
 <h3>CloudFormation Advanced</h3>
-<ul><li><strong>StackSets</strong> — deploy to multiple accounts/regions from management account</li>
-<li><strong>Nested Stacks</strong> — reusable stack modules</li>
-<li><strong>Custom Resources</strong> — extend CFN with Lambda for anything not natively supported</li>
-<li><strong>Hooks</strong> — pre/post-provision validation via Lambda</li>
-<li><strong>Drift Detection</strong> — compare stack's actual state to expected template state</li></ul>
+<ul><li><strong>StackSets</strong> - deploy to multiple accounts/regions from management account</li>
+<li><strong>Nested Stacks</strong> - reusable stack modules</li>
+<li><strong>Custom Resources</strong> - extend CFN with Lambda for anything not natively supported</li>
+<li><strong>Hooks</strong> - pre/post-provision validation via Lambda</li>
+<li><strong>Drift Detection</strong> - compare stack's actual state to expected template state</li></ul>
 <h3>AWS CDK</h3>
 <pre><code>from aws_cdk import Stack, aws_s3 as s3, aws_lambda as lambda_
 class MyStack(Stack):
@@ -713,7 +713,7 @@ class MyStack(Stack):
 
 <section id="containers-devops"><h2>Containers at Scale</h2>
 <div class="table-wrap"><table><thead><tr><th>Factor</th><th>ECS</th><th>EKS</th></tr></thead><tbody>
-  <tr><td>Learning curve</td><td>Low — AWS native</td><td>High — Kubernetes expertise needed</td></tr>
+  <tr><td>Learning curve</td><td>Low - AWS native</td><td>High - Kubernetes expertise needed</td></tr>
   <tr><td>Control plane</td><td>Managed by AWS (free)</td><td>Managed by AWS ($0.10/hr)</td></tr>
   <tr><td>Portability</td><td>AWS-only</td><td>Run anywhere Kubernetes runs</td></tr>
   <tr><td>Fargate support</td><td>Excellent</td><td>Supported (EKS Fargate profiles)</td></tr>
@@ -728,10 +728,10 @@ Account C → CloudWatch Logs → Kinesis Firehose ↗
                           OpenSearch (search/visualize)
                           Athena (SQL queries)</code></pre>
 <h3>AWS Config for Continuous Compliance</h3>
-<ul><li><strong>Config Rules</strong> — evaluate resource configs (managed or custom Lambda)</li>
-<li><strong>Conformance Packs</strong> — bundle of rules for compliance standards (PCI-DSS, HIPAA)</li>
-<li><strong>Remediation</strong> — auto-fix non-compliant resources via SSM Automation</li>
-<li><strong>Aggregator</strong> — centralize Config data from all accounts/regions</li></ul></section>"""
+<ul><li><strong>Config Rules</strong> - evaluate resource configs (managed or custom Lambda)</li>
+<li><strong>Conformance Packs</strong> - bundle of rules for compliance standards (PCI-DSS, HIPAA)</li>
+<li><strong>Remediation</strong> - auto-fix non-compliant resources via SSM Automation</li>
+<li><strong>Aggregator</strong> - centralize Config data from all accounts/regions</li></ul></section>"""
 dop = cert_page("DOP-C02","badge-purple","Professional","&#128260;","AWS Certified DevOps Engineer Professional","CI/CD automation, IaC, containers, monitoring, compliance, and incident response at professional level.",'<span class="badge badge-green">180 min | 75 questions</span><span class="badge badge-purple">Passing: 750/1000</span>',("DevOps Engineering on AWS","https://explore.skillbuilder.aws/learn/course/external/view/elearning/16408/aws-certified-devops-engineer-professional-official-practice-question-set-dop-c02-english","https://d1.awsstatic.com/training-and-certification/docs-devops-pro/AWS-Certified-DevOps-Engineer-Professional_Exam-Guide.pdf","https://d1.awsstatic.com/training-and-certification/docs-devops-pro/AWS-Certified-DevOps-Engineer-Professional_Sample-Questions.pdf","180 minutes","75","750",[("SDLC Automation","22"),("Configuration Management & IaC","17"),("Resilient Cloud Solutions","15"),("Monitoring & Logging","15"),("Incident & Event Response","14"),("Security & Compliance","17")]),
 [("overview","Exam Overview"),("cicd-pro","Advanced CI/CD"),("iac-pro","IaC at Scale"),("containers-devops","Containers"),("monitoring-pro","Monitoring & Observability"),("checklist","Checklist")],
 dop_body,["Build CodePipeline with manual approval and cross-account deploy","Write advanced buildspec.yml with Parameter Store and Secrets Manager","Design blue/green ECS deployment with CodeDeploy","Use CloudFormation StackSets for multi-account deployments","Write CDK code to define AWS infrastructure","Know Terraform state management with S3 + DynamoDB locking","Decide between ECS and EKS for containerized workloads","Design centralized logging with Kinesis Firehose","Configure X-Ray sampling rules and trace groups","Use AWS Config Conformance Packs for compliance","Build EventBridge auto-remediation rules","Configure OpsCenter and Incident Manager","Know CloudWatch Contributor Insights and Synthetics Canaries","Implement canary deployments with Lambda aliases and CodeDeploy","Design zero-downtime deployments with ALB weighted target groups","Understand chaos engineering with Fault Injection Simulator","Use Service Catalog for governed self-service infrastructure","Design GitOps workflows with CodePipeline + CodeCommit","Know service quotas and how to request increases","Use Systems Manager Automation documents for remediation"],"scs-c02.html","Security Specialty (SCS-C02)")
@@ -767,10 +767,10 @@ scs_body = """
   <tr><td>CloudHSM</td><td>Dedicated HSM hardware</td><td>High</td></tr>
 </tbody></table></div>
 <h3>S3 Encryption Options</h3>
-<ul><li><strong>SSE-S3</strong> — AWS manages keys; AES-256; default for new buckets</li>
-<li><strong>SSE-KMS</strong> — CMK; audit via CloudTrail; possible KMS throttling</li>
-<li><strong>SSE-C</strong> — customer provides key per request; HTTPS only</li>
-<li><strong>Client-Side</strong> — encrypt before upload; AWS never sees plaintext</li></ul>
+<ul><li><strong>SSE-S3</strong> - AWS manages keys; AES-256; default for new buckets</li>
+<li><strong>SSE-KMS</strong> - CMK; audit via CloudTrail; possible KMS throttling</li>
+<li><strong>SSE-C</strong> - customer provides key per request; HTTPS only</li>
+<li><strong>Client-Side</strong> - encrypt before upload; AWS never sees plaintext</li></ul>
 <h3>Secrets Manager vs Parameter Store</h3>
 <div class="grid-2">
   <div class="card"><h4>Secrets Manager</h4><ul><li>Built-in automatic rotation (Lambda)</li><li>Native RDS/Redshift integration</li><li>$0.40/secret/month</li><li>Cross-account sharing via resource policy</li></ul></div>
@@ -778,18 +778,18 @@ scs_body = """
 </div></section>
 
 <section id="netsec"><h2>Network Security</h2>
-<ul><li><strong>AWS WAF</strong> — Layer 7; block SQLi, XSS, rate limiting; attach to ALB, CloudFront, API Gateway</li>
-<li><strong>AWS Shield Standard</strong> — free; automatic DDoS protection Layer 3/4</li>
-<li><strong>AWS Shield Advanced</strong> — $3,000/month; DRT team; cost protection</li>
-<li><strong>Firewall Manager</strong> — centrally manage WAF, Shield, Security Groups across org</li>
-<li><strong>Network Firewall</strong> — stateful managed firewall in VPC; deep packet inspection; IDS/IPS</li>
-<li><strong>VPC Traffic Mirroring</strong> — copy traffic from ENIs to intrusion detection appliances</li></ul></section>"""
+<ul><li><strong>AWS WAF</strong> - Layer 7; block SQLi, XSS, rate limiting; attach to ALB, CloudFront, API Gateway</li>
+<li><strong>AWS Shield Standard</strong> - free; automatic DDoS protection Layer 3/4</li>
+<li><strong>AWS Shield Advanced</strong> - $3,000/month; DRT team; cost protection</li>
+<li><strong>Firewall Manager</strong> - centrally manage WAF, Shield, Security Groups across org</li>
+<li><strong>Network Firewall</strong> - stateful managed firewall in VPC; deep packet inspection; IDS/IPS</li>
+<li><strong>VPC Traffic Mirroring</strong> - copy traffic from ENIs to intrusion detection appliances</li></ul></section>"""
 scs = cert_page("SCS-C02","badge-red","Specialty","&#128274;","AWS Certified Security Specialty","Threat detection, identity management, data protection, infrastructure security, and compliance governance.",'<span class="badge badge-green">170 min | 65 questions</span><span class="badge badge-red">Passing: 750/1000</span>',("Security Engineering on AWS","https://explore.skillbuilder.aws/learn/course/external/view/elearning/97/security-engineering-on-aws","https://d1.awsstatic.com/training-and-certification/docs-security-spec/AWS-Certified-Security-Specialty_Exam-Guide.pdf","https://d1.awsstatic.com/training-and-certification/docs-security-spec/AWS-Certified-Security-Specialty_Sample-Questions.pdf","170 minutes","65","750",[("Threat Detection & Incident Response","14"),("Security Logging & Monitoring","18"),("Infrastructure Security","20"),("Identity & Access Management","16"),("Data Protection","18"),("Security Governance","14")]),
 [("overview","Exam Overview"),("threat","Threat Detection"),("iam-sec","IAM Deep Dive"),("encryption","Data Encryption"),("netsec","Network Security"),("checklist","Checklist")],
 scs_body,["Know all threat detection services: GuardDuty, Inspector, Macie, Security Hub, Detective","Explain all IAM policy types and evaluation logic","Configure S3 security: Block Public Access, bucket policies, pre-signed URLs, WORM","Know KMS key types: AWS-managed, CMK, SSE-C, CloudHSM","Explain S3 encryption: SSE-S3, SSE-KMS, SSE-C, client-side","Know when to use Secrets Manager vs Parameter Store","Understand automatic secret rotation with Secrets Manager","Configure WAF rules: SQLi, XSS, rate limiting, IP reputation","Know Shield Standard vs Advanced differences","Understand Firewall Manager centralized policy management","Configure Network Firewall for deep packet inspection","Enable CloudTrail in all regions with log file integrity validation","Configure S3 Access Analyzer and IAM Access Analyzer","Understand KMS key policies and grants for cross-account access","Use Config Conformance Packs for compliance standards","Design incident response playbooks with EventBridge + Lambda","Know ACM: public vs private CAs","Know Cognito User Pools vs Identity Pools security implications","Configure GuardDuty with automated remediation","Understand VPC Traffic Mirroring for intrusion detection"],"ans-c01.html","Advanced Networking Specialty (ANS-C01)")
 write(f"{DOCS}/scs-c02.html", scs)
 
-# ANS-C01, MLS-C01, DAS-C01 — concise specialty pages
+# ANS-C01, MLS-C01, DAS-C01 - concise specialty pages
 for code,lcls,ltxt,icon,title,desc,badges,ea,body_html,chklist,nf,nl in [
   ("ANS-C01","badge-red","Specialty","&#127760;","AWS Certified Advanced Networking Specialty",
    "Complex AWS networking: VPC design, Direct Connect, Transit Gateway, Route 53, CloudFront.",
@@ -799,10 +799,10 @@ for code,lcls,ltxt,icon,title,desc,badges,ea,body_html,chklist,nf,nl in [
     "https://d1.awsstatic.com/training-and-certification/docs-advnetworking-spec/AWS-Certified-Advanced-Networking-Specialty_Sample-Questions.pdf",
     "170 minutes","65","750",[("Network Design","30"),("Network Implementation","26"),("Network Management & Operations","20"),("Network Security & Governance","24")]),
    """<section id="vpc-adv"><h2>Advanced VPC Design</h2>
-<ul><li>Use /16 VPCs — 65,536 IPs; /24 subnets — 251 usable IPs (AWS reserves 5)</li>
+<ul><li>Use /16 VPCs - 65,536 IPs; /24 subnets - 251 usable IPs (AWS reserves 5)</li>
 <li>Non-overlapping CIDRs across all VPCs required for peering/TGW</li>
-<li>Secondary CIDRs — add up to 5 CIDR blocks to a VPC (e.g., EKS pods)</li>
-<li>VPC Sharing (RAM) — share subnets from central VPC to multiple accounts</li></ul>
+<li>Secondary CIDRs - add up to 5 CIDR blocks to a VPC (e.g., EKS pods)</li>
+<li>VPC Sharing (RAM) - share subnets from central VPC to multiple accounts</li></ul>
 <h3>VPC Endpoints Deep Dive</h3>
 <div class="table-wrap"><table><thead><tr><th>Type</th><th>Services</th><th>Cost</th></tr></thead><tbody>
   <tr><td>Gateway Endpoint</td><td>S3, DynamoDB only</td><td>Free</td></tr>
@@ -821,11 +821,11 @@ for code,lcls,ltxt,icon,title,desc,badges,ea,body_html,chklist,nf,nl in [
   <tr><td>IP-Based</td><td>Route by client CIDR</td><td>Map IP ranges to endpoints</td></tr>
 </tbody></table></div></section>
 <section id="cf-adv"><h2>CloudFront Advanced</h2>
-<ul><li><strong>OAC (Origin Access Control)</strong> — restricts S3 to CloudFront only (replaces OAI)</li>
-<li><strong>Lambda@Edge</strong> — all 4 request/response phases; 5-30s timeout; Node.js/Python</li>
-<li><strong>CloudFront Functions</strong> — viewer req/res only; sub-millisecond; JavaScript; cheapest</li>
-<li><strong>Signed URLs</strong> — single file access; <strong>Signed Cookies</strong> — multiple files (video streaming)</li>
-<li><strong>Origin Groups</strong> — primary + failover origin; auto-failover</li></ul></section>""",
+<ul><li><strong>OAC (Origin Access Control)</strong> - restricts S3 to CloudFront only (replaces OAI)</li>
+<li><strong>Lambda@Edge</strong> - all 4 request/response phases; 5-30s timeout; Node.js/Python</li>
+<li><strong>CloudFront Functions</strong> - viewer req/res only; sub-millisecond; JavaScript; cheapest</li>
+<li><strong>Signed URLs</strong> - single file access; <strong>Signed Cookies</strong> - multiple files (video streaming)</li>
+<li><strong>Origin Groups</strong> - primary + failover origin; auto-failover</li></ul></section>""",
    ["Design multi-VPC architectures with non-overlapping CIDRs","Know all 3 VPC Endpoint types and when to use each","Design DX with primary + backup VPN","Understand BGP: AS_PATH prepending, Local Preference, MED","Design TGW with route table segmentation and Appliance Mode","Know all 8 Route 53 routing policies and use cases","Design hybrid DNS with Route 53 Resolver endpoints","Configure CloudFront with OAC, Lambda@Edge, signed URLs","Know Network Firewall stateful vs stateless rule groups","Design IPv6 dual-stack VPCs with Egress-Only IGW","Know VPC Flow Log format and Athena analysis","Design multi-region active-active with Route 53 + health checks","Understand AWS Global Accelerator for TCP/UDP workloads","Know PrivateLink and VPC Endpoint Services","Understand prefix lists for CIDR management","Know ELB cross-zone load balancing behavior","Design AWS Global Network vs public internet routing","Understand BGP communities for DX routing","Configure Transit Gateway Connect with GRE tunnels","Know Direct Connect Gateway for multi-region VPC access"],
    "mls-c01.html","Machine Learning Specialty (MLS-C01)"),
 
@@ -903,17 +903,17 @@ for code,lcls,ltxt,icon,title,desc,badges,ea,body_html,chklist,nf,nl in [
   <tr><td>Streaming ETL</td><td>Continuous ETL from Kinesis/Kafka to S3/Redshift</td></tr>
 </tbody></table></div></section>
 <section id="redshift"><h2>Amazon Redshift</h2>
-<ul><li><strong>Columnar storage</strong> — optimized for OLAP aggregations</li>
-<li><strong>MPP</strong> — Massively Parallel Processing; leader node + compute nodes</li>
-<li><strong>Redshift Spectrum</strong> — query S3 directly without loading into Redshift</li>
-<li><strong>Redshift Serverless</strong> — no cluster management; auto-scaling; pay per compute</li>
-<li><strong>Distribution Styles</strong>: EVEN, KEY, ALL — control data distribution across nodes</li>
-<li><strong>Sort Keys</strong>: COMPOUND or INTERLEAVED — optimize query predicates</li></ul></section>
+<ul><li><strong>Columnar storage</strong> - optimized for OLAP aggregations</li>
+<li><strong>MPP</strong> - Massively Parallel Processing; leader node + compute nodes</li>
+<li><strong>Redshift Spectrum</strong> - query S3 directly without loading into Redshift</li>
+<li><strong>Redshift Serverless</strong> - no cluster management; auto-scaling; pay per compute</li>
+<li><strong>Distribution Styles</strong>: EVEN, KEY, ALL - control data distribution across nodes</li>
+<li><strong>Sort Keys</strong>: COMPOUND or INTERLEAVED - optimize query predicates</li></ul></section>
 <section id="lake-formation"><h2>Lake Formation</h2>
 <ul><li>Simplifies building secure data lakes on S3</li>
 <li>Fine-grained access: table, column, row, cell-level permissions</li>
-<li>Governed Tables — ACID transactions on S3 with automatic compaction</li>
-<li>Tag-Based Access Control (LF-TBAC) — scale permissions with tags</li>
+<li>Governed Tables - ACID transactions on S3 with automatic compaction</li>
+<li>Tag-Based Access Control (LF-TBAC) - scale permissions with tags</li>
 <li>Cross-account sharing of databases/tables</li></ul>
 <h3>Data Lake Architecture</h3>
 <pre><code>Bronze (Raw)      → Glue Crawlers → Data Catalog
@@ -951,9 +951,9 @@ linux_html = HEAD("Linux Fundamentals","Complete Linux guide for AWS certificati
 </div></div>
 """ + wrap([("why","Why Linux for AWS?"),("filesystem","File System"),("permissions","Permissions"),("commands","Essential Commands"),("processes","Processes"),("networking","Networking"),("scripting","Shell Scripting"),("ssh","SSH & EC2"),("systemd","Systemd"),("checklist","Checklist")], """
 <section id="why"><h2>Why Linux for AWS?</h2>
-<p>Over <strong>90% of cloud workloads</strong> run on Linux. EC2 instances, ECS containers, Lambda environments — all Linux. Understanding Linux means you can:</p>
+<p>Over <strong>90% of cloud workloads</strong> run on Linux. EC2 instances, ECS containers, Lambda environments - all Linux. Understanding Linux means you can:</p>
 <ul><li>Debug EC2 instances via SSH</li><li>Write UserData bootstrap scripts</li><li>Create and manage Docker containers</li><li>Answer scenario questions on SOA-C02 &amp; DVA-C02 exams</li></ul>
-<div class="callout tip"><div class="callout-title">&#128161; Tip</div><p>On EC2: <code>/var/log/cloud-init.log</code> contains your UserData script output — critical for debugging bootstrap issues.</p></div></section>
+<div class="callout tip"><div class="callout-title">&#128161; Tip</div><p>On EC2: <code>/var/log/cloud-init.log</code> contains your UserData script output - critical for debugging bootstrap issues.</p></div></section>
 
 <section id="filesystem"><h2>Linux File System</h2>
 <div class="table-wrap"><table><thead><tr><th>Directory</th><th>Purpose</th></tr></thead><tbody>
@@ -1023,7 +1023,7 @@ netstat -tulnp                # All listening ports
 ss -tulnp                     # Modern netstat
 curl -I https://example.com   # HTTP headers
 curl -v https://api.example.com  # Verbose HTTP</code></pre>
-<div class="callout warn"><div class="callout-title">&#9888; AWS Exam Tip</div><p>If you can ping an EC2 but can't connect on port 22, check the <strong>Security Group inbound rules</strong> — AWS Security Groups are applied before traffic reaches the OS firewall.</p></div></section>
+<div class="callout warn"><div class="callout-title">&#9888; AWS Exam Tip</div><p>If you can ping an EC2 but can't connect on port 22, check the <strong>Security Group inbound rules</strong> - AWS Security Groups are applied before traffic reaches the OS firewall.</p></div></section>
 
 <section id="scripting"><h2>Shell Scripting</h2>
 <pre><code>#!/bin/bash
@@ -1062,12 +1062,12 @@ Host my-ec2
     IdentityFile ~/.ssh/my-key.pem
 # Then just: ssh my-ec2
 
-# SCP — copy files
+# SCP - copy files
 scp -i key.pem file.txt ec2-user@IP:/home/ec2-user/
 
 # Port forwarding (tunnel to private RDS)
 ssh -i key.pem -L 5432:rds-endpoint:5432 ec2-user@IP</code></pre>
-<div class="callout tip"><div class="callout-title">&#128161; EC2 Instance Connect</div><p>Provides browser-based SSH access without key pairs — uses IAM permissions instead. Great for exam questions about "SSH access without managing key pairs".</p></div></section>
+<div class="callout tip"><div class="callout-title">&#128161; EC2 Instance Connect</div><p>Provides browser-based SSH access without key pairs - uses IAM permissions instead. Great for exam questions about "SSH access without managing key pairs".</p></div></section>
 
 <section id="systemd"><h2>Systemd &amp; Services</h2>
 <pre><code>systemctl start nginx     # Start service
@@ -1086,7 +1086,7 @@ net_html = HEAD("Networking Fundamentals","OSI model, TCP/IP, DNS, CIDR, subnett
 <div class="page-header"><div class="container">
   <span class="badge badge-blue">Foundations</span>
   <h1 style="margin-top:0.75rem">&#127760; Networking Fundamentals</h1>
-  <p>Deep understanding of networking is essential for AWS. VPCs, subnets, routing, load balancers, DNS — all rooted in networking basics.</p>
+  <p>Deep understanding of networking is essential for AWS. VPCs, subnets, routing, load balancers, DNS - all rooted in networking basics.</p>
   <div class="flex-wrap mt-1"><span class="badge badge-green">Essential for SAA / ANS / SCS</span><span class="badge badge-blue">25+ Topics</span></div>
 </div></div>
 """ + wrap([("osi","OSI Model"),("tcpip","TCP/IP"),("ip","IP Addressing"),("cidr","CIDR & Subnetting"),("ports","Key Protocols & Ports"),("dns","DNS"),("nat","NAT"),("lb","Load Balancers"),("firewalls","Firewalls & ACLs"),("vpc-intro","AWS VPC Overview"),("checklist","Checklist")], """
@@ -1094,7 +1094,7 @@ net_html = HEAD("Networking Fundamentals","OSI model, TCP/IP, DNS, CIDR, subnett
 <div class="table-wrap"><table><thead><tr><th>Layer</th><th>Name</th><th>Examples</th><th>AWS Service</th></tr></thead><tbody>
   <tr><td>7</td><td>Application</td><td>HTTP, HTTPS, FTP, DNS</td><td>API Gateway, CloudFront</td></tr>
   <tr><td>6</td><td>Presentation</td><td>SSL/TLS, JPEG</td><td>ACM (TLS certs)</td></tr>
-  <tr><td>5</td><td>Session</td><td>NetBIOS, RPC</td><td>—</td></tr>
+  <tr><td>5</td><td>Session</td><td>NetBIOS, RPC</td><td> - </td></tr>
   <tr><td>4</td><td>Transport</td><td>TCP, UDP</td><td>NLB (Layer 4)</td></tr>
   <tr><td>3</td><td>Network</td><td>IP, ICMP</td><td>VPC, Route Tables</td></tr>
   <tr><td>2</td><td>Data Link</td><td>Ethernet, MAC</td><td>Direct Connect (physical)</td></tr>
@@ -1105,7 +1105,7 @@ net_html = HEAD("Networking Fundamentals","OSI model, TCP/IP, DNS, CIDR, subnett
 <section id="tcpip"><h2>TCP vs UDP</h2>
 <div class="grid-2">
   <div class="card"><h3>TCP</h3><ul><li>Connection-oriented (3-way handshake)</li><li>Reliable, ordered delivery</li><li>Flow control &amp; congestion control</li><li>Use for: HTTP, SSH, FTP, SMTP</li></ul></div>
-  <div class="card"><h3>UDP</h3><ul><li>Connectionless — fire and forget</li><li>No guarantee of delivery or order</li><li>Very low latency overhead</li><li>Use for: DNS, VoIP, video streaming, gaming</li></ul></div>
+  <div class="card"><h3>UDP</h3><ul><li>Connectionless - fire and forget</li><li>No guarantee of delivery or order</li><li>Very low latency overhead</li><li>Use for: DNS, VoIP, video streaming, gaming</li></ul></div>
 </div></section>
 
 <section id="ip"><h2>IP Addressing</h2>
@@ -1151,7 +1151,7 @@ net_html = HEAD("Networking Fundamentals","OSI model, TCP/IP, DNS, CIDR, subnett
   <tr><td>NS</td><td>Name servers for zone</td><td>ns1.aws.com</td></tr>
   <tr><td>Alias (Route 53)</td><td>AWS-specific; map to AWS resource</td><td>apex.com → ALB DNS</td></tr>
 </tbody></table></div>
-<div class="callout warn"><div class="callout-title">&#9888; CNAME vs Alias</div><p>You <strong>cannot</strong> use CNAME at the zone apex (naked domain like <code>example.com</code>). Use Route 53 <strong>Alias records</strong> instead — they point to AWS resources and are free of charge.</p></div></section>
+<div class="callout warn"><div class="callout-title">&#9888; CNAME vs Alias</div><p>You <strong>cannot</strong> use CNAME at the zone apex (naked domain like <code>example.com</code>). Use Route 53 <strong>Alias records</strong> instead - they point to AWS resources and are free of charge.</p></div></section>
 
 <section id="nat"><h2>NAT Gateway vs NAT Instance</h2>
 <div class="grid-2">
@@ -1168,20 +1168,20 @@ net_html = HEAD("Networking Fundamentals","OSI model, TCP/IP, DNS, CIDR, subnett
 
 <section id="firewalls"><h2>Security Groups vs Network ACLs</h2>
 <div class="grid-2">
-  <div class="card"><h3>Security Groups</h3><ul><li>Instance level (ENI)</li><li><strong>Stateful</strong> — return traffic auto-allowed</li><li>ALLOW rules only</li><li>Default: deny all inbound, allow all outbound</li></ul></div>
-  <div class="card"><h3>Network ACLs</h3><ul><li>Subnet level</li><li><strong>Stateless</strong> — must allow both directions</li><li>ALLOW and DENY rules</li><li>Rules evaluated lowest number first</li></ul></div>
+  <div class="card"><h3>Security Groups</h3><ul><li>Instance level (ENI)</li><li><strong>Stateful</strong> - return traffic auto-allowed</li><li>ALLOW rules only</li><li>Default: deny all inbound, allow all outbound</li></ul></div>
+  <div class="card"><h3>Network ACLs</h3><ul><li>Subnet level</li><li><strong>Stateless</strong> - must allow both directions</li><li>ALLOW and DENY rules</li><li>Rules evaluated lowest number first</li></ul></div>
 </div></section>
 
 <section id="vpc-intro"><h2>AWS VPC Overview</h2>
 <p>A VPC (Virtual Private Cloud) is your isolated network in AWS.</p>
-<ul><li><strong>VPC</strong> — logical isolation; CIDR block (e.g., 10.0.0.0/16)</li>
-<li><strong>Subnets</strong> — subdivide VPC; tied to one AZ</li>
-<li><strong>Internet Gateway (IGW)</strong> — enables internet access for public subnets</li>
-<li><strong>Route Tables</strong> — control where traffic goes</li>
-<li><strong>NAT Gateway</strong> — outbound internet for private subnets</li>
-<li><strong>VPC Peering</strong> — connect two VPCs (no transitive routing)</li>
-<li><strong>Transit Gateway</strong> — hub-and-spoke for many VPCs (transitive)</li>
-<li><strong>VPC Endpoints</strong> — private access to AWS services (no internet)</li></ul>
+<ul><li><strong>VPC</strong> - logical isolation; CIDR block (e.g., 10.0.0.0/16)</li>
+<li><strong>Subnets</strong> - subdivide VPC; tied to one AZ</li>
+<li><strong>Internet Gateway (IGW)</strong> - enables internet access for public subnets</li>
+<li><strong>Route Tables</strong> - control where traffic goes</li>
+<li><strong>NAT Gateway</strong> - outbound internet for private subnets</li>
+<li><strong>VPC Peering</strong> - connect two VPCs (no transitive routing)</li>
+<li><strong>Transit Gateway</strong> - hub-and-spoke for many VPCs (transitive)</li>
+<li><strong>VPC Endpoints</strong> - private access to AWS services (no internet)</li></ul>
 <div class="callout tip"><div class="callout-title">&#128161; Public vs Private Subnet</div><p>A <strong>public subnet</strong> has a route to an Internet Gateway (<code>0.0.0.0/0 → igw-xxx</code>). A <strong>private subnet</strong> has no such route. It's all in the route table!</p></div></section>
 """ + chk(["Name all 7 OSI layers and their functions","Explain the difference between TCP and UDP","Calculate the number of IPs in a CIDR block","Identify private IP ranges (RFC 1918)","Know why AWS reserves 5 IPs per subnet","Explain DNS record types: A, CNAME, MX, TXT, Alias","Know common ports: 22, 80, 443, 3306, 5432, 3389","Explain NAT Gateway vs NAT Instance","Explain ALB vs NLB vs GLB differences","Explain Security Groups vs Network ACLs (stateful vs stateless)","Understand VPC components: IGW, Route Tables, Subnets","Explain VPC Peering vs Transit Gateway","Understand VPC Endpoints (Gateway vs Interface)","Explain Site-to-Site VPN vs Direct Connect","Know what makes a subnet public vs private"],"clf-c02.html","Cloud Practitioner (CLF-C02)")) + FOOT
 write(f"{DOCS}/foundations-networking.html", net_html)
@@ -1209,7 +1209,7 @@ res_html = HEAD("Resources","All AWS certification study resources: Skill Builde
 </aside>
 <main>
 
-<section id="skill-builder"><h2>&#127891; AWS Skill Builder (Official — FREE)</h2>
+<section id="skill-builder"><h2>&#127891; AWS Skill Builder (Official - FREE)</h2>
 <div class="callout tip"><div class="callout-title">&#128161; Best Free Resource</div><p>AWS Skill Builder is the official AWS training platform with hundreds of free digital courses, official practice question sets, and hands-on labs. <strong>Always start here.</strong></p></div>
 <div class="table-wrap"><table><thead><tr><th>Course</th><th>Cert</th><th>Link</th></tr></thead><tbody>
   <tr><td>AWS Cloud Practitioner Essentials</td><td>CLF-C02</td><td><a href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/134/aws-cloud-practitioner-essentials" target="_blank">Free Course &#8594;</a></td></tr>
@@ -1239,9 +1239,9 @@ res_html = HEAD("Resources","All AWS certification study resources: Skill Builde
   <tr><td>DAS-C01</td><td><a href="https://d1.awsstatic.com/training-and-certification/docs-data-analytics-specialty/AWS-Certified-Data-Analytics-Specialty_Exam-Guide.pdf" target="_blank">PDF &#8594;</a></td><td><a href="https://d1.awsstatic.com/training-and-certification/docs-data-analytics-specialty/AWS-Certified-Data-Analytics-Specialty_Sample-Questions.pdf" target="_blank">PDF &#8594;</a></td></tr>
 </tbody></table></div></section>
 
-<section id="stephane"><h2>&#11088; Stephane Maarek — #1 Udemy Instructor</h2>
+<section id="stephane"><h2>&#11088; Stephane Maarek - #1 Udemy Instructor</h2>
 <div class="callout info"><div class="callout-title">Why Stephane?</div><p>Stephane Maarek is the #1 rated AWS instructor on Udemy with 1M+ students and 12 AWS certifications himself. His courses are incredibly detailed, well-organized, and regularly updated. The single most recommended resource on r/AWSCertifications.</p></div>
-<div class="callout tip"><div class="callout-title">&#128161; Udemy Sales Tip</div><p>Never pay full price. Udemy runs sales constantly — courses often go for $10-15. Wait for a sale notification or check on a weekday.</p></div>
+<div class="callout tip"><div class="callout-title">&#128161; Udemy Sales Tip</div><p>Never pay full price. Udemy runs sales constantly - courses often go for $10-15. Wait for a sale notification or check on a weekday.</p></div>
 <div class="table-wrap"><table><thead><tr><th>Course</th><th>Cert</th><th>Link</th></tr></thead><tbody>
   <tr><td>Ultimate AWS Certified Cloud Practitioner</td><td>CLF-C02</td><td><a href="https://www.udemy.com/course/aws-certified-cloud-practitioner-new/" target="_blank" rel="noopener">View &#8594;</a></td></tr>
   <tr><td>Ultimate AWS Certified Solutions Architect Associate</td><td>SAA-C03</td><td><a href="https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c03/" target="_blank" rel="noopener">View &#8594;</a></td></tr>
@@ -1253,14 +1253,14 @@ res_html = HEAD("Resources","All AWS certification study resources: Skill Builde
   <tr><td>All courses &amp; practice exams</td><td>All</td><td><a href="https://www.udemy.com/user/stephane-maarek/" target="_blank" rel="noopener">Profile &#8594;</a></td></tr>
 </tbody></table></div></section>
 
-<section id="tutorials-dojo"><h2>&#128221; Tutorials Dojo — Best Practice Exams</h2>
+<section id="tutorials-dojo"><h2>&#128221; Tutorials Dojo - Best Practice Exams</h2>
 <div class="callout tip"><div class="callout-title">&#128161; The Practice Exam Standard</div><p>Tutorials Dojo by Jon Bonso is the gold standard for AWS practice exams. If you're consistently scoring <strong>75%+ on Tutorials Dojo, you're ready to book the real exam.</strong></p></div>
 <div class="grid-2">
   <div class="card"><h3>Free Cheat Sheets</h3><p>Comprehensive cheat sheets for every AWS service. Excellent quick reference during final study days.</p><a href="https://tutorialsdojo.com/aws-cheat-sheets/" target="_blank" class="btn btn-outline" style="margin-top:0.75rem;font-size:0.85rem">Free Cheat Sheets &#8594;</a></div>
   <div class="card"><h3>Practice Exams (Paid)</h3><p>Timed and review modes. Detailed explanations for every answer. Updated regularly.</p><a href="https://tutorialsdojo.com/courses/" target="_blank" class="btn btn-outline" style="margin-top:0.75rem;font-size:0.85rem">Practice Exams &#8594;</a></div>
 </div></section>
 
-<section id="adrian"><h2>&#127919; Adrian Cantrill — Deep-Dive Technical Courses</h2>
+<section id="adrian"><h2>&#127919; Adrian Cantrill - Deep-Dive Technical Courses</h2>
 <div class="card">
   <p>Adrian Cantrill's courses at <a href="https://learn.cantrill.io/" target="_blank">learn.cantrill.io</a> are famous for extraordinary depth, beautiful animated diagrams, and technical accuracy. If you want to truly <em>understand</em> AWS (not just pass), Adrian is the best for SAA and SAP.</p>
   <div class="grid-2" style="margin-top:1rem">
@@ -1281,7 +1281,7 @@ res_html = HEAD("Resources","All AWS certification study resources: Skill Builde
   <div class="card"><div class="card-icon">&#127358;</div><h3>AWS Free Tier</h3><p>Practice with real AWS. 750hrs EC2 t3.micro, 5GB S3, 1M Lambda invocations/month.</p><a href="https://aws.amazon.com/free/" target="_blank" class="btn btn-outline" style="margin-top:0.75rem;font-size:0.82rem">Start Free &#8594;</a></div>
   <div class="card"><div class="card-icon">&#128250;</div><h3>freeCodeCamp (Andrew Brown)</h3><p>Full free CLF, SAA, DVA courses on YouTube. 12-hour complete courses.</p><a href="https://www.youtube.com/@freecodecamp" target="_blank" class="btn btn-outline" style="margin-top:0.75rem;font-size:0.82rem">Watch &#8594;</a></div>
   <div class="card"><div class="card-icon">&#128217;</div><h3>Digital Cloud Training</h3><p>Neal Davis's free AWS cheat sheets and practice questions.</p><a href="https://digitalcloud.training/aws-cheat-sheets/" target="_blank" class="btn btn-outline" style="margin-top:0.75rem;font-size:0.82rem">Cheat Sheets &#8594;</a></div>
-  <div class="card"><div class="card-icon">&#127760;</div><h3>AWS Documentation</h3><p>Official service documentation — always the most accurate source.</p><a href="https://docs.aws.amazon.com/" target="_blank" class="btn btn-outline" style="margin-top:0.75rem;font-size:0.82rem">Read Docs &#8594;</a></div>
+  <div class="card"><div class="card-icon">&#127760;</div><h3>AWS Documentation</h3><p>Official service documentation - always the most accurate source.</p><a href="https://docs.aws.amazon.com/" target="_blank" class="btn btn-outline" style="margin-top:0.75rem;font-size:0.82rem">Read Docs &#8594;</a></div>
 </div></section>
 
 <section id="whitepapers"><h2>&#128220; Must-Read AWS Whitepapers</h2>
@@ -1342,7 +1342,7 @@ labs_html = HEAD("Practice Labs & Questions","Free AWS hands-on labs, practice q
 </div></section>
 
 <section id="questions"><h2>&#128221; Practice Questions</h2>
-<div class="callout info"><div class="callout-title">How to Use These</div><p>Cover the answers, think through your answer first, then reveal and read the explanation — especially for wrong answers. Understanding <em>why</em> wrong answers are wrong is just as important.</p></div>
+<div class="callout info"><div class="callout-title">How to Use These</div><p>Cover the answers, think through your answer first, then reveal and read the explanation - especially for wrong answers. Understanding <em>why</em> wrong answers are wrong is just as important.</p></div>
 
 <h3>CLF-C02 Questions</h3>
 <div class="card" style="margin-bottom:1rem"><p><strong>Q1.</strong> A company needs to run a workload that can be interrupted and restarted without data loss. It must complete within 24 hours. Which EC2 pricing option provides the most cost savings?</p>
@@ -1361,7 +1361,7 @@ labs_html = HEAD("Practice Labs & Questions","Free AWS hands-on labs, practice q
 <div class="card" style="margin-bottom:1rem"><p><strong>Q3.</strong> A web application experiences high read traffic on its MySQL database. The team wants to improve performance without changing application code. What is the MOST cost-effective solution?<br>A) Migrate to Aurora &nbsp; B) Add RDS Read Replicas &nbsp; C) Use ElastiCache &nbsp; D) Enable Multi-AZ</p>
 <details style="margin-top:0.75rem"><summary style="cursor:pointer;color:var(--aws-orange);font-weight:600">Reveal Answer</summary>
 <div style="margin-top:0.75rem;padding:1rem;background:var(--bg-hover);border-radius:8px">
-<p><strong>&#9989; B) Add RDS Read Replicas</strong></p><p>Read Replicas offload read traffic. No app code changes needed if configured at the connection string level. ElastiCache (C) requires app code changes to check cache first. Multi-AZ (D) is for HA, not performance — standby is not readable. Aurora (A) requires migration effort.</p>
+<p><strong>&#9989; B) Add RDS Read Replicas</strong></p><p>Read Replicas offload read traffic. No app code changes needed if configured at the connection string level. ElastiCache (C) requires app code changes to check cache first. Multi-AZ (D) is for HA, not performance - standby is not readable. Aurora (A) requires migration effort.</p>
 </div></details></div>
 
 <div class="card" style="margin-bottom:1rem"><p><strong>Q4.</strong> A company wants S3 objects accessible ONLY through CloudFront, not directly via S3 URL. What should they configure?<br>A) S3 bucket ACL = private &nbsp; B) CloudFront Signed URLs &nbsp; C) Origin Access Control (OAC) &nbsp; D) S3 Transfer Acceleration</p>
@@ -1428,7 +1428,7 @@ Primary (us-east-1):
   Route 53 Failover routing (health check on ALB)
 
 DR (us-west-2):
-  ALB → EC2 ASG (2 instances — warm) → RDS Read Replica
+  ALB → EC2 ASG (2 instances - warm) → RDS Read Replica
   (async replication ~5 min lag = RPO ✓)
 
 Failover:
@@ -1440,8 +1440,8 @@ Total RTO: ~10-15 minutes ✓</code></pre></div></details></div></section>
 
 <section id="strategy"><h2>&#127919; Exam Strategy</h2>
 <div class="grid-2">
-  <div class="card"><h3>Before the Exam</h3><ul><li>Score 75%+ on Tutorials Dojo before booking</li><li>Review all wrong answers — understand WHY they're wrong</li><li>Read the official exam guide domains the week before</li><li>Review your weak areas using our cert checklists</li><li>Get a good night's sleep — don't cram the night before</li></ul></div>
-  <div class="card"><h3>During the Exam</h3><ul><li>Read every word — key qualifiers matter</li><li>Look for: "MOST cost-effective", "LEAST operational overhead"</li><li>Eliminate obviously wrong answers first</li><li>Flag difficult questions and return later</li><li>Trust your first instinct — don't second-guess without reason</li></ul></div>
+  <div class="card"><h3>Before the Exam</h3><ul><li>Score 75%+ on Tutorials Dojo before booking</li><li>Review all wrong answers - understand WHY they're wrong</li><li>Read the official exam guide domains the week before</li><li>Review your weak areas using our cert checklists</li><li>Get a good night's sleep - don't cram the night before</li></ul></div>
+  <div class="card"><h3>During the Exam</h3><ul><li>Read every word - key qualifiers matter</li><li>Look for: "MOST cost-effective", "LEAST operational overhead"</li><li>Eliminate obviously wrong answers first</li><li>Flag difficult questions and return later</li><li>Trust your first instinct - don't second-guess without reason</li></ul></div>
 </div></section>
 
 <section id="patterns"><h2>&#128218; Question Pattern Recognition</h2>

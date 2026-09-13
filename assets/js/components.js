@@ -1,4 +1,4 @@
-/* AWS Study Hub — Shared Navbar + Footer */
+/* AWS Study Hub - Shared Navbar + Footer */
 (function(){
   const segs=location.pathname.split('/').filter(Boolean);
   const inDocs=segs.includes('docs');
@@ -84,7 +84,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>&copy; 2025 AWS Study Hub &mdash; MIT License</span>
+    <span>&copy; 2025 AWS Study Hub - MIT License</span>
     <span>Not affiliated with Amazon Web Services.</span>
   </div>
 </div></footer>

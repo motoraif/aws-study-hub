@@ -1,6 +1,6 @@
 # ☁️ AWS Study Hub
 
-> The ultimate free, open-source study platform for every AWS certification — built by the community, for the community.
+> The ultimate free, open-source study platform for every AWS certification - built by the community, for the community.
 
 [![Deploy](https://github.com/motoraif/aws-study-hub/actions/workflows/deploy.yml/badge.svg)](https://github.com/motoraif/aws-study-hub/actions/workflows/deploy.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -12,12 +12,12 @@
 
 ## What's Inside
 
-- 🐧 **Linux Fundamentals** — file system, permissions, scripting, SSH
-- 🌐 **Networking Fundamentals** — OSI model, CIDR, DNS, VPC concepts
-- ☁️ **10 AWS Certifications** — CLF-C02, SAA-C03, DVA-C02, SOA-C02, SAP-C02, DOP-C02, SCS-C02, ANS-C01, MLS-C01, DAS-C01
-- 🔗 **Resources** — Skill Builder, Stephane Maarek, Tutorials Dojo, Adrian Cantrill, whitepapers
-- 🧪 **Labs & Practice** — free lab platforms, practice questions with answers, architecture challenges
-- 🔄 **Auto-Updated** — GitHub Actions pulls AWS news weekly
+- 🐧 **Linux Fundamentals** - file system, permissions, scripting, SSH
+- 🌐 **Networking Fundamentals** - OSI model, CIDR, DNS, VPC concepts
+- ☁️ **10 AWS Certifications** - CLF-C02, SAA-C03, DVA-C02, SOA-C02, SAP-C02, DOP-C02, SCS-C02, ANS-C01, MLS-C01, DAS-C01
+- 🔗 **Resources** - Skill Builder, Stephane Maarek, Tutorials Dojo, Adrian Cantrill, whitepapers
+- 🧪 **Labs & Practice** - free lab platforms, practice questions with answers, architecture challenges
+- 🔄 **Auto-Updated** - GitHub Actions pulls AWS news weekly
 
 ## Quick Start (Local)
 
@@ -49,7 +49,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). We welcome bug fixes, new content, resou
 
 ## License
 
-MIT License — free to use, share, and modify with attribution.
+MIT License - free to use, share, and modify with attribution.
 
 ---
 *Not affiliated with Amazon Web Services. All AWS trademarks belong to Amazon.com, Inc.*

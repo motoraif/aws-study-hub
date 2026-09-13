@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>CLF-C02 — AWS Cloud Practitioner — AWS Study Hub</title>
+  <title>CLF-C02 - AWS Cloud Practitioner - AWS Study Hub</title>
   <meta name="description" content="Complete CLF-C02 study guide. Cloud concepts, shared responsibility, IAM, core services, billing, and support plans.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/style.css">
   <script src="../assets/js/components.js"></script>
-</head><body><div class="container" style="padding-top:2rem;"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Certifications</span> / <span>CLF-C02</span></div></div><div class="page-header"><div class="container"><span class="badge badge-orange">Foundational</span><h1 style="margin-top:0.75rem;">&#127885; CLF-C02 — AWS Certified Cloud Practitioner</h1><p>The entry-level AWS certification. Cloud concepts, core services, security, billing, and support. No technical background required.</p><div class="flex-wrap mt-1"><span class="badge badge-green">90 min | 65 questions</span><span class="badge badge-blue">Passing: 700/1000</span><span class="badge badge-teal">No prerequisites</span></div></div></div><div class="container" style="padding-bottom:4rem;"><div class="doc-layout"><aside class="sidebar"><h4>Contents</h4><a href="#overview">Exam Overview</a>
+</head><body><div class="container" style="padding-top:2rem;"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Certifications</span> / <span>CLF-C02</span></div></div><div class="page-header"><div class="container"><span class="badge badge-orange">Foundational</span><h1 style="margin-top:0.75rem;">&#127885; CLF-C02 - AWS Certified Cloud Practitioner</h1><p>The entry-level AWS certification. Cloud concepts, core services, security, billing, and support. No technical background required.</p><div class="flex-wrap mt-1"><span class="badge badge-green">90 min | 65 questions</span><span class="badge badge-blue">Passing: 700/1000</span><span class="badge badge-teal">No prerequisites</span></div></div></div><div class="container" style="padding-bottom:4rem;"><div class="doc-layout"><aside class="sidebar"><h4>Contents</h4><a href="#overview">Exam Overview</a>
 <a href="#cloud-concepts">Cloud Concepts</a>
 <a href="#shared-resp">Shared Responsibility</a>
 <a href="#global-infra">Global Infrastructure</a>
@@ -41,7 +41,7 @@
 <h3>The 6 Advantages of Cloud Computing</h3>
 <div class="grid-2">
   <div class="card"><h4>1. Trade CapEx for Variable Expense</h4><p>Pay only for what you consume instead of investing upfront in data centers and servers.</p></div>
-  <div class="card"><h4>2. Massive Economies of Scale</h4><p>AWS pools usage from hundreds of thousands of customers &mdash; passes savings to you.</p></div>
+  <div class="card"><h4>2. Massive Economies of Scale</h4><p>AWS pools usage from hundreds of thousands of customers - passes savings to you.</p></div>
   <div class="card"><h4>3. Stop Guessing Capacity</h4><p>Scale up or down in minutes. No over/under provisioning ever again.</p></div>
   <div class="card"><h4>4. Increase Speed &amp; Agility</h4><p>Deploy resources in minutes vs weeks. Experiment faster, fail cheaper.</p></div>
   <div class="card"><h4>5. Stop Spending on Data Centers</h4><p>Focus on your business, not racking servers and running cables.</p></div>
@@ -57,11 +57,11 @@
 <section id="shared-resp"><h2>Shared Responsibility Model</h2>
 <div class="callout warn"><div class="callout-title">&#9888; Most Tested CLF Topic</div><p>The Shared Responsibility Model is the most commonly tested concept on CLF. Know it perfectly.</p></div>
 <div class="grid-2">
-  <div class="card" style="border-color:var(--aws-orange)"><h3>AWS &mdash; "Security OF the Cloud"</h3><ul>
+  <div class="card" style="border-color:var(--aws-orange)"><h3>AWS - "Security OF the Cloud"</h3><ul>
     <li>Physical data center security</li><li>Hardware &amp; global network infrastructure</li>
     <li>Hypervisor / virtualization layer</li><li>Managed service OS patching (RDS, Lambda)</li>
   </ul></div>
-  <div class="card" style="border-color:var(--aws-blue)"><h3>Customer &mdash; "Security IN the Cloud"</h3><ul>
+  <div class="card" style="border-color:var(--aws-blue)"><h3>Customer - "Security IN the Cloud"</h3><ul>
     <li>EC2 OS patching &amp; updates</li><li>Application code security</li>
     <li>IAM users, roles, policies</li><li>Data encryption &amp; backups</li>
     <li>Security Groups &amp; Network ACLs</li>
@@ -76,14 +76,14 @@
   <div class="card"><h3>&#127760; Edge Locations</h3><p>400+ CDN endpoints globally for CloudFront &amp; Route 53. Cache content close to users for low latency.</p></div>
 </div></section>
 
-<section id="iam"><h2>IAM &mdash; Identity &amp; Access Management</h2>
+<section id="iam"><h2>IAM - Identity &amp; Access Management</h2>
 <div class="grid-2">
   <div><h3>Components</h3><ul>
-    <li><strong>Root User</strong> &mdash; master account; enable MFA; never use for daily tasks</li>
-    <li><strong>Users</strong> &mdash; individual people or service accounts</li>
-    <li><strong>Groups</strong> &mdash; collections of users sharing policies</li>
-    <li><strong>Roles</strong> &mdash; temporary permissions assumed by services/users</li>
-    <li><strong>Policies</strong> &mdash; JSON documents defining Allow/Deny</li>
+    <li><strong>Root User</strong> - master account; enable MFA; never use for daily tasks</li>
+    <li><strong>Users</strong> - individual people or service accounts</li>
+    <li><strong>Groups</strong> - collections of users sharing policies</li>
+    <li><strong>Roles</strong> - temporary permissions assumed by services/users</li>
+    <li><strong>Policies</strong> - JSON documents defining Allow/Deny</li>
   </ul></div>
   <div><h3>Best Practices</h3><ul>
     <li>&#128274; Never use root for daily tasks</li><li>&#128274; Enable MFA on root and admins</li>

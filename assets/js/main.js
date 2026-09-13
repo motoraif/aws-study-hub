@@ -1,4 +1,4 @@
-/* AWS Study Hub — Main JS */
+/* AWS Study Hub - Main JS */
 (function(){const b=document.getElementById('scroll-top');if(!b)return;window.addEventListener('scroll',()=>b.classList.toggle('visible',window.scrollY>400));b.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));})();
 
 (function(){const p=location.pathname.replace(/\/$/,'');document.querySelectorAll('.nav-links a').forEach(a=>{const h=a.getAttribute('href').replace(/\/$/,'');if(p===h||(h!=='/'&&p.startsWith(h)))a.classList.add('active');});})();
