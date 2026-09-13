@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>AIP-C01 — AWS Certified Generative AI Developer Professional — AWS Study Hub</title>
+  <meta name="description" content="AIP-C01 study guide. Integrate foundation models into production applications: Amazon Bedrock, AgentCore, RAG, agents, guardrails, evaluation, security, and cost optimization.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/components.js"></script>
+</head><body>
+<div class="container" style="padding-top:2rem;"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Certifications</span> / <span>AIP-C01</span></div></div>
+<div class="page-header"><div class="container"><span class="badge badge-purple">Professional</span> <span class="badge badge-green">&#127381; New Certification</span><h1 style="margin-top:0.75rem;">&#129504; AIP-C01 — AWS Certified Generative AI Developer Professional</h1><p>Integrate foundation models into production applications and business workflows using Amazon Bedrock, agents, RAG, and guardrails — with security and cost efficiency.</p><div class="flex-wrap mt-1"><span class="badge badge-green">180 min | 65 questions</span><span class="badge badge-purple">Passing: 750/1000</span></div></div></div>
+<div class="container" style="padding-top:1.5rem"><div class="card" style="border:1px solid #2e7d32;background:rgba(46,125,50,0.12)">
+  <h3 style="margin-top:0">&#127381; Newly launched professional-level AI certification</h3>
+  <p style="color:var(--text-muted);margin:0">The <strong>AWS Certified Generative AI Developer &mdash; Professional (AIP-C01)</strong> is a professional-level credential for developers who build production generative AI solutions. The beta period ended March 31, 2026, and the exam is now generally available. It sits at the top of the AWS AI track alongside the foundational <a href="aif-c01.html">AI Practitioner (AIF-C01)</a>.</p>
+</div></div>
+<div class="container" style="padding-bottom:4rem;"><div class="doc-layout">
+<aside class="sidebar"><h4>Contents</h4>
+<a href="#overview">Exam Overview</a>
+<a href="#who">Who It's For</a>
+<a href="#domains">Exam Domains</a>
+<a href="#topics">Key Topics</a>
+<a href="#services">Key AWS Services</a>
+<a href="#checklist">Study Checklist</a>
+</aside>
+<main>
+<section id="overview"><h2>Exam Overview</h2>
+<div class="grid-2">
+  <div class="card"><h3>Exam Details</h3><ul>
+    <li><strong>Code:</strong> AIP-C01</li>
+    <li><strong>Level:</strong> Professional</li>
+    <li><strong>Duration:</strong> 180 minutes</li>
+    <li><strong>Questions:</strong> 65</li>
+    <li><strong>Passing Score:</strong> 750/1000</li>
+    <li><strong>Cost:</strong> ~$300 USD</li>
+    <li><strong>Validity:</strong> 3 years</li>
+  </ul></div>
+  <div class="card"><h3>&#127891; Official Resources</h3><ul>
+    <li><a href="https://aws.amazon.com/certification/certified-generative-ai-developer-professional/" target="_blank" rel="noopener">Official Certification Page</a></li>
+    <li><a href="https://docs.aws.amazon.com/aws-certification/latest/ai-professional-01.html" target="_blank" rel="noopener">Official Exam Guide</a></li>
+    <li><a href="https://explore.skillbuilder.aws/" target="_blank" rel="noopener">AWS Skill Builder — Generative AI Developer path</a></li>
+    <li><a href="https://aws.amazon.com/certification/" target="_blank" rel="noopener">Schedule Your Exam</a></li>
+    <li><a href="https://tutorialsdojo.com/" target="_blank" rel="noopener">Tutorials Dojo Practice Exams</a></li>
+  </ul></div>
+</div></section>
+
+<section id="who"><h2>&#128100; Who It's For</h2>
+<div class="card"><p style="color:var(--text-muted)">Developers who build production generative AI applications. No formal prerequisites, but AWS recommends 2+ years of AWS experience and 1+ year of hands-on generative AI development. Recommended after gaining GenAI experience and ideally the AI Practitioner and/or ML Engineer Associate credentials.</p></div>
+</section>
+
+<section id="domains"><h2>&#128202; Exam Domains</h2>
+<div class="table-wrap"><table><thead><tr><th>Domain (representative)</th><th>Focus</th></tr></thead><tbody>
+  <tr><td>1. Foundation Model Selection &amp; Integration</td><td>Choosing FMs, invoking via Bedrock, embeddings, multimodal</td></tr>
+  <tr><td>2. Prompt Engineering &amp; Application Design</td><td>Advanced prompting, RAG, agents, orchestration</td></tr>
+  <tr><td>3. Customization &amp; Optimization</td><td>Fine-tuning, distillation, evaluation, cost/latency tuning</td></tr>
+  <tr><td>4. Responsible AI, Security &amp; Operations</td><td>Guardrails, privacy, monitoring, deployment, governance</td></tr>
+</tbody></table></div>
+<p style="color:var(--text-muted);font-size:0.85rem">The exam guide defines the authoritative domains and weights — this is a representative summary. Always confirm against the official AIP-C01 exam guide.</p>
+</section>
+
+<section id="topics"><h2>&#128218; Key Topics</h2>
+<div class="grid-2">
+  <div class="card"><h3>Foundation Models &amp; Bedrock</h3><ul>
+    <li>Selecting FMs by capability, cost, latency, context window</li>
+    <li>Bedrock InvokeModel / Converse APIs; streaming</li>
+    <li>Embeddings and vector representations</li>
+    <li>Multimodal inputs (text, image)</li>
+  </ul></div>
+  <div class="card"><h3>RAG &amp; Agents</h3><ul>
+    <li>Retrieval-Augmented Generation architectures</li>
+    <li>Bedrock Knowledge Bases; vector stores (OpenSearch, Aurora pgvector)</li>
+    <li>Bedrock Agents & AgentCore for tool use and workflows</li>
+    <li>Chunking, re-ranking, grounding strategies</li>
+  </ul></div>
+  <div class="card"><h3>Customization &amp; Evaluation</h3><ul>
+    <li>Fine-tuning vs. RAG vs. prompt engineering trade-offs</li>
+    <li>Model distillation; continued pre-training</li>
+    <li>Evaluation: automated metrics, human eval, LLM-as-judge</li>
+    <li>Latency, throughput, and cost optimization (caching, batching)</li>
+  </ul></div>
+  <div class="card"><h3>Responsible AI &amp; Security</h3><ul>
+    <li>Bedrock Guardrails: content filtering, PII, denied topics</li>
+    <li>Prompt injection defense; tool-use authorization</li>
+    <li>Data privacy: VPC endpoints, no-train guarantees</li>
+    <li>Monitoring, logging, human-in-the-loop oversight</li>
+  </ul></div>
+</div></section>
+
+<section id="services"><h2>&#9729;&#65039; Key AWS Services to Know</h2>
+<div class="table-wrap"><table><thead><tr><th>Category</th><th>Services</th></tr></thead><tbody>
+  <tr><td>Core GenAI</td><td>Amazon Bedrock (models, Knowledge Bases, Agents, Guardrails, Evaluations), Bedrock AgentCore</td></tr>
+  <tr><td>Vector / Retrieval</td><td>OpenSearch Service, Aurora PostgreSQL (pgvector), Kendra</td></tr>
+  <tr><td>ML platform</td><td>Amazon SageMaker AI (for custom models / hosting)</td></tr>
+  <tr><td>App integration</td><td>Lambda, API Gateway, Step Functions, EventBridge</td></tr>
+  <tr><td>Security &amp; Ops</td><td>IAM, KMS, VPC/PrivateLink, CloudWatch, CloudTrail</td></tr>
+</tbody></table></div></section>
+
+<section id="checklist" class="progress-section"><h2>&#128203; Study Checklist</h2>
+<div class="progress-wrap"><div class="progress-label"><span>Progress</span><span class="progress-pct">0%</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div>
+<ul class="checklist">
+  <li><input type="checkbox"><span>Read the official AIP-C01 exam guide</span></li>
+  <li><input type="checkbox"><span>Invoke foundation models via Bedrock (InvokeModel / Converse)</span></li>
+  <li><input type="checkbox"><span>Build a RAG app with Bedrock Knowledge Bases + a vector store</span></li>
+  <li><input type="checkbox"><span>Create a Bedrock Agent / AgentCore workflow with tool use</span></li>
+  <li><input type="checkbox"><span>Configure Bedrock Guardrails (content filters, PII, denied topics)</span></li>
+  <li><input type="checkbox"><span>Compare fine-tuning vs RAG vs prompt engineering</span></li>
+  <li><input type="checkbox"><span>Evaluate model quality (automated + human + LLM-as-judge)</span></li>
+  <li><input type="checkbox"><span>Optimize latency and cost (caching, batching, model choice)</span></li>
+  <li><input type="checkbox"><span>Secure GenAI apps: prompt injection defense, VPC endpoints, IAM</span></li>
+  <li><input type="checkbox"><span>Score 75%+ on practice exams before booking</span></li>
+</ul>
+<div class="mt-2"><a href="../docs/resources.html" class="btn btn-primary">Browse Study Resources &rarr;</a></div>
+</section>
+</main></div></div>
+<script src="../assets/js/main.js"></script></body></html>
