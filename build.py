@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build all AWS Study Hub HTML pages."""
 import os, textwrap
-BASE = "/projects/sandbox/aws-study-hub"
+BASE = os.path.dirname(os.path.abspath(__file__))
 DOCS = f"{BASE}/docs"
 os.makedirs(DOCS, exist_ok=True)
 
@@ -161,7 +161,7 @@ index_body = """
     <div class="card"><div class="card-icon">&#127963;</div><h3>Official First</h3><p style="color:var(--text-muted);font-size:0.9rem">All content links back to AWS Skill Builder, official whitepapers, and official exam guides.</p></div>
     <div class="card"><div class="card-icon">&#129309;</div><h3>Community Driven</h3><p style="color:var(--text-muted);font-size:0.9rem">Open source on GitHub. Anyone can contribute. PRs and issues welcome!</p></div>
     <div class="card"><div class="card-icon">&#128202;</div><h3>Progress Tracking</h3><p style="color:var(--text-muted);font-size:0.9rem">Interactive checklists saved in your browser. Track what you've studied without an account.</p></div>
-    <div class="card"><div class="card-icon">&#128260;</div><h3>Auto-Updated</h3><p style="color:var(--text-muted);font-size:0.9rem">GitHub Actions pulls the latest AWS news weekly so content stays fresh.</p></div>
+    <a href="docs/news.html" class="card" style="text-decoration:none;color:var(--text)"><div class="card-icon">&#128260;</div><h3>Auto-Updated</h3><p style="color:var(--text-muted);font-size:0.9rem">GitHub Actions pulls the latest AWS news weekly so content stays fresh. <span style="color:var(--aws-orange)">View news &rarr;</span></p></a>
     <div class="card"><div class="card-icon">&#129139;</div><h3>Full-Stack Learning</h3><p style="color:var(--text-muted);font-size:0.9rem">Starts from Linux and networking basics, building up to professional and specialty certifications.</p></div>
   </div>
 </div></section>
@@ -264,7 +264,7 @@ index_html = HEAD_ROOT("AWS Study Hub — Ultimate AWS Certification Study Platf
     <div class="card"><div class="card-icon">&#127963;</div><h3>Official First</h3><p style="color:var(--text-muted);font-size:0.9rem">All content links back to AWS Skill Builder, official whitepapers, and exam guides.</p></div>
     <div class="card"><div class="card-icon">&#129309;</div><h3>Community Driven</h3><p style="color:var(--text-muted);font-size:0.9rem">Open source on GitHub. Anyone can contribute. PRs and issues welcome!</p></div>
     <div class="card"><div class="card-icon">&#9989;</div><h3>Progress Tracking</h3><p style="color:var(--text-muted);font-size:0.9rem">Interactive checklists saved in your browser. No account needed.</p></div>
-    <div class="card"><div class="card-icon">&#128260;</div><h3>Auto-Updated</h3><p style="color:var(--text-muted);font-size:0.9rem">GitHub Actions pulls the latest AWS news weekly so content stays fresh.</p></div>
+    <a href="docs/news.html" class="card" style="text-decoration:none;color:var(--text)"><div class="card-icon">&#128260;</div><h3>Auto-Updated</h3><p style="color:var(--text-muted);font-size:0.9rem">GitHub Actions pulls the latest AWS news weekly so content stays fresh. <span style="color:var(--aws-orange)">View news &rarr;</span></p></a>
     <div class="card"><div class="card-icon">&#129139;</div><h3>Full-Stack Learning</h3><p style="color:var(--text-muted);font-size:0.9rem">Linux basics &rarr; Networking &rarr; AWS Associate &rarr; Professional &rarr; Specialty.</p></div>
   </div>
 </div></section>

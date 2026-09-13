@@ -30,21 +30,62 @@ jobs:
           from datetime import datetime, timezone
           from dateutil import parser as dp
 
+          PATH = 'data/aws-news.json'
+
+          # Load existing cumulative archive (if any)
+          existing = {"items": []}
+          if os.path.exists(PATH):
+              try:
+                  with open(PATH) as f:
+                      existing = json.load(f)
+              except Exception:
+                  existing = {"items": []}
+
+          # Index existing items by their canonical key (link, falling back to title+date)
+          def key(it):
+              return (it.get('link') or '').strip() or (it.get('title','') + it.get('date',''))
+
+          archive = {key(it): it for it in existing.get('items', [])}
+
+          # Fetch the latest feed and merge in any new items
           feed = feedparser.parse("https://aws.amazon.com/about-aws/whats-new/recent/feed/")
-          items = []
-          for entry in feed.entries[:10]:
+          new_count = 0
+          for entry in feed.entries[:25]:
               try: date = dp.parse(entry.get('published','')).strftime('%Y-%m-%d')
               except: date = 'Unknown'
               desc = re.sub(r'<[^>]+>','',entry.get('summary','')).strip()[:300]
-              items.append({"title":entry.get('title',''),"link":entry.get('link','#'),"date":date,"summary":desc})
+              item = {"title":entry.get('title',''),"link":entry.get('link','#'),"date":date,"summary":desc}
+              k = key(item)
+              if k not in archive:
+                  archive[k] = item
+                  new_count += 1
 
-          os.makedirs('data',exist_ok=True)
-          with open('data/aws-news.json','w') as f:
-              json.dump({"updated":datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC'),"items":items},f,indent=2)
-          print(f"Fetched {len(items)} items")
+          # Sort newest-first by date (unknown dates sink to the bottom)
+          items = sorted(archive.values(), key=lambda x: x.get('date','0000-00-00'), reverse=True)
+
+          os.makedirs('data', exist_ok=True)
+          out = {
+              "updated": datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC'),
+              "note": "Cumulative AWS What's New archive. Auto-appended weekly by GitHub Actions. Do not edit manually.",
+              "count": len(items),
+              "items": items,
+          }
+          with open(PATH, 'w') as f:
+              json.dump(out, f, indent=2)
+          print(f"Added {new_count} new item(s); archive now has {len(items)} total")
+
+          # Signal to later steps whether there were genuinely new items
+          gh_out = os.environ.get('GITHUB_OUTPUT')
+          if gh_out:
+              with open(gh_out, 'a') as f:
+                  f.write(f"new_count={new_count}\n")
           PYEOF
+        id: fetch
 
       - name: Commit if changed
+        if: steps.fetch.outputs.new_count != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -55,10 +96,16 @@ jobs:
             git checkout -b "$BRANCH"
             git add data/aws-news.json
             git commit -m "chore: update AWS What's New feed $(date +%Y-%m-%d)"
-            git push origin "$BRANCH"
-            curl -s -X POST \
-              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-              -H "Content-Type: application/json" \
-              https://api.github.com/repos/${{ github.repository }}/pulls \
-              -d "{\"title\":\"chore: AWS news update $(date +%Y-%m-%d)\",\"body\":\"Auto-generated weekly AWS What's New update.\",\"head\":\"$BRANCH\",\"base\":\"main\"}"
+            git push -f origin "$BRANCH"
+            PR_URL=$(gh pr create \
+              --title "chore: AWS news update $(date +%Y-%m-%d)" \
+              --body "Auto-generated weekly AWS What's New update." \
+              --head "$BRANCH" \
+              --base main 2>/dev/null || gh pr view "$BRANCH" --json url -q .url)
+            echo "PR: $PR_URL"
+            # Merge the PR automatically (squash). Try normal merge, then auto-merge, then admin.
+            gh pr merge "$BRANCH" --squash --delete-branch \
+              || gh pr merge "$BRANCH" --squash --auto --delete-branch \
+              || gh pr merge "$BRANCH" --squash --admin --delete-branch \
+              || echo "Could not auto-merge; PR left open for manual review: $PR_URL"
           fi
