@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Practice Labs & Questions — AWS Study Hub</title>
+  <title>Practice Labs & Questions - AWS Study Hub</title>
   <meta name="description" content="Free AWS hands-on labs, practice questions with answers, architecture challenges, and exam strategies.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,7 +39,7 @@
 </div></section>
 
 <section id="questions"><h2>&#128221; Practice Questions</h2>
-<div class="callout info"><div class="callout-title">How to Use These</div><p>Cover the answers, think through your answer first, then reveal and read the explanation — especially for wrong answers. Understanding <em>why</em> wrong answers are wrong is just as important.</p></div>
+<div class="callout info"><div class="callout-title">How to Use These</div><p>Cover the answers, think through your answer first, then reveal and read the explanation - especially for wrong answers. Understanding <em>why</em> wrong answers are wrong is just as important.</p></div>
 
 <h3>CLF-C02 Questions</h3>
 <div class="card" style="margin-bottom:1rem"><p><strong>Q1.</strong> A company needs to run a workload that can be interrupted and restarted without data loss. It must complete within 24 hours. Which EC2 pricing option provides the most cost savings?</p>
@@ -58,7 +58,7 @@
 <div class="card" style="margin-bottom:1rem"><p><strong>Q3.</strong> A web application experiences high read traffic on its MySQL database. The team wants to improve performance without changing application code. What is the MOST cost-effective solution?<br>A) Migrate to Aurora &nbsp; B) Add RDS Read Replicas &nbsp; C) Use ElastiCache &nbsp; D) Enable Multi-AZ</p>
 <details style="margin-top:0.75rem"><summary style="cursor:pointer;color:var(--aws-orange);font-weight:600">Reveal Answer</summary>
 <div style="margin-top:0.75rem;padding:1rem;background:var(--bg-hover);border-radius:8px">
-<p><strong>&#9989; B) Add RDS Read Replicas</strong></p><p>Read Replicas offload read traffic. No app code changes needed if configured at the connection string level. ElastiCache (C) requires app code changes to check cache first. Multi-AZ (D) is for HA, not performance — standby is not readable. Aurora (A) requires migration effort.</p>
+<p><strong>&#9989; B) Add RDS Read Replicas</strong></p><p>Read Replicas offload read traffic. No app code changes needed if configured at the connection string level. ElastiCache (C) requires app code changes to check cache first. Multi-AZ (D) is for HA, not performance - standby is not readable. Aurora (A) requires migration effort.</p>
 </div></details></div>
 
 <div class="card" style="margin-bottom:1rem"><p><strong>Q4.</strong> A company wants S3 objects accessible ONLY through CloudFront, not directly via S3 URL. What should they configure?<br>A) S3 bucket ACL = private &nbsp; B) CloudFront Signed URLs &nbsp; C) Origin Access Control (OAC) &nbsp; D) S3 Transfer Acceleration</p>
@@ -125,7 +125,7 @@ Primary (us-east-1):
   Route 53 Failover routing (health check on ALB)
 
 DR (us-west-2):
-  ALB → EC2 ASG (2 instances — warm) → RDS Read Replica
+  ALB → EC2 ASG (2 instances - warm) → RDS Read Replica
   (async replication ~5 min lag = RPO ✓)
 
 Failover:
@@ -137,8 +137,8 @@ Total RTO: ~10-15 minutes ✓</code></pre></div></details></div></section>
 
 <section id="strategy"><h2>&#127919; Exam Strategy</h2>
 <div class="grid-2">
-  <div class="card"><h3>Before the Exam</h3><ul><li>Score 75%+ on Tutorials Dojo before booking</li><li>Review all wrong answers — understand WHY they're wrong</li><li>Read the official exam guide domains the week before</li><li>Review your weak areas using our cert checklists</li><li>Get a good night's sleep — don't cram the night before</li></ul></div>
-  <div class="card"><h3>During the Exam</h3><ul><li>Read every word — key qualifiers matter</li><li>Look for: "MOST cost-effective", "LEAST operational overhead"</li><li>Eliminate obviously wrong answers first</li><li>Flag difficult questions and return later</li><li>Trust your first instinct — don't second-guess without reason</li></ul></div>
+  <div class="card"><h3>Before the Exam</h3><ul><li>Score 75%+ on Tutorials Dojo before booking</li><li>Review all wrong answers - understand WHY they're wrong</li><li>Read the official exam guide domains the week before</li><li>Review your weak areas using our cert checklists</li><li>Get a good night's sleep - don't cram the night before</li></ul></div>
+  <div class="card"><h3>During the Exam</h3><ul><li>Read every word - key qualifiers matter</li><li>Look for: "MOST cost-effective", "LEAST operational overhead"</li><li>Eliminate obviously wrong answers first</li><li>Flag difficult questions and return later</li><li>Trust your first instinct - don't second-guess without reason</li></ul></div>
 </div></section>
 
 <section id="patterns"><h2>&#128218; Question Pattern Recognition</h2>

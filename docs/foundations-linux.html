@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Linux Fundamentals — AWS Study Hub</title>
+  <title>Linux Fundamentals - AWS Study Hub</title>
   <meta name="description" content="Complete Linux guide for AWS certification candidates.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,9 +29,9 @@
 <a href="#checklist">Checklist</a>
 </aside><main>
 <section id="why"><h2>Why Linux for AWS?</h2>
-<p>Over <strong>90% of cloud workloads</strong> run on Linux. EC2 instances, ECS containers, Lambda environments — all Linux. Understanding Linux means you can:</p>
+<p>Over <strong>90% of cloud workloads</strong> run on Linux. EC2 instances, ECS containers, Lambda environments - all Linux. Understanding Linux means you can:</p>
 <ul><li>Debug EC2 instances via SSH</li><li>Write UserData bootstrap scripts</li><li>Create and manage Docker containers</li><li>Answer scenario questions on SOA-C02 &amp; DVA-C02 exams</li></ul>
-<div class="callout tip"><div class="callout-title">&#128161; Tip</div><p>On EC2: <code>/var/log/cloud-init.log</code> contains your UserData script output — critical for debugging bootstrap issues.</p></div></section>
+<div class="callout tip"><div class="callout-title">&#128161; Tip</div><p>On EC2: <code>/var/log/cloud-init.log</code> contains your UserData script output - critical for debugging bootstrap issues.</p></div></section>
 
 <section id="filesystem"><h2>Linux File System</h2>
 <div class="table-wrap"><table><thead><tr><th>Directory</th><th>Purpose</th></tr></thead><tbody>
@@ -101,7 +101,7 @@ netstat -tulnp                # All listening ports
 ss -tulnp                     # Modern netstat
 curl -I https://example.com   # HTTP headers
 curl -v https://api.example.com  # Verbose HTTP</code></pre>
-<div class="callout warn"><div class="callout-title">&#9888; AWS Exam Tip</div><p>If you can ping an EC2 but can't connect on port 22, check the <strong>Security Group inbound rules</strong> — AWS Security Groups are applied before traffic reaches the OS firewall.</p></div></section>
+<div class="callout warn"><div class="callout-title">&#9888; AWS Exam Tip</div><p>If you can ping an EC2 but can't connect on port 22, check the <strong>Security Group inbound rules</strong> - AWS Security Groups are applied before traffic reaches the OS firewall.</p></div></section>
 
 <section id="scripting"><h2>Shell Scripting</h2>
 <pre><code>#!/bin/bash
@@ -140,12 +140,12 @@ Host my-ec2
     IdentityFile ~/.ssh/my-key.pem
 # Then just: ssh my-ec2
 
-# SCP — copy files
+# SCP - copy files
 scp -i key.pem file.txt ec2-user@IP:/home/ec2-user/
 
 # Port forwarding (tunnel to private RDS)
 ssh -i key.pem -L 5432:rds-endpoint:5432 ec2-user@IP</code></pre>
-<div class="callout tip"><div class="callout-title">&#128161; EC2 Instance Connect</div><p>Provides browser-based SSH access without key pairs — uses IAM permissions instead. Great for exam questions about "SSH access without managing key pairs".</p></div></section>
+<div class="callout tip"><div class="callout-title">&#128161; EC2 Instance Connect</div><p>Provides browser-based SSH access without key pairs - uses IAM permissions instead. Great for exam questions about "SSH access without managing key pairs".</p></div></section>
 
 <section id="systemd"><h2>Systemd &amp; Services</h2>
 <pre><code>systemctl start nginx     # Start service
