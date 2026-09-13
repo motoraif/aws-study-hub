@@ -191,3 +191,89 @@ footer { background: var(--bg-card); border-top: 1px solid var(--border); paddin
   .nav-search   { display: none; }
   .hero-stats   { gap: 1.5rem; }
 }
+
+/* =========================================================
+   Animations
+   ========================================================= */
+
+/* Hero entrance: elements start hidden and animate in (staggered via inline delay from JS/CSS) */
+.hero .hero-eyebrow,
+.hero h1,
+.hero .subtitle,
+.hero > .container > div,
+.hero-stats {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: heroIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.hero .hero-eyebrow { animation-delay: 0.05s; }
+.hero h1            { animation-delay: 0.15s; }
+.hero .subtitle     { animation-delay: 0.28s; }
+.hero > .container > div:not(.hero-stats) { animation-delay: 0.40s; }
+.hero-stats         { animation-delay: 0.52s; }
+
+@keyframes heroIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animated soft glow behind the hero */
+.hero { position: relative; overflow: hidden; }
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 60% 30%, rgba(255,153,0,0.10) 0%, transparent 55%),
+    radial-gradient(ellipse at 25% 70%, rgba(0,164,180,0.08) 0%, transparent 50%);
+  animation: glowDrift 16s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+.hero > .container { position: relative; z-index: 1; }
+
+@keyframes glowDrift {
+  0%   { transform: translate(0, 0) scale(1); opacity: 0.9; }
+  50%  { transform: translate(2%, -1.5%) scale(1.06); opacity: 1; }
+  100% { transform: translate(-2%, 1.5%) scale(1.03); opacity: 0.85; }
+}
+
+/* Scroll reveal: sections/cards fade + slide up when they enter the viewport */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Staggered children (e.g., cards in a grid) */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.reveal-stagger.is-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respect users who prefer reduced motion: disable all of the above */
+@media (prefers-reduced-motion: reduce) {
+  .hero .hero-eyebrow,
+  .hero h1,
+  .hero .subtitle,
+  .hero > .container > div,
+  .hero-stats,
+  .reveal,
+  .reveal-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .hero::before { animation: none !important; }
+  html { scroll-behavior: auto; }
+}

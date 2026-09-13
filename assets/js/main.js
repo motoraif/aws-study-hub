@@ -10,3 +10,86 @@ document.querySelectorAll('.tab-container').forEach(c=>{const btns=c.querySelect
 document.querySelectorAll('pre').forEach(pre=>{const btn=document.createElement('button');btn.textContent='Copy';btn.style.cssText='position:absolute;top:8px;right:8px;background:rgba(255,255,255,0.1);color:#ccc;border:1px solid rgba(255,255,255,0.2);border-radius:4px;padding:2px 10px;font-size:0.75rem;cursor:pointer;';pre.appendChild(btn);btn.addEventListener('click',()=>{navigator.clipboard.writeText(pre.querySelector('code')?.textContent||pre.textContent).then(()=>{btn.textContent='Copied!';setTimeout(()=>btn.textContent='Copy',1500);});});});
 
 (function(){const h=document.querySelectorAll('h2[id],h3[id]'),l=document.querySelectorAll('.sidebar a');if(!h.length||!l.length)return;new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){l.forEach(x=>x.classList.remove('active'));const a=document.querySelector(`.sidebar a[href="#${e.target.id}"]`);if(a)a.classList.add('active');}});},{rootMargin:'0px 0px -70% 0px'}).observe&&h.forEach(x=>new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){l.forEach(y=>y.classList.remove('active'));const a=document.querySelector(`.sidebar a[href="#${e.target.id}"]`);if(a)a.classList.add('active');}});},{rootMargin:'0px 0px -70% 0px'}).observe(x));})();
+
+
+/* ── Scroll reveal + staggered children + animated stat counters ── */
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Auto-tag sections and grids on the homepage-style pages for reveal (skip hero which has its own entrance)
+  var revealTargets = [];
+  document.querySelectorAll('.section, .cert-path').forEach(function(el){
+    if (el.closest('.hero')) return;
+    el.classList.add('reveal');
+    revealTargets.push(el);
+  });
+  // Grids inside sections get staggered children
+  document.querySelectorAll('.grid-2, .grid-3, .grid-4').forEach(function(el){
+    if (el.closest('.hero')) return;
+    el.classList.add('reveal-stagger');
+    revealTargets.push(el);
+  });
+
+  if (reduce) {
+    // Reveal everything immediately for reduced-motion users
+    revealTargets.forEach(function(el){ el.classList.add('is-visible'); });
+  } else if ('IntersectionObserver' in window) {
+    // Apply a small stagger delay to direct children of stagger containers
+    document.querySelectorAll('.reveal-stagger').forEach(function(c){
+      Array.prototype.forEach.call(c.children, function(child, i){
+        child.style.transitionDelay = (i * 0.07) + 's';
+      });
+    });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    revealTargets.forEach(function(el){ io.observe(el); });
+  } else {
+    revealTargets.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+
+  // Animated count-up for hero stats (e.g., "12+", "200+", "500+", "100%")
+  var stats = document.querySelectorAll('.stat-number');
+  if (stats.length){
+    stats.forEach(function(el){
+      var raw = el.textContent.trim();
+      var m = raw.match(/^(\d[\d,]*)(.*)$/);
+      if (!m){ return; } // leave non-numeric labels as-is
+      var target = parseInt(m[1].replace(/,/g,''), 10);
+      var suffix = m[2] || '';
+      if (reduce || !('IntersectionObserver' in window) || isNaN(target)){ return; }
+      el.dataset.target = target;
+      el.dataset.suffix = suffix;
+      el.textContent = '0' + suffix;
+    });
+
+    if (!reduce && 'IntersectionObserver' in window){
+      var seen = false;
+      var sObs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting && !seen){
+            seen = true;
+            stats.forEach(function(el){
+              if (!el.dataset.target) return;
+              var target = parseInt(el.dataset.target, 10);
+              var suffix = el.dataset.suffix || '';
+              var dur = 1200, start = null;
+              function step(ts){
+                if (!start) start = ts;
+                var p = Math.min((ts - start) / dur, 1);
+                var eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+                el.textContent = Math.round(eased * target).toLocaleString() + suffix;
+                if (p < 1) requestAnimationFrame(step);
+              }
+              requestAnimationFrame(step);
+            });
+          }
+        });
+      }, { threshold: 0.4 });
+      var host = document.querySelector('.hero-stats') || stats[0];
+      sObs.observe(host);
+    }
+  }
+})();
