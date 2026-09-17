@@ -37,8 +37,9 @@ FOOT_ROOT = '<script src="assets/js/main.js"></script></body></html>'
 def crumb(cert):
     return f'<div class="container" style="padding-top:2rem;"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Certifications</span> / <span>{cert}</span></div></div>'
 
-def phdr(bcls,btxt,icon,title,desc,badges=""):
-    return f'<div class="page-header"><div class="container"><span class="badge {bcls}">{btxt}</span><h1 style="margin-top:0.75rem;">{icon} {title}</h1><p>{desc}</p><div class="flex-wrap mt-1">{badges}</div></div></div>'
+def phdr(bcls,btxt,icon,title,desc,badges="",extra_badge=""):
+    eb = f' {extra_badge}' if extra_badge else ''
+    return f'<div class="page-header"><div class="container"><span class="badge {bcls}">{btxt}</span>{eb}<h1 style="margin-top:0.75rem;">{icon} {title}</h1><p>{desc}</p><div class="flex-wrap mt-1">{badges}</div></div></div>'
 
 def wrap(toc,body):
     links="".join(f'<a href="#{a}">{b}</a>\n' for a,b in toc)
@@ -236,24 +237,30 @@ index_html = HEAD_ROOT("AWS Study Hub - Ultimate AWS Certification Study Platfor
 <div class="container">
   <div class="text-center mb-2"><h2>&#9729;&#65039; AWS Certifications</h2><p style="color:var(--text-muted);max-width:600px;margin:0 auto">From beginner to expert. Each page includes official Skill Builder links, key topics, cheat sheets, and practice questions.</p></div>
   <h3 style="color:var(--aws-orange);margin-bottom:1rem">Foundational</h3>
-  <a href="docs/clf-c02.html" class="cert-path" style="margin-bottom:2rem"><div class="cert-path-icon">&#127885;</div><div><div class="cert-path-title">CLF-C02 - AWS Certified Cloud Practitioner</div><div class="cert-path-meta">The perfect entry point. No technical background required. Cloud concepts, core services, security &amp; billing.</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-orange">Foundational</span><span class="badge badge-green">~6 hrs study</span></div></div></a>
+  <div class="grid-2" style="margin-bottom:2rem">
+    <a href="docs/clf-c02.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#127885;</div><div><div class="cert-path-title">CLF-C02 - Cloud Practitioner</div><div class="cert-path-meta">The perfect entry point. Cloud concepts, core services, security &amp; billing.</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-orange">Foundational</span></div></div></a>
+    <a href="docs/aif-c01.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#129504;</div><div><div class="cert-path-title">AIF-C01 - AI Practitioner</div><div class="cert-path-meta">Foundational AI, ML &amp; generative AI concepts and AWS AI services.</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-orange">Foundational</span><span class="badge badge-green">New &#127381;</span></div></div></a>
+  </div>
   <h3 style="color:var(--aws-orange);margin:2rem 0 1rem">Associate</h3>
   <div class="grid-3" style="margin-bottom:2rem">
     <a href="docs/saa-c03.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#127959;</div><div><div class="cert-path-title">SAA-C03</div><div class="cert-path-meta">Solutions Architect Associate</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-blue">Associate</span></div></div></a>
     <a href="docs/dva-c02.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#128187;</div><div><div class="cert-path-title">DVA-C02</div><div class="cert-path-meta">Developer Associate</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-blue">Associate</span></div></div></a>
     <a href="docs/soa-c02.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#9881;</div><div><div class="cert-path-title">SOA-C02</div><div class="cert-path-meta">SysOps Administrator</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-blue">Associate</span></div></div></a>
+    <a href="docs/dea-c01.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#128202;</div><div><div class="cert-path-title">DEA-C01</div><div class="cert-path-meta">Data Engineer Associate</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-blue">Associate</span><span class="badge badge-green">New &#127381;</span></div></div></a>
+    <a href="docs/mla-c01.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#129302;</div><div><div class="cert-path-title">MLA-C01</div><div class="cert-path-meta">Machine Learning Engineer Associate</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-blue">Associate</span><span class="badge badge-green">New &#127381;</span></div></div></a>
   </div>
   <h3 style="color:var(--aws-orange);margin-bottom:1rem">Professional</h3>
-  <div class="grid-2" style="margin-bottom:2rem">
-    <a href="docs/sap-c02.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#129504;</div><div><div class="cert-path-title">SAP-C02 - Solutions Architect Professional</div><div class="cert-path-meta">Advanced architecture, org complexity, migration planning.</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-purple">Professional</span></div></div></a>
-    <a href="docs/dop-c02.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#128260;</div><div><div class="cert-path-title">DOP-C02 - DevOps Engineer Professional</div><div class="cert-path-meta">CI/CD, IaC, containers, monitoring at professional level.</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-purple">Professional</span></div></div></a>
+  <div class="grid-3" style="margin-bottom:2rem">
+    <a href="docs/sap-c02.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#129504;</div><div><div class="cert-path-title">SAP-C02 - Solutions Architect Pro</div><div class="cert-path-meta">Advanced architecture, org complexity, migration planning.</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-purple">Professional</span></div></div></a>
+    <a href="docs/dop-c02.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#128260;</div><div><div class="cert-path-title">DOP-C02 - DevOps Engineer Pro</div><div class="cert-path-meta">CI/CD, IaC, containers, monitoring at professional level.</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-purple">Professional</span></div></div></a>
+    <a href="docs/aip-c01.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#129504;</div><div><div class="cert-path-title">AIP-C01 - GenAI Developer Pro</div><div class="cert-path-meta">Build production generative AI apps: Bedrock, agents, RAG, guardrails.</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-purple">Professional</span><span class="badge badge-green">New &#127381;</span></div></div></a>
   </div>
   <h3 style="color:var(--aws-orange);margin-bottom:1rem">Specialty</h3>
   <div class="grid-4">
     <a href="docs/scs-c02.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#128274;</div><div><div class="cert-path-title">SCS-C02</div><div class="cert-path-meta">Security Specialty</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-red">Specialty</span></div></div></a>
     <a href="docs/ans-c01.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#127760;</div><div><div class="cert-path-title">ANS-C01</div><div class="cert-path-meta">Advanced Networking</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-red">Specialty</span></div></div></a>
-    <a href="docs/mls-c01.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#129302;</div><div><div class="cert-path-title">MLS-C01</div><div class="cert-path-meta">Machine Learning</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-red">Specialty</span></div></div></a>
-    <a href="docs/das-c01.html" class="cert-path" style="text-decoration:none;color:var(--text)"><div class="cert-path-icon">&#128202;</div><div><div class="cert-path-title">DAS-C01</div><div class="cert-path-meta">Data Analytics</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge badge-red">Specialty</span></div></div></a>
+    <a href="docs/mls-c01.html" class="cert-path" style="text-decoration:none;color:var(--text);opacity:0.7"><div class="cert-path-icon">&#129302;</div><div><div class="cert-path-title">MLS-C01</div><div class="cert-path-meta">Machine Learning - use MLA-C01 instead</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge" style="background:#6b1010;color:#ffb3b3;border:1px solid #a33">&#9940; Retired</span></div></div></a>
+    <a href="docs/das-c01.html" class="cert-path" style="text-decoration:none;color:var(--text);opacity:0.7"><div class="cert-path-icon">&#128202;</div><div><div class="cert-path-title">DAS-C01</div><div class="cert-path-meta">Data Analytics - use DEA-C01 instead</div><div class="flex-wrap" style="margin-top:0.4rem"><span class="badge" style="background:#6b1010;color:#ffb3b3;border:1px solid #a33">&#9940; Retired</span></div></div></a>
   </div>
 </div></section>
 
@@ -268,6 +275,35 @@ index_html = HEAD_ROOT("AWS Study Hub - Ultimate AWS Certification Study Platfor
     <div class="card"><div class="card-icon">&#129139;</div><h3>Full-Stack Learning</h3><p style="color:var(--text-muted);font-size:0.9rem">Linux basics &rarr; Networking &rarr; AWS Associate &rarr; Professional &rarr; Specialty.</p></div>
   </div>
 </div></section>
+
+<section class="section"><div class="container">
+  <div class="text-center mb-2"><h2>&#128240; Latest AWS News</h2><p style="color:var(--text-muted);max-width:600px;margin:0 auto">Fresh from the official AWS What's New feed, updated automatically every week.</p></div>
+  <div id="home-news" class="grid-3">
+    <div class="card"><p style="color:var(--text-muted)">Loading latest AWS news&hellip;</p></div>
+  </div>
+  <div class="text-center mt-2"><a href="docs/news.html" class="btn btn-outline">View All AWS News &rarr;</a></div>
+</div></section>
+<script>
+(function(){
+  var el = document.getElementById("home-news");
+  if(!el) return;
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;","\\"":"&quot;","'":"&#39;"}[c]; }); }
+  fetch("data/aws-news.json",{cache:"no-cache"})
+    .then(function(r){ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
+    .then(function(data){
+      var items=((data&&data.items)||[]).slice(0,3);
+      if(!items.length){ el.innerHTML='<div class="card"><p style="color:var(--text-muted)">No news items yet.</p></div>'; return; }
+      el.innerHTML=items.map(function(it){
+        return '<a href="'+esc(it.link||"#")+'" target="_blank" rel="noopener" class="card" style="text-decoration:none;color:var(--text);display:block">'+
+               '<div class="flex-wrap" style="margin-bottom:0.5rem"><span class="badge badge-orange">'+esc(it.date||"")+'</span></div>'+
+               '<h3 style="font-size:1rem;margin:0 0 0.4rem">'+esc(it.title||"")+'</h3>'+
+               '<p style="color:var(--text-muted);font-size:0.85rem;margin:0">'+esc((it.summary||"").slice(0,140))+'</p></a>';
+      }).join("");
+    })
+    .catch(function(){ el.innerHTML='<div class="card"><p style="color:var(--text-muted)">Could not load news. <a href="docs/news.html">Open the News page &rarr;</a></p></div>'; });
+})();
+</script>
 
 <section class="section" style="background:var(--bg-card);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
 <div class="container">
@@ -490,9 +526,29 @@ write(f"{DOCS}/saa-c03.html", saa)
 # ── DVA-C02, SOA-C02, SAP-C02, DOP-C02, SCS-C02, ANS-C01, MLS-C01, DAS-C01 ─
 # (concise but complete pages for each)
 
-def cert_page(code, level_cls, level_txt, icon, title, desc, badges, exam_args, toc, body_html, checklist_items, next_file, next_label):
-    return (HEAD(f"{code} - {title}", desc) + crumb(code) + phdr(level_cls, level_txt, icon, f"{code} - {title}", desc, badges)
+def cert_page(code, level_cls, level_txt, icon, title, desc, badges, exam_args, toc, body_html, checklist_items, next_file, next_label, extra_badge="", notice=""):
+    # extra_badge: optional status badge shown next to the level badge (e.g. RETIRED / Updating)
+    # notice: optional banner card (retirement / new-version notice) shown right after the page header
+    header = phdr(level_cls, level_txt, icon, f"{code} - {title}", desc, badges, extra_badge)
+    return (HEAD(f"{code} - {title}", desc) + crumb(code) + header + notice
             + wrap(toc, exam(*exam_args) + body_html + chk(checklist_items, next_file, next_label)) + FOOT)
+
+# ── Status badges & notice banners (keep build output in sync with published site) ──
+RETIRED_BADGE = lambda txt: f'<span class="badge" style="background:#6b1010;color:#ffb3b3;border:1px solid #a33">&#9940; RETIRED - {txt}</span>'
+UPDATING_BADGE = lambda txt: f'<span class="badge" style="background:#5a4a00;color:#ffe08a;border:1px solid #b89100">&#9888;&#65039; Updating - {txt}</span>'
+
+def retired_notice(name_html, replacement_html):
+    return ('\n<div class="container" style="padding-top:1.5rem"><div class="card" style="border:1px solid #a33;background:rgba(160,40,40,0.12)">\n'
+            '  <h3 style="margin-top:0">&#9940; This certification has been retired</h3>\n'
+            f'  <p style="color:var(--text-muted);margin-bottom:0.75rem">{name_html}</p>\n'
+            f'  <p style="margin:0"><strong>Replacement:</strong> {replacement_html}</p>\n'
+            '</div></div>')
+
+def updating_notice(new_code, body_html):
+    return ('<div class="container" style="padding-top:1.5rem"><div class="card" style="border:1px solid #b89100;background:rgba(180,145,0,0.12)">\n'
+            f'  <h3 style="margin-top:0">&#9888;&#65039; A new version is coming: {new_code}</h3>\n'
+            f'  <p style="color:var(--text-muted);margin:0">{body_html}</p>\n'
+            '</div></div>')
 
 # DVA-C02
 dva_body = """
@@ -551,7 +607,9 @@ dva_body = """
 </div></section>"""
 dva = cert_page("DVA-C02","badge-blue","Associate","&#128187;","AWS Certified Developer Associate","Develop, deploy, and debug cloud-based apps on AWS. Lambda, DynamoDB, API Gateway, CI/CD, X-Ray.",'<span class="badge badge-green">130 min | 65 questions</span><span class="badge badge-blue">Passing: 720/1000</span>',("Developing on AWS","https://explore.skillbuilder.aws/learn/course/external/view/elearning/764/developing-on-aws","https://d1.awsstatic.com/training-and-certification/docs-dev-associate/AWS-Certified-Developer-Associate_Exam-Guide.pdf","https://d1.awsstatic.com/training-and-certification/docs-dev-associate/AWS-Certified-Developer-Associate_Sample-Questions.pdf","130 minutes","65","720",[("Development with AWS Services","32"),("Security","26"),("Deployment","24"),("Troubleshooting &amp; Optimization","18")]),
 [("overview","Exam Overview"),("lambda","Lambda Deep Dive"),("dynamodb","DynamoDB"),("cicd","CI/CD"),("api-gw","API Gateway"),("xray","Monitoring &amp; X-Ray"),("checklist","Checklist")],
-dva_body,["Configure AWS CLI with profiles","Know SDK credential resolution order","Understand Lambda invocation types (sync, async, poll)","Know Lambda limits: 15 min, 10 GB memory, 250 MB package","Explain Lambda versions, aliases, canary deployments","Know DynamoDB primary keys, GSI vs LSI","Understand DynamoDB capacity modes (provisioned vs on-demand)","Explain DAX, Streams, TTL, Transactions","Know CodeCommit, CodeBuild, CodeDeploy, CodePipeline","Explain blue/green, canary, linear deployment strategies","Configure API Gateway REST vs HTTP API","Enable CORS in API Gateway","Use CloudWatch Logs, Metrics, and Alarms","Implement distributed tracing with X-Ray","Use SSM Parameter Store vs Secrets Manager","Understand SQS visibility timeout and DLQs","Know Kinesis Data Streams shards and partition keys","Use Elastic Beanstalk deployment policies","Understand Cognito User Pools vs Identity Pools","Know S3 pre-signed URLs for temporary access"],"soa-c02.html","SysOps Administrator (SOA-C02)")
+dva_body,["Configure AWS CLI with profiles","Know SDK credential resolution order","Understand Lambda invocation types (sync, async, poll)","Know Lambda limits: 15 min, 10 GB memory, 250 MB package","Explain Lambda versions, aliases, canary deployments","Know DynamoDB primary keys, GSI vs LSI","Understand DynamoDB capacity modes (provisioned vs on-demand)","Explain DAX, Streams, TTL, Transactions","Know CodeCommit, CodeBuild, CodeDeploy, CodePipeline","Explain blue/green, canary, linear deployment strategies","Configure API Gateway REST vs HTTP API","Enable CORS in API Gateway","Use CloudWatch Logs, Metrics, and Alarms","Implement distributed tracing with X-Ray","Use SSM Parameter Store vs Secrets Manager","Understand SQS visibility timeout and DLQs","Know Kinesis Data Streams shards and partition keys","Use Elastic Beanstalk deployment policies","Understand Cognito User Pools vs Identity Pools","Know S3 pre-signed URLs for temporary access"],"soa-c02.html","SysOps Administrator (SOA-C02)",
+extra_badge=UPDATING_BADGE("last day for DVA-C02: Nov 30, 2026"),
+notice=updating_notice("DVA-C03","AWS is updating this exam. Registration for <strong>DVA-C03</strong> opens <strong>Oct 27, 2026</strong>, with GA delivery on <strong>Dec 1, 2026</strong>. The last day to take the current <strong>DVA-C02</strong> is <strong>Nov 30, 2026</strong>. DVA-C03 adds AI-assisted development, AI security (Amazon Bedrock, Bedrock AgentCore, Amazon Q, Kiro), and container management (ECR/ECS/EKS/Fargate). This guide covers DVA-C02; content still broadly applies."))
 write(f"{DOCS}/dva-c02.html", dva)
 
 
@@ -663,7 +721,9 @@ sap_body = """
 <li><strong>Savings Plans</strong> - Compute (most flexible), EC2 Instance (most discount)</li></ul></section>"""
 sap = cert_page("SAP-C02","badge-purple","Professional","&#129504;","AWS Certified Solutions Architect Professional","Advanced multi-account architectures, migration planning, cost optimization, complex hybrid designs.",'<span class="badge badge-green">180 min | 75 questions</span><span class="badge badge-purple">Passing: 750/1000</span><span class="badge badge-red">Hardest AWS exam</span>',("AWS Advanced Architecting","https://explore.skillbuilder.aws/learn/course/external/view/elearning/1313/aws-certified-solutions-architect-professional-official-practice-question-set-sap-c02-english","https://d1.awsstatic.com/training-and-certification/docs-sa-pro/AWS-Certified-Solutions-Architect-Professional_Exam-Guide.pdf","https://d1.awsstatic.com/training-and-certification/docs-sa-pro/AWS-Certified-Solutions-Architect-Professional_Sample-Questions.pdf","180 minutes","75","750",[("Design for Org Complexity","26"),("Design for New Solutions","29"),("Migration Planning","15"),("Cost Control","20"),("Continuous Improvement","10")]),
 [("overview","Exam Overview"),("prereq","Prerequisites"),("orgs","Organizations & Multi-Account"),("advanced-net","Advanced Networking"),("migration","Migration (7 Rs)"),("cost","Cost Optimization"),("checklist","Checklist")],
-sap_body,["Explain AWS Organizations: OUs, SCPs, delegated admin, Control Tower","Know all identity federation patterns and when to use each","Understand RAM - what can be shared and how","Design Transit Gateway with route table isolation","Know Direct Connect: connection types, VIFs, DX Gateway","Design Route 53 hybrid DNS with Resolver Endpoints","Know the 7 Rs of migration and when to use each","Understand Application Migration Service (MGN) vs DMS vs DataSync","Design cost-optimized architectures with Savings Plans and Spot","Use Compute Optimizer for right-sizing","Design event-driven patterns: fan-out, CQRS, Saga, Strangler Fig","Understand Step Functions Standard vs Express workflows","Design multi-region active-active architectures","Understand Global Accelerator vs CloudFront use cases","Design disaster recovery: pilot light, warm standby, active-active","Know Kinesis Data Streams vs Firehose vs MSK","Understand AWS Service Catalog for governed self-service","Know Lake Formation for data lake governance","Design EKS/ECS advanced deployment patterns","Understand Outposts and Local Zones for edge scenarios"],"dop-c02.html","DevOps Engineer Professional (DOP-C02)")
+sap_body,["Explain AWS Organizations: OUs, SCPs, delegated admin, Control Tower","Know all identity federation patterns and when to use each","Understand RAM - what can be shared and how","Design Transit Gateway with route table isolation","Know Direct Connect: connection types, VIFs, DX Gateway","Design Route 53 hybrid DNS with Resolver Endpoints","Know the 7 Rs of migration and when to use each","Understand Application Migration Service (MGN) vs DMS vs DataSync","Design cost-optimized architectures with Savings Plans and Spot","Use Compute Optimizer for right-sizing","Design event-driven patterns: fan-out, CQRS, Saga, Strangler Fig","Understand Step Functions Standard vs Express workflows","Design multi-region active-active architectures","Understand Global Accelerator vs CloudFront use cases","Design disaster recovery: pilot light, warm standby, active-active","Know Kinesis Data Streams vs Firehose vs MSK","Understand AWS Service Catalog for governed self-service","Know Lake Formation for data lake governance","Design EKS/ECS advanced deployment patterns","Understand Outposts and Local Zones for edge scenarios"],"dop-c02.html","DevOps Engineer Professional (DOP-C02)",
+extra_badge=UPDATING_BADGE("last day for SAP-C02: Nov 16, 2026"),
+notice=updating_notice("SAP-C03","AWS is updating this exam. Registration for <strong>SAP-C03</strong> opens <strong>Oct 27, 2026</strong>, with GA delivery on <strong>Nov 17, 2026</strong>. The last day to take the current <strong>SAP-C02</strong> is <strong>Nov 16, 2026</strong>. SAP-C03 adds GenAI/agentic AI architectures (Amazon Bedrock, Bedrock AgentCore, RAG, Guardrails), resilience engineering (FIS, Resilience Hub, ARC), cloud-native patterns, DevSecOps, data lakehouse, and post-quantum cryptography. This guide covers SAP-C02; core architecture content still applies."))
 write(f"{DOCS}/sap-c02.html", sap)
 
 # DOP-C02
@@ -790,6 +850,21 @@ scs_body,["Know all threat detection services: GuardDuty, Inspector, Macie, Secu
 write(f"{DOCS}/scs-c02.html", scs)
 
 # ANS-C01, MLS-C01, DAS-C01 - concise specialty pages
+# Per-cert status extras (badge shown in header + notice banner after header)
+CERT_EXTRAS = {
+    "MLS-C01": {
+        "extra_badge": RETIRED_BADGE("Exam ended Mar 31, 2026"),
+        "notice": retired_notice(
+            "<strong>AWS Certified Machine Learning - Specialty (MLS-C01)</strong> was retired on <strong>March 31, 2026</strong>. Existing credentials remain valid for 3 years from the date earned, but the exam can no longer be taken.",
+            '<a href="mla-c01.html">AWS Certified Machine Learning Engineer - Associate (MLA-C01) &rarr;</a> &nbsp;|&nbsp; See also <a href="aip-c01.html">Generative AI Developer - Professional (AIP-C01)</a>'),
+    },
+    "DAS-C01": {
+        "extra_badge": RETIRED_BADGE("Exam ended Apr 8, 2024"),
+        "notice": retired_notice(
+            "<strong>AWS Certified Data Analytics - Specialty (DAS-C01)</strong> was retired on <strong>April 9, 2024</strong> (last exam date April 8, 2024). Existing credentials remain valid for 3 years from the date earned, but the exam can no longer be taken.",
+            '<a href="dea-c01.html">AWS Certified Data Engineer - Associate (DEA-C01) &rarr;</a>'),
+    },
+}
 for code,lcls,ltxt,icon,title,desc,badges,ea,body_html,chklist,nf,nl in [
   ("ANS-C01","badge-red","Specialty","&#127760;","AWS Certified Advanced Networking Specialty",
    "Complex AWS networking: VPC design, Direct Connect, Transit Gateway, Route 53, CloudFront.",
@@ -928,7 +1003,9 @@ Visualization     → QuickSight / Grafana dashboards</code></pre></section>""",
 ]:
   page = cert_page(code,lcls,ltxt,icon,title,desc,badges,ea,
     [("overview","Exam Overview")]+[(f"s{i}",h.split('>')[1].split('<')[0]) for i,h in enumerate(body_html.split('<section id="')[1:]) if '>' in h],
-    body_html,chklist,nf,nl)
+    body_html,chklist,nf,nl,
+    extra_badge=CERT_EXTRAS.get(code,{}).get("extra_badge",""),
+    notice=CERT_EXTRAS.get(code,{}).get("notice",""))
   write(f"{DOCS}/{code.lower().replace('-','')}.html", page)
 
 # Fix filenames (hyphenated)
@@ -1272,7 +1349,7 @@ log() { echo "[$(date +%FT%T)] $*"; }
 log "Bootstrap starting"
 
 # Exit codes
-if command -v docker >/dev/null 2>&1; then
+if command -v docker &gt;/dev/null 2&gt;&amp;1; then
   log "docker present"
 else
   log "docker missing"; exit 1
@@ -1282,7 +1359,7 @@ fi</code></pre>
 dnf update -y
 dnf install -y nginx
 systemctl enable --now nginx
-echo "<h1>Hello from $(hostname)</h1>" > /usr/share/nginx/html/index.html</code></pre>
+echo "&lt;h1&gt;Hello from $(hostname)&lt;/h1&gt;" &gt; /usr/share/nginx/html/index.html</code></pre>
 <div class="callout tip"><div class="callout-title">&#128161; Test conditions</div><p><code>-f</code> file exists, <code>-d</code> directory exists, <code>-z</code> string empty, <code>-n</code> string not empty, <code>-eq/-ne/-lt/-gt</code> numeric comparisons.</p></div></section>
 
 <section id="cron"><h2>Cron &amp; Scheduling</h2>

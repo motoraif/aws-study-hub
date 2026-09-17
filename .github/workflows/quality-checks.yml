@@ -1,0 +1,85 @@
+name: Quality Checks
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  # 1. Ensure build.py stays in sync with the committed HTML.
+  #    The site is deployed from the committed HTML (not rebuilt in CI),
+  #    so drift between build.py and the HTML must be caught here.
+  build-reproducibility:
+    name: Build is reproducible
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Regenerate site from build.py
+        run: python3 build.py
+
+      - name: Fail if generated HTML differs from committed HTML
+        run: |
+          if ! git diff --quiet -- '*.html'; then
+            echo "::error::Running build.py changed committed HTML. build.py is out of sync."
+            echo "The following files differ:"
+            git --no-pager diff --stat -- '*.html'
+            echo ""
+            echo "Fix: run 'python3 build.py' locally and commit the regenerated HTML,"
+            echo "or update build.py so it produces the committed output."
+            exit 1
+          fi
+          echo "build.py output matches committed HTML."
+
+  # 2. Validate HTML structure using the Nu HTML Checker (v.Nu).
+  html-validate:
+    name: HTML validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install html-validate
+        run: npm install -g html-validate
+
+      - name: Validate all HTML files
+        run: |
+          # Fail the build on validation errors; warnings are reported but non-blocking.
+          html-validate "index.html" "docs/**/*.html"
+
+  # 3. Check for broken links (internal + external).
+  link-check:
+    name: Link checker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run lychee link checker
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # --no-progress: quiet CI logs
+          # --accept 200,206,429: treat rate-limit (429) as OK to avoid flaky failures
+          #   from external sites that throttle CI runners
+          args: >-
+            --no-progress
+            --accept 200,206,429
+            --exclude-mail
+            "index.html"
+            "docs/**/*.html"
+            "*.md"
+          fail: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

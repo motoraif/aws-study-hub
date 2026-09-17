@@ -362,7 +362,7 @@ log() { echo "[$(date +%FT%T)] $*"; }
 log "Bootstrap starting"
 
 # Exit codes
-if command -v docker >/dev/null 2>&1; then
+if command -v docker &gt;/dev/null 2&gt;&amp;1; then
   log "docker present"
 else
   log "docker missing"; exit 1
@@ -372,7 +372,7 @@ fi</code></pre>
 dnf update -y
 dnf install -y nginx
 systemctl enable --now nginx
-echo "<h1>Hello from $(hostname)</h1>" > /usr/share/nginx/html/index.html</code></pre>
+echo "&lt;h1&gt;Hello from $(hostname)&lt;/h1&gt;" &gt; /usr/share/nginx/html/index.html</code></pre>
 <div class="callout tip"><div class="callout-title">&#128161; Test conditions</div><p><code>-f</code> file exists, <code>-d</code> directory exists, <code>-z</code> string empty, <code>-n</code> string not empty, <code>-eq/-ne/-lt/-gt</code> numeric comparisons.</p></div></section>
 
 <section id="cron"><h2>Cron &amp; Scheduling</h2>
