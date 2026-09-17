@@ -67,12 +67,11 @@ def phdr(bcls,btxt,icon,title,desc,badges="",extra_badge=""):
     return f'<div class="page-header"><div class="container"><span class="badge {bcls}">{btxt}</span>{eb}<h1 style="margin-top:0.75rem;">{icon} {title}</h1><p>{desc}</p><div class="flex-wrap mt-1">{badges}</div></div></div>'
 
 def quiz_cta(code):
-    """A 'test yourself' CTA bar linking to a deep-linked quiz + flashcards. Used on all cert pages."""
+    """A 'test yourself' CTA bar linking to a deep-linked quiz. Used on all cert pages."""
     return (f'<div class="container" style="padding-top:1.25rem"><div class="quiz-cta">'
             f'<span>&#129513; Ready to test yourself on {code}?</span>'
             f'<span class="quiz-cta-actions">'
             f'<a class="btn btn-primary" href="quiz.html?cert={code}">Quiz yourself &rarr;</a>'
-            f'<a class="btn btn-outline" href="flashcards.html">Flashcards</a>'
             f'</span></div></div>')
 
 def wrap(toc,body):
@@ -2113,23 +2112,6 @@ quiz_html = HEAD("Practice Quiz","Interactive AWS certification practice quiz wi
 <script src="../assets/js/quiz.js"></script>
 """ + FOOT
 write(f"{DOCS}/quiz.html", quiz_html)
-
-# ── flashcards.html ─────────────────────────────────────────
-flash_html = HEAD("Flashcards","Spaced-repetition AWS flashcards for services, ports, limits, and key concepts. Free and open source.") + """
-<div class="container" style="padding-top:2rem"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Flashcards</span></div></div>
-<div class="page-header"><div class="container">
-  <span class="badge badge-green">Interactive</span>
-  <h1 style="margin-top:0.75rem">&#127183; Flashcards</h1>
-  <p>Master AWS services, ports, limits, and key concepts with spaced repetition. Rate each card and the app schedules its next review using an SM-2 algorithm. Your progress is saved in your browser - no account needed.</p>
-  <div class="flex-wrap mt-1"><span class="badge badge-blue">Spaced Repetition</span><span class="badge badge-orange">Per-Cert Decks</span><span class="badge badge-green">Progress Saved Locally</span></div>
-</div></div>
-<div class="container" style="padding:2rem 0 4rem">
-  <div id="flash-app"></div>
-  <div class="callout info" style="margin-top:2rem"><div class="callout-title">&#128161; Want to add cards?</div><p>The flashcard bank is open source. Add cards by editing <code>data/flashcards.json</code> and opening a pull request. Each card needs a cert (or GENERAL), topic, front, and back.</p></div>
-</div>
-<script src="../assets/js/flashcards.js"></script>
-""" + FOOT
-write(f"{DOCS}/flashcards.html", flash_html)
 
 # ── SEO & PWA assets: sitemap.xml, robots.txt, manifest, OG image ──
 import datetime
