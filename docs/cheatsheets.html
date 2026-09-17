@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Confusing Pairs Cheat Sheet - AWS Study Hub</title>
+  <meta name="description" content="Side-by-side comparisons of commonly confused AWS services: SG vs NACL, SQS vs SNS vs EventBridge, EBS vs EFS vs FSx, ALB vs NLB, and more.">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="AWS Study Hub">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="AWS Study Hub">
+  <meta property="og:title" content="Confusing Pairs Cheat Sheet - AWS Study Hub">
+  <meta property="og:description" content="Side-by-side comparisons of commonly confused AWS services: SG vs NACL, SQS vs SNS vs EventBridge, EBS vs EFS vs FSx, ALB vs NLB, and more.">
+  <meta property="og:image" content="https://toraif.com/aws-study-hub/assets/og-image.svg">
+  <meta property="og:url" content="https://toraif.com/aws-study-hub/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Confusing Pairs Cheat Sheet - AWS Study Hub">
+  <meta name="twitter:description" content="Side-by-side comparisons of commonly confused AWS services: SG vs NACL, SQS vs SNS vs EventBridge, EBS vs EFS vs FSx, ALB vs NLB, and more.">
+  <meta name="twitter:image" content="https://toraif.com/aws-study-hub/assets/og-image.svg">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AWS Study Hub","url":"https://toraif.com/aws-study-hub/","description":"Free, open-source study platform for every AWS certification.","inLanguage":"en"}</script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/components.js"></script>
+</head><body>
+<div class="container" style="padding-top:2rem"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Cheat Sheets</span></div></div>
+<div class="page-header"><div class="container">
+  <span class="badge badge-teal">Exam Cheat Sheet</span>
+  <h1 style="margin-top:0.75rem">&#128221; Confusing Pairs Cheat Sheet</h1>
+  <p>The AWS service comparisons that trip people up on exams, side by side. Skim these before test day - knowing the difference between look-alike services is worth easy points.</p>
+  <div class="flex-wrap mt-1"><span class="badge badge-blue">Quick Reference</span><span class="badge badge-orange">All Certs</span></div>
+</div></div>
+<div class="container" style="padding-bottom:4rem;"><div class="doc-layout"><aside class="sidebar"><h4>Contents</h4><a href="#compute">Compute</a>
+<a href="#storage">Storage</a>
+<a href="#databases">Databases</a>
+<a href="#networking">Networking</a>
+<a href="#integration">Messaging & Integration</a>
+<a href="#security">Security & Identity</a>
+<a href="#deployment">Deployment & DR</a>
+<a href="#analytics">Analytics & AI</a>
+</aside><main>
+<section id="compute"><h2>&#128187; Compute</h2>
+<h3>ALB vs NLB vs GLB</h3>
+<div class="table-wrap"><table><thead><tr><th>&nbsp;</th><th>ALB</th><th>NLB</th><th>GLB</th></tr></thead><tbody>
+  <tr><td>OSI Layer</td><td>7 (HTTP/HTTPS)</td><td>4 (TCP/UDP/TLS)</td><td>3 (IP)</td></tr>
+  <tr><td>Routing</td><td>Path, host, header, query</td><td>Flow hash (fast)</td><td>To virtual appliances</td></tr>
+  <tr><td>Static IP</td><td>No (DNS name)</td><td>Yes (per AZ / EIP)</td><td>No</td></tr>
+  <tr><td>Best for</td><td>Web apps, microservices</td><td>Low latency, gaming, IoT</td><td>Firewalls, IDS/IPS inline</td></tr>
+</tbody></table></div>
+<h3>ECS vs EKS vs Fargate</h3>
+<div class="table-wrap"><table><thead><tr><th>&nbsp;</th><th>ECS</th><th>EKS</th><th>Fargate</th></tr></thead><tbody>
+  <tr><td>What</td><td>AWS-native container orchestrator</td><td>Managed Kubernetes</td><td>Serverless compute for containers</td></tr>
+  <tr><td>Control plane</td><td>Managed by AWS (free)</td><td>Managed K8s (hourly fee)</td><td>N/A - launch type</td></tr>
+  <tr><td>Use when</td><td>Simple, AWS-only</td><td>K8s portability/ecosystem</td><td>No servers to manage (works with ECS/EKS)</td></tr>
+</tbody></table></div>
+<h3>Lambda vs Fargate vs EC2</h3>
+<div class="table-wrap"><table><thead><tr><th>&nbsp;</th><th>Lambda</th><th>Fargate</th><th>EC2</th></tr></thead><tbody>
+  <tr><td>Unit</td><td>Function (event)</td><td>Container (task)</td><td>Virtual machine</td></tr>
+  <tr><td>Max run time</td><td>15 min</td><td>No hard limit</td><td>No limit</td></tr>
+  <tr><td>Scaling</td><td>Automatic, to zero</td><td>Task-based</td><td>Auto Scaling groups</td></tr>
+  <tr><td>Use when</td><td>Event-driven, spiky</td><td>Long-running containers, no server mgmt</td><td>Full control / legacy</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="storage"><h2>&#128190; Storage</h2>
+<h3>EBS vs EFS vs FSx vs S3</h3>
+<div class="table-wrap"><table><thead><tr><th>&nbsp;</th><th>EBS</th><th>EFS</th><th>FSx</th><th>S3</th></tr></thead><tbody>
+  <tr><td>Type</td><td>Block</td><td>File (NFS)</td><td>File (Windows/Lustre)</td><td>Object</td></tr>
+  <tr><td>Attach</td><td>One instance (or multi-attach io2)</td><td>Many instances, multi-AZ</td><td>Many instances</td><td>Over HTTP API</td></tr>
+  <tr><td>Scope</td><td>Single AZ</td><td>Regional (multi-AZ)</td><td>Varies</td><td>Regional, 11 9s durability</td></tr>
+  <tr><td>Use for</td><td>Boot volumes, databases</td><td>Shared Linux file storage</td><td>Windows shares, HPC</td><td>Static assets, data lake, backup</td></tr>
+</tbody></table></div>
+<h3>S3 Standard-IA vs One Zone-IA vs Glacier</h3>
+<div class="table-wrap"><table><thead><tr><th>&nbsp;</th><th>Standard-IA</th><th>One Zone-IA</th><th>Glacier Flexible</th></tr></thead><tbody>
+  <tr><td>Retrieval</td><td>Milliseconds</td><td>Milliseconds</td><td>Minutes to hours</td></tr>
+  <tr><td>AZs</td><td>Multi-AZ</td><td>Single AZ</td><td>Multi-AZ</td></tr>
+  <tr><td>Use for</td><td>Infrequent, needs durability</td><td>Infrequent, reproducible data</td><td>Archive</td></tr>
+</tbody></table></div>
+<div class="callout tip"><div class="callout-title">&#128161; Instance store vs EBS</div><p>Instance store is ephemeral (data lost on stop/terminate); EBS persists independently of the instance lifecycle.</p></div>
+</section>
+
+<section id="databases"><h2>&#128202; Databases</h2>
+<h3>RDS vs Aurora vs DynamoDB vs Redshift</h3>
+<div class="table-wrap"><table><thead><tr><th>&nbsp;</th><th>RDS</th><th>Aurora</th><th>DynamoDB</th><th>Redshift</th></tr></thead><tbody>
+  <tr><td>Model</td><td>Relational</td><td>Relational (MySQL/PG compatible)</td><td>NoSQL key-value/document</td><td>Columnar data warehouse</td></tr>
+  <tr><td>Scale</td><td>Vertical + read replicas</td><td>Auto-scaling storage, 15 replicas</td><td>Horizontal, virtually unlimited</td><td>MPP cluster / serverless</td></tr>
+  <tr><td>Use for</td><td>Traditional apps</td><td>High-performance relational</td><td>Massive scale, low latency</td><td>OLAP / analytics</td></tr>
+</tbody></table></div>
+<h3>RDS Multi-AZ vs Read Replicas</h3>
+<div class="grid-2">
+  <div class="card"><h3>Multi-AZ</h3><ul><li>Purpose: high availability / failover</li><li>Synchronous standby, not readable</li><li>Automatic failover on outage</li></ul></div>
+  <div class="card"><h3>Read Replicas</h3><ul><li>Purpose: scale read traffic</li><li>Asynchronous, readable</li><li>Can be promoted to standalone</li></ul></div>
+</div>
+<h3>ElastiCache Redis vs Memcached</h3>
+<div class="table-wrap"><table><thead><tr><th>&nbsp;</th><th>Redis</th><th>Memcached</th></tr></thead><tbody>
+  <tr><td>Data structures</td><td>Rich (lists, sets, sorted sets)</td><td>Simple key-value</td></tr>
+  <tr><td>Persistence / replication</td><td>Yes (backups, replicas, Multi-AZ)</td><td>No</td></tr>
+  <tr><td>Use for</td><td>Leaderboards, pub/sub, HA cache</td><td>Simple, multi-threaded caching</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="networking"><h2>&#127760; Networking</h2>
+<h3>Security Group vs Network ACL</h3>
+<div class="table-wrap"><table><thead><tr><th>&nbsp;</th><th>Security Group</th><th>Network ACL</th></tr></thead><tbody>
+  <tr><td>Level</td><td>Instance / ENI</td><td>Subnet</td></tr>
+  <tr><td>State</td><td>Stateful (return auto-allowed)</td><td>Stateless (allow both directions)</td></tr>
+  <tr><td>Rules</td><td>Allow only</td><td>Allow and Deny</td></tr>
+  <tr><td>Evaluation</td><td>All rules</td><td>In order, lowest number first</td></tr>
+</tbody></table></div>
+<div class="callout warn"><div class="callout-title">&#9888; Ephemeral ports</div><p>Because NACLs are stateless, you must allow the ephemeral port range (1024-65535) for return traffic. Security Groups handle this automatically.</p></div>
+<h3>VPC Peering vs Transit Gateway vs PrivateLink</h3>
+<div class="table-wrap"><table><thead><tr><th>&nbsp;</th><th>VPC Peering</th><th>Transit Gateway</th><th>PrivateLink</th></tr></thead><tbody>
+  <tr><td>Topology</td><td>1:1</td><td>Hub-and-spoke (many)</td><td>Expose a single service</td></tr>
+  <tr><td>Transitive</td><td>No</td><td>Yes</td><td>N/A</td></tr>
+  <tr><td>Overlapping CIDRs</td><td>Not allowed</td><td>Not allowed</td><td>Works despite overlap</td></tr>
+</tbody></table></div>
+<h3>NAT Gateway vs Internet Gateway vs Egress-Only IGW</h3>
+<div class="table-wrap"><table><thead><tr><th>&nbsp;</th><th>NAT Gateway</th><th>Internet Gateway</th><th>Egress-Only IGW</th></tr></thead><tbody>
+  <tr><td>Direction</td><td>Outbound only (IPv4)</td><td>Inbound + outbound</td><td>Outbound only (IPv6)</td></tr>
+  <tr><td>Subnet</td><td>Private -> internet</td><td>Public subnet</td><td>Private IPv6 -> internet</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="integration"><h2>&#128233; Messaging &amp; Integration</h2>
+<h3>SQS vs SNS vs EventBridge vs Kinesis</h3>
+<div class="table-wrap"><table><thead><tr><th>&nbsp;</th><th>SQS</th><th>SNS</th><th>EventBridge</th><th>Kinesis</th></tr></thead><tbody>
+  <tr><td>Pattern</td><td>Queue (pull)</td><td>Pub/sub (push)</td><td>Event bus + routing rules</td><td>Streaming</td></tr>
+  <tr><td>Consumers</td><td>One (per message)</td><td>Many subscribers</td><td>Many targets, filtered</td><td>Many, can replay</td></tr>
+  <tr><td>Ordering</td><td>FIFO option</td><td>FIFO option</td><td>No</td><td>Per-shard order + replay</td></tr>
+  <tr><td>Use for</td><td>Decouple, buffer work</td><td>Fan-out notifications</td><td>SaaS/AWS event routing</td><td>Real-time analytics, big streams</td></tr>
+</tbody></table></div>
+<h3>Step Functions: Standard vs Express</h3>
+<div class="table-wrap"><table><thead><tr><th>&nbsp;</th><th>Standard</th><th>Express</th></tr></thead><tbody>
+  <tr><td>Duration</td><td>Up to 1 year</td><td>Up to 5 minutes</td></tr>
+  <tr><td>Rate</td><td>Lower throughput</td><td>Very high throughput</td></tr>
+  <tr><td>Use for</td><td>Long-running, auditable workflows</td><td>High-volume, short event processing</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="security"><h2>&#128274; Security &amp; Identity</h2>
+<h3>SCP vs IAM Policy vs Permission Boundary</h3>
+<div class="table-wrap"><table><thead><tr><th>&nbsp;</th><th>SCP</th><th>IAM Policy</th><th>Permission Boundary</th></tr></thead><tbody>
+  <tr><td>Scope</td><td>Whole account/OU (Org)</td><td>User/role/group</td><td>Max perms for a principal</td></tr>
+  <tr><td>Grants access?</td><td>No - only limits</td><td>Yes</td><td>No - only caps</td></tr>
+  <tr><td>Use for</td><td>Org-wide guardrails</td><td>Day-to-day permissions</td><td>Delegated admin limits</td></tr>
+</tbody></table></div>
+<h3>Cognito User Pool vs Identity Pool</h3>
+<div class="grid-2">
+  <div class="card"><h3>User Pool</h3><ul><li>User directory &amp; sign-in</li><li>Issues JWT tokens</li><li>Answers "who is this user?"</li></ul></div>
+  <div class="card"><h3>Identity Pool</h3><ul><li>Exchanges identity for temporary AWS credentials</li><li>Maps to IAM roles</li><li>Answers "what AWS resources can they use?"</li></ul></div>
+</div>
+<h3>Secrets Manager vs Parameter Store</h3>
+<div class="table-wrap"><table><thead><tr><th>&nbsp;</th><th>Secrets Manager</th><th>Parameter Store</th></tr></thead><tbody>
+  <tr><td>Rotation</td><td>Built-in automatic</td><td>Manual (Lambda + EventBridge)</td></tr>
+  <tr><td>Cost</td><td>Per secret/month</td><td>Standard tier free</td></tr>
+  <tr><td>Use for</td><td>DB creds, rotating secrets</td><td>Config values, non-rotating secrets</td></tr>
+</tbody></table></div>
+<h3>KMS vs CloudHSM</h3>
+<div class="table-wrap"><table><thead><tr><th>&nbsp;</th><th>KMS</th><th>CloudHSM</th></tr></thead><tbody>
+  <tr><td>Tenancy</td><td>Multi-tenant managed</td><td>Single-tenant dedicated HSM</td></tr>
+  <tr><td>Control</td><td>AWS-managed FIPS 140-2</td><td>You fully control keys</td></tr>
+  <tr><td>Use for</td><td>Most encryption needs</td><td>Strict compliance, custom key store</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="deployment"><h2>&#128640; Deployment &amp; DR</h2>
+<h3>Deployment strategies</h3>
+<div class="table-wrap"><table><thead><tr><th>Strategy</th><th>Behavior</th><th>Downtime / rollback</th></tr></thead><tbody>
+  <tr><td>All-at-once</td><td>Replace everything at once</td><td>Downtime; fast but risky</td></tr>
+  <tr><td>Rolling</td><td>Replace in batches</td><td>Reduced capacity during deploy</td></tr>
+  <tr><td>Blue/Green</td><td>New env beside old, then switch</td><td>Zero downtime, instant rollback</td></tr>
+  <tr><td>Canary</td><td>Small % first, then rest</td><td>Limited blast radius</td></tr>
+</tbody></table></div>
+<h3>DR strategies (RTO/RPO vs cost)</h3>
+<div class="table-wrap"><table><thead><tr><th>Strategy</th><th>RTO/RPO</th><th>Cost</th></tr></thead><tbody>
+  <tr><td>Backup &amp; Restore</td><td>Hours</td><td>Lowest</td></tr>
+  <tr><td>Pilot Light</td><td>Tens of minutes</td><td>Low</td></tr>
+  <tr><td>Warm Standby</td><td>Minutes</td><td>Medium</td></tr>
+  <tr><td>Multi-Region Active-Active</td><td>Near zero</td><td>Highest</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="analytics"><h2>&#128200; Analytics &amp; AI</h2>
+<h3>Athena vs Redshift vs EMR</h3>
+<div class="table-wrap"><table><thead><tr><th>&nbsp;</th><th>Athena</th><th>Redshift</th><th>EMR</th></tr></thead><tbody>
+  <tr><td>What</td><td>Serverless SQL on S3</td><td>Managed data warehouse</td><td>Managed Hadoop/Spark clusters</td></tr>
+  <tr><td>Pay for</td><td>Data scanned per query</td><td>Cluster / serverless capacity</td><td>Cluster runtime</td></tr>
+  <tr><td>Use for</td><td>Ad-hoc queries, occasional</td><td>Frequent BI on structured data</td><td>Big data processing, custom frameworks</td></tr>
+</tbody></table></div>
+<h3>Kinesis Data Streams vs Data Firehose</h3>
+<div class="table-wrap"><table><thead><tr><th>&nbsp;</th><th>Data Streams</th><th>Data Firehose</th></tr></thead><tbody>
+  <tr><td>Management</td><td>You manage shards/consumers</td><td>Fully managed delivery</td></tr>
+  <tr><td>Latency</td><td>Real-time (sub-second)</td><td>Near real-time (buffered)</td></tr>
+  <tr><td>Use for</td><td>Custom real-time processing, replay</td><td>Load to S3/Redshift/OpenSearch</td></tr>
+</tbody></table></div>
+<h3>Fine-tuning vs RAG vs Prompt Engineering</h3>
+<div class="table-wrap"><table><thead><tr><th>&nbsp;</th><th>Prompt Engineering</th><th>RAG</th><th>Fine-tuning</th></tr></thead><tbody>
+  <tr><td>Changes model?</td><td>No</td><td>No (adds context)</td><td>Yes (weights)</td></tr>
+  <tr><td>Uses private data</td><td>In the prompt</td><td>Retrieved at query time</td><td>Baked into the model</td></tr>
+  <tr><td>Effort / cost</td><td>Lowest</td><td>Medium</td><td>Highest</td></tr>
+</tbody></table></div>
+<div class="callout tip"><div class="callout-title">&#128221; Contribute</div><p>Spot a missing pair? Add it to the cheat sheet source in <code>build.py</code> and open a pull request.</p></div>
+</section>
+</main></div></div><script src="../assets/js/main.js"></script></body></html>
