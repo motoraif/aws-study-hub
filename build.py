@@ -5,13 +5,36 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 DOCS = f"{BASE}/docs"
 os.makedirs(DOCS, exist_ok=True)
 
+# Canonical site URL (custom domain). Used for SEO tags and sitemap.
+SITE_URL = "https://toraif.com/aws-study-hub"
+OG_IMAGE = f"{SITE_URL}/assets/og-image.svg"
+
+# Shared social / SEO meta tags injected into every page's <head>.
+def seo_tags(title, desc, root):
+    full_title = f"{title} - AWS Study Hub"
+    return f"""  <meta name="robots" content="index,follow">
+  <meta name="author" content="AWS Study Hub">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="AWS Study Hub">
+  <meta property="og:title" content="{full_title}">
+  <meta property="og:description" content="{desc}">
+  <meta property="og:image" content="{OG_IMAGE}">
+  <meta property="og:url" content="{SITE_URL}/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{full_title}">
+  <meta name="twitter:description" content="{desc}">
+  <meta name="twitter:image" content="{OG_IMAGE}">
+  <script type="application/ld+json">{{"@context":"https://schema.org","@type":"WebSite","name":"AWS Study Hub","url":"{SITE_URL}/","description":"Free, open-source study platform for every AWS certification.","inLanguage":"en"}}</script>"""
+
 HEAD = lambda t,d: f"""<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>{t} - AWS Study Hub</title>
   <meta name="description" content="{d}">
+{seo_tags(t, d, "../")}
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
+  <link rel="manifest" href="../manifest.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/style.css">
@@ -24,7 +47,9 @@ HEAD_ROOT = lambda t,d: f"""<!DOCTYPE html>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>{t} - AWS Study Hub</title>
   <meta name="description" content="{d}">
+{seo_tags(t, d, "")}
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
+  <link rel="manifest" href="manifest.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
@@ -2078,5 +2103,65 @@ quiz_html = HEAD("Practice Quiz","Interactive AWS certification practice quiz wi
 <script src="../assets/js/quiz.js"></script>
 """ + FOOT
 write(f"{DOCS}/quiz.html", quiz_html)
+
+# ── SEO & PWA assets: sitemap.xml, robots.txt, manifest, OG image ──
+import datetime
+today = datetime.date.today().isoformat()
+
+# Discover all generated pages for the sitemap (root index + docs/*.html)
+sitemap_pages = ["index.html"] + sorted(
+    f"docs/{n}" for n in os.listdir(DOCS) if n.endswith(".html")
+)
+# Priority hints: homepage highest, foundations/quiz high, rest default
+def _priority(path):
+    if path == "index.html": return "1.0"
+    if "foundations" in path or path.endswith("quiz.html"): return "0.9"
+    if path.endswith(("resources.html", "labs.html")): return "0.8"
+    return "0.7"
+
+urls = "".join(
+    f'  <url><loc>{SITE_URL}/{p}</loc><lastmod>{today}</lastmod>'
+    f'<changefreq>weekly</changefreq><priority>{_priority(p)}</priority></url>\n'
+    for p in sitemap_pages
+)
+sitemap = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+           f"{urls}</urlset>\n")
+write(f"{BASE}/sitemap.xml", sitemap)
+
+robots = ("User-agent: *\n"
+          "Allow: /\n\n"
+          f"Sitemap: {SITE_URL}/sitemap.xml\n")
+write(f"{BASE}/robots.txt", robots)
+
+manifest = ('{\n'
+            '  "name": "AWS Study Hub",\n'
+            '  "short_name": "AWS Study Hub",\n'
+            '  "description": "Free, open-source study platform for every AWS certification.",\n'
+            '  "start_url": "./index.html",\n'
+            '  "display": "standalone",\n'
+            '  "background_color": "#0f1117",\n'
+            '  "theme_color": "#ff9900",\n'
+            '  "icons": [\n'
+            '    { "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }\n'
+            '  ]\n'
+            '}\n')
+write(f"{BASE}/manifest.webmanifest", manifest)
+
+# Simple SVG app icon and OG image (no binary assets; git-friendly)
+icon_svg = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">'
+            '<rect width="512" height="512" rx="96" fill="#0f1117"/>'
+            '<text x="256" y="340" font-size="300" text-anchor="middle" font-family="sans-serif">&#x2601;</text>'
+            '</svg>\n')
+write(f"{BASE}/assets/icon.svg", icon_svg)
+
+og_svg = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">'
+          '<rect width="1200" height="630" fill="#0f1117"/>'
+          '<text x="80" y="300" font-size="92" font-weight="800" fill="#ffffff" font-family="sans-serif">AWS Study Hub</text>'
+          '<text x="80" y="380" font-size="40" fill="#ff9900" font-family="sans-serif">Free study platform for every AWS certification</text>'
+          '<text x="80" y="470" font-size="34" fill="#9aa4b2" font-family="sans-serif">Foundations &#183; 12 certs &#183; labs &#183; interactive quiz</text>'
+          '<text x="1040" y="150" font-size="120" font-family="sans-serif">&#x2601;</text>'
+          '</svg>\n')
+write(f"{BASE}/assets/og-image.svg", og_svg)
 
 print("\nAll pages generated successfully!")
