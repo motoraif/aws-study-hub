@@ -357,3 +357,30 @@ footer { background: var(--bg-card); border-top: 1px solid var(--border); paddin
 }
 .quiz-cta-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
 .quiz-cta .btn { font-size: 0.85rem; padding: 0.45rem 1rem; }
+
+/* ── Client-side search ───────────────────────────────────── */
+.search-overlay {
+  position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.55);
+  display: flex; align-items: flex-start; justify-content: center; padding: 10vh 1rem 1rem;
+}
+.search-overlay[hidden] { display: none; }
+.search-box {
+  width: 100%; max-width: 640px; background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 14px; box-shadow: var(--shadow); overflow: hidden;
+}
+#search-input {
+  width: 100%; border: none; border-bottom: 1px solid var(--border); background: transparent;
+  color: var(--text); font-size: 1.1rem; padding: 1.1rem 1.25rem; outline: none;
+}
+.search-results { max-height: 55vh; overflow-y: auto; }
+.search-result { display: block; padding: 0.8rem 1.25rem; border-bottom: 1px solid var(--border); text-decoration: none; color: var(--text); }
+.search-result:last-child { border-bottom: none; }
+.search-result:hover, .search-result.active { background: var(--bg-hover); text-decoration: none; }
+.search-result.active { box-shadow: inset 3px 0 0 var(--aws-orange); }
+.search-result-title { font-weight: 700; }
+.search-result-desc { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.15rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.search-result-sub { color: var(--aws-orange); font-size: 0.78rem; margin-top: 0.2rem; }
+.search-empty { padding: 1.5rem 1.25rem; color: var(--text-muted); text-align: center; }
+.search-hint { padding: 0.6rem 1.25rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.75rem; }
+.search-hint kbd { background: var(--bg-hover); border: 1px solid var(--border); border-radius: 4px; padding: 0.05em 0.4em; font-family: inherit; margin: 0 0.1em; }
+@media (max-width: 600px) { .search-overlay { padding-top: 5vh; } }
