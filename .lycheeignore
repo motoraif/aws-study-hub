@@ -1,0 +1,8 @@
+# Domains that commonly block or rate-limit CI runners (cause flaky link-check failures).
+# These are valid links; they just reject automated HEAD/GET requests from GitHub Actions IPs.
+https://www.udemy.com.*
+https://explore.skillbuilder.aws.*
+https://tutorialsdojo.com.*
+https://learn.cantrill.io.*
+# LinkedIn and social often 999/403 to bots
+https://www.linkedin.com.*
