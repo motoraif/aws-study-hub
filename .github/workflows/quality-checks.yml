@@ -76,7 +76,6 @@ jobs:
           args: >-
             --no-progress
             --accept 200,206,429
-            --exclude-mail
             "index.html"
             "docs/**/*.html"
             "*.md"
