@@ -74,6 +74,21 @@ def quiz_cta(code):
             f'<a class="btn btn-primary" href="quiz.html?cert={code}">Quiz yourself &rarr;</a>'
             f'</span></div></div>')
 
+def newcert_page(code, title, desc, level_cls, level_txt, icon, badges, notice_html, toc, body_html, extra_badge="", meta_desc=None):
+    """Build a 'newer cert' page (AIF/DEA/MLA/AIP) that has a custom notice card and
+    preserved body sections. `desc` is the visible header paragraph; `meta_desc`
+    (defaults to desc) is the SEO/meta description."""
+    header = phdr(level_cls, level_txt, icon, f"{code} - {title}", desc, badges, extra_badge)
+    return (HEAD(f"{code} - {title}", meta_desc or desc) + crumb(code) + header + notice_html
+            + quiz_cta(code) + wrap(toc, body_html) + FOOT)
+
+NEW_CERT_BADGE = '<span class="badge badge-green">&#127381; New Certification</span>'
+def new_notice(title_html, body_html):
+    return ('\n<div class="container" style="padding-top:1.5rem"><div class="card" style="border:1px solid #2e7d32;background:rgba(46,125,50,0.12)">\n'
+            f'  <h3 style="margin-top:0">{title_html}</h3>\n'
+            f'  <p style="color:var(--text-muted);margin:0">{body_html}</p>\n'
+            '</div></div>')
+
 def wrap(toc,body):
     links="".join(f'<a href="#{a}">{b}</a>\n' for a,b in toc)
     return f'<div class="container" style="padding-bottom:4rem;"><div class="doc-layout"><aside class="sidebar"><h4>Contents</h4>{links}</aside><main>{body}</main></div></div>'
@@ -1050,6 +1065,416 @@ for code in ["ANS-C01","MLS-C01","DAS-C01"]:
     if os.path.exists(src): shutil.move(src,dst)
 
 print("All cert pages done!")
+
+# ── Newer cert pages (AIF-C01, DEA-C01, MLA-C01, AIP-C01) ────
+# These use newcert_page() to get SEO tags, the quiz CTA, and reproducibility.
+_new_toc = [("overview","Exam Overview"),("who","Who It's For"),("domains","Exam Domains"),
+            ("topics","Key Topics"),("services","Key AWS Services"),("checklist","Study Checklist")]
+
+# AIF-C01
+write(f"{DOCS}/aif-c01.html", newcert_page(
+  "AIF-C01","AWS Certified AI Practitioner",
+  "Validate a foundational understanding of AI, machine learning, and generative AI concepts and their practical business applications on AWS. No coding required.",
+  "badge-orange","Foundational","&#129504;",
+  '<span class="badge badge-green">90 min | 65 questions</span><span class="badge badge-orange">Passing: 700/1000</span><span class="badge badge-teal">No prerequisites</span>',
+  new_notice("&#127381; Newly launched certification",
+    'The <strong>AWS Certified AI Practitioner (AIF-C01)</strong> is a foundational-level credential aimed at anyone who wants to demonstrate an overall understanding of AI/ML and generative AI on AWS - including non-technical roles. It pairs well with Cloud Practitioner (CLF-C02) as an entry point into the AI track.'),
+  _new_toc,
+  """<section id="overview"><h2>Exam Overview</h2>
+<div class="grid-2">
+  <div class="card"><h3>Exam Details</h3><ul>
+    <li><strong>Code:</strong> AIF-C01</li>
+    <li><strong>Level:</strong> Foundational</li>
+    <li><strong>Duration:</strong> 90 minutes</li>
+    <li><strong>Questions:</strong> 65</li>
+    <li><strong>Passing Score:</strong> 700/1000</li>
+    <li><strong>Cost:</strong> ~$100 USD</li>
+    <li><strong>Validity:</strong> 3 years</li>
+  </ul></div>
+  <div class="card"><h3>&#127891; Official Resources</h3><ul>
+    <li><a href="https://aws.amazon.com/certification/certified-ai-practitioner/" target="_blank" rel="noopener">Official Certification Page</a></li>
+    <li><a href="https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/ai-practitioner-01.html" target="_blank" rel="noopener">Official Exam Guide</a></li>
+    <li><a href="https://explore.skillbuilder.aws/" target="_blank" rel="noopener">AWS Skill Builder - AI Practitioner path</a></li>
+    <li><a href="https://aws.amazon.com/certification/" target="_blank" rel="noopener">Schedule Your Exam</a></li>
+    <li><a href="https://tutorialsdojo.com/" target="_blank" rel="noopener">Tutorials Dojo Practice Exams</a></li>
+  </ul></div>
+</div></section>
+
+<section id="who"><h2>&#128100; Who It's For</h2>
+<div class="card"><p style="color:var(--text-muted)">Designed for individuals who use or interact with AI/ML solutions on AWS but do not necessarily build them. Recommended (not required): up to 6 months of exposure to AI/ML technologies on AWS. Ideal for business analysts, product managers, sales/marketing, IT support, and anyone starting the AWS AI learning path.</p></div>
+</section>
+
+<section id="domains"><h2>&#128202; Exam Domains</h2>
+<div class="table-wrap"><table><thead><tr><th>Domain</th><th>Weight</th></tr></thead><tbody>
+  <tr><td>1. Fundamentals of AI and ML</td><td>20%</td></tr>
+  <tr><td>2. Fundamentals of Generative AI</td><td>24%</td></tr>
+  <tr><td>3. Applications of Foundation Models</td><td>28%</td></tr>
+  <tr><td>4. Guidelines for Responsible AI</td><td>14%</td></tr>
+  <tr><td>5. Security, Compliance, and Governance for AI Solutions</td><td>14%</td></tr>
+</tbody></table></div>
+<p style="color:var(--text-muted);font-size:0.85rem">Domain weights reflect the AIF-C01 exam guide. Always confirm against the latest official guide.</p>
+</section>
+
+<section id="topics"><h2>&#128218; Key Topics</h2>
+<div class="grid-2">
+  <div class="card"><h3>AI/ML Fundamentals</h3><ul>
+    <li>AI vs. ML vs. deep learning vs. generative AI</li>
+    <li>Supervised, unsupervised, and reinforcement learning</li>
+    <li>Training data, features, labels, inference</li>
+    <li>Common use cases: classification, regression, forecasting, NLP, computer vision</li>
+    <li>Model evaluation basics (accuracy, precision, recall)</li>
+  </ul></div>
+  <div class="card"><h3>Generative AI &amp; Foundation Models</h3><ul>
+    <li>Foundation models (FMs) and large language models (LLMs)</li>
+    <li>Tokens, embeddings, context windows, temperature</li>
+    <li>Prompt engineering basics; zero/few-shot prompting</li>
+    <li>Retrieval-Augmented Generation (RAG)</li>
+    <li>Fine-tuning vs. prompt engineering vs. RAG trade-offs</li>
+  </ul></div>
+  <div class="card"><h3>Responsible AI</h3><ul>
+    <li>Bias, fairness, transparency, explainability</li>
+    <li>Hallucinations and how to mitigate them</li>
+    <li>Human-in-the-loop and guardrails</li>
+    <li>Amazon Bedrock Guardrails; SageMaker Clarify</li>
+  </ul></div>
+  <div class="card"><h3>Security &amp; Governance</h3><ul>
+    <li>Data privacy: inputs/outputs not used to train FMs</li>
+    <li>IAM for AI services; least privilege</li>
+    <li>Encryption, VPC endpoints/PrivateLink for AI workloads</li>
+    <li>Governance, compliance, and audit considerations</li>
+  </ul></div>
+</div></section>
+
+<section id="services"><h2>&#9729;&#65039; Key AWS Services to Know</h2>
+<div class="table-wrap"><table><thead><tr><th>Service</th><th>What to know</th></tr></thead><tbody>
+  <tr><td>Amazon Bedrock</td><td>Managed access to foundation models; RAG (Knowledge Bases), Agents, Guardrails</td></tr>
+  <tr><td>Amazon SageMaker AI</td><td>Build/train/deploy ML models; SageMaker Clarify (bias), JumpStart</td></tr>
+  <tr><td>Amazon Q</td><td>Generative AI assistant for business and builders</td></tr>
+  <tr><td>Amazon Comprehend</td><td>NLP: sentiment, entities, PII detection</td></tr>
+  <tr><td>Amazon Rekognition</td><td>Image and video analysis</td></tr>
+  <tr><td>Amazon Transcribe / Polly / Translate</td><td>Speech-to-text, text-to-speech, translation</td></tr>
+  <tr><td>Amazon Textract</td><td>Extract text and data from documents</td></tr>
+  <tr><td>Amazon Kendra</td><td>Intelligent enterprise search</td></tr>
+</tbody></table></div></section>
+
+<section id="checklist" class="progress-section"><h2>&#128203; Study Checklist</h2>
+<div class="progress-wrap"><div class="progress-label"><span>Progress</span><span class="progress-pct">0%</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div>
+<ul class="checklist">
+  <li><input type="checkbox"><span>Read the official AIF-C01 exam guide</span></li>
+  <li><input type="checkbox"><span>Understand AI vs ML vs deep learning vs generative AI</span></li>
+  <li><input type="checkbox"><span>Learn foundation model concepts: tokens, embeddings, prompts</span></li>
+  <li><input type="checkbox"><span>Understand RAG vs fine-tuning vs prompt engineering trade-offs</span></li>
+  <li><input type="checkbox"><span>Explore Amazon Bedrock: models, Knowledge Bases, Guardrails, Agents</span></li>
+  <li><input type="checkbox"><span>Review responsible AI: bias, fairness, explainability, hallucinations</span></li>
+  <li><input type="checkbox"><span>Learn AI security & governance: data privacy, IAM, encryption</span></li>
+  <li><input type="checkbox"><span>Know the AWS AI/ML service portfolio and use cases</span></li>
+  <li><input type="checkbox"><span>Complete the AWS Skill Builder AI Practitioner learning plan</span></li>
+  <li><input type="checkbox"><span>Score 75%+ on practice exams before booking</span></li>
+</ul>
+<div class="mt-2"><a href="mla-c01.html" class="btn btn-primary">Next: MLA-C01 (ML Engineer Associate) &rarr;</a></div>
+</section>""",
+  extra_badge=NEW_CERT_BADGE,
+  meta_desc="AIF-C01 study guide. Foundational AI, ML, and generative AI concepts, Amazon Bedrock, SageMaker, responsible AI, and prompt engineering basics."))
+
+# DEA-C01
+write(f"{DOCS}/dea-c01.html", newcert_page(
+  "DEA-C01","AWS Certified Data Engineer Associate",
+  "Design and build data pipelines: ingestion, transformation, storage, and operations. The modern replacement for the retired Data Analytics Specialty.",
+  "badge-blue","Associate","&#128202;",
+  '<span class="badge badge-green">130 min | 65 questions</span><span class="badge badge-blue">Passing: 720/1000</span>',
+  new_notice("&#127381; Newly launched - replaces DAS-C01",
+    'The <strong>AWS Certified Data Engineer - Associate (DEA-C01)</strong> launched in 2024 as the modern successor to the retired <a href="das-c01.html">Data Analytics - Specialty (DAS-C01)</a>. It focuses on building and operating data pipelines rather than analytics tooling alone.'),
+  _new_toc,
+  """<section id="overview"><h2>Exam Overview</h2>
+<div class="grid-2">
+  <div class="card"><h3>Exam Details</h3><ul>
+    <li><strong>Code:</strong> DEA-C01</li>
+    <li><strong>Level:</strong> Associate</li>
+    <li><strong>Duration:</strong> 130 minutes</li>
+    <li><strong>Questions:</strong> 65</li>
+    <li><strong>Passing Score:</strong> 720/1000</li>
+    <li><strong>Cost:</strong> ~$150 USD</li>
+    <li><strong>Validity:</strong> 3 years</li>
+  </ul></div>
+  <div class="card"><h3>&#127891; Official Resources</h3><ul>
+    <li><a href="https://aws.amazon.com/certification/certified-data-engineer-associate/" target="_blank" rel="noopener">Official Certification Page</a></li>
+    <li><a href="https://docs.aws.amazon.com/aws-certification/latest/data-engineer-associate-01/data-engineer-associate-01.html" target="_blank" rel="noopener">Official Exam Guide</a></li>
+    <li><a href="https://d1.awsstatic.com/training-and-certification/docs-data-engineer-associate/AWS-Certified-Data-Engineer-Associate_Exam-Guide.pdf" target="_blank" rel="noopener">Exam Guide (PDF)</a></li>
+    <li><a href="https://explore.skillbuilder.aws/" target="_blank" rel="noopener">AWS Skill Builder - Data Engineer path</a></li>
+    <li><a href="https://tutorialsdojo.com/" target="_blank" rel="noopener">Tutorials Dojo Practice Exams</a></li>
+  </ul></div>
+</div></section>
+
+<section id="who"><h2>&#128100; Who It's For</h2>
+<div class="card"><p style="color:var(--text-muted)">Data engineers and related roles. AWS recommends 2-3 years of data engineering experience and 1-2 years of hands-on experience with AWS services. Strong fit for anyone who previously targeted the retired DAS-C01, plus ETL/pipeline developers and analytics engineers.</p></div>
+</section>
+
+<section id="domains"><h2>&#128202; Exam Domains</h2>
+<div class="table-wrap"><table><thead><tr><th>Domain</th><th>Weight</th></tr></thead><tbody>
+  <tr><td>1. Data Ingestion and Transformation</td><td>34%</td></tr>
+  <tr><td>2. Data Store Management</td><td>26%</td></tr>
+  <tr><td>3. Data Operations and Support</td><td>22%</td></tr>
+  <tr><td>4. Data Security and Governance</td><td>18%</td></tr>
+</tbody></table></div>
+<p style="color:var(--text-muted);font-size:0.85rem">Domain weights reflect the DEA-C01 exam guide. Confirm against the latest official guide.</p>
+</section>
+
+<section id="topics"><h2>&#128218; Key Topics</h2>
+<div class="grid-2">
+  <div class="card"><h3>Ingestion &amp; Transformation</h3><ul>
+    <li>Batch vs. streaming ingestion patterns</li>
+    <li>Kinesis Data Streams / Data Firehose, MSK (Kafka)</li>
+    <li>AWS Glue ETL, Glue crawlers, Glue Data Catalog</li>
+    <li>Spark on EMR; AWS DMS for migration/CDC</li>
+    <li>Orchestration: Step Functions, MWAA (Airflow), EventBridge</li>
+  </ul></div>
+  <div class="card"><h3>Data Store Management</h3><ul>
+    <li>S3 data lake design, partitioning, file formats (Parquet/ORC)</li>
+    <li>Redshift architecture, distribution/sort keys, Spectrum</li>
+    <li>Lake Formation permissions and governed tables</li>
+    <li>Apache Iceberg / data lakehouse patterns</li>
+    <li>Choosing the right store (DynamoDB, RDS, OpenSearch)</li>
+  </ul></div>
+  <div class="card"><h3>Operations &amp; Support</h3><ul>
+    <li>Monitoring pipelines with CloudWatch, Glue job metrics</li>
+    <li>Cost & performance optimization (compression, partition pruning)</li>
+    <li>Troubleshooting failed jobs, retries, DLQs</li>
+    <li>Automation and CI/CD for data pipelines</li>
+  </ul></div>
+  <div class="card"><h3>Security &amp; Governance</h3><ul>
+    <li>Encryption at rest/in transit; KMS</li>
+    <li>IAM, Lake Formation fine-grained access, row/column security</li>
+    <li>Data quality, cataloging, lineage</li>
+    <li>PII detection and masking (Macie, Glue)</li>
+  </ul></div>
+</div></section>
+
+<section id="services"><h2>&#9729;&#65039; Key AWS Services to Know</h2>
+<div class="table-wrap"><table><thead><tr><th>Category</th><th>Services</th></tr></thead><tbody>
+  <tr><td>Ingestion</td><td>Kinesis Data Streams, Data Firehose, MSK, DMS, DataSync</td></tr>
+  <tr><td>Transformation</td><td>AWS Glue (ETL, crawlers, Data Catalog), EMR (Spark), Lambda</td></tr>
+  <tr><td>Storage</td><td>S3, Redshift, Lake Formation, DynamoDB, RDS/Aurora</td></tr>
+  <tr><td>Query &amp; Analytics</td><td>Athena, Redshift Spectrum, OpenSearch Service, QuickSight</td></tr>
+  <tr><td>Orchestration</td><td>Step Functions, MWAA (Airflow), EventBridge</td></tr>
+  <tr><td>Security &amp; Governance</td><td>IAM, KMS, Lake Formation, Macie, Glue Data Quality</td></tr>
+</tbody></table></div></section>
+
+<section id="checklist" class="progress-section"><h2>&#128203; Study Checklist</h2>
+<div class="progress-wrap"><div class="progress-label"><span>Progress</span><span class="progress-pct">0%</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div>
+<ul class="checklist">
+  <li><input type="checkbox"><span>Read the official DEA-C01 exam guide</span></li>
+  <li><input type="checkbox"><span>Master S3 data lake design: partitioning, Parquet/ORC</span></li>
+  <li><input type="checkbox"><span>Build a Glue ETL job with a crawler and Data Catalog</span></li>
+  <li><input type="checkbox"><span>Understand Kinesis Data Streams vs Data Firehose vs MSK</span></li>
+  <li><input type="checkbox"><span>Learn Redshift distribution/sort keys and Spectrum</span></li>
+  <li><input type="checkbox"><span>Orchestrate a pipeline with Step Functions or MWAA (Airflow)</span></li>
+  <li><input type="checkbox"><span>Configure Lake Formation fine-grained permissions</span></li>
+  <li><input type="checkbox"><span>Query S3 with Athena; understand Iceberg/lakehouse</span></li>
+  <li><input type="checkbox"><span>Practice monitoring and cost/performance optimization</span></li>
+  <li><input type="checkbox"><span>Score 75%+ on practice exams before booking</span></li>
+</ul>
+<div class="mt-2"><a href="resources.html" class="btn btn-primary">Browse Study Resources &rarr;</a></div>
+</section>""",
+  extra_badge=NEW_CERT_BADGE,
+  meta_desc="DEA-C01 study guide. Data ingestion, transformation, storage, and operations - pipelines with Glue, Kinesis, Redshift, Lake Formation, and more."))
+
+# MLA-C01
+write(f"{DOCS}/mla-c01.html", newcert_page(
+  "MLA-C01","AWS Certified Machine Learning Engineer Associate",
+  "Build, deploy, operationalize, and monitor ML and generative AI solutions on AWS. The modern replacement for the retired ML Specialty.",
+  "badge-blue","Associate","&#129302;",
+  '<span class="badge badge-green">130 min | 65 questions</span><span class="badge badge-blue">Passing: 720/1000</span>',
+  new_notice("&#127381; Newly launched - replaces MLS-C01",
+    'The <strong>AWS Certified Machine Learning Engineer - Associate (MLA-C01)</strong> is the modern successor to the retired <a href="mls-c01.html">Machine Learning - Specialty (MLS-C01)</a>. Note: AWS is refreshing this exam - <strong>MLA-C02</strong> beta opened Sep 2026 (adds GenAI, agentic AI, and LLM workloads), with MLA-C01 retiring in all languages on Jan 14, 2027. This guide covers MLA-C01.'),
+  _new_toc,
+  """<section id="overview"><h2>Exam Overview</h2>
+<div class="grid-2">
+  <div class="card"><h3>Exam Details</h3><ul>
+    <li><strong>Code:</strong> MLA-C01 (MLA-C02 beta from Sep 2026)</li>
+    <li><strong>Level:</strong> Associate</li>
+    <li><strong>Duration:</strong> 130 minutes</li>
+    <li><strong>Questions:</strong> 65</li>
+    <li><strong>Passing Score:</strong> 720/1000</li>
+    <li><strong>Cost:</strong> ~$150 USD</li>
+    <li><strong>Validity:</strong> 3 years</li>
+  </ul></div>
+  <div class="card"><h3>&#127891; Official Resources</h3><ul>
+    <li><a href="https://aws.amazon.com/certification/certified-machine-learning-engineer-associate/" target="_blank" rel="noopener">Official Certification Page</a></li>
+    <li><a href="https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-01/machine-learning-engineer-associate-01.html" target="_blank" rel="noopener">Official Exam Guide</a></li>
+    <li><a href="https://explore.skillbuilder.aws/" target="_blank" rel="noopener">AWS Skill Builder - ML Engineer path</a></li>
+    <li><a href="https://aws.amazon.com/certification/" target="_blank" rel="noopener">Schedule Your Exam</a></li>
+    <li><a href="https://tutorialsdojo.com/" target="_blank" rel="noopener">Tutorials Dojo Practice Exams</a></li>
+  </ul></div>
+</div></section>
+
+<section id="who"><h2>&#128100; Who It's For</h2>
+<div class="card"><p style="color:var(--text-muted)">ML engineers, MLOps engineers, and developers who build and operationalize ML/GenAI solutions. AWS recommends ~1 year using Amazon SageMaker AI and related services, plus ~1 year in a related role (backend dev, DevOps, data engineer, or data scientist). A great next step after AI Practitioner (AIF-C01).</p></div>
+</section>
+
+<section id="domains"><h2>&#128202; Exam Domains</h2>
+<div class="table-wrap"><table><thead><tr><th>Domain</th><th>Weight</th></tr></thead><tbody>
+  <tr><td>1. Data Preparation for Machine Learning</td><td>28%</td></tr>
+  <tr><td>2. ML Model Development</td><td>26%</td></tr>
+  <tr><td>3. Deployment and Orchestration of ML Workflows</td><td>22%</td></tr>
+  <tr><td>4. ML Solution Monitoring, Maintenance, and Security</td><td>24%</td></tr>
+</tbody></table></div>
+<p style="color:var(--text-muted);font-size:0.85rem">Domain weights reflect the MLA-C01 exam guide. MLA-C02 keeps the same domain structure but adds GenAI/agentic AI coverage. Confirm against the latest official guide.</p>
+</section>
+
+<section id="topics"><h2>&#128218; Key Topics</h2>
+<div class="grid-2">
+  <div class="card"><h3>Data Preparation</h3><ul>
+    <li>Feature engineering, transformation, and selection</li>
+    <li>SageMaker Data Wrangler, Feature Store, Processing jobs</li>
+    <li>Handling missing data, encoding, scaling, imbalance</li>
+    <li>Data ingestion from S3, Glue, streaming sources</li>
+  </ul></div>
+  <div class="card"><h3>Model Development</h3><ul>
+    <li>Algorithm selection; SageMaker built-in algorithms</li>
+    <li>Training, hyperparameter tuning (AMT), evaluation metrics</li>
+    <li>Overfitting/underfitting, cross-validation</li>
+    <li>SageMaker JumpStart; foundation models via Bedrock (C02)</li>
+  </ul></div>
+  <div class="card"><h3>Deployment &amp; Orchestration</h3><ul>
+    <li>Real-time endpoints, batch transform, async & serverless inference</li>
+    <li>SageMaker Pipelines; CI/CD for ML (MLOps)</li>
+    <li>Model registry, versioning, A/B and shadow testing</li>
+    <li>Infrastructure choices and cost optimization</li>
+  </ul></div>
+  <div class="card"><h3>Monitoring &amp; Security</h3><ul>
+    <li>SageMaker Model Monitor: data/model drift</li>
+    <li>SageMaker Clarify: bias & explainability</li>
+    <li>CloudWatch metrics/alarms; retraining triggers</li>
+    <li>IAM, VPC, encryption for ML workloads</li>
+  </ul></div>
+</div></section>
+
+<section id="services"><h2>&#9729;&#65039; Key AWS Services to Know</h2>
+<div class="table-wrap"><table><thead><tr><th>Category</th><th>Services</th></tr></thead><tbody>
+  <tr><td>Core ML</td><td>Amazon SageMaker AI (Studio, Training, Endpoints, Pipelines, Model Monitor, Clarify, Feature Store, JumpStart)</td></tr>
+  <tr><td>Generative AI (C02)</td><td>Amazon Bedrock, Bedrock AgentCore, foundation models, RAG</td></tr>
+  <tr><td>Data</td><td>S3, Glue, Athena, Kinesis, Feature Store</td></tr>
+  <tr><td>Orchestration &amp; MLOps</td><td>SageMaker Pipelines, Step Functions, CodePipeline, EventBridge</td></tr>
+  <tr><td>Monitoring &amp; Security</td><td>CloudWatch, IAM, KMS, VPC, Model Monitor</td></tr>
+</tbody></table></div></section>
+
+<section id="checklist" class="progress-section"><h2>&#128203; Study Checklist</h2>
+<div class="progress-wrap"><div class="progress-label"><span>Progress</span><span class="progress-pct">0%</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div>
+<ul class="checklist">
+  <li><input type="checkbox"><span>Read the official MLA-C01 (or MLA-C02) exam guide</span></li>
+  <li><input type="checkbox"><span>Prepare data with SageMaker Data Wrangler & Feature Store</span></li>
+  <li><input type="checkbox"><span>Train and tune a model with SageMaker built-in algorithms + AMT</span></li>
+  <li><input type="checkbox"><span>Deploy real-time, batch, async, and serverless inference</span></li>
+  <li><input type="checkbox"><span>Build an MLOps pipeline with SageMaker Pipelines + model registry</span></li>
+  <li><input type="checkbox"><span>Configure Model Monitor for drift and Clarify for bias</span></li>
+  <li><input type="checkbox"><span>Explore generative AI via Amazon Bedrock (esp. for MLA-C02)</span></li>
+  <li><input type="checkbox"><span>Secure ML workloads: IAM, VPC, KMS encryption</span></li>
+  <li><input type="checkbox"><span>Complete the AWS Skill Builder ML Engineer learning plan</span></li>
+  <li><input type="checkbox"><span>Score 75%+ on practice exams before booking</span></li>
+</ul>
+<div class="mt-2"><a href="aip-c01.html" class="btn btn-primary">Next: AIP-C01 (Generative AI Developer Pro) &rarr;</a></div>
+</section>""",
+  extra_badge=NEW_CERT_BADGE,
+  meta_desc="MLA-C01 study guide. Build, deploy, operationalize, and monitor ML and generative AI solutions on AWS with Amazon SageMaker AI and Bedrock."))
+
+# AIP-C01
+write(f"{DOCS}/aip-c01.html", newcert_page(
+  "AIP-C01","AWS Certified Generative AI Developer Professional",
+  "Integrate foundation models into production applications and business workflows using Amazon Bedrock, agents, RAG, and guardrails - with security and cost efficiency.",
+  "badge-purple","Professional","&#129504;",
+  '<span class="badge badge-green">180 min | 65 questions</span><span class="badge badge-purple">Passing: 750/1000</span>',
+  new_notice("&#127381; Newly launched professional-level AI certification",
+    'The <strong>AWS Certified Generative AI Developer - Professional (AIP-C01)</strong> is a professional-level credential for developers who build production generative AI solutions. The beta period ended March 31, 2026, and the exam is now generally available. It sits at the top of the AWS AI track alongside the foundational <a href="aif-c01.html">AI Practitioner (AIF-C01)</a>.'),
+  _new_toc,
+  """<section id="overview"><h2>Exam Overview</h2>
+<div class="grid-2">
+  <div class="card"><h3>Exam Details</h3><ul>
+    <li><strong>Code:</strong> AIP-C01</li>
+    <li><strong>Level:</strong> Professional</li>
+    <li><strong>Duration:</strong> 180 minutes</li>
+    <li><strong>Questions:</strong> 65</li>
+    <li><strong>Passing Score:</strong> 750/1000</li>
+    <li><strong>Cost:</strong> ~$300 USD</li>
+    <li><strong>Validity:</strong> 3 years</li>
+  </ul></div>
+  <div class="card"><h3>&#127891; Official Resources</h3><ul>
+    <li><a href="https://aws.amazon.com/certification/certified-generative-ai-developer-professional/" target="_blank" rel="noopener">Official Certification Page</a></li>
+    <li><a href="https://docs.aws.amazon.com/aws-certification/latest/ai-professional-01.html" target="_blank" rel="noopener">Official Exam Guide</a></li>
+    <li><a href="https://explore.skillbuilder.aws/" target="_blank" rel="noopener">AWS Skill Builder - Generative AI Developer path</a></li>
+    <li><a href="https://aws.amazon.com/certification/" target="_blank" rel="noopener">Schedule Your Exam</a></li>
+    <li><a href="https://tutorialsdojo.com/" target="_blank" rel="noopener">Tutorials Dojo Practice Exams</a></li>
+  </ul></div>
+</div></section>
+
+<section id="who"><h2>&#128100; Who It's For</h2>
+<div class="card"><p style="color:var(--text-muted)">Developers who build production generative AI applications. No formal prerequisites, but AWS recommends 2+ years of AWS experience and 1+ year of hands-on generative AI development. Recommended after gaining GenAI experience and ideally the AI Practitioner and/or ML Engineer Associate credentials.</p></div>
+</section>
+
+<section id="domains"><h2>&#128202; Exam Domains</h2>
+<div class="table-wrap"><table><thead><tr><th>Domain (representative)</th><th>Focus</th></tr></thead><tbody>
+  <tr><td>1. Foundation Model Selection &amp; Integration</td><td>Choosing FMs, invoking via Bedrock, embeddings, multimodal</td></tr>
+  <tr><td>2. Prompt Engineering &amp; Application Design</td><td>Advanced prompting, RAG, agents, orchestration</td></tr>
+  <tr><td>3. Customization &amp; Optimization</td><td>Fine-tuning, distillation, evaluation, cost/latency tuning</td></tr>
+  <tr><td>4. Responsible AI, Security &amp; Operations</td><td>Guardrails, privacy, monitoring, deployment, governance</td></tr>
+</tbody></table></div>
+<p style="color:var(--text-muted);font-size:0.85rem">The exam guide defines the authoritative domains and weights - this is a representative summary. Always confirm against the official AIP-C01 exam guide.</p>
+</section>
+
+<section id="topics"><h2>&#128218; Key Topics</h2>
+<div class="grid-2">
+  <div class="card"><h3>Foundation Models &amp; Bedrock</h3><ul>
+    <li>Selecting FMs by capability, cost, latency, context window</li>
+    <li>Bedrock InvokeModel / Converse APIs; streaming</li>
+    <li>Embeddings and vector representations</li>
+    <li>Multimodal inputs (text, image)</li>
+  </ul></div>
+  <div class="card"><h3>RAG &amp; Agents</h3><ul>
+    <li>Retrieval-Augmented Generation architectures</li>
+    <li>Bedrock Knowledge Bases; vector stores (OpenSearch, Aurora pgvector)</li>
+    <li>Bedrock Agents & AgentCore for tool use and workflows</li>
+    <li>Chunking, re-ranking, grounding strategies</li>
+  </ul></div>
+  <div class="card"><h3>Customization &amp; Evaluation</h3><ul>
+    <li>Fine-tuning vs. RAG vs. prompt engineering trade-offs</li>
+    <li>Model distillation; continued pre-training</li>
+    <li>Evaluation: automated metrics, human eval, LLM-as-judge</li>
+    <li>Latency, throughput, and cost optimization (caching, batching)</li>
+  </ul></div>
+  <div class="card"><h3>Responsible AI &amp; Security</h3><ul>
+    <li>Bedrock Guardrails: content filtering, PII, denied topics</li>
+    <li>Prompt injection defense; tool-use authorization</li>
+    <li>Data privacy: VPC endpoints, no-train guarantees</li>
+    <li>Monitoring, logging, human-in-the-loop oversight</li>
+  </ul></div>
+</div></section>
+
+<section id="services"><h2>&#9729;&#65039; Key AWS Services to Know</h2>
+<div class="table-wrap"><table><thead><tr><th>Category</th><th>Services</th></tr></thead><tbody>
+  <tr><td>Core GenAI</td><td>Amazon Bedrock (models, Knowledge Bases, Agents, Guardrails, Evaluations), Bedrock AgentCore</td></tr>
+  <tr><td>Vector / Retrieval</td><td>OpenSearch Service, Aurora PostgreSQL (pgvector), Kendra</td></tr>
+  <tr><td>ML platform</td><td>Amazon SageMaker AI (for custom models / hosting)</td></tr>
+  <tr><td>App integration</td><td>Lambda, API Gateway, Step Functions, EventBridge</td></tr>
+  <tr><td>Security &amp; Ops</td><td>IAM, KMS, VPC/PrivateLink, CloudWatch, CloudTrail</td></tr>
+</tbody></table></div></section>
+
+<section id="checklist" class="progress-section"><h2>&#128203; Study Checklist</h2>
+<div class="progress-wrap"><div class="progress-label"><span>Progress</span><span class="progress-pct">0%</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div>
+<ul class="checklist">
+  <li><input type="checkbox"><span>Read the official AIP-C01 exam guide</span></li>
+  <li><input type="checkbox"><span>Invoke foundation models via Bedrock (InvokeModel / Converse)</span></li>
+  <li><input type="checkbox"><span>Build a RAG app with Bedrock Knowledge Bases + a vector store</span></li>
+  <li><input type="checkbox"><span>Create a Bedrock Agent / AgentCore workflow with tool use</span></li>
+  <li><input type="checkbox"><span>Configure Bedrock Guardrails (content filters, PII, denied topics)</span></li>
+  <li><input type="checkbox"><span>Compare fine-tuning vs RAG vs prompt engineering</span></li>
+  <li><input type="checkbox"><span>Evaluate model quality (automated + human + LLM-as-judge)</span></li>
+  <li><input type="checkbox"><span>Optimize latency and cost (caching, batching, model choice)</span></li>
+  <li><input type="checkbox"><span>Secure GenAI apps: prompt injection defense, VPC endpoints, IAM</span></li>
+  <li><input type="checkbox"><span>Score 75%+ on practice exams before booking</span></li>
+</ul>
+<div class="mt-2"><a href="resources.html" class="btn btn-primary">Browse Study Resources &rarr;</a></div>
+</section>""",
+  extra_badge=NEW_CERT_BADGE,
+  meta_desc="AIP-C01 study guide. Integrate foundation models into production apps with Amazon Bedrock, agents, RAG, and guardrails - securely and cost-efficiently."))
 
 # ── foundations-linux.html ──────────────────────────────────
 linux_html = HEAD("Linux Fundamentals","Complete Linux guide for AWS certification candidates.").replace("../assets","../assets") + """
