@@ -14,118 +14,400 @@
 <div class="page-header"><div class="container">
   <span class="badge badge-teal">Foundations</span>
   <h1 style="margin-top:0.75rem">&#128039; Linux Fundamentals</h1>
-  <p>Master essential Linux skills needed for every AWS certification and real-world cloud engineering. From basic commands to shell scripting and system administration.</p>
-  <div class="flex-wrap mt-1"><span class="badge badge-green">Beginner Friendly</span><span class="badge badge-blue">20+ Topics</span><span class="badge badge-orange">Essential for all AWS Certs</span></div>
+  <p>Master essential Linux skills needed for every AWS certification and real-world cloud engineering. From the file system and permissions to text processing, storage, shell scripting, systemd, security hardening, containers, and a full troubleshooting playbook.</p>
+  <div class="flex-wrap mt-1"><span class="badge badge-green">Beginner Friendly</span><span class="badge badge-blue">21 Topics</span><span class="badge badge-orange">Essential for all AWS Certs</span></div>
 </div></div>
 <div class="container" style="padding-bottom:4rem;"><div class="doc-layout"><aside class="sidebar"><h4>Contents</h4><a href="#why">Why Linux for AWS?</a>
+<a href="#distros">Distributions & Shells</a>
 <a href="#filesystem">File System</a>
+<a href="#navigation">Navigation & Files</a>
 <a href="#permissions">Permissions</a>
-<a href="#commands">Essential Commands</a>
-<a href="#processes">Processes</a>
-<a href="#networking">Networking</a>
+<a href="#users">Users & Groups</a>
+<a href="#text">Text Processing</a>
+<a href="#commands">Command Reference</a>
+<a href="#processes">Processes & Signals</a>
+<a href="#resources">Memory, CPU & Disk</a>
+<a href="#storage">Disks, Partitions & Mounts</a>
+<a href="#packages">Package Management</a>
+<a href="#networking">Networking Commands</a>
 <a href="#scripting">Shell Scripting</a>
-<a href="#ssh">SSH & EC2</a>
-<a href="#systemd">Systemd</a>
+<a href="#cron">Cron & Scheduling</a>
+<a href="#logs">Logs & journald</a>
+<a href="#ssh">SSH & EC2 Access</a>
+<a href="#systemd">Systemd & Services</a>
+<a href="#security">Security Hardening</a>
+<a href="#containers">Containers on Linux</a>
+<a href="#troubleshooting">Troubleshooting Playbook</a>
 <a href="#checklist">Checklist</a>
 </aside><main>
 <section id="why"><h2>Why Linux for AWS?</h2>
-<p>Over <strong>90% of cloud workloads</strong> run on Linux. EC2 instances, ECS containers, Lambda environments - all Linux. Understanding Linux means you can:</p>
-<ul><li>Debug EC2 instances via SSH</li><li>Write UserData bootstrap scripts</li><li>Create and manage Docker containers</li><li>Answer scenario questions on SOA-C02 &amp; DVA-C02 exams</li></ul>
-<div class="callout tip"><div class="callout-title">&#128161; Tip</div><p>On EC2: <code>/var/log/cloud-init.log</code> contains your UserData script output - critical for debugging bootstrap issues.</p></div></section>
+<p>Over <strong>90% of cloud workloads</strong> run on Linux. EC2 instances, ECS/EKS containers, Lambda execution environments, and most managed services run on a Linux kernel under the hood. Solid Linux skills let you:</p>
+<ul><li>Debug EC2 instances over SSH and Session Manager</li><li>Write UserData / cloud-init bootstrap scripts</li><li>Build and run Docker containers for ECS, EKS, and Fargate</li><li>Read logs, trace processes, and diagnose performance issues</li><li>Answer scenario questions on SOA-C02, DVA-C02, and SAP-C02 exams</li></ul>
+<div class="callout tip"><div class="callout-title">&#128161; Tip</div><p>On EC2, <code>/var/log/cloud-init-output.log</code> captures your UserData script output - the first place to look when a bootstrap fails.</p></div>
+<div class="callout info"><div class="callout-title">&#9729;&#65039; Amazon Linux 2023</div><p>AL2023 is the current default Amazon Linux. It uses <code>dnf</code> (not <code>yum</code>), <code>systemd</code>, and ships with SELinux in permissive mode. The default login user is <code>ec2-user</code>.</p></div></section>
 
-<section id="filesystem"><h2>Linux File System</h2>
+<section id="distros"><h2>Distributions &amp; Shells</h2>
+<div class="table-wrap"><table><thead><tr><th>Distro</th><th>Package Mgr</th><th>Default EC2 User</th><th>Notes</th></tr></thead><tbody>
+  <tr><td>Amazon Linux 2023</td><td>dnf</td><td>ec2-user</td><td>AWS-tuned, current default</td></tr>
+  <tr><td>Amazon Linux 2</td><td>yum</td><td>ec2-user</td><td>Legacy, still widely used</td></tr>
+  <tr><td>Ubuntu</td><td>apt</td><td>ubuntu</td><td>Popular, large ecosystem</td></tr>
+  <tr><td>RHEL / Rocky / Alma</td><td>dnf/yum</td><td>ec2-user / rocky</td><td>Enterprise, RPM-based</td></tr>
+  <tr><td>Debian</td><td>apt</td><td>admin</td><td>Stable, minimal</td></tr>
+  <tr><td>SUSE (SLES)</td><td>zypper</td><td>ec2-user</td><td>SAP workloads</td></tr>
+</tbody></table></div>
+<p>The <strong>shell</strong> is the program that interprets your commands. <code>bash</code> is the most common; <code>sh</code>, <code>zsh</code>, and <code>dash</code> also appear. Check yours with <code>echo $SHELL</code>.</p>
+<pre><code>cat /etc/os-release       # Identify the distribution and version
+echo $SHELL               # Your login shell
+uname -r                  # Kernel version
+hostnamectl               # Host, OS, kernel summary (systemd)</code></pre></section>
+
+<section id="filesystem"><h2>Linux File System (FHS)</h2>
+<p>Linux follows the <strong>Filesystem Hierarchy Standard</strong>. Everything is a file, and everything hangs off a single root <code>/</code>.</p>
 <div class="table-wrap"><table><thead><tr><th>Directory</th><th>Purpose</th></tr></thead><tbody>
   <tr><td><code>/</code></td><td>Root of the entire filesystem</td></tr>
-  <tr><td><code>/bin</code></td><td>Essential user binaries (ls, cp, mv)</td></tr>
-  <tr><td><code>/etc</code></td><td>Configuration files</td></tr>
+  <tr><td><code>/bin</code>, <code>/usr/bin</code></td><td>Essential and user binaries (ls, cp, mv)</td></tr>
+  <tr><td><code>/sbin</code>, <code>/usr/sbin</code></td><td>System admin binaries (mount, iptables)</td></tr>
+  <tr><td><code>/etc</code></td><td>System-wide configuration files</td></tr>
   <tr><td><code>/home</code></td><td>User home directories</td></tr>
-  <tr><td><code>/var</code></td><td>Variable data (logs, databases, mail)</td></tr>
-  <tr><td><code>/tmp</code></td><td>Temporary files (cleared on reboot)</td></tr>
-  <tr><td><code>/proc</code></td><td>Virtual filesystem for kernel/process info</td></tr>
-  <tr><td><code>/opt</code></td><td>Optional software packages</td></tr>
-</tbody></table></div></section>
+  <tr><td><code>/root</code></td><td>Home directory of the root user</td></tr>
+  <tr><td><code>/var</code></td><td>Variable data (logs, spools, caches, mail)</td></tr>
+  <tr><td><code>/var/log</code></td><td>Log files - your debugging home base</td></tr>
+  <tr><td><code>/tmp</code></td><td>Temporary files (often cleared on reboot)</td></tr>
+  <tr><td><code>/proc</code></td><td>Virtual FS exposing kernel/process info</td></tr>
+  <tr><td><code>/sys</code></td><td>Virtual FS for devices and kernel objects</td></tr>
+  <tr><td><code>/dev</code></td><td>Device files (disks: /dev/xvda, /dev/nvme0n1)</td></tr>
+  <tr><td><code>/opt</code></td><td>Optional / third-party software packages</td></tr>
+  <tr><td><code>/mnt</code>, <code>/media</code></td><td>Mount points for extra filesystems</td></tr>
+</tbody></table></div>
+<div class="callout tip"><div class="callout-title">&#128161; Everything is a file</div><p>Disks, processes, and even network sockets are represented as files. That is why tools like <code>cat /proc/cpuinfo</code> and <code>cat /proc/meminfo</code> work.</p></div></section>
 
-<section id="permissions"><h2>File Permissions</h2>
+<section id="navigation"><h2>Navigation &amp; File Operations</h2>
+<pre><code># Where am I / what is here
+pwd                       # Print working directory
+ls -la                    # Long listing incl. hidden files
+ls -lh                    # Human-readable sizes
+tree -L 2                 # Directory tree (2 levels)
+
+# Moving around
+cd /var/log; cd ~; cd -   # Absolute, home, previous dir
+
+# Create / copy / move / delete
+mkdir -p a/b/c            # Create nested directories
+touch file.txt           # Create empty file / update timestamp
+cp -r src/ dest/          # Recursive copy
+mv old.txt new.txt        # Rename or move
+rm -i file.txt           # Interactive delete (safer)
+rm -rf dir/              # Recursive force delete (dangerous)
+
+# Read files
+cat file.txt              # Dump whole file
+less file.txt             # Page through (q to quit)
+head -n 20 file.txt       # First 20 lines
+tail -n 50 file.txt       # Last 50 lines
+tail -f /var/log/syslog   # Follow live (Ctrl+C to stop)
+
+# Links
+ln -s /path/target link   # Symbolic link
+</code></pre>
+<div class="callout warn"><div class="callout-title">&#9888; rm -rf is irreversible</div><p>There is no recycle bin. <code>rm -rf /</code> or a mistyped variable like <code>rm -rf $DIR/</code> (when <code>$DIR</code> is empty) can wipe a system. Double-check paths and prefer <code>rm -i</code> when unsure.</p></div></section>
+
+<section id="permissions"><h2>File Permissions &amp; Ownership</h2>
 <pre><code>-rwxr-xr-- 1 ubuntu aws-team 1234 Jul 10 12:00 deploy.sh
- │└──┬──┘└──┬──┘└──┬──┘
- │   │      │      └── Other: r-- (4)
- │   │      └───────── Group: r-x (5)
- │   └──────────────── Owner: rwx (7)</code></pre>
+│└──┬──┘└──┬──┘└──┬──┘
+│   │      │      └── Other: r-- (4)
+│   │      └───────── Group: r-x (5)
+│   └──────────────── Owner: rwx (7)
+└── File type: - file, d directory, l symlink</code></pre>
 <div class="table-wrap"><table><thead><tr><th>Permission</th><th>Symbol</th><th>Octal</th></tr></thead><tbody>
   <tr><td>Read</td><td>r</td><td>4</td></tr><tr><td>Write</td><td>w</td><td>2</td></tr>
   <tr><td>Execute</td><td>x</td><td>1</td></tr><tr><td>None</td><td>-</td><td>0</td></tr>
 </tbody></table></div>
-<pre><code>chmod 755 script.sh        # rwxr-xr-x
-chmod +x script.sh         # Add execute for all
-chown ubuntu:team file.txt # Change owner:group</code></pre>
-<div class="callout warn"><div class="callout-title">&#9888; AWS Exam Tip</div><p>SSH key pairs must have <code>chmod 400</code> permissions. AWS refuses connection if the .pem file is too permissive.</p></div></section>
+<pre><code>chmod 755 script.sh          # rwxr-xr-x
+chmod 640 secret.conf        # rw-r-----
+chmod +x script.sh           # Add execute for all
+chmod -R g+w /shared         # Recursive group write
+chown ubuntu:team file.txt   # Change owner:group
+chgrp team file.txt          # Change group only
+umask 022                    # Default permission mask</code></pre>
+<h3>Special permission bits</h3>
+<div class="table-wrap"><table><thead><tr><th>Bit</th><th>Octal</th><th>Effect</th></tr></thead><tbody>
+  <tr><td>setuid</td><td>4000</td><td>Run as file owner (e.g. <code>passwd</code>)</td></tr>
+  <tr><td>setgid</td><td>2000</td><td>Run as group / inherit group on dirs</td></tr>
+  <tr><td>sticky</td><td>1000</td><td>Only owner can delete (e.g. <code>/tmp</code>)</td></tr>
+</tbody></table></div>
+<div class="callout warn"><div class="callout-title">&#9888; AWS Exam Tip</div><p>SSH private keys must be <code>chmod 400</code> (or 600). SSH refuses to use a <code>.pem</code> that is readable by group/other with an "UNPROTECTED PRIVATE KEY FILE" error.</p></div></section>
 
-<section id="commands"><h2>Essential Commands</h2>
-<pre><code># Navigation
-pwd; ls -la; cd /var/log; cd ~; cd -
+<section id="users"><h2>Users, Groups &amp; sudo</h2>
+<pre><code># Identity
+whoami; id                    # Current user, UID/GID/groups
+who; w                        # Who is logged in
 
-# Files
-cp source dest; mv file newname; rm -rf dir/
-mkdir -p a/b/c; touch file.txt
-cat file.txt; less file.txt; tail -f /var/log/syslog
+# Manage users (need root/sudo)
+sudo useradd -m -s /bin/bash alice   # Create user with home + shell
+sudo passwd alice                    # Set password
+sudo usermod -aG docker alice        # Add to supplementary group
+sudo userdel -r alice                # Delete user and home
 
-# Search
-find / -name "*.log" -type f
-grep -r "ERROR" /var/log/
-grep -i "warning" app.log
-which python3; whereis nginx
+# Groups
+sudo groupadd deploy
+groups alice                         # Show a user's groups
 
-# Archives
-tar -czvf archive.tar.gz /mydir
-tar -xzvf archive.tar.gz
-zip -r backup.zip /mydir; unzip backup.zip</code></pre></section>
+# Elevated privileges
+sudo command                         # Run one command as root
+sudo -i                              # Interactive root shell
+visudo                               # Safely edit /etc/sudoers</code></pre>
+<div class="table-wrap"><table><thead><tr><th>File</th><th>Contents</th></tr></thead><tbody>
+  <tr><td><code>/etc/passwd</code></td><td>User accounts (name, UID, GID, home, shell)</td></tr>
+  <tr><td><code>/etc/shadow</code></td><td>Hashed passwords (root-only)</td></tr>
+  <tr><td><code>/etc/group</code></td><td>Group definitions and members</td></tr>
+  <tr><td><code>/etc/sudoers</code></td><td>Who can run sudo and how</td></tr>
+</tbody></table></div>
+<div class="callout info"><div class="callout-title">&#9729;&#65039; AWS Context</div><p>On EC2, the default user (<code>ec2-user</code> / <code>ubuntu</code>) is granted passwordless sudo via a file in <code>/etc/sudoers.d/</code>. SSM Session Manager connects as <code>ssm-user</code>.</p></div></section>
 
-<section id="processes"><h2>Processes &amp; System Info</h2>
-<pre><code>ps aux                  # All running processes
-ps aux | grep nginx     # Filter for nginx
-top                     # Real-time process viewer
-kill PID                # Graceful stop (SIGTERM)
-kill -9 PID             # Force kill (SIGKILL)
-free -h                 # Memory usage
-df -h                   # Disk usage
-uname -a                # Kernel info
-uptime                  # System uptime and load</code></pre></section>
+<section id="text"><h2>Text Processing (grep, sed, awk)</h2>
+<pre><code># grep - search text
+grep -i "error" app.log          # Case-insensitive
+grep -r "TODO" src/              # Recursive
+grep -c "404" access.log         # Count matches
+grep -v "DEBUG" app.log          # Invert (exclude)
+grep -E "warn|error" app.log     # Extended regex
+
+# sed - stream editor (find/replace)
+sed 's/foo/bar/g' file.txt       # Replace all foo with bar
+sed -i 's/8080/80/g' app.conf    # In-place edit
+sed -n '10,20p' file.txt         # Print lines 10-20
+
+# awk - column/field processing
+awk '{print $1}' access.log      # First field of each line
+awk -F',' '{print $3}' data.csv  # CSV third column
+awk '$9 == 500 {print}' access.log  # Rows where field 9 is 500
+awk '{sum+=$1} END {print sum}' nums.txt  # Sum a column
+
+# cut / sort / uniq / wc
+cut -d':' -f1 /etc/passwd         # First colon-delimited field
+sort file.txt | uniq -c | sort -rn  # Frequency count, descending
+wc -l file.txt                    # Count lines</code></pre>
+<div class="callout tip"><div class="callout-title">&#128161; Real-world combo</div><p>Find the top 10 IPs hitting your server: <code>awk '{print $1}' access.log | sort | uniq -c | sort -rn | head</code></p></div></section>
+
+<section id="commands"><h2>Command Reference</h2>
+<pre><code># Pipes and redirection
+command | other           # Pipe stdout to next command
+command > file            # Redirect stdout (overwrite)
+command >> file           # Redirect stdout (append)
+command 2> err.log        # Redirect stderr
+command > out.log 2>&1    # Redirect both stdout and stderr
+command < input.txt       # Feed file as stdin
+command1 && command2      # Run command2 only if command1 succeeds
+command1 || command2      # Run command2 only if command1 fails
+
+# Search the filesystem
+find / -name "*.log" -type f          # By name
+find /var -size +100M                 # Files larger than 100MB
+find . -mtime -1                      # Modified in last 24h
+find /tmp -type f -delete             # Find and delete
+which python3; whereis nginx; type ls # Locate binaries
+
+# Archives & compression
+tar -czvf archive.tar.gz /mydir       # Create gzip tarball
+tar -xzvf archive.tar.gz              # Extract gzip tarball
+tar -tzvf archive.tar.gz              # List contents
+zip -r backup.zip /mydir; unzip backup.zip
+gzip file; gunzip file.gz
+
+# Transfer & sync
+scp -i key.pem file ec2-user@IP:/tmp/ # Secure copy
+rsync -avz src/ ec2-user@IP:/dest/    # Efficient sync
+curl -O https://example.com/file.tgz  # Download
+wget https://example.com/file.tgz     # Download</code></pre></section>
+
+<section id="processes"><h2>Processes &amp; Signals</h2>
+<pre><code>ps aux                    # All running processes
+ps aux | grep nginx       # Filter for nginx
+ps -ef --forest           # Process tree
+pgrep -a nginx            # PIDs by name
+top                       # Real-time process viewer
+htop                      # Friendlier top (if installed)
+
+# Sending signals
+kill PID                  # SIGTERM (15) - graceful stop
+kill -9 PID               # SIGKILL (9) - force kill
+kill -HUP PID             # SIGHUP (1) - reload config
+pkill nginx               # Kill by name
+killall -9 python3        # Kill all matching
+
+# Job control
+command &                 # Run in background
+jobs                      # List background jobs
+fg %1; bg %1              # Foreground / background a job
+nohup long_task &         # Survive logout
+</code></pre>
+<div class="table-wrap"><table><thead><tr><th>Signal</th><th>Number</th><th>Meaning</th></tr></thead><tbody>
+  <tr><td>SIGTERM</td><td>15</td><td>Polite request to terminate (default)</td></tr>
+  <tr><td>SIGKILL</td><td>9</td><td>Force kill, cannot be caught</td></tr>
+  <tr><td>SIGHUP</td><td>1</td><td>Hang up / reload configuration</td></tr>
+  <tr><td>SIGINT</td><td>2</td><td>Interrupt (Ctrl+C)</td></tr>
+</tbody></table></div></section>
+
+<section id="resources"><h2>Memory, CPU &amp; Load</h2>
+<pre><code>free -h                   # Memory usage (human readable)
+vmstat 1                  # Virtual memory stats every 1s
+top                       # CPU + memory live view
+uptime                    # Load averages (1, 5, 15 min)
+nproc                     # Number of CPU cores
+cat /proc/cpuinfo         # CPU details
+cat /proc/meminfo         # Memory details
+iostat -x 1               # Disk I/O stats (sysstat pkg)
+sar -u 1 5                # Historical CPU sampling</code></pre>
+<div class="callout tip"><div class="callout-title">&#128161; Reading load average</div><p>Load average is the number of processes waiting to run. On a machine with 4 cores, a load of 4.0 means fully busy. A load consistently above your core count means CPU saturation - a common CloudWatch alarm scenario.</p></div></section>
+
+<section id="storage"><h2>Disks, Partitions &amp; Mounts</h2>
+<pre><code>df -h                     # Disk usage per filesystem
+du -sh /var/log           # Size of a directory
+du -sh * | sort -rh | head  # Biggest items in current dir
+lsblk                     # Block devices tree
+blkid                     # Show UUIDs and filesystem types
+mount | column -t         # Currently mounted filesystems
+
+# Format and mount a new EBS volume (Nitro: /dev/nvme1n1)
+sudo mkfs -t xfs /dev/nvme1n1
+sudo mkdir /data
+sudo mount /dev/nvme1n1 /data
+# Persist across reboot via /etc/fstab (use UUID from blkid)
+echo 'UUID=xxxx /data xfs defaults,nofail 0 2' | sudo tee -a /etc/fstab</code></pre>
+<div class="callout warn"><div class="callout-title">&#9888; AWS Exam Tip</div><p>On Nitro-based instances, EBS volumes appear as NVMe devices (<code>/dev/nvme1n1</code>), not <code>/dev/xvdf</code>. Use <code>lsblk</code> to map them. Always add <code>nofail</code> in <code>/etc/fstab</code> so a missing volume does not block boot.</p></div>
+<div class="callout info"><div class="callout-title">&#9729;&#65039; Grow a filesystem after resizing EBS</div><p>After increasing an EBS volume: <code>sudo growpart /dev/nvme0n1 1</code> then <code>sudo xfs_growfs /</code> (xfs) or <code>sudo resize2fs /dev/nvme0n1p1</code> (ext4).</p></div></section>
+
+<section id="packages"><h2>Package Management</h2>
+<div class="grid-2">
+  <div class="card"><h3>dnf / yum (Amazon Linux, RHEL)</h3><pre><code>sudo dnf update -y
+sudo dnf install -y nginx
+sudo dnf remove nginx
+dnf search keyword
+dnf list installed
+rpm -qa | grep nginx</code></pre></div>
+  <div class="card"><h3>apt (Ubuntu, Debian)</h3><pre><code>sudo apt update
+sudo apt upgrade -y
+sudo apt install -y nginx
+sudo apt remove nginx
+apt search keyword
+dpkg -l | grep nginx</code></pre></div>
+</div>
+<div class="callout warn"><div class="callout-title">&#9888; AWS Exam Tip</div><p>Amazon Linux 2 uses <code>yum</code>; Amazon Linux 2023 uses <code>dnf</code>; Ubuntu uses <code>apt</code>. UserData scripts must match the AMI's package manager or the bootstrap fails silently.</p></div></section>
 
 <section id="networking"><h2>Linux Networking Commands</h2>
-<pre><code>ip addr show                  # Show IP addresses
-ping -c 4 8.8.8.8             # ICMP ping
-traceroute google.com         # Trace route to host
-nslookup example.com          # DNS lookup
+<pre><code># Interfaces & addresses
+ip addr show                  # Show IP addresses (modern)
+ip route                      # Routing table
+ip link                       # Network interfaces
+
+# Connectivity
+ping -c 4 8.8.8.8             # ICMP reachability
+traceroute google.com         # Path to a host
+mtr google.com                # Live traceroute + loss
+
+# DNS
+nslookup example.com          # Basic DNS lookup
 dig example.com               # Detailed DNS query
-netstat -tulnp                # All listening ports
-ss -tulnp                     # Modern netstat
-curl -I https://example.com   # HTTP headers
-curl -v https://api.example.com  # Verbose HTTP</code></pre>
-<div class="callout warn"><div class="callout-title">&#9888; AWS Exam Tip</div><p>If you can ping an EC2 but can't connect on port 22, check the <strong>Security Group inbound rules</strong> - AWS Security Groups are applied before traffic reaches the OS firewall.</p></div></section>
+dig +short example.com        # Just the answer
+host example.com              # Simple lookup
+
+# Ports & sockets
+ss -tulnp                     # Listening TCP/UDP + PIDs (modern)
+netstat -tulnp                # Legacy equivalent
+lsof -i :80                   # What is using port 80
+
+# HTTP debugging
+curl -I https://example.com   # Response headers only
+curl -v https://api.example.com   # Verbose handshake
+curl -s -o /dev/null -w "%{http_code}\n" URL  # Just status code</code></pre>
+<div class="callout warn"><div class="callout-title">&#9888; AWS Exam Tip</div><p>If you can ping an EC2 instance but cannot reach port 22, check the <strong>Security Group inbound rules</strong> and <strong>Network ACLs</strong> first. AWS network controls are evaluated before traffic ever reaches the OS firewall.</p></div>
+<div class="callout info"><div class="callout-title">&#9729;&#65039; Instance Metadata (IMDS)</div><p>Query instance metadata from inside EC2. Prefer IMDSv2 (token-based):</p><pre><code>TOKEN=$(curl -s -X PUT "http://169.254.169.254/latest/api/token" \
+  -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+curl -s -H "X-aws-ec2-metadata-token: $TOKEN" \
+  http://169.254.169.254/latest/meta-data/instance-id</code></pre></div></section>
 
 <section id="scripting"><h2>Shell Scripting</h2>
 <pre><code>#!/bin/bash
-# EC2 UserData example
-REGION="us-east-1"
-INSTANCE_ID=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
+set -euo pipefail          # Exit on error, unset var, pipe failure
 
+# Variables
+REGION="us-east-1"
+NAME="${1:-default}"       # First arg or "default"
+TOKEN=$(curl -s -X PUT "http://169.254.169.254/latest/api/token" \
+  -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+INSTANCE_ID=$(curl -s -H "X-aws-ec2-metadata-token: $TOKEN" \
+  http://169.254.169.254/latest/meta-data/instance-id)
+
+# Conditionals
 if [ -f "/etc/nginx/nginx.conf" ]; then
   echo "Nginx config exists"
+elif [ -d "/etc/nginx" ]; then
+  echo "Directory exists but no config"
+else
+  echo "Nginx not installed"
 fi
 
+# Loops
 for FILE in /var/log/*.log; do
   echo "Processing: $FILE"
 done
 
-# Error handling
-set -e          # Exit on first error
-set -u          # Treat unset vars as error
+COUNT=0
+while [ $COUNT -lt 3 ]; do
+  echo "Attempt $COUNT"; COUNT=$((COUNT+1))
+done
 
-# UserData script pattern
-yum update -y
-yum install -y nginx
-systemctl start nginx
-systemctl enable nginx</code></pre></section>
+# Functions
+log() { echo "[$(date +%FT%T)] $*"; }
+log "Bootstrap starting"
+
+# Exit codes
+if command -v docker >/dev/null 2>&1; then
+  log "docker present"
+else
+  log "docker missing"; exit 1
+fi</code></pre>
+<h3>Typical EC2 UserData bootstrap</h3>
+<pre><code>#!/bin/bash
+dnf update -y
+dnf install -y nginx
+systemctl enable --now nginx
+echo "<h1>Hello from $(hostname)</h1>" > /usr/share/nginx/html/index.html</code></pre>
+<div class="callout tip"><div class="callout-title">&#128161; Test conditions</div><p><code>-f</code> file exists, <code>-d</code> directory exists, <code>-z</code> string empty, <code>-n</code> string not empty, <code>-eq/-ne/-lt/-gt</code> numeric comparisons.</p></div></section>
+
+<section id="cron"><h2>Cron &amp; Scheduling</h2>
+<pre><code>crontab -e                # Edit current user's crontab
+crontab -l                # List cron jobs
+
+# Format:  minute hour day month weekday  command
+# ┌── min (0-59)
+# │ ┌── hour (0-23)
+# │ │ ┌── day of month (1-31)
+# │ │ │ ┌── month (1-12)
+# │ │ │ │ ┌── day of week (0-6, Sun=0)
+# * * * * * /path/script.sh
+
+0 2 * * *   /opt/backup.sh          # Every day at 02:00
+*/15 * * * * /opt/healthcheck.sh    # Every 15 minutes
+0 0 * * 0   /opt/weekly.sh          # Weekly, Sunday midnight
+@reboot     /opt/startup.sh         # Once at boot</code></pre>
+<div class="callout info"><div class="callout-title">&#9729;&#65039; systemd timers</div><p>Modern alternative to cron. List active timers with <code>systemctl list-timers</code>. Timers give logging via journald and dependency handling.</p></div></section>
+
+<section id="logs"><h2>Logs &amp; journald</h2>
+<pre><code># Traditional log files
+tail -f /var/log/messages         # Amazon Linux / RHEL
+tail -f /var/log/syslog           # Ubuntu / Debian
+less /var/log/secure              # Auth events (RHEL family)
+less /var/log/auth.log            # Auth events (Debian family)
+cat /var/log/cloud-init-output.log  # UserData output on EC2
+
+# systemd journal
+journalctl -u nginx -f            # Follow one service
+journalctl -u nginx --since "1 hour ago"
+journalctl -xe                    # Recent entries + explanations
+journalctl -p err -b              # Errors from current boot
+journalctl --disk-usage           # How much space logs use</code></pre>
+<div class="callout tip"><div class="callout-title">&#128161; Ship logs to CloudWatch</div><p>Install the CloudWatch agent to stream <code>/var/log/*</code> to CloudWatch Logs, then query with Logs Insights. Common on SOA-C02 monitoring scenarios.</p></div></section>
 
 <section id="ssh"><h2>SSH &amp; EC2 Access</h2>
 <pre><code># Connect to EC2
@@ -140,19 +422,89 @@ Host my-ec2
     IdentityFile ~/.ssh/my-key.pem
 # Then just: ssh my-ec2
 
-# SCP - copy files
+# Copy files
 scp -i key.pem file.txt ec2-user@IP:/home/ec2-user/
+scp -i key.pem -r localdir/ ec2-user@IP:/tmp/
 
-# Port forwarding (tunnel to private RDS)
-ssh -i key.pem -L 5432:rds-endpoint:5432 ec2-user@IP</code></pre>
-<div class="callout tip"><div class="callout-title">&#128161; EC2 Instance Connect</div><p>Provides browser-based SSH access without key pairs - uses IAM permissions instead. Great for exam questions about "SSH access without managing key pairs".</p></div></section>
+# Port forwarding (tunnel to a private RDS through a bastion)
+ssh -i key.pem -L 5432:rds-endpoint:5432 ec2-user@IP
+
+# Jump host / bastion
+ssh -i key.pem -J ec2-user@BASTION ec2-user@PRIVATE_IP
+
+# Generate a new key pair
+ssh-keygen -t ed25519 -C "you@example.com"</code></pre>
+<div class="callout tip"><div class="callout-title">&#128161; Prefer SSM Session Manager</div><p>AWS Systems Manager Session Manager gives shell access with <strong>no open port 22, no bastion, and no key pairs</strong> - access is controlled by IAM and fully logged. Frequently the "most secure" exam answer: <code>aws ssm start-session --target i-0abc123</code>.</p></div></section>
 
 <section id="systemd"><h2>Systemd &amp; Services</h2>
-<pre><code>systemctl start nginx     # Start service
-systemctl stop nginx      # Stop service
-systemctl restart nginx   # Restart
-systemctl enable nginx    # Auto-start on boot
-systemctl status nginx    # Current status
-journalctl -u nginx -f    # Follow service logs
-journalctl -xe            # Recent errors</code></pre></section>
-<section id="checklist" class="progress-section"><h2>&#128203; Study Checklist</h2><div class="progress-wrap"><div class="progress-label"><span>Progress</span><span class="progress-pct">0%</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div><ul class="checklist"><li><input type="checkbox"><span>Understand the Linux directory structure</span></li><li><input type="checkbox"><span>Know how file permissions work (rwx / octal)</span></li><li><input type="checkbox"><span>Use chmod, chown commands</span></li><li><input type="checkbox"><span>Navigate with cd, ls, pwd, find</span></li><li><input type="checkbox"><span>Edit files with nano or vim</span></li><li><input type="checkbox"><span>Manage processes with ps, top, kill</span></li><li><input type="checkbox"><span>Use grep, awk, sed for text processing</span></li><li><input type="checkbox"><span>Write a basic bash script with variables and loops</span></li><li><input type="checkbox"><span>Install packages with yum/apt</span></li><li><input type="checkbox"><span>Manage services with systemctl</span></li><li><input type="checkbox"><span>Connect to EC2 via SSH with key pair</span></li><li><input type="checkbox"><span>Set and use environment variables</span></li><li><input type="checkbox"><span>Schedule tasks with cron</span></li><li><input type="checkbox"><span>Use networking commands (ping, netstat, curl, dig)</span></li><li><input type="checkbox"><span>View and tail logs with tail -f and journalctl</span></li><li><input type="checkbox"><span>Use pipes and redirects (|, >, >>, 2>&1)</span></li><li><input type="checkbox"><span>Understand EC2 UserData scripts</span></li><li><input type="checkbox"><span>Know where AWS credential files are stored (~/.aws/)</span></li><li><input type="checkbox"><span>Understand IMDS (Instance Metadata Service at 169.254.169.254)</span></li><li><input type="checkbox"><span>Know the difference between yum (Amazon Linux) and apt (Ubuntu)</span></li></ul><div class="mt-2"><a href="foundations-networking.html" class="btn btn-primary">Next: Networking Fundamentals &rarr;</a></div></section></main></div></div><script src="../assets/js/main.js"></script></body></html>
+<pre><code>systemctl start nginx        # Start now
+systemctl stop nginx         # Stop now
+systemctl restart nginx      # Restart
+systemctl reload nginx       # Reload config without downtime
+systemctl enable nginx       # Auto-start on boot
+systemctl enable --now nginx # Enable and start in one step
+systemctl disable nginx      # Do not start on boot
+systemctl status nginx       # Current status + recent logs
+systemctl is-active nginx    # Quick active check
+systemctl daemon-reload      # Reload unit files after edits</code></pre>
+<h3>A minimal unit file</h3>
+<pre><code># /etc/systemd/system/myapp.service
+[Unit]
+Description=My App
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /opt/myapp/app.py
+Restart=always
+User=appuser
+
+[Install]
+WantedBy=multi-user.target</code></pre>
+<div class="callout info"><div class="callout-title">&#9729;&#65039; Why systemd matters on AWS</div><p><code>Restart=always</code> keeps your app alive after crashes, and <code>enable</code> ensures it survives instance reboots and Auto Scaling replacements.</p></div></section>
+
+<section id="security"><h2>Security Hardening Basics</h2>
+<ul>
+  <li><strong>Least privilege:</strong> avoid logging in as root; use <code>sudo</code> per command.</li>
+  <li><strong>Key-only SSH:</strong> disable password auth (<code>PasswordAuthentication no</code> in <code>/etc/ssh/sshd_config</code>).</li>
+  <li><strong>Patch regularly:</strong> <code>dnf update -y</code> / <code>apt upgrade -y</code>, or use SSM Patch Manager.</li>
+  <li><strong>Host firewall:</strong> <code>firewalld</code> (RHEL family) or <code>ufw</code> (Ubuntu) in addition to Security Groups.</li>
+  <li><strong>SELinux / AppArmor:</strong> mandatory access control; check with <code>getenforce</code>.</li>
+  <li><strong>Fail2ban:</strong> block repeated failed logins.</li>
+</ul>
+<pre><code>ufw allow 22/tcp; ufw enable        # Ubuntu firewall
+firewall-cmd --add-service=https --permanent  # RHEL family
+getenforce                          # SELinux mode
+sudo lastb                          # Failed login attempts</code></pre>
+<div class="callout warn"><div class="callout-title">&#9888; Defense in depth</div><p>Security Groups protect the network edge, but OS-level controls (firewall, SELinux, patching) matter too. Exams reward layered security answers.</p></div></section>
+
+<section id="containers"><h2>Containers on Linux</h2>
+<pre><code># Docker basics (foundation for ECS / EKS / Fargate)
+docker ps                     # Running containers
+docker ps -a                  # All containers
+docker images                 # Local images
+docker run -d -p 80:80 nginx  # Run detached, map port
+docker exec -it CID /bin/bash # Shell into a container
+docker logs -f CID            # Follow container logs
+docker build -t myapp:1.0 .   # Build from Dockerfile
+docker stop CID; docker rm CID
+
+# Push to Amazon ECR
+aws ecr get-login-password --region us-east-1 \
+  | docker login --username AWS --password-stdin ACCOUNT.dkr.ecr.us-east-1.amazonaws.com
+docker tag myapp:1.0 ACCOUNT.dkr.ecr.us-east-1.amazonaws.com/myapp:1.0
+docker push ACCOUNT.dkr.ecr.us-east-1.amazonaws.com/myapp:1.0</code></pre>
+<div class="callout info"><div class="callout-title">&#9729;&#65039; Namespaces &amp; cgroups</div><p>Containers are just Linux processes isolated with <strong>namespaces</strong> (what they can see) and limited with <strong>cgroups</strong> (how much CPU/memory they can use). No VM involved.</p></div></section>
+
+<section id="troubleshooting"><h2>Troubleshooting Playbook</h2>
+<div class="table-wrap"><table><thead><tr><th>Symptom</th><th>First commands to run</th></tr></thead><tbody>
+  <tr><td>Instance out of disk</td><td><code>df -h</code>, then <code>du -sh /* | sort -rh</code></td></tr>
+  <tr><td>High CPU / slow</td><td><code>top</code>, <code>uptime</code>, <code>ps aux --sort=-%cpu | head</code></td></tr>
+  <tr><td>Out of memory / OOM kills</td><td><code>free -h</code>, <code>dmesg | grep -i oom</code></td></tr>
+  <tr><td>Service will not start</td><td><code>systemctl status svc</code>, <code>journalctl -u svc -xe</code></td></tr>
+  <tr><td>Cannot SSH in</td><td>Check SG, NACL, subnet route, key perms, <code>/var/log/secure</code></td></tr>
+  <tr><td>App cannot reach internet</td><td><code>ip route</code>, <code>curl -v</code>, check NAT/IGW route</td></tr>
+  <tr><td>UserData did not run</td><td><code>cat /var/log/cloud-init-output.log</code></td></tr>
+  <tr><td>Port not listening</td><td><code>ss -tulnp</code>, <code>lsof -i :PORT</code></td></tr>
+</tbody></table></div>
+<div class="callout tip"><div class="callout-title">&#128161; The universal first step</div><p>When something on Linux breaks, <strong>read the logs</strong>: <code>journalctl -xe</code> and <code>tail -f /var/log/...</code>. Ninety percent of issues announce themselves there.</p></div></section>
+<section id="checklist" class="progress-section"><h2>&#128203; Study Checklist</h2><div class="progress-wrap"><div class="progress-label"><span>Progress</span><span class="progress-pct">0%</span></div><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div></div><ul class="checklist"><li><input type="checkbox"><span>Identify the distribution with cat /etc/os-release</span></li><li><input type="checkbox"><span>Understand the Linux directory structure (FHS)</span></li><li><input type="checkbox"><span>Navigate with cd, ls, pwd, find, tree</span></li><li><input type="checkbox"><span>Know how file permissions work (rwx / octal)</span></li><li><input type="checkbox"><span>Use chmod, chown, chgrp and understand umask</span></li><li><input type="checkbox"><span>Understand setuid, setgid, and the sticky bit</span></li><li><input type="checkbox"><span>Manage users and groups (useradd, usermod, groups)</span></li><li><input type="checkbox"><span>Use sudo and understand /etc/sudoers</span></li><li><input type="checkbox"><span>Process text with grep, sed, awk, cut, sort, uniq</span></li><li><input type="checkbox"><span>Use pipes and redirects (|, >, >>, 2>&1, &&, ||)</span></li><li><input type="checkbox"><span>Manage processes with ps, top, kill and know signals (15, 9, 1)</span></li><li><input type="checkbox"><span>Check memory, CPU, and load (free, top, uptime, vmstat)</span></li><li><input type="checkbox"><span>Inspect disks and mounts (df, du, lsblk, mount, /etc/fstab)</span></li><li><input type="checkbox"><span>Format and mount an EBS/NVMe volume</span></li><li><input type="checkbox"><span>Install packages with dnf, yum, and apt</span></li><li><input type="checkbox"><span>Use networking commands (ip, ping, dig, ss, curl, traceroute)</span></li><li><input type="checkbox"><span>Query IMDSv2 for instance metadata</span></li><li><input type="checkbox"><span>Write a bash script with variables, conditionals, loops, functions</span></li><li><input type="checkbox"><span>Use set -euo pipefail for safe scripts</span></li><li><input type="checkbox"><span>Schedule tasks with cron and systemd timers</span></li><li><input type="checkbox"><span>Read logs with tail -f, less, and journalctl</span></li><li><input type="checkbox"><span>Connect to EC2 via SSH, SCP, tunnels, and jump hosts</span></li><li><input type="checkbox"><span>Prefer SSM Session Manager over open port 22</span></li><li><input type="checkbox"><span>Manage services with systemctl and write a unit file</span></li><li><input type="checkbox"><span>Apply basic hardening (key-only SSH, patching, firewall, SELinux)</span></li><li><input type="checkbox"><span>Run containers with Docker and push images to ECR</span></li><li><input type="checkbox"><span>Follow a troubleshooting playbook for common EC2 issues</span></li></ul><div class="mt-2"><a href="foundations-networking.html" class="btn btn-primary">Next: Networking Fundamentals &rarr;</a></div></section></main></div></div><script src="../assets/js/main.js"></script></body></html>
