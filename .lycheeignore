@@ -6,3 +6,6 @@ https://tutorialsdojo.com.*
 https://learn.cantrill.io.*
 # LinkedIn and social often 999/403 to bots
 https://www.linkedin.com.*
+https://www.reddit.com.*
+# AWS training PDFs return 403 to CI runners but work fine in browsers
+https://d1.awsstatic.com.*
