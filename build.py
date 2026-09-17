@@ -1097,14 +1097,9 @@ Visualization     → QuickSight / Grafana dashboards</code></pre></section>""",
     body_html,chklist,nf,nl,
     extra_badge=CERT_EXTRAS.get(code,{}).get("extra_badge",""),
     notice=CERT_EXTRAS.get(code,{}).get("notice",""))
-  write(f"{DOCS}/{code.lower().replace('-','')}.html", page)
-
-# Fix filenames (hyphenated)
-import shutil
-for code in ["ANS-C01","MLS-C01","DAS-C01"]:
-    src = f"{DOCS}/{code.lower().replace('-','')}.html"
-    dst = f"{DOCS}/{code.lower()}.html"
-    if os.path.exists(src): shutil.move(src,dst)
+  # Write directly to the correct hyphenated filename (e.g. ans-c01.html) so the
+  # canonical/og:url/breadcrumb URLs computed in write() match the deployed path.
+  write(f"{DOCS}/{code.lower()}.html", page)
 
 print("All cert pages done!")
 
