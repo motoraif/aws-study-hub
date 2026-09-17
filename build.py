@@ -2770,6 +2770,99 @@ dashboard_html = HEAD("My Progress","Your personal AWS study dashboard: quiz rea
 """ + FOOT
 write(f"{DOCS}/dashboard.html", dashboard_html)
 
+# ── news.html ───────────────────────────────────────────────
+# Renders the auto-updated data/aws-news.json feed. Generated here (not by the
+# news workflow, which only writes the JSON) so it gets SEO tags via HEAD.
+news_html = HEAD("AWS News - Latest AWS What's New","Latest AWS What's New announcements, updated automatically every week. Stay current with new AWS services, features, and region launches.") + """
+<div class="page-header"><div class="container">
+  <span class="badge badge-orange">&#128260; Auto-Updated Weekly</span>
+  <h1 style="margin-top:0.75rem;">&#128240; AWS News - What's New</h1>
+  <p>The latest AWS announcements, pulled automatically from the official <a href="https://aws.amazon.com/about-aws/whats-new/recent/" target="_blank" rel="noopener">AWS What's New</a> feed by GitHub Actions every week.</p>
+  <div class="flex-wrap mt-1"><span class="badge badge-teal" id="news-updated">Loading&hellip;</span><span class="badge badge-green" id="news-count"></span></div>
+</div></div>
+
+<section class="section"><div class="container">
+  <div style="max-width:520px;margin:0 auto 1.5rem">
+    <input id="news-filter" type="text" placeholder="&#128269; Filter announcements (e.g. Bedrock, EC2, Lambda)&hellip;" autocomplete="off"
+      style="width:100%;padding:0.7rem 1rem;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);color:var(--text);font-size:0.95rem">
+  </div>
+  <div id="news-list" class="grid-2">
+    <div class="card"><p style="color:var(--text-muted)">Loading the latest AWS news&hellip;</p></div>
+  </div>
+  <div class="text-center mt-2">
+    <a href="https://aws.amazon.com/about-aws/whats-new/recent/" target="_blank" rel="noopener" class="btn btn-outline">View Full AWS What's New Feed &rarr;</a>
+  </div>
+</div></section>
+
+<script>
+(function(){
+  var dataUrl = "../data/aws-news.json";
+  var listEl = document.getElementById("news-list");
+  var updatedEl = document.getElementById("news-updated");
+  var countEl = document.getElementById("news-count");
+  var filterEl = document.getElementById("news-filter");
+  var ALL = [];
+
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;","\\"":"&quot;","'":"&#39;"}[c]; }); }
+
+  function card(it){
+    var link = esc(it.link || "#");
+    var date = esc(it.date || "");
+    var title = esc(it.title || "");
+    var summary = esc(it.summary || "");
+    return '<a href="' + link + '" target="_blank" rel="noopener" class="card" style="text-decoration:none;color:var(--text);display:block">' +
+             '<div class="flex-wrap" style="margin-bottom:0.5rem"><span class="badge badge-orange">' + date + '</span>' +
+             '<span class="badge badge-blue">AWS Official &#8599;</span></div>' +
+             '<h3 style="font-size:1.05rem;margin:0 0 0.5rem">' + title + '</h3>' +
+             '<p style="color:var(--text-muted);font-size:0.9rem;margin:0">' + summary + '</p>' +
+           '</a>';
+  }
+
+  function render(items){
+    if (!items.length){
+      listEl.innerHTML = '<div class="card"><p style="color:var(--text-muted)">No matching announcements.</p></div>';
+      return;
+    }
+    listEl.innerHTML = items.map(card).join("");
+  }
+
+  if (filterEl){
+    filterEl.addEventListener("input", function(){
+      var q = filterEl.value.trim().toLowerCase();
+      if (!q){ render(ALL); return; }
+      render(ALL.filter(function(it){
+        return ((it.title||"")+" "+(it.summary||"")).toLowerCase().indexOf(q) !== -1;
+      }));
+    });
+  }
+
+  fetch(dataUrl, {cache: "no-cache"})
+    .then(function(r){ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
+    .then(function(data){
+      var items = (data && data.items) || [];
+      ALL = items;
+      if (updatedEl) updatedEl.textContent = data && data.updated ? ("Last updated: " + data.updated) : "Update time unknown";
+      if (countEl) countEl.textContent = items.length + " announcements";
+
+      if (!items.length) {
+        listEl.innerHTML = '<div class="card"><p style="color:var(--text-muted)">No news items available yet. Check back soon.</p></div>';
+        return;
+      }
+      render(items);
+    })
+    .catch(function(err){
+      if (updatedEl) updatedEl.textContent = "Could not load news";
+      listEl.innerHTML = '<div class="card"><h3>&#9888;&#65039; Unable to load AWS news</h3>' +
+        '<p style="color:var(--text-muted)">The news feed could not be loaded (' + esc(err.message) + '). ' +
+        'You can view the latest announcements directly on the ' +
+        '<a href="https://aws.amazon.com/about-aws/whats-new/recent/" target="_blank" rel="noopener">official AWS What\\'s New page</a>.</p></div>';
+    });
+})();
+</script>
+""" + FOOT
+write(f"{DOCS}/news.html", news_html)
+
 # ── SEO & PWA assets: sitemap.xml, robots.txt, manifest, OG image ──
 import datetime
 today = datetime.date.today().isoformat()
