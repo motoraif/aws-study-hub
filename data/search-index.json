@@ -7,6 +7,10 @@
 "url": "index.html",
 "desc": "Free community-driven study hub for all AWS certifications.",
 "headings": [
+"Interactive Study Tools",
+"Practice Quiz",
+"Confusing Pairs Cheat Sheet",
+"My Progress",
 "Foundations First",
 "Linux Fundamentals",
 "Networking Fundamentals",
@@ -27,9 +31,7 @@
 "Top Study Resources",
 "AWS Skill Builder",
 "Stephane Maarek",
-"Tutorials Dojo",
-"Adrian Cantrill",
-"Help Make This the #1 AWS Study Resource"
+"Tutorials Dojo"
 ]
 },
 {
