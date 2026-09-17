@@ -2061,4 +2061,22 @@ Total RTO: ~10-15 minutes ✓</code></pre></div></details></div></section>
 </main></div></div>
 """ + FOOT
 write(f"{DOCS}/labs.html", labs_html)
+
+# ── quiz.html ───────────────────────────────────────────────
+quiz_html = HEAD("Practice Quiz","Interactive AWS certification practice quiz with instant scoring, domain breakdown, and explanations. Free and open source.") + """
+<div class="container" style="padding-top:2rem"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Practice Quiz</span></div></div>
+<div class="page-header"><div class="container">
+  <span class="badge badge-green">Interactive</span>
+  <h1 style="margin-top:0.75rem">&#129513; Practice Quiz</h1>
+  <p>Test yourself with timed, randomized questions per certification. Get instant scoring, a domain-by-domain breakdown, and an explanation for every answer. Your best scores are saved in your browser - no account needed.</p>
+  <div class="flex-wrap mt-1"><span class="badge badge-blue">Instant Scoring</span><span class="badge badge-orange">Explanations</span><span class="badge badge-green">Progress Saved Locally</span></div>
+</div></div>
+<div class="container" style="padding:2rem 0 4rem">
+  <div id="quiz-app"></div>
+  <div class="callout info" style="margin-top:2rem"><div class="callout-title">&#128161; Want to add questions?</div><p>This question bank is open source. Add or improve questions by editing <code>data/quiz-questions.json</code> and opening a pull request. Each question needs a cert, domain, options, the correct answer index, and an explanation.</p></div>
+</div>
+<script src="../assets/js/quiz.js"></script>
+""" + FOOT
+write(f"{DOCS}/quiz.html", quiz_html)
+
 print("\nAll pages generated successfully!")
