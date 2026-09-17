@@ -24,7 +24,7 @@ def seo_tags(title, desc, root):
   <meta name="twitter:title" content="{full_title}">
   <meta name="twitter:description" content="{desc}">
   <meta name="twitter:image" content="{OG_IMAGE}">
-  <script type="application/ld+json">{{"@context":"https://schema.org","@type":"WebSite","name":"AWS Study Hub","url":"{SITE_URL}/","description":"Free, open-source study platform for every AWS certification.","inLanguage":"en"}}</script>"""
+  <script type="application/ld+json">{{"@context":"https://schema.org","@graph":[{{"@type":"WebSite","@id":"{SITE_URL}/#website","name":"AWS Study Hub","url":"{SITE_URL}/","description":"Free, open-source study platform for every AWS certification.","inLanguage":"en","publisher":{{"@id":"{SITE_URL}/#org"}}}},{{"@type":"EducationalOrganization","@id":"{SITE_URL}/#org","name":"AWS Study Hub","url":"{SITE_URL}/","description":"Free, community-driven study resources for AWS certifications."}}]}}</script>"""
 
 HEAD = lambda t,d: f"""<!DOCTYPE html>
 <html lang="en">
@@ -122,7 +122,36 @@ def exam(cn,cu,egu,sq,dur,q,ps,domains):
 <div class="table-wrap"><table><thead><tr><th>Domain</th><th>Weight</th></tr></thead><tbody>{dr}</tbody></table></div>
 </section>"""
 
+def _page_url(path):
+    """Absolute canonical URL for a written file, based on its path relative to BASE."""
+    rel = os.path.relpath(path, BASE).replace(os.sep, "/")
+    return f"{SITE_URL}/{rel}"
+
+def _breadcrumb_jsonld(path, content):
+    """BreadcrumbList JSON-LD for a page, using its <title> as the page name."""
+    import json as _j, re as _re, html as _h
+    rel = os.path.relpath(path, BASE).replace(os.sep, "/")
+    url = f"{SITE_URL}/{rel}"
+    items = [{"@type": "ListItem", "position": 1, "name": "Home", "item": f"{SITE_URL}/"}]
+    if rel != "index.html":
+        m = _re.search(r"<title>(.*?)</title>", content, _re.S)
+        name = _h.unescape(m.group(1)).replace(" - AWS Study Hub", "").strip() if m else rel
+        items.append({"@type": "ListItem", "position": 2, "name": name, "item": url})
+    return ('<script type="application/ld+json">'
+            + _j.dumps({"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": items}, ensure_ascii=False)
+            + '</script>')
+
 def write(path,content):
+    # For HTML pages, inject per-page canonical, og:url, and breadcrumb structured data.
+    if path.endswith(".html"):
+        url = _page_url(path)
+        if '<link rel="canonical"' not in content:
+            content = content.replace('  <link rel="manifest"',
+                                      f'  <link rel="canonical" href="{url}">\n  <link rel="manifest"', 1)
+        content = content.replace(f'<meta property="og:url" content="{SITE_URL}/">',
+                                  f'<meta property="og:url" content="{url}">', 1)
+        if 'BreadcrumbList' not in content:
+            content = content.replace('</head>', '  ' + _breadcrumb_jsonld(path, content) + '\n</head>', 1)
     with open(path,'w') as f: f.write(content)
     print(f"  Written: {path.split('/')[-1]}")
 
