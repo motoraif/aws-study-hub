@@ -55,6 +55,7 @@
     <a href="${root}docs/labs.html">Labs</a>
     <a href="${root}docs/quiz.html">Quiz <span class="nav-pill nav-pill-new">New</span></a>
     <a href="${root}docs/cheatsheets.html">Cheat Sheets <span class="nav-pill nav-pill-new">New</span></a>
+    <a href="${root}docs/dashboard.html">My Progress <span class="nav-pill nav-pill-new">New</span></a>
     <a href="${root}docs/news.html">News</a>
     <a href="https://github.com/motoraif/aws-study-hub" target="_blank" rel="noopener">GitHub &#11088;</a>
     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme">&#127769;</button>
@@ -104,6 +105,7 @@
         <li><a href="${root}docs/labs.html">Labs &amp; Practice</a></li>
         <li><a href="${root}docs/quiz.html">Practice Quiz</a></li>
         <li><a href="${root}docs/cheatsheets.html">Cheat Sheets</a></li>
+        <li><a href="${root}docs/dashboard.html">My Progress</a></li>
         <li><a href="${root}docs/news.html">AWS News</a></li>
         <li><a href="https://explore.skillbuilder.aws/" target="_blank">AWS Skill Builder</a></li>
         <li><a href="https://www.udemy.com/user/stephane-maarek/" target="_blank">Stephane Maarek</a></li>

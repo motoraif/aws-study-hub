@@ -2717,6 +2717,22 @@ cheatsheets_html = HEAD("Confusing Pairs Cheat Sheet","Side-by-side comparisons 
 """) + FOOT
 write(f"{DOCS}/cheatsheets.html", cheatsheets_html)
 
+# ── dashboard.html (progress) ───────────────────────────────
+dashboard_html = HEAD("My Progress","Your personal AWS study dashboard: quiz readiness per certification and study-checklist completion, all saved privately in your browser.") + """
+<div class="container" style="padding-top:2rem"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>My Progress</span></div></div>
+<div class="page-header"><div class="container">
+  <span class="badge badge-green">Personal</span>
+  <h1 style="margin-top:0.75rem">&#128202; My Progress</h1>
+  <p>Your quiz readiness by certification and overall study-checklist completion, in one place. Everything here is stored privately in your browser - no account, nothing uploaded.</p>
+  <div class="flex-wrap mt-1"><span class="badge badge-blue">Quiz Scores</span><span class="badge badge-orange">Checklist Completion</span><span class="badge badge-green">Private &amp; Local</span></div>
+</div></div>
+<div class="container" style="padding:2rem 0 4rem">
+  <div id="dashboard-app"></div>
+</div>
+<script src="../assets/js/dashboard.js"></script>
+""" + FOOT
+write(f"{DOCS}/dashboard.html", dashboard_html)
+
 # ── SEO & PWA assets: sitemap.xml, robots.txt, manifest, OG image ──
 import datetime
 today = datetime.date.today().isoformat()
