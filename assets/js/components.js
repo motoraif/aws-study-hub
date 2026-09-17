@@ -58,6 +58,7 @@
     <a href="${root}docs/dashboard.html">My Progress <span class="nav-pill nav-pill-new">New</span></a>
     <a href="${root}docs/news.html">News</a>
     <a href="https://github.com/motoraif/aws-study-hub" target="_blank" rel="noopener">GitHub &#11088;</a>
+    <button class="theme-toggle" id="search-toggle" aria-label="Search (press /)" title="Search (/)">&#128269;</button>
     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme">&#127769;</button>
   </div>
 </div></nav>`;

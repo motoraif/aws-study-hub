@@ -39,6 +39,7 @@ HEAD = lambda t,d: f"""<!DOCTYPE html>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/style.css">
   <script src="../assets/js/components.js"></script>
+  <script src="../assets/js/search.js" defer></script>
 </head><body>"""
 
 HEAD_ROOT = lambda t,d: f"""<!DOCTYPE html>
@@ -54,6 +55,7 @@ HEAD_ROOT = lambda t,d: f"""<!DOCTYPE html>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
   <script src="assets/js/components.js"></script>
+  <script src="assets/js/search.js" defer></script>
 </head><body>"""
 
 FOOT      = '<script src="../assets/js/main.js"></script></body></html>'
@@ -2757,6 +2759,41 @@ sitemap = ('<?xml version="1.0" encoding="UTF-8"?>\n'
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
            f"{urls}</urlset>\n")
 write(f"{BASE}/sitemap.xml", sitemap)
+
+# ── Search index (client-side search, no external deps) ──────
+import re as _re, json as _json, html as _html
+_search_docs = []
+for _p in sitemap_pages:
+    _fp = f"{BASE}/{_p}"
+    try:
+        _txt = open(_fp, encoding="utf-8").read()
+    except OSError:
+        continue
+    _title_m = _re.search(r"<title>(.*?)</title>", _txt, _re.S)
+    _title = _html.unescape(_title_m.group(1).strip()) if _title_m else _p
+    _title = _title.replace(" - AWS Study Hub", "")
+    _desc_m = _re.search(r'<meta name="description" content="(.*?)"', _txt, _re.S)
+    _desc = _html.unescape(_desc_m.group(1).strip()) if _desc_m else ""
+    # Section headings (h2/h3), strip any inner tags/emoji entities
+    _heads = []
+    for _h in _re.findall(r"<h[23][^>]*>(.*?)</h[23]>", _txt, _re.S):
+        _clean = _re.sub(r"<[^>]+>", "", _h)
+        _clean = _re.sub(r"&#\d+;|&#x[0-9a-fA-F]+;", "", _clean)
+        _clean = _html.unescape(_clean).strip()
+        if _clean:
+            _heads.append(_clean)
+    # URL relative to site root (index.html at root, others under docs/)
+    _url = _p
+    _search_docs.append({
+        "title": _title,
+        "url": _url,
+        "desc": _desc,
+        "headings": _heads[:25],
+    })
+_search_index = {"version": 1, "generated": today, "docs": _search_docs}
+os.makedirs(f"{BASE}/data", exist_ok=True)
+write(f"{BASE}/data/search-index.json", _json.dumps(_search_index, ensure_ascii=False, indent=0) + "\n")
+
 
 robots = ("User-agent: *\n"
           "Allow: /\n\n"
