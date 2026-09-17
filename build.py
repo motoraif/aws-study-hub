@@ -946,108 +946,378 @@ linux_html = HEAD("Linux Fundamentals","Complete Linux guide for AWS certificati
 <div class="page-header"><div class="container">
   <span class="badge badge-teal">Foundations</span>
   <h1 style="margin-top:0.75rem">&#128039; Linux Fundamentals</h1>
-  <p>Master essential Linux skills needed for every AWS certification and real-world cloud engineering. From basic commands to shell scripting and system administration.</p>
-  <div class="flex-wrap mt-1"><span class="badge badge-green">Beginner Friendly</span><span class="badge badge-blue">20+ Topics</span><span class="badge badge-orange">Essential for all AWS Certs</span></div>
+  <p>Master essential Linux skills needed for every AWS certification and real-world cloud engineering. From the file system and permissions to text processing, storage, shell scripting, systemd, security hardening, containers, and a full troubleshooting playbook.</p>
+  <div class="flex-wrap mt-1"><span class="badge badge-green">Beginner Friendly</span><span class="badge badge-blue">21 Topics</span><span class="badge badge-orange">Essential for all AWS Certs</span></div>
 </div></div>
-""" + wrap([("why","Why Linux for AWS?"),("filesystem","File System"),("permissions","Permissions"),("commands","Essential Commands"),("processes","Processes"),("networking","Networking"),("scripting","Shell Scripting"),("ssh","SSH & EC2"),("systemd","Systemd"),("checklist","Checklist")], """
+""" + wrap([("why","Why Linux for AWS?"),("distros","Distributions & Shells"),("filesystem","File System"),("navigation","Navigation & Files"),("permissions","Permissions"),("users","Users & Groups"),("text","Text Processing"),("commands","Command Reference"),("processes","Processes & Signals"),("resources","Memory, CPU & Disk"),("storage","Disks, Partitions & Mounts"),("packages","Package Management"),("networking","Networking Commands"),("scripting","Shell Scripting"),("cron","Cron & Scheduling"),("logs","Logs & journald"),("ssh","SSH & EC2 Access"),("systemd","Systemd & Services"),("security","Security Hardening"),("containers","Containers on Linux"),("troubleshooting","Troubleshooting Playbook"),("checklist","Checklist")], """
 <section id="why"><h2>Why Linux for AWS?</h2>
-<p>Over <strong>90% of cloud workloads</strong> run on Linux. EC2 instances, ECS containers, Lambda environments - all Linux. Understanding Linux means you can:</p>
-<ul><li>Debug EC2 instances via SSH</li><li>Write UserData bootstrap scripts</li><li>Create and manage Docker containers</li><li>Answer scenario questions on SOA-C02 &amp; DVA-C02 exams</li></ul>
-<div class="callout tip"><div class="callout-title">&#128161; Tip</div><p>On EC2: <code>/var/log/cloud-init.log</code> contains your UserData script output - critical for debugging bootstrap issues.</p></div></section>
+<p>Over <strong>90% of cloud workloads</strong> run on Linux. EC2 instances, ECS/EKS containers, Lambda execution environments, and most managed services run on a Linux kernel under the hood. Solid Linux skills let you:</p>
+<ul><li>Debug EC2 instances over SSH and Session Manager</li><li>Write UserData / cloud-init bootstrap scripts</li><li>Build and run Docker containers for ECS, EKS, and Fargate</li><li>Read logs, trace processes, and diagnose performance issues</li><li>Answer scenario questions on SOA-C02, DVA-C02, and SAP-C02 exams</li></ul>
+<div class="callout tip"><div class="callout-title">&#128161; Tip</div><p>On EC2, <code>/var/log/cloud-init-output.log</code> captures your UserData script output - the first place to look when a bootstrap fails.</p></div>
+<div class="callout info"><div class="callout-title">&#9729;&#65039; Amazon Linux 2023</div><p>AL2023 is the current default Amazon Linux. It uses <code>dnf</code> (not <code>yum</code>), <code>systemd</code>, and ships with SELinux in permissive mode. The default login user is <code>ec2-user</code>.</p></div></section>
 
-<section id="filesystem"><h2>Linux File System</h2>
+<section id="distros"><h2>Distributions &amp; Shells</h2>
+<div class="table-wrap"><table><thead><tr><th>Distro</th><th>Package Mgr</th><th>Default EC2 User</th><th>Notes</th></tr></thead><tbody>
+  <tr><td>Amazon Linux 2023</td><td>dnf</td><td>ec2-user</td><td>AWS-tuned, current default</td></tr>
+  <tr><td>Amazon Linux 2</td><td>yum</td><td>ec2-user</td><td>Legacy, still widely used</td></tr>
+  <tr><td>Ubuntu</td><td>apt</td><td>ubuntu</td><td>Popular, large ecosystem</td></tr>
+  <tr><td>RHEL / Rocky / Alma</td><td>dnf/yum</td><td>ec2-user / rocky</td><td>Enterprise, RPM-based</td></tr>
+  <tr><td>Debian</td><td>apt</td><td>admin</td><td>Stable, minimal</td></tr>
+  <tr><td>SUSE (SLES)</td><td>zypper</td><td>ec2-user</td><td>SAP workloads</td></tr>
+</tbody></table></div>
+<p>The <strong>shell</strong> is the program that interprets your commands. <code>bash</code> is the most common; <code>sh</code>, <code>zsh</code>, and <code>dash</code> also appear. Check yours with <code>echo $SHELL</code>.</p>
+<pre><code>cat /etc/os-release       # Identify the distribution and version
+echo $SHELL               # Your login shell
+uname -r                  # Kernel version
+hostnamectl               # Host, OS, kernel summary (systemd)</code></pre></section>
+
+<section id="filesystem"><h2>Linux File System (FHS)</h2>
+<p>Linux follows the <strong>Filesystem Hierarchy Standard</strong>. Everything is a file, and everything hangs off a single root <code>/</code>.</p>
 <div class="table-wrap"><table><thead><tr><th>Directory</th><th>Purpose</th></tr></thead><tbody>
   <tr><td><code>/</code></td><td>Root of the entire filesystem</td></tr>
-  <tr><td><code>/bin</code></td><td>Essential user binaries (ls, cp, mv)</td></tr>
-  <tr><td><code>/etc</code></td><td>Configuration files</td></tr>
+  <tr><td><code>/bin</code>, <code>/usr/bin</code></td><td>Essential and user binaries (ls, cp, mv)</td></tr>
+  <tr><td><code>/sbin</code>, <code>/usr/sbin</code></td><td>System admin binaries (mount, iptables)</td></tr>
+  <tr><td><code>/etc</code></td><td>System-wide configuration files</td></tr>
   <tr><td><code>/home</code></td><td>User home directories</td></tr>
-  <tr><td><code>/var</code></td><td>Variable data (logs, databases, mail)</td></tr>
-  <tr><td><code>/tmp</code></td><td>Temporary files (cleared on reboot)</td></tr>
-  <tr><td><code>/proc</code></td><td>Virtual filesystem for kernel/process info</td></tr>
-  <tr><td><code>/opt</code></td><td>Optional software packages</td></tr>
-</tbody></table></div></section>
+  <tr><td><code>/root</code></td><td>Home directory of the root user</td></tr>
+  <tr><td><code>/var</code></td><td>Variable data (logs, spools, caches, mail)</td></tr>
+  <tr><td><code>/var/log</code></td><td>Log files - your debugging home base</td></tr>
+  <tr><td><code>/tmp</code></td><td>Temporary files (often cleared on reboot)</td></tr>
+  <tr><td><code>/proc</code></td><td>Virtual FS exposing kernel/process info</td></tr>
+  <tr><td><code>/sys</code></td><td>Virtual FS for devices and kernel objects</td></tr>
+  <tr><td><code>/dev</code></td><td>Device files (disks: /dev/xvda, /dev/nvme0n1)</td></tr>
+  <tr><td><code>/opt</code></td><td>Optional / third-party software packages</td></tr>
+  <tr><td><code>/mnt</code>, <code>/media</code></td><td>Mount points for extra filesystems</td></tr>
+</tbody></table></div>
+<div class="callout tip"><div class="callout-title">&#128161; Everything is a file</div><p>Disks, processes, and even network sockets are represented as files. That is why tools like <code>cat /proc/cpuinfo</code> and <code>cat /proc/meminfo</code> work.</p></div></section>
 
-<section id="permissions"><h2>File Permissions</h2>
+<section id="navigation"><h2>Navigation &amp; File Operations</h2>
+<pre><code># Where am I / what is here
+pwd                       # Print working directory
+ls -la                    # Long listing incl. hidden files
+ls -lh                    # Human-readable sizes
+tree -L 2                 # Directory tree (2 levels)
+
+# Moving around
+cd /var/log; cd ~; cd -   # Absolute, home, previous dir
+
+# Create / copy / move / delete
+mkdir -p a/b/c            # Create nested directories
+touch file.txt           # Create empty file / update timestamp
+cp -r src/ dest/          # Recursive copy
+mv old.txt new.txt        # Rename or move
+rm -i file.txt           # Interactive delete (safer)
+rm -rf dir/              # Recursive force delete (dangerous)
+
+# Read files
+cat file.txt              # Dump whole file
+less file.txt             # Page through (q to quit)
+head -n 20 file.txt       # First 20 lines
+tail -n 50 file.txt       # Last 50 lines
+tail -f /var/log/syslog   # Follow live (Ctrl+C to stop)
+
+# Links
+ln -s /path/target link   # Symbolic link
+</code></pre>
+<div class="callout warn"><div class="callout-title">&#9888; rm -rf is irreversible</div><p>There is no recycle bin. <code>rm -rf /</code> or a mistyped variable like <code>rm -rf $DIR/</code> (when <code>$DIR</code> is empty) can wipe a system. Double-check paths and prefer <code>rm -i</code> when unsure.</p></div></section>
+
+<section id="permissions"><h2>File Permissions &amp; Ownership</h2>
 <pre><code>-rwxr-xr-- 1 ubuntu aws-team 1234 Jul 10 12:00 deploy.sh
- │└──┬──┘└──┬──┘└──┬──┘
- │   │      │      └── Other: r-- (4)
- │   │      └───────── Group: r-x (5)
- │   └──────────────── Owner: rwx (7)</code></pre>
+│└──┬──┘└──┬──┘└──┬──┘
+│   │      │      └── Other: r-- (4)
+│   │      └───────── Group: r-x (5)
+│   └──────────────── Owner: rwx (7)
+└── File type: - file, d directory, l symlink</code></pre>
 <div class="table-wrap"><table><thead><tr><th>Permission</th><th>Symbol</th><th>Octal</th></tr></thead><tbody>
   <tr><td>Read</td><td>r</td><td>4</td></tr><tr><td>Write</td><td>w</td><td>2</td></tr>
   <tr><td>Execute</td><td>x</td><td>1</td></tr><tr><td>None</td><td>-</td><td>0</td></tr>
 </tbody></table></div>
-<pre><code>chmod 755 script.sh        # rwxr-xr-x
-chmod +x script.sh         # Add execute for all
-chown ubuntu:team file.txt # Change owner:group</code></pre>
-<div class="callout warn"><div class="callout-title">&#9888; AWS Exam Tip</div><p>SSH key pairs must have <code>chmod 400</code> permissions. AWS refuses connection if the .pem file is too permissive.</p></div></section>
+<pre><code>chmod 755 script.sh          # rwxr-xr-x
+chmod 640 secret.conf        # rw-r-----
+chmod +x script.sh           # Add execute for all
+chmod -R g+w /shared         # Recursive group write
+chown ubuntu:team file.txt   # Change owner:group
+chgrp team file.txt          # Change group only
+umask 022                    # Default permission mask</code></pre>
+<h3>Special permission bits</h3>
+<div class="table-wrap"><table><thead><tr><th>Bit</th><th>Octal</th><th>Effect</th></tr></thead><tbody>
+  <tr><td>setuid</td><td>4000</td><td>Run as file owner (e.g. <code>passwd</code>)</td></tr>
+  <tr><td>setgid</td><td>2000</td><td>Run as group / inherit group on dirs</td></tr>
+  <tr><td>sticky</td><td>1000</td><td>Only owner can delete (e.g. <code>/tmp</code>)</td></tr>
+</tbody></table></div>
+<div class="callout warn"><div class="callout-title">&#9888; AWS Exam Tip</div><p>SSH private keys must be <code>chmod 400</code> (or 600). SSH refuses to use a <code>.pem</code> that is readable by group/other with an "UNPROTECTED PRIVATE KEY FILE" error.</p></div></section>
 
-<section id="commands"><h2>Essential Commands</h2>
-<pre><code># Navigation
-pwd; ls -la; cd /var/log; cd ~; cd -
+<section id="users"><h2>Users, Groups &amp; sudo</h2>
+<pre><code># Identity
+whoami; id                    # Current user, UID/GID/groups
+who; w                        # Who is logged in
 
-# Files
-cp source dest; mv file newname; rm -rf dir/
-mkdir -p a/b/c; touch file.txt
-cat file.txt; less file.txt; tail -f /var/log/syslog
+# Manage users (need root/sudo)
+sudo useradd -m -s /bin/bash alice   # Create user with home + shell
+sudo passwd alice                    # Set password
+sudo usermod -aG docker alice        # Add to supplementary group
+sudo userdel -r alice                # Delete user and home
 
-# Search
-find / -name "*.log" -type f
-grep -r "ERROR" /var/log/
-grep -i "warning" app.log
-which python3; whereis nginx
+# Groups
+sudo groupadd deploy
+groups alice                         # Show a user's groups
 
-# Archives
-tar -czvf archive.tar.gz /mydir
-tar -xzvf archive.tar.gz
-zip -r backup.zip /mydir; unzip backup.zip</code></pre></section>
+# Elevated privileges
+sudo command                         # Run one command as root
+sudo -i                              # Interactive root shell
+visudo                               # Safely edit /etc/sudoers</code></pre>
+<div class="table-wrap"><table><thead><tr><th>File</th><th>Contents</th></tr></thead><tbody>
+  <tr><td><code>/etc/passwd</code></td><td>User accounts (name, UID, GID, home, shell)</td></tr>
+  <tr><td><code>/etc/shadow</code></td><td>Hashed passwords (root-only)</td></tr>
+  <tr><td><code>/etc/group</code></td><td>Group definitions and members</td></tr>
+  <tr><td><code>/etc/sudoers</code></td><td>Who can run sudo and how</td></tr>
+</tbody></table></div>
+<div class="callout info"><div class="callout-title">&#9729;&#65039; AWS Context</div><p>On EC2, the default user (<code>ec2-user</code> / <code>ubuntu</code>) is granted passwordless sudo via a file in <code>/etc/sudoers.d/</code>. SSM Session Manager connects as <code>ssm-user</code>.</p></div></section>
 
-<section id="processes"><h2>Processes &amp; System Info</h2>
-<pre><code>ps aux                  # All running processes
-ps aux | grep nginx     # Filter for nginx
-top                     # Real-time process viewer
-kill PID                # Graceful stop (SIGTERM)
-kill -9 PID             # Force kill (SIGKILL)
-free -h                 # Memory usage
-df -h                   # Disk usage
-uname -a                # Kernel info
-uptime                  # System uptime and load</code></pre></section>
+<section id="text"><h2>Text Processing (grep, sed, awk)</h2>
+<pre><code># grep - search text
+grep -i "error" app.log          # Case-insensitive
+grep -r "TODO" src/              # Recursive
+grep -c "404" access.log         # Count matches
+grep -v "DEBUG" app.log          # Invert (exclude)
+grep -E "warn|error" app.log     # Extended regex
+
+# sed - stream editor (find/replace)
+sed 's/foo/bar/g' file.txt       # Replace all foo with bar
+sed -i 's/8080/80/g' app.conf    # In-place edit
+sed -n '10,20p' file.txt         # Print lines 10-20
+
+# awk - column/field processing
+awk '{print $1}' access.log      # First field of each line
+awk -F',' '{print $3}' data.csv  # CSV third column
+awk '$9 == 500 {print}' access.log  # Rows where field 9 is 500
+awk '{sum+=$1} END {print sum}' nums.txt  # Sum a column
+
+# cut / sort / uniq / wc
+cut -d':' -f1 /etc/passwd         # First colon-delimited field
+sort file.txt | uniq -c | sort -rn  # Frequency count, descending
+wc -l file.txt                    # Count lines</code></pre>
+<div class="callout tip"><div class="callout-title">&#128161; Real-world combo</div><p>Find the top 10 IPs hitting your server: <code>awk '{print $1}' access.log | sort | uniq -c | sort -rn | head</code></p></div></section>
+
+<section id="commands"><h2>Command Reference</h2>
+<pre><code># Pipes and redirection
+command | other           # Pipe stdout to next command
+command > file            # Redirect stdout (overwrite)
+command >> file           # Redirect stdout (append)
+command 2> err.log        # Redirect stderr
+command > out.log 2>&1    # Redirect both stdout and stderr
+command < input.txt       # Feed file as stdin
+command1 && command2      # Run command2 only if command1 succeeds
+command1 || command2      # Run command2 only if command1 fails
+
+# Search the filesystem
+find / -name "*.log" -type f          # By name
+find /var -size +100M                 # Files larger than 100MB
+find . -mtime -1                      # Modified in last 24h
+find /tmp -type f -delete             # Find and delete
+which python3; whereis nginx; type ls # Locate binaries
+
+# Archives & compression
+tar -czvf archive.tar.gz /mydir       # Create gzip tarball
+tar -xzvf archive.tar.gz              # Extract gzip tarball
+tar -tzvf archive.tar.gz              # List contents
+zip -r backup.zip /mydir; unzip backup.zip
+gzip file; gunzip file.gz
+
+# Transfer & sync
+scp -i key.pem file ec2-user@IP:/tmp/ # Secure copy
+rsync -avz src/ ec2-user@IP:/dest/    # Efficient sync
+curl -O https://example.com/file.tgz  # Download
+wget https://example.com/file.tgz     # Download</code></pre></section>
+
+<section id="processes"><h2>Processes &amp; Signals</h2>
+<pre><code>ps aux                    # All running processes
+ps aux | grep nginx       # Filter for nginx
+ps -ef --forest           # Process tree
+pgrep -a nginx            # PIDs by name
+top                       # Real-time process viewer
+htop                      # Friendlier top (if installed)
+
+# Sending signals
+kill PID                  # SIGTERM (15) - graceful stop
+kill -9 PID               # SIGKILL (9) - force kill
+kill -HUP PID             # SIGHUP (1) - reload config
+pkill nginx               # Kill by name
+killall -9 python3        # Kill all matching
+
+# Job control
+command &                 # Run in background
+jobs                      # List background jobs
+fg %1; bg %1              # Foreground / background a job
+nohup long_task &         # Survive logout
+</code></pre>
+<div class="table-wrap"><table><thead><tr><th>Signal</th><th>Number</th><th>Meaning</th></tr></thead><tbody>
+  <tr><td>SIGTERM</td><td>15</td><td>Polite request to terminate (default)</td></tr>
+  <tr><td>SIGKILL</td><td>9</td><td>Force kill, cannot be caught</td></tr>
+  <tr><td>SIGHUP</td><td>1</td><td>Hang up / reload configuration</td></tr>
+  <tr><td>SIGINT</td><td>2</td><td>Interrupt (Ctrl+C)</td></tr>
+</tbody></table></div></section>
+
+<section id="resources"><h2>Memory, CPU &amp; Load</h2>
+<pre><code>free -h                   # Memory usage (human readable)
+vmstat 1                  # Virtual memory stats every 1s
+top                       # CPU + memory live view
+uptime                    # Load averages (1, 5, 15 min)
+nproc                     # Number of CPU cores
+cat /proc/cpuinfo         # CPU details
+cat /proc/meminfo         # Memory details
+iostat -x 1               # Disk I/O stats (sysstat pkg)
+sar -u 1 5                # Historical CPU sampling</code></pre>
+<div class="callout tip"><div class="callout-title">&#128161; Reading load average</div><p>Load average is the number of processes waiting to run. On a machine with 4 cores, a load of 4.0 means fully busy. A load consistently above your core count means CPU saturation - a common CloudWatch alarm scenario.</p></div></section>
+
+<section id="storage"><h2>Disks, Partitions &amp; Mounts</h2>
+<pre><code>df -h                     # Disk usage per filesystem
+du -sh /var/log           # Size of a directory
+du -sh * | sort -rh | head  # Biggest items in current dir
+lsblk                     # Block devices tree
+blkid                     # Show UUIDs and filesystem types
+mount | column -t         # Currently mounted filesystems
+
+# Format and mount a new EBS volume (Nitro: /dev/nvme1n1)
+sudo mkfs -t xfs /dev/nvme1n1
+sudo mkdir /data
+sudo mount /dev/nvme1n1 /data
+# Persist across reboot via /etc/fstab (use UUID from blkid)
+echo 'UUID=xxxx /data xfs defaults,nofail 0 2' | sudo tee -a /etc/fstab</code></pre>
+<div class="callout warn"><div class="callout-title">&#9888; AWS Exam Tip</div><p>On Nitro-based instances, EBS volumes appear as NVMe devices (<code>/dev/nvme1n1</code>), not <code>/dev/xvdf</code>. Use <code>lsblk</code> to map them. Always add <code>nofail</code> in <code>/etc/fstab</code> so a missing volume does not block boot.</p></div>
+<div class="callout info"><div class="callout-title">&#9729;&#65039; Grow a filesystem after resizing EBS</div><p>After increasing an EBS volume: <code>sudo growpart /dev/nvme0n1 1</code> then <code>sudo xfs_growfs /</code> (xfs) or <code>sudo resize2fs /dev/nvme0n1p1</code> (ext4).</p></div></section>
+
+<section id="packages"><h2>Package Management</h2>
+<div class="grid-2">
+  <div class="card"><h3>dnf / yum (Amazon Linux, RHEL)</h3><pre><code>sudo dnf update -y
+sudo dnf install -y nginx
+sudo dnf remove nginx
+dnf search keyword
+dnf list installed
+rpm -qa | grep nginx</code></pre></div>
+  <div class="card"><h3>apt (Ubuntu, Debian)</h3><pre><code>sudo apt update
+sudo apt upgrade -y
+sudo apt install -y nginx
+sudo apt remove nginx
+apt search keyword
+dpkg -l | grep nginx</code></pre></div>
+</div>
+<div class="callout warn"><div class="callout-title">&#9888; AWS Exam Tip</div><p>Amazon Linux 2 uses <code>yum</code>; Amazon Linux 2023 uses <code>dnf</code>; Ubuntu uses <code>apt</code>. UserData scripts must match the AMI's package manager or the bootstrap fails silently.</p></div></section>
 
 <section id="networking"><h2>Linux Networking Commands</h2>
-<pre><code>ip addr show                  # Show IP addresses
-ping -c 4 8.8.8.8             # ICMP ping
-traceroute google.com         # Trace route to host
-nslookup example.com          # DNS lookup
+<pre><code># Interfaces & addresses
+ip addr show                  # Show IP addresses (modern)
+ip route                      # Routing table
+ip link                       # Network interfaces
+
+# Connectivity
+ping -c 4 8.8.8.8             # ICMP reachability
+traceroute google.com         # Path to a host
+mtr google.com                # Live traceroute + loss
+
+# DNS
+nslookup example.com          # Basic DNS lookup
 dig example.com               # Detailed DNS query
-netstat -tulnp                # All listening ports
-ss -tulnp                     # Modern netstat
-curl -I https://example.com   # HTTP headers
-curl -v https://api.example.com  # Verbose HTTP</code></pre>
-<div class="callout warn"><div class="callout-title">&#9888; AWS Exam Tip</div><p>If you can ping an EC2 but can't connect on port 22, check the <strong>Security Group inbound rules</strong> - AWS Security Groups are applied before traffic reaches the OS firewall.</p></div></section>
+dig +short example.com        # Just the answer
+host example.com              # Simple lookup
+
+# Ports & sockets
+ss -tulnp                     # Listening TCP/UDP + PIDs (modern)
+netstat -tulnp                # Legacy equivalent
+lsof -i :80                   # What is using port 80
+
+# HTTP debugging
+curl -I https://example.com   # Response headers only
+curl -v https://api.example.com   # Verbose handshake
+curl -s -o /dev/null -w "%{http_code}\\n" URL  # Just status code</code></pre>
+<div class="callout warn"><div class="callout-title">&#9888; AWS Exam Tip</div><p>If you can ping an EC2 instance but cannot reach port 22, check the <strong>Security Group inbound rules</strong> and <strong>Network ACLs</strong> first. AWS network controls are evaluated before traffic ever reaches the OS firewall.</p></div>
+<div class="callout info"><div class="callout-title">&#9729;&#65039; Instance Metadata (IMDS)</div><p>Query instance metadata from inside EC2. Prefer IMDSv2 (token-based):</p><pre><code>TOKEN=$(curl -s -X PUT "http://169.254.169.254/latest/api/token" \\
+  -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+curl -s -H "X-aws-ec2-metadata-token: $TOKEN" \\
+  http://169.254.169.254/latest/meta-data/instance-id</code></pre></div></section>
 
 <section id="scripting"><h2>Shell Scripting</h2>
 <pre><code>#!/bin/bash
-# EC2 UserData example
-REGION="us-east-1"
-INSTANCE_ID=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
+set -euo pipefail          # Exit on error, unset var, pipe failure
 
+# Variables
+REGION="us-east-1"
+NAME="${1:-default}"       # First arg or "default"
+TOKEN=$(curl -s -X PUT "http://169.254.169.254/latest/api/token" \\
+  -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+INSTANCE_ID=$(curl -s -H "X-aws-ec2-metadata-token: $TOKEN" \\
+  http://169.254.169.254/latest/meta-data/instance-id)
+
+# Conditionals
 if [ -f "/etc/nginx/nginx.conf" ]; then
   echo "Nginx config exists"
+elif [ -d "/etc/nginx" ]; then
+  echo "Directory exists but no config"
+else
+  echo "Nginx not installed"
 fi
 
+# Loops
 for FILE in /var/log/*.log; do
   echo "Processing: $FILE"
 done
 
-# Error handling
-set -e          # Exit on first error
-set -u          # Treat unset vars as error
+COUNT=0
+while [ $COUNT -lt 3 ]; do
+  echo "Attempt $COUNT"; COUNT=$((COUNT+1))
+done
 
-# UserData script pattern
-yum update -y
-yum install -y nginx
-systemctl start nginx
-systemctl enable nginx</code></pre></section>
+# Functions
+log() { echo "[$(date +%FT%T)] $*"; }
+log "Bootstrap starting"
+
+# Exit codes
+if command -v docker >/dev/null 2>&1; then
+  log "docker present"
+else
+  log "docker missing"; exit 1
+fi</code></pre>
+<h3>Typical EC2 UserData bootstrap</h3>
+<pre><code>#!/bin/bash
+dnf update -y
+dnf install -y nginx
+systemctl enable --now nginx
+echo "<h1>Hello from $(hostname)</h1>" > /usr/share/nginx/html/index.html</code></pre>
+<div class="callout tip"><div class="callout-title">&#128161; Test conditions</div><p><code>-f</code> file exists, <code>-d</code> directory exists, <code>-z</code> string empty, <code>-n</code> string not empty, <code>-eq/-ne/-lt/-gt</code> numeric comparisons.</p></div></section>
+
+<section id="cron"><h2>Cron &amp; Scheduling</h2>
+<pre><code>crontab -e                # Edit current user's crontab
+crontab -l                # List cron jobs
+
+# Format:  minute hour day month weekday  command
+# ┌── min (0-59)
+# │ ┌── hour (0-23)
+# │ │ ┌── day of month (1-31)
+# │ │ │ ┌── month (1-12)
+# │ │ │ │ ┌── day of week (0-6, Sun=0)
+# * * * * * /path/script.sh
+
+0 2 * * *   /opt/backup.sh          # Every day at 02:00
+*/15 * * * * /opt/healthcheck.sh    # Every 15 minutes
+0 0 * * 0   /opt/weekly.sh          # Weekly, Sunday midnight
+@reboot     /opt/startup.sh         # Once at boot</code></pre>
+<div class="callout info"><div class="callout-title">&#9729;&#65039; systemd timers</div><p>Modern alternative to cron. List active timers with <code>systemctl list-timers</code>. Timers give logging via journald and dependency handling.</p></div></section>
+
+<section id="logs"><h2>Logs &amp; journald</h2>
+<pre><code># Traditional log files
+tail -f /var/log/messages         # Amazon Linux / RHEL
+tail -f /var/log/syslog           # Ubuntu / Debian
+less /var/log/secure              # Auth events (RHEL family)
+less /var/log/auth.log            # Auth events (Debian family)
+cat /var/log/cloud-init-output.log  # UserData output on EC2
+
+# systemd journal
+journalctl -u nginx -f            # Follow one service
+journalctl -u nginx --since "1 hour ago"
+journalctl -xe                    # Recent entries + explanations
+journalctl -p err -b              # Errors from current boot
+journalctl --disk-usage           # How much space logs use</code></pre>
+<div class="callout tip"><div class="callout-title">&#128161; Ship logs to CloudWatch</div><p>Install the CloudWatch agent to stream <code>/var/log/*</code> to CloudWatch Logs, then query with Logs Insights. Common on SOA-C02 monitoring scenarios.</p></div></section>
 
 <section id="ssh"><h2>SSH &amp; EC2 Access</h2>
 <pre><code># Connect to EC2
@@ -1062,22 +1332,92 @@ Host my-ec2
     IdentityFile ~/.ssh/my-key.pem
 # Then just: ssh my-ec2
 
-# SCP - copy files
+# Copy files
 scp -i key.pem file.txt ec2-user@IP:/home/ec2-user/
+scp -i key.pem -r localdir/ ec2-user@IP:/tmp/
 
-# Port forwarding (tunnel to private RDS)
-ssh -i key.pem -L 5432:rds-endpoint:5432 ec2-user@IP</code></pre>
-<div class="callout tip"><div class="callout-title">&#128161; EC2 Instance Connect</div><p>Provides browser-based SSH access without key pairs - uses IAM permissions instead. Great for exam questions about "SSH access without managing key pairs".</p></div></section>
+# Port forwarding (tunnel to a private RDS through a bastion)
+ssh -i key.pem -L 5432:rds-endpoint:5432 ec2-user@IP
+
+# Jump host / bastion
+ssh -i key.pem -J ec2-user@BASTION ec2-user@PRIVATE_IP
+
+# Generate a new key pair
+ssh-keygen -t ed25519 -C "you@example.com"</code></pre>
+<div class="callout tip"><div class="callout-title">&#128161; Prefer SSM Session Manager</div><p>AWS Systems Manager Session Manager gives shell access with <strong>no open port 22, no bastion, and no key pairs</strong> - access is controlled by IAM and fully logged. Frequently the "most secure" exam answer: <code>aws ssm start-session --target i-0abc123</code>.</p></div></section>
 
 <section id="systemd"><h2>Systemd &amp; Services</h2>
-<pre><code>systemctl start nginx     # Start service
-systemctl stop nginx      # Stop service
-systemctl restart nginx   # Restart
-systemctl enable nginx    # Auto-start on boot
-systemctl status nginx    # Current status
-journalctl -u nginx -f    # Follow service logs
-journalctl -xe            # Recent errors</code></pre></section>
-""" + chk(["Understand the Linux directory structure","Know how file permissions work (rwx / octal)","Use chmod, chown commands","Navigate with cd, ls, pwd, find","Edit files with nano or vim","Manage processes with ps, top, kill","Use grep, awk, sed for text processing","Write a basic bash script with variables and loops","Install packages with yum/apt","Manage services with systemctl","Connect to EC2 via SSH with key pair","Set and use environment variables","Schedule tasks with cron","Use networking commands (ping, netstat, curl, dig)","View and tail logs with tail -f and journalctl","Use pipes and redirects (|, >, >>, 2>&1)","Understand EC2 UserData scripts","Know where AWS credential files are stored (~/.aws/)","Understand IMDS (Instance Metadata Service at 169.254.169.254)","Know the difference between yum (Amazon Linux) and apt (Ubuntu)"],"foundations-networking.html","Networking Fundamentals")) + FOOT
+<pre><code>systemctl start nginx        # Start now
+systemctl stop nginx         # Stop now
+systemctl restart nginx      # Restart
+systemctl reload nginx       # Reload config without downtime
+systemctl enable nginx       # Auto-start on boot
+systemctl enable --now nginx # Enable and start in one step
+systemctl disable nginx      # Do not start on boot
+systemctl status nginx       # Current status + recent logs
+systemctl is-active nginx    # Quick active check
+systemctl daemon-reload      # Reload unit files after edits</code></pre>
+<h3>A minimal unit file</h3>
+<pre><code># /etc/systemd/system/myapp.service
+[Unit]
+Description=My App
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /opt/myapp/app.py
+Restart=always
+User=appuser
+
+[Install]
+WantedBy=multi-user.target</code></pre>
+<div class="callout info"><div class="callout-title">&#9729;&#65039; Why systemd matters on AWS</div><p><code>Restart=always</code> keeps your app alive after crashes, and <code>enable</code> ensures it survives instance reboots and Auto Scaling replacements.</p></div></section>
+
+<section id="security"><h2>Security Hardening Basics</h2>
+<ul>
+  <li><strong>Least privilege:</strong> avoid logging in as root; use <code>sudo</code> per command.</li>
+  <li><strong>Key-only SSH:</strong> disable password auth (<code>PasswordAuthentication no</code> in <code>/etc/ssh/sshd_config</code>).</li>
+  <li><strong>Patch regularly:</strong> <code>dnf update -y</code> / <code>apt upgrade -y</code>, or use SSM Patch Manager.</li>
+  <li><strong>Host firewall:</strong> <code>firewalld</code> (RHEL family) or <code>ufw</code> (Ubuntu) in addition to Security Groups.</li>
+  <li><strong>SELinux / AppArmor:</strong> mandatory access control; check with <code>getenforce</code>.</li>
+  <li><strong>Fail2ban:</strong> block repeated failed logins.</li>
+</ul>
+<pre><code>ufw allow 22/tcp; ufw enable        # Ubuntu firewall
+firewall-cmd --add-service=https --permanent  # RHEL family
+getenforce                          # SELinux mode
+sudo lastb                          # Failed login attempts</code></pre>
+<div class="callout warn"><div class="callout-title">&#9888; Defense in depth</div><p>Security Groups protect the network edge, but OS-level controls (firewall, SELinux, patching) matter too. Exams reward layered security answers.</p></div></section>
+
+<section id="containers"><h2>Containers on Linux</h2>
+<pre><code># Docker basics (foundation for ECS / EKS / Fargate)
+docker ps                     # Running containers
+docker ps -a                  # All containers
+docker images                 # Local images
+docker run -d -p 80:80 nginx  # Run detached, map port
+docker exec -it CID /bin/bash # Shell into a container
+docker logs -f CID            # Follow container logs
+docker build -t myapp:1.0 .   # Build from Dockerfile
+docker stop CID; docker rm CID
+
+# Push to Amazon ECR
+aws ecr get-login-password --region us-east-1 \\
+  | docker login --username AWS --password-stdin ACCOUNT.dkr.ecr.us-east-1.amazonaws.com
+docker tag myapp:1.0 ACCOUNT.dkr.ecr.us-east-1.amazonaws.com/myapp:1.0
+docker push ACCOUNT.dkr.ecr.us-east-1.amazonaws.com/myapp:1.0</code></pre>
+<div class="callout info"><div class="callout-title">&#9729;&#65039; Namespaces &amp; cgroups</div><p>Containers are just Linux processes isolated with <strong>namespaces</strong> (what they can see) and limited with <strong>cgroups</strong> (how much CPU/memory they can use). No VM involved.</p></div></section>
+
+<section id="troubleshooting"><h2>Troubleshooting Playbook</h2>
+<div class="table-wrap"><table><thead><tr><th>Symptom</th><th>First commands to run</th></tr></thead><tbody>
+  <tr><td>Instance out of disk</td><td><code>df -h</code>, then <code>du -sh /* | sort -rh</code></td></tr>
+  <tr><td>High CPU / slow</td><td><code>top</code>, <code>uptime</code>, <code>ps aux --sort=-%cpu | head</code></td></tr>
+  <tr><td>Out of memory / OOM kills</td><td><code>free -h</code>, <code>dmesg | grep -i oom</code></td></tr>
+  <tr><td>Service will not start</td><td><code>systemctl status svc</code>, <code>journalctl -u svc -xe</code></td></tr>
+  <tr><td>Cannot SSH in</td><td>Check SG, NACL, subnet route, key perms, <code>/var/log/secure</code></td></tr>
+  <tr><td>App cannot reach internet</td><td><code>ip route</code>, <code>curl -v</code>, check NAT/IGW route</td></tr>
+  <tr><td>UserData did not run</td><td><code>cat /var/log/cloud-init-output.log</code></td></tr>
+  <tr><td>Port not listening</td><td><code>ss -tulnp</code>, <code>lsof -i :PORT</code></td></tr>
+</tbody></table></div>
+<div class="callout tip"><div class="callout-title">&#128161; The universal first step</div><p>When something on Linux breaks, <strong>read the logs</strong>: <code>journalctl -xe</code> and <code>tail -f /var/log/...</code>. Ninety percent of issues announce themselves there.</p></div></section>
+""" + chk(["Identify the distribution with cat /etc/os-release","Understand the Linux directory structure (FHS)","Navigate with cd, ls, pwd, find, tree","Know how file permissions work (rwx / octal)","Use chmod, chown, chgrp and understand umask","Understand setuid, setgid, and the sticky bit","Manage users and groups (useradd, usermod, groups)","Use sudo and understand /etc/sudoers","Process text with grep, sed, awk, cut, sort, uniq","Use pipes and redirects (|, >, >>, 2>&1, &&, ||)","Manage processes with ps, top, kill and know signals (15, 9, 1)","Check memory, CPU, and load (free, top, uptime, vmstat)","Inspect disks and mounts (df, du, lsblk, mount, /etc/fstab)","Format and mount an EBS/NVMe volume","Install packages with dnf, yum, and apt","Use networking commands (ip, ping, dig, ss, curl, traceroute)","Query IMDSv2 for instance metadata","Write a bash script with variables, conditionals, loops, functions","Use set -euo pipefail for safe scripts","Schedule tasks with cron and systemd timers","Read logs with tail -f, less, and journalctl","Connect to EC2 via SSH, SCP, tunnels, and jump hosts","Prefer SSM Session Manager over open port 22","Manage services with systemctl and write a unit file","Apply basic hardening (key-only SSH, patching, firewall, SELinux)","Run containers with Docker and push images to ECR","Follow a troubleshooting playbook for common EC2 issues"],"foundations-networking.html","Networking Fundamentals")) + FOOT
 write(f"{DOCS}/foundations-linux.html", linux_html)
 
 # ── foundations-networking.html ─────────────────────────────
@@ -1086,104 +1426,245 @@ net_html = HEAD("Networking Fundamentals","OSI model, TCP/IP, DNS, CIDR, subnett
 <div class="page-header"><div class="container">
   <span class="badge badge-blue">Foundations</span>
   <h1 style="margin-top:0.75rem">&#127760; Networking Fundamentals</h1>
-  <p>Deep understanding of networking is essential for AWS. VPCs, subnets, routing, load balancers, DNS - all rooted in networking basics.</p>
-  <div class="flex-wrap mt-1"><span class="badge badge-green">Essential for SAA / ANS / SCS</span><span class="badge badge-blue">25+ Topics</span></div>
+  <p>Deep understanding of networking is essential for AWS. From the OSI model, TCP/IP, and subnetting to DNS, routing, load balancers, TLS, and full VPC connectivity - all rooted in networking fundamentals.</p>
+  <div class="flex-wrap mt-1"><span class="badge badge-green">Essential for SAA / ANS / SCS</span><span class="badge badge-blue">19 Topics</span></div>
 </div></div>
-""" + wrap([("osi","OSI Model"),("tcpip","TCP/IP"),("ip","IP Addressing"),("cidr","CIDR & Subnetting"),("ports","Key Protocols & Ports"),("dns","DNS"),("nat","NAT"),("lb","Load Balancers"),("firewalls","Firewalls & ACLs"),("vpc-intro","AWS VPC Overview"),("checklist","Checklist")], """
-<section id="osi"><h2>The OSI Model</h2>
-<div class="table-wrap"><table><thead><tr><th>Layer</th><th>Name</th><th>Examples</th><th>AWS Service</th></tr></thead><tbody>
-  <tr><td>7</td><td>Application</td><td>HTTP, HTTPS, FTP, DNS</td><td>API Gateway, CloudFront</td></tr>
-  <tr><td>6</td><td>Presentation</td><td>SSL/TLS, JPEG</td><td>ACM (TLS certs)</td></tr>
-  <tr><td>5</td><td>Session</td><td>NetBIOS, RPC</td><td> - </td></tr>
-  <tr><td>4</td><td>Transport</td><td>TCP, UDP</td><td>NLB (Layer 4)</td></tr>
-  <tr><td>3</td><td>Network</td><td>IP, ICMP</td><td>VPC, Route Tables</td></tr>
-  <tr><td>2</td><td>Data Link</td><td>Ethernet, MAC</td><td>Direct Connect (physical)</td></tr>
-  <tr><td>1</td><td>Physical</td><td>Cables, fiber</td><td>Direct Connect</td></tr>
+""" + wrap([("osi","OSI & TCP/IP Models"),("encapsulation","Encapsulation"),("tcpip","TCP vs UDP"),("handshake","Handshake & Connections"),("ip","IP Addressing"),("cidr","CIDR & Subnetting"),("subnetex","Subnetting Worked Example"),("ipv6","IPv6"),("ports","Protocols & Ports"),("dns","DNS Deep Dive"),("dhcp","DHCP & ARP"),("nat","NAT"),("routing","Routing"),("lb","Load Balancers"),("firewalls","Firewalls & ACLs"),("tls","TLS & Certificates"),("vpc-intro","AWS VPC Overview"),("vpc-connect","VPC Connectivity"),("troubleshooting","Troubleshooting Playbook"),("checklist","Checklist")], """
+<section id="osi"><h2>The OSI &amp; TCP/IP Models</h2>
+<p>The OSI model is a 7-layer conceptual framework. The TCP/IP model is the 4-layer version networks actually run on. Knowing how they map helps you reason about where a problem lives.</p>
+<div class="table-wrap"><table><thead><tr><th>OSI Layer</th><th>Name</th><th>Examples</th><th>TCP/IP</th><th>AWS Service</th></tr></thead><tbody>
+  <tr><td>7</td><td>Application</td><td>HTTP, HTTPS, FTP, DNS</td><td>Application</td><td>API Gateway, CloudFront</td></tr>
+  <tr><td>6</td><td>Presentation</td><td>SSL/TLS, JPEG, encoding</td><td>Application</td><td>ACM (TLS certs)</td></tr>
+  <tr><td>5</td><td>Session</td><td>NetBIOS, RPC, sockets</td><td>Application</td><td> - </td></tr>
+  <tr><td>4</td><td>Transport</td><td>TCP, UDP</td><td>Transport</td><td>NLB (Layer 4)</td></tr>
+  <tr><td>3</td><td>Network</td><td>IP, ICMP, routing</td><td>Internet</td><td>VPC, Route Tables, GLB</td></tr>
+  <tr><td>2</td><td>Data Link</td><td>Ethernet, MAC, ARP</td><td>Link</td><td>ENI, Direct Connect</td></tr>
+  <tr><td>1</td><td>Physical</td><td>Cables, fiber, radio</td><td>Link</td><td>Direct Connect (physical)</td></tr>
 </tbody></table></div>
-<div class="callout warn"><div class="callout-title">&#9888; AWS Exam Tip</div><p>ALB = Layer 7. NLB = Layer 4. GLB = Layer 3. Frequently tested!</p></div></section>
+<div class="callout warn"><div class="callout-title">&#9888; AWS Exam Tip</div><p>ALB = Layer 7 (HTTP-aware). NLB = Layer 4 (TCP/UDP). GLB = Layer 3 (IP). This mapping is tested constantly - memorize it.</p></div></section>
+
+<section id="encapsulation"><h2>Encapsulation</h2>
+<p>As data travels down the stack, each layer wraps it with its own header. This is <strong>encapsulation</strong>; the receiver reverses it (decapsulation).</p>
+<pre><code>Application data
+  → + TCP header      = Segment      (Layer 4)
+    → + IP header     = Packet       (Layer 3)
+      → + Frame header/trailer = Frame (Layer 2)
+        → bits on the wire            (Layer 1)</code></pre>
+<div class="callout info"><div class="callout-title">&#9729;&#65039; Why it matters</div><p>MTU (typically 1500 bytes) limits frame size. AWS supports <strong>jumbo frames (9001 MTU)</strong> within a VPC for higher throughput, but paths crossing the internet or some gateways fall back to 1500.</p></div></section>
 
 <section id="tcpip"><h2>TCP vs UDP</h2>
 <div class="grid-2">
-  <div class="card"><h3>TCP</h3><ul><li>Connection-oriented (3-way handshake)</li><li>Reliable, ordered delivery</li><li>Flow control &amp; congestion control</li><li>Use for: HTTP, SSH, FTP, SMTP</li></ul></div>
-  <div class="card"><h3>UDP</h3><ul><li>Connectionless - fire and forget</li><li>No guarantee of delivery or order</li><li>Very low latency overhead</li><li>Use for: DNS, VoIP, video streaming, gaming</li></ul></div>
-</div></section>
+  <div class="card"><h3>TCP</h3><ul><li>Connection-oriented (3-way handshake)</li><li>Reliable, ordered, retransmitted delivery</li><li>Flow control &amp; congestion control</li><li>Higher overhead</li><li>Use for: HTTP(S), SSH, FTP, SMTP, database</li></ul></div>
+  <div class="card"><h3>UDP</h3><ul><li>Connectionless - fire and forget</li><li>No guarantee of delivery or order</li><li>Very low latency, minimal overhead</li><li>No congestion control</li><li>Use for: DNS, VoIP, video streaming, gaming, QUIC</li></ul></div>
+</div>
+<div class="callout warn"><div class="callout-title">&#9888; AWS Exam Tip</div><p>NLB supports both TCP and UDP listeners. ALB is HTTP/HTTPS only. If a scenario needs UDP (gaming, IoT, DNS), the answer is NLB, not ALB.</p></div></section>
+
+<section id="handshake"><h2>Handshake &amp; Connection Lifecycle</h2>
+<pre><code>TCP 3-way handshake (open):
+  Client → SYN            → Server
+  Client ← SYN, ACK       ← Server
+  Client → ACK            → Server
+  [connection established]
+
+TCP 4-way teardown (close):
+  Client → FIN → Server
+  Client ← ACK ← Server
+  Client ← FIN ← Server
+  Client → ACK → Server</code></pre>
+<div class="callout tip"><div class="callout-title">&#128161; Debugging tip</div><p>A connection stuck in <code>SYN_SENT</code> usually means a firewall/Security Group is silently dropping the SYN. A flood of <code>TIME_WAIT</code> sockets is normal after many short-lived connections. Inspect with <code>ss -tan</code>.</p></div></section>
 
 <section id="ip"><h2>IP Addressing</h2>
-<p>32-bit IPv4 address in 4 octets: <code>192.168.1.100</code></p>
+<p>A 32-bit IPv4 address written as 4 octets: <code>192.168.1.100</code>. Each address has a <strong>network</strong> portion and a <strong>host</strong> portion, determined by the subnet mask.</p>
 <h3>Private IP Ranges (RFC 1918)</h3>
-<pre><code>10.0.0.0/8        → AWS VPC default range
-172.16.0.0/12     → AWS default VPC (172.31.0.0/16)
-192.168.0.0/16    → Home networks</code></pre>
-<div class="callout info"><div class="callout-title">&#9729;&#65039; AWS Context</div><p>AWS VPCs must use private IP ranges. The default VPC uses <code>172.31.0.0/16</code>.</p></div></section>
+<pre><code>10.0.0.0/8        → 10.0.0.0    - 10.255.255.255   (common for AWS VPCs)
+172.16.0.0/12     → 172.16.0.0  - 172.31.255.255   (AWS default VPC: 172.31.0.0/16)
+192.168.0.0/16    → 192.168.0.0 - 192.168.255.255  (home networks)</code></pre>
+<div class="table-wrap"><table><thead><tr><th>Type</th><th>Example</th><th>Notes</th></tr></thead><tbody>
+  <tr><td>Public</td><td>54.239.28.85</td><td>Routable on the internet</td></tr>
+  <tr><td>Private</td><td>10.0.1.20</td><td>RFC 1918, not internet-routable</td></tr>
+  <tr><td>Loopback</td><td>127.0.0.1</td><td>The local host itself</td></tr>
+  <tr><td>Link-local</td><td>169.254.0.0/16</td><td>Includes IMDS at 169.254.169.254</td></tr>
+</tbody></table></div>
+<div class="callout info"><div class="callout-title">&#9729;&#65039; AWS Context</div><p>VPCs use private ranges. The default VPC is <code>172.31.0.0/16</code>. The special address <code>169.254.169.254</code> serves EC2 instance metadata.</p></div></section>
 
 <section id="cidr"><h2>CIDR &amp; Subnetting</h2>
-<p>CIDR notation combines an IP with a prefix length: <code>10.0.0.0/16</code></p>
-<div class="table-wrap"><table><thead><tr><th>CIDR</th><th>Total IPs</th><th>AWS Usable</th></tr></thead><tbody>
-  <tr><td>/16</td><td>65,536</td><td>65,531</td></tr>
-  <tr><td>/24</td><td>256</td><td>251</td></tr>
-  <tr><td>/25</td><td>128</td><td>123</td></tr>
-  <tr><td>/26</td><td>64</td><td>59</td></tr>
-  <tr><td>/27</td><td>32</td><td>27</td></tr>
-  <tr><td>/28</td><td>16</td><td>11</td></tr>
+<p>CIDR notation pairs an IP with a prefix length: <code>10.0.0.0/16</code>. The prefix says how many leading bits are the network portion. Smaller prefix = bigger network.</p>
+<div class="table-wrap"><table><thead><tr><th>CIDR</th><th>Subnet Mask</th><th>Total IPs</th><th>AWS Usable</th></tr></thead><tbody>
+  <tr><td>/16</td><td>255.255.0.0</td><td>65,536</td><td>65,531</td></tr>
+  <tr><td>/20</td><td>255.255.240.0</td><td>4,096</td><td>4,091</td></tr>
+  <tr><td>/24</td><td>255.255.255.0</td><td>256</td><td>251</td></tr>
+  <tr><td>/25</td><td>255.255.255.128</td><td>128</td><td>123</td></tr>
+  <tr><td>/26</td><td>255.255.255.192</td><td>64</td><td>59</td></tr>
+  <tr><td>/27</td><td>255.255.255.224</td><td>32</td><td>27</td></tr>
+  <tr><td>/28</td><td>255.255.255.240</td><td>16</td><td>11</td></tr>
 </tbody></table></div>
-<div class="callout warn"><div class="callout-title">&#9888; AWS Reserves 5 IPs Per Subnet</div><p>Network address, VPC router, DNS, future use, and broadcast. A /24 gives 251 usable IPs, not 254. <strong>Frequently tested!</strong></p></div>
-<pre><code># Quick formula: Total IPs = 2^(32 - prefix)
-/24 = 2^8 = 256 IPs
-/16 = 2^16 = 65,536 IPs</code></pre></section>
+<div class="callout warn"><div class="callout-title">&#9888; AWS Reserves 5 IPs Per Subnet</div><p>Network address (.0), VPC router (.1), Amazon DNS (.2), future use (.3), and network broadcast (last). A /24 therefore gives <strong>251</strong> usable IPs, not 254. Frequently tested!</p></div>
+<pre><code># Total IPs in a block = 2^(32 - prefix)
+/28 = 2^4  = 16 IPs   (11 usable in AWS)
+/24 = 2^8  = 256 IPs  (251 usable in AWS)
+/16 = 2^16 = 65,536 IPs
+# VPC CIDR can be /16 (max) to /28 (min) in AWS</code></pre></section>
+
+<section id="subnetex"><h2>Subnetting: Worked Example</h2>
+<p>Split a VPC <code>10.0.0.0/16</code> into public and private subnets across two AZs:</p>
+<div class="table-wrap"><table><thead><tr><th>Subnet</th><th>CIDR</th><th>AZ</th><th>Purpose</th><th>Usable IPs</th></tr></thead><tbody>
+  <tr><td>Public A</td><td>10.0.0.0/24</td><td>us-east-1a</td><td>ALB, NAT GW</td><td>251</td></tr>
+  <tr><td>Public B</td><td>10.0.1.0/24</td><td>us-east-1b</td><td>ALB, NAT GW</td><td>251</td></tr>
+  <tr><td>Private A</td><td>10.0.10.0/24</td><td>us-east-1a</td><td>App servers</td><td>251</td></tr>
+  <tr><td>Private B</td><td>10.0.11.0/24</td><td>us-east-1b</td><td>App servers</td><td>251</td></tr>
+  <tr><td>DB A</td><td>10.0.20.0/24</td><td>us-east-1a</td><td>RDS</td><td>251</td></tr>
+  <tr><td>DB B</td><td>10.0.21.0/24</td><td>us-east-1b</td><td>RDS</td><td>251</td></tr>
+</tbody></table></div>
+<div class="callout tip"><div class="callout-title">&#128161; Design rule</div><p>Never overlap CIDR blocks between VPCs you plan to peer or connect - overlapping ranges make routing impossible. Plan address space up front.</p></div></section>
+
+<section id="ipv6"><h2>IPv6 Basics</h2>
+<p>128-bit addresses written in hex, e.g. <code>2001:db8::1</code>. Solves IPv4 exhaustion. In AWS, IPv6 addresses are <strong>globally unique and public by default</strong> - there is no NAT for IPv6.</p>
+<pre><code>::1                 # IPv6 loopback (like 127.0.0.1)
+fe80::/10           # Link-local
+2001:db8::/32       # Documentation range</code></pre>
+<div class="callout info"><div class="callout-title">&#9729;&#65039; Egress-Only Internet Gateway</div><p>Because IPv6 has no NAT, AWS uses an <strong>Egress-Only Internet Gateway</strong> to allow outbound-only IPv6 traffic from private subnets - the IPv6 equivalent of a NAT Gateway.</p></div></section>
 
 <section id="ports"><h2>Key Protocols &amp; Ports</h2>
-<div class="table-wrap"><table><thead><tr><th>Protocol</th><th>Port</th><th>Transport</th></tr></thead><tbody>
-  <tr><td>HTTP</td><td>80</td><td>TCP</td></tr><tr><td>HTTPS</td><td>443</td><td>TCP</td></tr>
-  <tr><td>SSH</td><td>22</td><td>TCP</td></tr><tr><td>RDP</td><td>3389</td><td>TCP</td></tr>
-  <tr><td>DNS</td><td>53</td><td>UDP/TCP</td></tr><tr><td>DHCP</td><td>67/68</td><td>UDP</td></tr>
-  <tr><td>SMTP</td><td>25/587</td><td>TCP</td></tr>
-  <tr><td>MySQL/Aurora</td><td>3306</td><td>TCP</td></tr><tr><td>PostgreSQL</td><td>5432</td><td>TCP</td></tr>
-  <tr><td>Redis (ElastiCache)</td><td>6379</td><td>TCP</td></tr>
-  <tr><td>NFS (EFS)</td><td>2049</td><td>TCP</td></tr>
-</tbody></table></div></section>
-
-<section id="dns"><h2>DNS Record Types</h2>
-<div class="table-wrap"><table><thead><tr><th>Record</th><th>Purpose</th><th>Example</th></tr></thead><tbody>
-  <tr><td>A</td><td>Domain → IPv4</td><td>example.com → 93.184.216.34</td></tr>
-  <tr><td>CNAME</td><td>Alias to another domain</td><td>www → example.com</td></tr>
-  <tr><td>MX</td><td>Mail server</td><td>mail.example.com</td></tr>
-  <tr><td>TXT</td><td>Text info (SPF, verification)</td><td>"v=spf1..."</td></tr>
-  <tr><td>NS</td><td>Name servers for zone</td><td>ns1.aws.com</td></tr>
-  <tr><td>Alias (Route 53)</td><td>AWS-specific; map to AWS resource</td><td>apex.com → ALB DNS</td></tr>
+<div class="table-wrap"><table><thead><tr><th>Protocol</th><th>Port</th><th>Transport</th><th>Use</th></tr></thead><tbody>
+  <tr><td>HTTP</td><td>80</td><td>TCP</td><td>Web (plaintext)</td></tr>
+  <tr><td>HTTPS</td><td>443</td><td>TCP</td><td>Web (TLS)</td></tr>
+  <tr><td>SSH</td><td>22</td><td>TCP</td><td>Secure shell</td></tr>
+  <tr><td>RDP</td><td>3389</td><td>TCP</td><td>Windows remote desktop</td></tr>
+  <tr><td>DNS</td><td>53</td><td>UDP/TCP</td><td>Name resolution</td></tr>
+  <tr><td>DHCP</td><td>67/68</td><td>UDP</td><td>Dynamic IP assignment</td></tr>
+  <tr><td>NTP</td><td>123</td><td>UDP</td><td>Time sync</td></tr>
+  <tr><td>SMTP</td><td>25/587</td><td>TCP</td><td>Email send</td></tr>
+  <tr><td>MySQL/Aurora</td><td>3306</td><td>TCP</td><td>Database</td></tr>
+  <tr><td>PostgreSQL</td><td>5432</td><td>TCP</td><td>Database</td></tr>
+  <tr><td>Redis (ElastiCache)</td><td>6379</td><td>TCP</td><td>Cache</td></tr>
+  <tr><td>NFS (EFS)</td><td>2049</td><td>TCP</td><td>Network file system</td></tr>
 </tbody></table></div>
-<div class="callout warn"><div class="callout-title">&#9888; CNAME vs Alias</div><p>You <strong>cannot</strong> use CNAME at the zone apex (naked domain like <code>example.com</code>). Use Route 53 <strong>Alias records</strong> instead - they point to AWS resources and are free of charge.</p></div></section>
+<div class="callout warn"><div class="callout-title">&#9888; AWS Exam Tip</div><p>When a Security Group question involves a database, remember the port: RDS MySQL/Aurora = 3306, PostgreSQL = 5432, EFS = 2049. The SG on the DB must allow the app tier's SG on that port.</p></div></section>
+
+<section id="dns"><h2>DNS Deep Dive</h2>
+<h3>Record types</h3>
+<div class="table-wrap"><table><thead><tr><th>Record</th><th>Purpose</th><th>Example</th></tr></thead><tbody>
+  <tr><td>A</td><td>Name → IPv4</td><td>example.com → 93.184.216.34</td></tr>
+  <tr><td>AAAA</td><td>Name → IPv6</td><td>example.com → 2606:2800::1</td></tr>
+  <tr><td>CNAME</td><td>Alias to another name</td><td>www → example.com</td></tr>
+  <tr><td>MX</td><td>Mail server + priority</td><td>10 mail.example.com</td></tr>
+  <tr><td>TXT</td><td>Text (SPF, DKIM, verification)</td><td>"v=spf1 ..."</td></tr>
+  <tr><td>NS</td><td>Name servers for a zone</td><td>ns-1.awsdns.com</td></tr>
+  <tr><td>SOA</td><td>Zone authority / metadata</td><td>primary NS + serial</td></tr>
+  <tr><td>Alias (Route 53)</td><td>Map apex to AWS resource</td><td>example.com → ALB DNS</td></tr>
+</tbody></table></div>
+<h3>How a lookup works</h3>
+<pre><code>Browser → Recursive resolver → Root (.) → TLD (.com) → Authoritative NS → Answer
+                                (cached along the way, controlled by TTL)</code></pre>
+<h3>Route 53 routing policies</h3>
+<div class="table-wrap"><table><thead><tr><th>Policy</th><th>Use</th></tr></thead><tbody>
+  <tr><td>Simple</td><td>One record, no logic</td></tr>
+  <tr><td>Weighted</td><td>Split traffic by percentage (A/B, canary)</td></tr>
+  <tr><td>Latency</td><td>Route to lowest-latency region</td></tr>
+  <tr><td>Failover</td><td>Primary/secondary with health checks</td></tr>
+  <tr><td>Geolocation</td><td>Route by user's country/continent</td></tr>
+  <tr><td>Geoproximity</td><td>Route by geographic distance + bias</td></tr>
+  <tr><td>Multivalue</td><td>Return several healthy IPs</td></tr>
+</tbody></table></div>
+<div class="callout warn"><div class="callout-title">&#9888; CNAME vs Alias</div><p>You <strong>cannot</strong> use a CNAME at the zone apex (naked domain like <code>example.com</code>). Use a Route 53 <strong>Alias</strong> record instead - it maps to AWS resources (ALB, CloudFront, S3) and is free of charge.</p></div></section>
+
+<section id="dhcp"><h2>DHCP &amp; ARP</h2>
+<p><strong>DHCP</strong> hands out IP configuration automatically via the DORA exchange:</p>
+<pre><code>Discover → Offer → Request → Acknowledge  (client gets IP, mask, gateway, DNS)</code></pre>
+<p><strong>ARP</strong> (Address Resolution Protocol) maps an IP address to a MAC address on the local link, so frames can be delivered at Layer 2.</p>
+<div class="callout info"><div class="callout-title">&#9729;&#65039; DHCP Option Sets</div><p>In a VPC, AWS runs DHCP for you. <strong>DHCP Option Sets</strong> let you customize the DNS servers and domain name handed to instances - useful for hybrid setups pointing at on-prem DNS.</p></div></section>
 
 <section id="nat"><h2>NAT Gateway vs NAT Instance</h2>
 <div class="grid-2">
-  <div class="card"><h3>NAT Gateway (Managed)</h3><ul><li>Fully managed, highly available per AZ</li><li>Private subnet → internet outbound only</li><li>Requires Elastic IP in public subnet</li><li>Scales to 45 Gbps automatically</li></ul></div>
-  <div class="card"><h3>NAT Instance (Legacy)</h3><ul><li>EC2 instance doing NAT manually</li><li>Must disable Source/Destination Check</li><li>You manage patching and HA</li><li>Can double as a bastion host</li></ul></div>
-</div></section>
+  <div class="card"><h3>NAT Gateway (Managed)</h3><ul><li>Fully managed, highly available within an AZ</li><li>Private subnet → internet, outbound only</li><li>Requires an Elastic IP, lives in a public subnet</li><li>Scales automatically up to 100 Gbps</li><li>No security group (it is managed)</li></ul></div>
+  <div class="card"><h3>NAT Instance (Legacy)</h3><ul><li>An EC2 instance doing NAT manually</li><li>Must disable Source/Destination Check</li><li>You manage patching, sizing, and HA</li><li>Can double as a bastion host</li><li>Cheaper at tiny scale, more work</li></ul></div>
+</div>
+<div class="callout tip"><div class="callout-title">&#128161; HA pattern</div><p>Deploy one NAT Gateway per AZ and point each AZ's private route table at its local NAT GW. This avoids cross-AZ data charges and survives an AZ failure.</p></div></section>
+
+<section id="routing"><h2>Routing &amp; Route Tables</h2>
+<p>A route table is a set of rules matching destination CIDRs to targets. The <strong>most specific (longest prefix) match wins</strong>.</p>
+<div class="table-wrap"><table><thead><tr><th>Destination</th><th>Target</th><th>Meaning</th></tr></thead><tbody>
+  <tr><td>10.0.0.0/16</td><td>local</td><td>Traffic inside the VPC (always present)</td></tr>
+  <tr><td>0.0.0.0/0</td><td>igw-xxxx</td><td>Default route to internet (public subnet)</td></tr>
+  <tr><td>0.0.0.0/0</td><td>nat-xxxx</td><td>Default route via NAT (private subnet)</td></tr>
+  <tr><td>172.16.0.0/12</td><td>pcx-xxxx</td><td>Peered VPC</td></tr>
+  <tr><td>192.168.0.0/16</td><td>vgw-xxxx</td><td>On-prem via VPN/Direct Connect</td></tr>
+</tbody></table></div>
+<div class="callout warn"><div class="callout-title">&#9888; Longest prefix match</div><p>If both <code>0.0.0.0/0</code> and <code>10.0.5.0/24</code> could match, the <code>/24</code> wins because it is more specific. This is how you steer specific traffic to a firewall appliance while everything else uses the default route.</p></div></section>
 
 <section id="lb"><h2>Load Balancers</h2>
 <div class="table-wrap"><table><thead><tr><th>Type</th><th>OSI Layer</th><th>Protocol</th><th>Best For</th></tr></thead><tbody>
-  <tr><td>ALB</td><td>7</td><td>HTTP, HTTPS, gRPC</td><td>Web apps, microservices, path-based routing</td></tr>
+  <tr><td>ALB</td><td>7</td><td>HTTP, HTTPS, gRPC</td><td>Web apps, microservices, path/host routing</td></tr>
   <tr><td>NLB</td><td>4</td><td>TCP, UDP, TLS</td><td>Ultra-low latency, static IP, gaming, IoT</td></tr>
-  <tr><td>GLB</td><td>3</td><td>IP</td><td>Inline virtual appliances (firewalls, IDS)</td></tr>
-</tbody></table></div></section>
+  <tr><td>GLB</td><td>3</td><td>IP (GENEVE)</td><td>Inline virtual appliances (firewalls, IDS/IPS)</td></tr>
+</tbody></table></div>
+<h3>Key features</h3>
+<ul>
+  <li><strong>Health checks:</strong> unhealthy targets are removed from rotation automatically.</li>
+  <li><strong>Target groups:</strong> route to EC2, IPs, Lambda (ALB), or other resources.</li>
+  <li><strong>Cross-zone load balancing:</strong> spread traffic evenly across AZs (on by default for ALB).</li>
+  <li><strong>Sticky sessions:</strong> pin a client to one target (ALB cookies).</li>
+  <li><strong>ALB routing:</strong> by path (<code>/api/*</code>), host header, HTTP header, or query string.</li>
+</ul>
+<div class="callout warn"><div class="callout-title">&#9888; Static IP need?</div><p>Only NLB provides a static IP per AZ (and supports Elastic IPs). ALB's IPs change, so front it with a DNS name or use NLB when a fixed IP is required.</p></div></section>
 
 <section id="firewalls"><h2>Security Groups vs Network ACLs</h2>
 <div class="grid-2">
-  <div class="card"><h3>Security Groups</h3><ul><li>Instance level (ENI)</li><li><strong>Stateful</strong> - return traffic auto-allowed</li><li>ALLOW rules only</li><li>Default: deny all inbound, allow all outbound</li></ul></div>
-  <div class="card"><h3>Network ACLs</h3><ul><li>Subnet level</li><li><strong>Stateless</strong> - must allow both directions</li><li>ALLOW and DENY rules</li><li>Rules evaluated lowest number first</li></ul></div>
-</div></section>
+  <div class="card"><h3>Security Groups</h3><ul><li>Operate at the instance / ENI level</li><li><strong>Stateful</strong> - return traffic is auto-allowed</li><li>ALLOW rules only (no explicit deny)</li><li>All rules evaluated together</li><li>Default: deny all inbound, allow all outbound</li></ul></div>
+  <div class="card"><h3>Network ACLs</h3><ul><li>Operate at the subnet level</li><li><strong>Stateless</strong> - must allow both directions</li><li>ALLOW and DENY rules</li><li>Rules evaluated in number order, lowest first</li><li>Default NACL allows all; custom NACL denies all</li></ul></div>
+</div>
+<div class="callout warn"><div class="callout-title">&#9888; Stateful vs stateless</div><p>Because NACLs are stateless, you must open <strong>ephemeral ports (1024-65535)</strong> for return traffic. Security Groups handle return traffic automatically. This distinction is a classic exam trap.</p></div></section>
+
+<section id="tls"><h2>TLS &amp; Certificates</h2>
+<p>TLS encrypts traffic and authenticates the server via a certificate signed by a trusted CA. The handshake negotiates keys before any application data flows.</p>
+<pre><code>Client Hello → Server Hello (+ certificate)
+  → key exchange → Finished → encrypted application data</code></pre>
+<ul>
+  <li><strong>ACM (AWS Certificate Manager):</strong> free public certs, auto-renewed, integrates with ALB, CloudFront, API Gateway.</li>
+  <li><strong>TLS termination:</strong> the load balancer decrypts, so backends can serve HTTP internally.</li>
+  <li><strong>End-to-end encryption:</strong> re-encrypt from LB to target when compliance requires it.</li>
+  <li><strong>SNI:</strong> host multiple certs/domains on one listener.</li>
+</ul>
+<div class="callout tip"><div class="callout-title">&#128161; ACM region gotcha</div><p>For CloudFront, the ACM certificate <strong>must be in us-east-1</strong>, regardless of where your origin lives. For a regional ALB, the cert lives in the ALB's region.</p></div></section>
 
 <section id="vpc-intro"><h2>AWS VPC Overview</h2>
-<p>A VPC (Virtual Private Cloud) is your isolated network in AWS.</p>
-<ul><li><strong>VPC</strong> - logical isolation; CIDR block (e.g., 10.0.0.0/16)</li>
-<li><strong>Subnets</strong> - subdivide VPC; tied to one AZ</li>
-<li><strong>Internet Gateway (IGW)</strong> - enables internet access for public subnets</li>
-<li><strong>Route Tables</strong> - control where traffic goes</li>
-<li><strong>NAT Gateway</strong> - outbound internet for private subnets</li>
-<li><strong>VPC Peering</strong> - connect two VPCs (no transitive routing)</li>
-<li><strong>Transit Gateway</strong> - hub-and-spoke for many VPCs (transitive)</li>
-<li><strong>VPC Endpoints</strong> - private access to AWS services (no internet)</li></ul>
-<div class="callout tip"><div class="callout-title">&#128161; Public vs Private Subnet</div><p>A <strong>public subnet</strong> has a route to an Internet Gateway (<code>0.0.0.0/0 → igw-xxx</code>). A <strong>private subnet</strong> has no such route. It's all in the route table!</p></div></section>
-""" + chk(["Name all 7 OSI layers and their functions","Explain the difference between TCP and UDP","Calculate the number of IPs in a CIDR block","Identify private IP ranges (RFC 1918)","Know why AWS reserves 5 IPs per subnet","Explain DNS record types: A, CNAME, MX, TXT, Alias","Know common ports: 22, 80, 443, 3306, 5432, 3389","Explain NAT Gateway vs NAT Instance","Explain ALB vs NLB vs GLB differences","Explain Security Groups vs Network ACLs (stateful vs stateless)","Understand VPC components: IGW, Route Tables, Subnets","Explain VPC Peering vs Transit Gateway","Understand VPC Endpoints (Gateway vs Interface)","Explain Site-to-Site VPN vs Direct Connect","Know what makes a subnet public vs private"],"clf-c02.html","Cloud Practitioner (CLF-C02)")) + FOOT
+<p>A VPC (Virtual Private Cloud) is your logically isolated network in AWS.</p>
+<ul>
+  <li><strong>VPC</strong> - the network boundary; a CIDR block such as <code>10.0.0.0/16</code>.</li>
+  <li><strong>Subnets</strong> - subdivide the VPC; each subnet lives in exactly one AZ.</li>
+  <li><strong>Internet Gateway (IGW)</strong> - enables internet access for public subnets.</li>
+  <li><strong>Route Tables</strong> - control where subnet traffic is directed.</li>
+  <li><strong>NAT Gateway</strong> - outbound-only internet for private subnets.</li>
+  <li><strong>Elastic Network Interface (ENI)</strong> - a virtual NIC attached to instances.</li>
+  <li><strong>Elastic IP (EIP)</strong> - a static public IPv4 you own.</li>
+</ul>
+<div class="callout tip"><div class="callout-title">&#128161; Public vs Private Subnet</div><p>A <strong>public subnet</strong> has a route <code>0.0.0.0/0 → igw-xxx</code>. A <strong>private subnet</strong> has no direct route to an IGW. The difference lives entirely in the route table.</p></div></section>
+
+<section id="vpc-connect"><h2>VPC Connectivity Options</h2>
+<div class="table-wrap"><table><thead><tr><th>Option</th><th>Connects</th><th>Notes</th></tr></thead><tbody>
+  <tr><td>VPC Peering</td><td>Two VPCs</td><td>1:1, <strong>non-transitive</strong>, no overlapping CIDRs</td></tr>
+  <tr><td>Transit Gateway</td><td>Many VPCs + on-prem</td><td>Hub-and-spoke, <strong>transitive</strong>, scales to thousands</td></tr>
+  <tr><td>VPC Endpoint (Gateway)</td><td>VPC → S3 / DynamoDB</td><td>Free, via route table, stays on AWS network</td></tr>
+  <tr><td>VPC Endpoint (Interface)</td><td>VPC → most AWS services</td><td>PrivateLink ENI, hourly + data cost</td></tr>
+  <tr><td>Site-to-Site VPN</td><td>VPC ↔ on-prem</td><td>Over internet, IPsec encrypted, quick to set up</td></tr>
+  <tr><td>Direct Connect (DX)</td><td>VPC ↔ on-prem</td><td>Dedicated private link, consistent low latency</td></tr>
+  <tr><td>PrivateLink</td><td>Consumer VPC → provider service</td><td>Expose a service privately without peering</td></tr>
+</tbody></table></div>
+<div class="callout warn"><div class="callout-title">&#9888; Peering is not transitive</div><p>If VPC A peers with B, and B peers with C, A <strong>cannot</strong> reach C through B. For any-to-any connectivity at scale, use a Transit Gateway.</p></div>
+<div class="callout info"><div class="callout-title">&#9729;&#65039; VPN + DX</div><p>A common resilient hybrid design: primary connectivity over Direct Connect for performance, with a Site-to-Site VPN as an encrypted failover path.</p></div></section>
+
+<section id="troubleshooting"><h2>Connectivity Troubleshooting Playbook</h2>
+<div class="table-wrap"><table><thead><tr><th>Symptom</th><th>Check in this order</th></tr></thead><tbody>
+  <tr><td>Cannot SSH/RDP to instance</td><td>Security Group inbound → NACL → route table → key/user → OS firewall</td></tr>
+  <tr><td>Instance has no internet (public)</td><td>Public IP assigned? IGW attached? Route <code>0.0.0.0/0 → igw</code>? SG outbound?</td></tr>
+  <tr><td>Private instance no outbound</td><td>NAT Gateway healthy? Route <code>0.0.0.0/0 → nat</code>? NAT in a public subnet?</td></tr>
+  <tr><td>Cannot reach RDS</td><td>DB Security Group allows app SG on 3306/5432? Same VPC / peered? Subnet route?</td></tr>
+  <tr><td>DNS not resolving</td><td>VPC <code>enableDnsSupport</code> &amp; <code>enableDnsHostnames</code>? Resolver at .2? <code>dig</code> output</td></tr>
+  <tr><td>Peered VPC unreachable</td><td>Routes on both sides? Non-overlapping CIDRs? SG/NACL allow peer CIDR?</td></tr>
+  <tr><td>Intermittent packet loss</td><td>MTU mismatch (jumbo frames)? Check with <code>ping -M do -s 8972</code></td></tr>
+</tbody></table></div>
+<div class="callout tip"><div class="callout-title">&#128161; Use VPC tooling</div><p><strong>VPC Reachability Analyzer</strong> traces the configured path between two resources and tells you exactly which SG, NACL, or route blocks it. <strong>VPC Flow Logs</strong> show ACCEPT/REJECT per flow - invaluable for diagnosing silent drops.</p></div></section>
+""" + chk(["Map the 7 OSI layers to the 4 TCP/IP layers","Explain encapsulation and MTU / jumbo frames","Explain the difference between TCP and UDP","Describe the TCP 3-way handshake and connection states","Identify private IP ranges (RFC 1918) and special addresses","Calculate the number of IPs in a CIDR block","Know why AWS reserves 5 IPs per subnet","Design a multi-AZ public/private subnet layout without overlaps","Understand IPv6 basics and the Egress-Only Internet Gateway","Know common ports: 22, 80, 443, 53, 3306, 5432, 2049, 3389","Explain DNS record types: A, AAAA, CNAME, MX, TXT, NS, Alias","Describe how a recursive DNS lookup works and the role of TTL","Compare Route 53 routing policies (weighted, latency, failover, geo)","Explain CNAME vs Alias and the zone apex rule","Understand DHCP (DORA) and ARP","Explain NAT Gateway vs NAT Instance and the per-AZ HA pattern","Read a route table and apply longest-prefix match","Explain ALB vs NLB vs GLB and their layers","Explain Security Groups vs Network ACLs (stateful vs stateless)","Understand ephemeral ports for stateless NACL return traffic","Understand TLS handshake, ACM, and TLS termination","Know the CloudFront us-east-1 certificate requirement","Understand core VPC components: IGW, route tables, subnets, ENI, EIP","Compare VPC Peering, Transit Gateway, and VPC Endpoints","Explain Site-to-Site VPN vs Direct Connect and hybrid failover","Know that VPC Peering is non-transitive","Use Reachability Analyzer and VPC Flow Logs to troubleshoot"],"clf-c02.html","Cloud Practitioner (CLF-C02)")) + FOOT
 write(f"{DOCS}/foundations-networking.html", net_html)
 
 # ── resources.html ──────────────────────────────────────────
