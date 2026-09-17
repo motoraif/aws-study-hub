@@ -245,6 +245,15 @@
         root.innerHTML = '<div class="card quiz-panel"><p>No questions available yet.</p></div>';
         return;
       }
+      // Deep-link: ?cert=SAA-C03 auto-starts a 10-question quiz for that cert
+      var params = new URLSearchParams(location.search);
+      var wanted = (params.get('cert') || '').toUpperCase();
+      var available = state.all.map(function (q) { return q.cert.toUpperCase(); });
+      if (wanted && available.indexOf(wanted) !== -1) {
+        var certName = state.all.filter(function (q) { return q.cert.toUpperCase() === wanted; })[0].cert;
+        startQuiz(certName, 10);
+        return;
+      }
       renderStart();
     })
     .catch(function () {

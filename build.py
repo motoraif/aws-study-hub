@@ -66,6 +66,15 @@ def phdr(bcls,btxt,icon,title,desc,badges="",extra_badge=""):
     eb = f' {extra_badge}' if extra_badge else ''
     return f'<div class="page-header"><div class="container"><span class="badge {bcls}">{btxt}</span>{eb}<h1 style="margin-top:0.75rem;">{icon} {title}</h1><p>{desc}</p><div class="flex-wrap mt-1">{badges}</div></div></div>'
 
+def quiz_cta(code):
+    """A 'test yourself' CTA bar linking to a deep-linked quiz + flashcards. Used on all cert pages."""
+    return (f'<div class="container" style="padding-top:1.25rem"><div class="quiz-cta">'
+            f'<span>&#129513; Ready to test yourself on {code}?</span>'
+            f'<span class="quiz-cta-actions">'
+            f'<a class="btn btn-primary" href="quiz.html?cert={code}">Quiz yourself &rarr;</a>'
+            f'<a class="btn btn-outline" href="flashcards.html">Flashcards</a>'
+            f'</span></div></div>')
+
 def wrap(toc,body):
     links="".join(f'<a href="#{a}">{b}</a>\n' for a,b in toc)
     return f'<div class="container" style="padding-bottom:4rem;"><div class="doc-layout"><aside class="sidebar"><h4>Contents</h4>{links}</aside><main>{body}</main></div></div>'
@@ -358,7 +367,7 @@ write(f"{BASE}/index.html", index_html)
 
 
 # ── CLF-C02 ─────────────────────────────────────────────────
-clf = HEAD("CLF-C02 - AWS Cloud Practitioner","Complete CLF-C02 study guide. Cloud concepts, shared responsibility, IAM, core services, billing, and support plans.") + crumb("CLF-C02") + phdr("badge-orange","Foundational","&#127885;","CLF-C02 - AWS Certified Cloud Practitioner","The entry-level AWS certification. Cloud concepts, core services, security, billing, and support. No technical background required.",'<span class="badge badge-green">90 min | 65 questions</span><span class="badge badge-blue">Passing: 700/1000</span><span class="badge badge-teal">No prerequisites</span>') + wrap([
+clf = HEAD("CLF-C02 - AWS Cloud Practitioner","Complete CLF-C02 study guide. Cloud concepts, shared responsibility, IAM, core services, billing, and support plans.") + crumb("CLF-C02") + phdr("badge-orange","Foundational","&#127885;","CLF-C02 - AWS Certified Cloud Practitioner","The entry-level AWS certification. Cloud concepts, core services, security, billing, and support. No technical background required.",'<span class="badge badge-green">90 min | 65 questions</span><span class="badge badge-blue">Passing: 700/1000</span><span class="badge badge-teal">No prerequisites</span>') + quiz_cta("CLF-C02") + wrap([
 ("overview","Exam Overview"),("cloud-concepts","Cloud Concepts"),("shared-resp","Shared Responsibility"),("global-infra","Global Infrastructure"),("iam","IAM"),("core-services","Core Services"),("billing","Billing &amp; Pricing"),("checklist","Checklist")],
 exam("AWS Cloud Practitioner Essentials","https://explore.skillbuilder.aws/learn/course/external/view/elearning/134/aws-cloud-practitioner-essentials","https://d1.awsstatic.com/training-and-certification/docs-cloud-practitioner/AWS-Certified-Cloud-Practitioner_Exam-Guide.pdf","https://d1.awsstatic.com/training-and-certification/docs-cloud-practitioner/AWS-Certified-Cloud-Practitioner_Sample-Questions.pdf","90 minutes","65","700",[("Cloud Concepts","24"),("Security &amp; Compliance","30"),("Cloud Technology &amp; Services","34"),("Billing, Pricing &amp; Support","12")])+"""
 <section id="cloud-concepts"><h2>Cloud Concepts</h2>
@@ -454,7 +463,7 @@ write(f"{DOCS}/clf-c02.html", clf)
 
 
 # ── SAA-C03 ──────────────────────────────────────────────────
-saa = HEAD("SAA-C03 - Solutions Architect Associate","Complete SAA-C03 study guide. EC2, S3, VPC, RDS, serverless, HA design patterns, security.") + crumb("SAA-C03") + phdr("badge-blue","Associate","&#127959;","SAA-C03 - AWS Certified Solutions Architect Associate","The most popular AWS certification. Design resilient, performant, secure, cost-optimized architectures.",'<span class="badge badge-green">130 min | 65 questions</span><span class="badge badge-blue">Passing: 720/1000</span>') + wrap([("overview","Exam Overview"),("ec2","EC2 Deep Dive"),("s3","S3 Deep Dive"),("vpc","VPC &amp; Networking"),("ha","HA &amp; Resilient Design"),("serverless","Serverless"),("security","Security"),("checklist","Checklist")],
+saa = HEAD("SAA-C03 - Solutions Architect Associate","Complete SAA-C03 study guide. EC2, S3, VPC, RDS, serverless, HA design patterns, security.") + crumb("SAA-C03") + phdr("badge-blue","Associate","&#127959;","SAA-C03 - AWS Certified Solutions Architect Associate","The most popular AWS certification. Design resilient, performant, secure, cost-optimized architectures.",'<span class="badge badge-green">130 min | 65 questions</span><span class="badge badge-blue">Passing: 720/1000</span>') + quiz_cta("SAA-C03") + wrap([("overview","Exam Overview"),("ec2","EC2 Deep Dive"),("s3","S3 Deep Dive"),("vpc","VPC &amp; Networking"),("ha","HA &amp; Resilient Design"),("serverless","Serverless"),("security","Security"),("checklist","Checklist")],
 exam("AWS Solutions Architect Associate","https://explore.skillbuilder.aws/learn/course/external/view/elearning/1044/aws-certified-solutions-architect-associate-official-practice-question-set-saa-c03-english","https://d1.awsstatic.com/training-and-certification/docs-sa-assoc/AWS-Certified-Solutions-Architect-Associate_Exam-Guide.pdf","https://d1.awsstatic.com/training-and-certification/docs-sa-assoc/AWS-Certified-Solutions-Architect-Associate_Sample-Questions.pdf","130 minutes","65","720",[("Design Secure Architectures","30"),("Design Resilient Architectures","26"),("Design High-Performing Architectures","24"),("Design Cost-Optimized Architectures","20")])+"""
 <section id="ec2"><h2>EC2 Deep Dive</h2>
 <h3>Instance Type Families</h3>
@@ -555,7 +564,8 @@ def cert_page(code, level_cls, level_txt, icon, title, desc, badges, exam_args, 
     # extra_badge: optional status badge shown next to the level badge (e.g. RETIRED / Updating)
     # notice: optional banner card (retirement / new-version notice) shown right after the page header
     header = phdr(level_cls, level_txt, icon, f"{code} - {title}", desc, badges, extra_badge)
-    return (HEAD(f"{code} - {title}", desc) + crumb(code) + header + notice
+    cta = quiz_cta(code)
+    return (HEAD(f"{code} - {title}", desc) + crumb(code) + header + notice + cta
             + wrap(toc, exam(*exam_args) + body_html + chk(checklist_items, next_file, next_label)) + FOOT)
 
 # ── Status badges & notice banners (keep build output in sync with published site) ──
@@ -2103,6 +2113,23 @@ quiz_html = HEAD("Practice Quiz","Interactive AWS certification practice quiz wi
 <script src="../assets/js/quiz.js"></script>
 """ + FOOT
 write(f"{DOCS}/quiz.html", quiz_html)
+
+# ── flashcards.html ─────────────────────────────────────────
+flash_html = HEAD("Flashcards","Spaced-repetition AWS flashcards for services, ports, limits, and key concepts. Free and open source.") + """
+<div class="container" style="padding-top:2rem"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Flashcards</span></div></div>
+<div class="page-header"><div class="container">
+  <span class="badge badge-green">Interactive</span>
+  <h1 style="margin-top:0.75rem">&#127183; Flashcards</h1>
+  <p>Master AWS services, ports, limits, and key concepts with spaced repetition. Rate each card and the app schedules its next review using an SM-2 algorithm. Your progress is saved in your browser - no account needed.</p>
+  <div class="flex-wrap mt-1"><span class="badge badge-blue">Spaced Repetition</span><span class="badge badge-orange">Per-Cert Decks</span><span class="badge badge-green">Progress Saved Locally</span></div>
+</div></div>
+<div class="container" style="padding:2rem 0 4rem">
+  <div id="flash-app"></div>
+  <div class="callout info" style="margin-top:2rem"><div class="callout-title">&#128161; Want to add cards?</div><p>The flashcard bank is open source. Add cards by editing <code>data/flashcards.json</code> and opening a pull request. Each card needs a cert (or GENERAL), topic, front, and back.</p></div>
+</div>
+<script src="../assets/js/flashcards.js"></script>
+""" + FOOT
+write(f"{DOCS}/flashcards.html", flash_html)
 
 # ── SEO & PWA assets: sitemap.xml, robots.txt, manifest, OG image ──
 import datetime
