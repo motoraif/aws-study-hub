@@ -1,5 +1,10 @@
 /* AWS Study Hub - Shared Navbar + Footer */
 (function(){
+  // Apply saved theme as early as possible (this script is in <head>) to avoid a flash.
+  try {
+    if (localStorage.getItem('theme') === 'light') document.documentElement.setAttribute('data-theme', 'light');
+  } catch(e) {}
+
   const segs=location.pathname.split('/').filter(Boolean);
   const inDocs=segs.includes('docs');
   const root=inDocs?'../':'./';
@@ -49,8 +54,10 @@
     <a href="${root}docs/resources.html">Resources</a>
     <a href="${root}docs/labs.html">Labs</a>
     <a href="${root}docs/quiz.html">Quiz <span class="nav-pill nav-pill-new">New</span></a>
+    <a href="${root}docs/flashcards.html">Flashcards <span class="nav-pill nav-pill-new">New</span></a>
     <a href="${root}docs/news.html">News</a>
     <a href="https://github.com/motoraif/aws-study-hub" target="_blank" rel="noopener">GitHub &#11088;</a>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme">&#127769;</button>
   </div>
 </div></nav>`;
 
@@ -96,6 +103,7 @@
         <li><a href="${root}docs/resources.html">All Resources</a></li>
         <li><a href="${root}docs/labs.html">Labs &amp; Practice</a></li>
         <li><a href="${root}docs/quiz.html">Practice Quiz</a></li>
+        <li><a href="${root}docs/flashcards.html">Flashcards</a></li>
         <li><a href="${root}docs/news.html">AWS News</a></li>
         <li><a href="https://explore.skillbuilder.aws/" target="_blank">AWS Skill Builder</a></li>
         <li><a href="https://www.udemy.com/user/stephane-maarek/" target="_blank">Stephane Maarek</a></li>
@@ -113,6 +121,24 @@
   document.addEventListener('DOMContentLoaded',()=>{
     document.body.insertAdjacentHTML('afterbegin',nav);
     document.body.insertAdjacentHTML('beforeend',footer);
+
+    // Theme toggle
+    const themeBtn=document.getElementById('theme-toggle');
+    function setThemeIcon(){
+      if(!themeBtn) return;
+      const light=document.documentElement.getAttribute('data-theme')==='light';
+      themeBtn.innerHTML=light?'&#9728;&#65039;':'&#127769;'; // sun when light, moon when dark
+      themeBtn.setAttribute('title', light?'Switch to dark theme':'Switch to light theme');
+    }
+    setThemeIcon();
+    if(themeBtn){
+      themeBtn.addEventListener('click',()=>{
+        const light=document.documentElement.getAttribute('data-theme')==='light';
+        if(light){ document.documentElement.removeAttribute('data-theme'); try{localStorage.setItem('theme','dark');}catch(e){} }
+        else { document.documentElement.setAttribute('data-theme','light'); try{localStorage.setItem('theme','light');}catch(e){} }
+        setThemeIcon();
+      });
+    }
 
     // Mobile hamburger toggle
     const toggle=document.getElementById('nav-toggle');
