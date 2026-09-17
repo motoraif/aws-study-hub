@@ -58,6 +58,6 @@ link: update Stephane Maarek DVA course URL
 
 ## Questions?
 
-Open a [GitHub Discussion](https://github.com/motoraif/aws-study-hub/discussions) or an [Issue](https://github.com/motoraif/aws-study-hub/issues/new).
+Open an [Issue](https://github.com/motoraif/aws-study-hub/issues/new) to ask a question or start a conversation.
 
 Thank you! ☁️
