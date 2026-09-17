@@ -6,7 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-**🌐 Live Site:** https://motoraif.github.io/aws-study-hub
+**🌐 Live Site:** https://toraif.com/aws-study-hub
 
 ---
 
