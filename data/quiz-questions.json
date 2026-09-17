@@ -1,7 +1,7 @@
 {
-  "version": 1,
+  "version": 2,
   "updated": "2026-09-17",
-  "note": "Community question bank for AWS Study Hub. Each question: id, cert, domain, question, options[], answer (index), explanation. Contributions welcome via PR.",
+  "note": "Community question bank for AWS Study Hub. Each question: id, cert, domain, question, options[], answer (index into options), explanation. Contributions welcome via PR.",
   "questions": [
     {
       "id": "clf-001",
@@ -40,6 +40,61 @@
       "explanation": "Paying only for what you consume, instead of buying hardware upfront, is the classic 'trade capital expense (CapEx) for variable expense (OpEx)' benefit of cloud computing."
     },
     {
+      "id": "clf-005",
+      "cert": "CLF-C02",
+      "domain": "Billing, Pricing & Support",
+      "question": "Which AWS Support plan is the MINIMUM required to get a response time of less than 1 hour for production-down cases and a dedicated Technical Account Manager (TAM)?",
+      "options": ["Basic", "Developer", "Business", "Enterprise"],
+      "answer": 3,
+      "explanation": "A dedicated Technical Account Manager (TAM) is included with Enterprise Support. Business Support offers fast response times but no TAM; Developer and Basic do not offer production-critical response times."
+    },
+    {
+      "id": "clf-006",
+      "cert": "CLF-C02",
+      "domain": "Security & Compliance",
+      "question": "Which AWS service helps you centrally manage billing and apply Service Control Policies (SCPs) across multiple AWS accounts?",
+      "options": ["IAM Identity Center", "AWS Organizations", "AWS Config", "AWS CloudTrail"],
+      "answer": 1,
+      "explanation": "AWS Organizations provides consolidated billing and lets you apply SCPs to accounts/OUs. Control Tower builds a landing zone on top of it, but the core account and SCP management is Organizations."
+    },
+    {
+      "id": "clf-007",
+      "cert": "CLF-C02",
+      "domain": "Cloud Technology & Services",
+      "question": "A company wants a fully managed relational database and does not want to manage servers or patching. Which service should they choose?",
+      "options": ["Amazon EC2 with MySQL installed", "Amazon RDS", "Amazon DynamoDB", "Amazon Redshift"],
+      "answer": 1,
+      "explanation": "Amazon RDS is a managed relational database (MySQL, PostgreSQL, etc.) that handles patching, backups, and failover. DynamoDB is NoSQL, Redshift is a data warehouse, and self-managed EC2 requires you to run everything."
+    },
+    {
+      "id": "clf-008",
+      "cert": "CLF-C02",
+      "domain": "Cloud Concepts",
+      "question": "Which AWS Well-Architected Framework pillar focuses on the ability of a workload to recover from failures and meet demand?",
+      "options": ["Cost Optimization", "Operational Excellence", "Reliability", "Performance Efficiency"],
+      "answer": 2,
+      "explanation": "The Reliability pillar covers a workload's ability to recover from failures, scale to meet demand, and mitigate disruptions. There are six pillars in total."
+    },
+    {
+      "id": "clf-009",
+      "cert": "CLF-C02",
+      "domain": "Cloud Technology & Services",
+      "question": "Which service delivers content to users with low latency by caching it at edge locations around the world?",
+      "options": ["Amazon Route 53", "Amazon CloudFront", "AWS Global Accelerator", "Amazon S3 Transfer Acceleration"],
+      "answer": 1,
+      "explanation": "Amazon CloudFront is the CDN that caches content at edge locations for low-latency delivery. Route 53 is DNS, and Global Accelerator improves availability/performance for TCP/UDP but is not a CDN cache."
+    },
+    {
+      "id": "clf-010",
+      "cert": "CLF-C02",
+      "domain": "Billing, Pricing & Support",
+      "question": "Which tool provides cost visualization and lets you forecast future AWS spend based on historical usage?",
+      "options": ["AWS Budgets", "AWS Cost Explorer", "AWS Trusted Advisor", "AWS Pricing Calculator"],
+      "answer": 1,
+      "explanation": "AWS Cost Explorer visualizes and forecasts spend from historical data. AWS Budgets sets thresholds/alerts, the Pricing Calculator estimates future architectures, and Trusted Advisor gives best-practice checks."
+    },
+
+    {
       "id": "saa-001",
       "cert": "SAA-C03",
       "domain": "Design High-Performing Architectures",
@@ -75,6 +130,61 @@
       "answer": 1,
       "explanation": "S3 Standard-IA is for infrequently accessed data that still needs millisecond retrieval, at lower storage cost than Standard. Glacier has retrieval delays, and One Zone-IA sacrifices multi-AZ durability."
     },
+    {
+      "id": "saa-005",
+      "cert": "SAA-C03",
+      "domain": "Design Resilient Architectures",
+      "question": "A queue-based system must ensure messages are processed exactly once and in the exact order they were sent. Which service configuration is appropriate?",
+      "options": ["SQS Standard queue", "SQS FIFO queue", "SNS Standard topic", "Amazon Data Firehose"],
+      "answer": 1,
+      "explanation": "SQS FIFO queues guarantee ordering and exactly-once processing. SQS Standard offers best-effort ordering and at-least-once delivery. SNS is pub/sub, and Firehose is streaming delivery, not ordered queue processing."
+    },
+    {
+      "id": "saa-006",
+      "cert": "SAA-C03",
+      "domain": "Design Secure Architectures",
+      "question": "EC2 instances in a private subnet need to download OS patches from the internet but must not be reachable from the internet. What should be used?",
+      "options": ["Internet Gateway attached to the private subnet", "NAT Gateway in a public subnet", "VPC Peering connection", "Egress-Only Internet Gateway"],
+      "answer": 1,
+      "explanation": "A NAT Gateway in a public subnet lets private instances make outbound-only connections to the internet. An Internet Gateway would make them reachable, and Egress-Only IGW is for IPv6 only."
+    },
+    {
+      "id": "saa-007",
+      "cert": "SAA-C03",
+      "domain": "Design High-Performing Architectures",
+      "question": "An application needs single-digit millisecond latency at massive scale for a key-value workload with unpredictable traffic spikes. Which database is the BEST fit?",
+      "options": ["Amazon RDS for PostgreSQL", "Amazon DynamoDB with on-demand capacity", "Amazon Redshift", "Amazon Aurora Serverless v1"],
+      "answer": 1,
+      "explanation": "DynamoDB provides single-digit millisecond latency at any scale, and on-demand capacity absorbs unpredictable spikes without capacity planning. Redshift is analytics, and RDS/Aurora are relational."
+    },
+    {
+      "id": "saa-008",
+      "cert": "SAA-C03",
+      "domain": "Design Cost-Optimized Architectures",
+      "question": "A stateless web tier sees predictable baseline load plus occasional spikes. Which purchasing mix is MOST cost-effective while handling spikes?",
+      "options": ["All On-Demand", "All Spot Instances", "Reserved/Savings Plans for baseline plus On-Demand or Spot for spikes", "All Reserved Instances sized for peak"],
+      "answer": 2,
+      "explanation": "Cover the steady baseline with Reserved Instances or Savings Plans (lowest rate for known usage), and handle variable spikes with On-Demand or Spot. Sizing all-Reserved for peak wastes money off-peak."
+    },
+    {
+      "id": "saa-009",
+      "cert": "SAA-C03",
+      "domain": "Design Secure Architectures",
+      "question": "A company wants to give an application on EC2 permission to read from an S3 bucket without storing long-term credentials on the instance. What is the recommended approach?",
+      "options": ["Store IAM user access keys in the app config", "Attach an IAM role to the EC2 instance", "Hard-code credentials in environment variables", "Use the root account access keys"],
+      "answer": 1,
+      "explanation": "An IAM role attached to the instance provides temporary, automatically rotated credentials via the instance metadata service, with no long-term keys to manage or leak."
+    },
+    {
+      "id": "saa-010",
+      "cert": "SAA-C03",
+      "domain": "Design Resilient Architectures",
+      "question": "Which combination provides a decoupled, scalable architecture for processing uploaded files asynchronously?",
+      "options": ["EC2 polling S3 directly on a loop", "S3 event notification to SQS, consumed by an Auto Scaling worker fleet", "Synchronous API Gateway to a single EC2 instance", "CloudFront invalidation triggers"],
+      "answer": 1,
+      "explanation": "S3 event notifications to an SQS queue, consumed by workers that scale on queue depth, decouples producers from consumers and scales with load, a core resilient/scalable pattern."
+    },
+
     {
       "id": "dva-001",
       "cert": "DVA-C02",
@@ -112,6 +222,43 @@
       "explanation": "Secrets Manager provides built-in automatic rotation via Lambda and native integration with RDS/Redshift. Parameter Store Standard has no built-in rotation, and env vars/S3 are not purpose-built secret stores with rotation."
     },
     {
+      "id": "dva-005",
+      "cert": "DVA-C02",
+      "domain": "Development with AWS Services",
+      "question": "A DynamoDB query returns a LastEvaluatedKey in the response. What does this indicate?",
+      "options": ["The query failed and must be retried", "There are more results; use it as ExclusiveStartKey to paginate", "The table is being throttled", "The item was deleted"],
+      "answer": 1,
+      "explanation": "A LastEvaluatedKey means the result set was paginated and more items exist. Pass it as ExclusiveStartKey on the next request to continue. When it is absent, you have retrieved all matching items."
+    },
+    {
+      "id": "dva-006",
+      "cert": "DVA-C02",
+      "domain": "Troubleshooting & Optimization",
+      "question": "An application makes many repeated reads of the same DynamoDB items and needs microsecond latency. Which feature should be added?",
+      "options": ["A Global Secondary Index", "DynamoDB Accelerator (DAX)", "DynamoDB Streams", "Provisioned capacity with auto scaling"],
+      "answer": 1,
+      "explanation": "DAX is an in-memory cache for DynamoDB that delivers microsecond read latency for repeated reads. GSIs support alternate query patterns, Streams capture changes, and capacity settings do not add caching."
+    },
+    {
+      "id": "dva-007",
+      "cert": "DVA-C02",
+      "domain": "Development with AWS Services",
+      "question": "An API Gateway REST API needs to reduce backend calls for identical GET requests. Which feature helps MOST?",
+      "options": ["Usage plans", "API caching", "Request validation", "Mutual TLS"],
+      "answer": 1,
+      "explanation": "API Gateway caching stores responses for a configurable TTL, so identical requests are served from cache and never reach the backend. Usage plans throttle, and validation/mTLS address input and security."
+    },
+    {
+      "id": "dva-008",
+      "cert": "DVA-C02",
+      "domain": "Security",
+      "question": "A mobile app needs to let users sign in with email/password and then call AWS APIs with temporary credentials. Which combination is appropriate?",
+      "options": ["Cognito User Pool for sign-in, Identity Pool for AWS credentials", "IAM users for each mobile user", "Access keys embedded in the app", "API Gateway API keys"],
+      "answer": 0,
+      "explanation": "A Cognito User Pool handles user sign-in/directory; a Cognito Identity Pool exchanges that identity for temporary AWS credentials via IAM roles. IAM users per end-user and embedded keys are anti-patterns."
+    },
+
+    {
       "id": "soa-001",
       "cert": "SOA-C02",
       "domain": "Monitoring, Logging & Remediation",
@@ -130,6 +277,34 @@
       "explanation": "SSM Session Manager provides shell access controlled by IAM, requires no inbound ports or bastion, and logs sessions to CloudWatch/S3, making it the most secure option."
     },
     {
+      "id": "soa-003",
+      "cert": "SOA-C02",
+      "domain": "Deployment, Provisioning & Automation",
+      "question": "You must apply OS security patches to a fleet of EC2 instances on a schedule with compliance reporting. Which service automates this?",
+      "options": ["AWS Config", "AWS Systems Manager Patch Manager", "AWS CloudFormation", "Amazon Inspector"],
+      "answer": 1,
+      "explanation": "SSM Patch Manager automates patching on a schedule via maintenance windows and reports compliance. Config tracks configuration state, Inspector finds vulnerabilities, and CloudFormation provisions infrastructure."
+    },
+    {
+      "id": "soa-004",
+      "cert": "SOA-C02",
+      "domain": "Monitoring, Logging & Remediation",
+      "question": "A CloudWatch alarm should notify an on-call team and trigger an Auto Scaling action when CPU is high. What does the alarm send its notification action to?",
+      "options": ["Directly to email addresses", "An Amazon SNS topic (and an Auto Scaling policy)", "An S3 bucket", "AWS CloudTrail"],
+      "answer": 1,
+      "explanation": "CloudWatch alarms invoke actions such as publishing to an SNS topic (which fans out to email/SMS/Lambda) and triggering Auto Scaling policies. Alarms do not email addresses directly without SNS."
+    },
+    {
+      "id": "soa-005",
+      "cert": "SOA-C02",
+      "domain": "Reliability & Business Continuity",
+      "question": "Which AWS Backup capability lets you meet a requirement to keep copies of backups in a second Region for disaster recovery?",
+      "options": ["Backup vault lock", "Cross-Region copy in a backup plan", "Lifecycle to cold storage", "On-demand backup"],
+      "answer": 1,
+      "explanation": "AWS Backup plans support cross-Region copy so recovery points are replicated to another Region for DR. Vault lock enforces immutability, and lifecycle moves backups to cheaper tiers."
+    },
+
+    {
       "id": "scs-001",
       "cert": "SCS-C02",
       "domain": "Threat Detection & Incident Response",
@@ -139,14 +314,70 @@
       "explanation": "GuardDuty is the managed threat-detection service that analyzes CloudTrail, VPC Flow Logs, and DNS logs. Macie classifies sensitive data in S3, Inspector scans for software vulnerabilities, and Config tracks resource compliance."
     },
     {
+      "id": "scs-002",
+      "cert": "SCS-C02",
+      "domain": "Data Protection",
+      "question": "A company must discover and classify sensitive data such as PII stored in Amazon S3. Which service is purpose-built for this?",
+      "options": ["Amazon Macie", "Amazon GuardDuty", "AWS Secrets Manager", "AWS KMS"],
+      "answer": 0,
+      "explanation": "Amazon Macie uses machine learning to discover and classify sensitive data (like PII and credentials) in S3. GuardDuty is threat detection, Secrets Manager stores secrets, and KMS manages encryption keys."
+    },
+    {
+      "id": "scs-003",
+      "cert": "SCS-C02",
+      "domain": "Infrastructure Security",
+      "question": "You need Layer 7 protection to block SQL injection and cross-site scripting for an application behind an Application Load Balancer. Which service should you attach?",
+      "options": ["AWS Shield Standard", "AWS WAF", "Network ACLs", "Security Groups"],
+      "answer": 1,
+      "explanation": "AWS WAF inspects HTTP(S) requests (Layer 7) and can block SQLi, XSS, and rate-based abuse; it attaches to ALB, CloudFront, and API Gateway. Shield handles DDoS, and SG/NACLs operate at layers 3/4."
+    },
+    {
+      "id": "scs-004",
+      "cert": "SCS-C02",
+      "domain": "Identity & Access Management",
+      "question": "Across an AWS Organization, you must guarantee that no account can disable AWS CloudTrail, even by an account administrator. What enforces this?",
+      "options": ["An IAM permission boundary", "A Service Control Policy (SCP)", "A resource-based policy", "An IAM group policy"],
+      "answer": 1,
+      "explanation": "An SCP that denies cloudtrail:StopLogging/DeleteTrail sets the maximum permissions for member accounts, so even admins cannot disable CloudTrail. Permission boundaries and identity/resource policies act within a single account."
+    },
+
+    {
       "id": "sap-001",
       "cert": "SAP-C02",
-      "domain": "Design for Organizational Complexity",
+      "domain": "Design Solutions for Organizational Complexity",
       "question": "An organization wants to prevent any member account from disabling CloudTrail, regardless of that account's IAM permissions. What should be used?",
       "options": ["An IAM permission boundary", "A Service Control Policy (SCP) in AWS Organizations", "A resource-based policy on CloudTrail", "An IAM identity policy on each user"],
       "answer": 1,
       "explanation": "SCPs set the maximum available permissions for accounts in an OU/organization. A deny SCP on cloudtrail:StopLogging prevents even account admins from disabling CloudTrail. Permission boundaries and identity policies act only within a single account."
     },
+    {
+      "id": "sap-002",
+      "cert": "SAP-C02",
+      "domain": "Continuous Improvement for Existing Solutions",
+      "question": "A company needs many VPCs across multiple accounts to communicate with each other and on-premises through a single hub, with transitive routing. Which service is the BEST fit?",
+      "options": ["VPC Peering between every VPC", "AWS Transit Gateway", "Internet Gateway", "AWS PrivateLink"],
+      "answer": 1,
+      "explanation": "Transit Gateway is a hub-and-spoke router that connects many VPCs and on-premises networks with transitive routing, avoiding a full mesh of peering connections. VPC Peering is non-transitive."
+    },
+    {
+      "id": "sap-003",
+      "cert": "SAP-C02",
+      "domain": "Accelerate Workload Migration & Modernization",
+      "question": "During a large migration, which of the 7 Rs describes moving an application to the cloud with minimal changes (a 'lift and shift')?",
+      "options": ["Refactor", "Replatform", "Rehost", "Repurchase"],
+      "answer": 2,
+      "explanation": "Rehost is lift-and-shift: move the workload as-is (often with Application Migration Service). Replatform makes minor optimizations, Refactor re-architects, and Repurchase moves to a different product (e.g., SaaS)."
+    },
+    {
+      "id": "sap-004",
+      "cert": "SAP-C02",
+      "domain": "Design Solutions for Organizational Complexity",
+      "question": "A workload must fail over to a second Region with an RPO of seconds and near-zero RTO, serving live traffic from both Regions. Which DR strategy is this?",
+      "options": ["Backup and restore", "Pilot light", "Warm standby", "Multi-Region active-active"],
+      "answer": 3,
+      "explanation": "Active-active (multi-Region) serves traffic from both Regions simultaneously, giving the lowest RTO/RPO at the highest cost. Pilot light and warm standby have larger RTOs; backup/restore is the slowest."
+    },
+
     {
       "id": "dop-001",
       "cert": "DOP-C02",
@@ -155,6 +386,200 @@
       "options": ["CodeDeploy", "CodeBuild", "CodeCommit", "CodeArtifact"],
       "answer": 1,
       "explanation": "CodeBuild compiles code, runs tests, and produces artifacts; a failing test fails the build and halts the pipeline. CodeDeploy handles deployment, CodeCommit is source control, and CodeArtifact is a package repository."
+    },
+    {
+      "id": "dop-002",
+      "cert": "DOP-C02",
+      "domain": "Resilient Cloud Solutions",
+      "question": "You need zero-downtime deployments for an ECS service where a new version runs alongside the old and traffic shifts only after health checks pass. Which strategy fits?",
+      "options": ["In-place all-at-once", "Blue/green deployment", "Recreate deployment", "Manual instance replacement"],
+      "answer": 1,
+      "explanation": "Blue/green stands up the new (green) version beside the old (blue), validates health, then shifts traffic, enabling zero-downtime and fast rollback. CodeDeploy supports blue/green for ECS and Lambda."
+    },
+    {
+      "id": "dop-003",
+      "cert": "DOP-C02",
+      "domain": "Monitoring & Logging",
+      "question": "Application logs from EC2 must be centralized and queried with a SQL-like language for troubleshooting. Which combination is appropriate?",
+      "options": ["Store logs on the instance only", "CloudWatch agent to CloudWatch Logs, queried with Logs Insights", "S3 with server access logging", "CloudTrail data events"],
+      "answer": 1,
+      "explanation": "The CloudWatch agent ships logs to CloudWatch Logs, and Logs Insights provides a query language for fast troubleshooting. CloudTrail records API activity, not application logs."
+    },
+    {
+      "id": "dop-004",
+      "cert": "DOP-C02",
+      "domain": "Configuration Management & IaC",
+      "question": "A team wants to detect when a deployed CloudFormation stack's resources have been changed manually outside of the template. Which feature helps?",
+      "options": ["Change sets", "Drift detection", "Nested stacks", "StackSets"],
+      "answer": 1,
+      "explanation": "Drift detection compares actual resource configuration against the stack template to find manual (out-of-band) changes. Change sets preview updates, nested stacks compose templates, and StackSets deploy across accounts/Regions."
+    },
+
+    {
+      "id": "ans-001",
+      "cert": "ANS-C01",
+      "domain": "Network Design",
+      "question": "A company needs a dedicated, private, consistent-bandwidth connection between its data center and AWS that does not traverse the public internet. Which service should they use?",
+      "options": ["Site-to-Site VPN", "AWS Direct Connect", "VPC Peering", "AWS Transit Gateway"],
+      "answer": 1,
+      "explanation": "Direct Connect provides a dedicated private physical connection with consistent bandwidth and lower latency than internet-based VPN. A Site-to-Site VPN runs over the public internet."
+    },
+    {
+      "id": "ans-002",
+      "cert": "ANS-C01",
+      "domain": "Network Management & Operations",
+      "question": "You must capture metadata about accepted and rejected IP traffic to and from network interfaces in a VPC for security analysis. Which feature provides this?",
+      "options": ["VPC Flow Logs", "CloudTrail", "Traffic Mirroring", "Route 53 query logging"],
+      "answer": 0,
+      "explanation": "VPC Flow Logs record metadata (source/dest, ports, ACCEPT/REJECT) for traffic at the VPC, subnet, or ENI level. Traffic Mirroring copies full packets to an appliance; CloudTrail logs API calls."
+    },
+    {
+      "id": "ans-003",
+      "cert": "ANS-C01",
+      "domain": "Network Connectivity",
+      "question": "Two VPCs with overlapping CIDR blocks must exchange data for a specific service. VPC Peering is not possible due to the overlap. Which service can expose the service privately?",
+      "options": ["AWS Transit Gateway", "AWS PrivateLink (interface endpoint / endpoint service)", "Internet Gateway", "NAT Gateway"],
+      "answer": 1,
+      "explanation": "PrivateLink exposes a specific service through an interface endpoint, which works even with overlapping CIDRs because it does not require routable, non-overlapping address space like peering or Transit Gateway do."
+    },
+    {
+      "id": "ans-004",
+      "cert": "ANS-C01",
+      "domain": "Network Design",
+      "question": "An application needs a static IP address and ultra-low-latency Layer 4 load balancing for a TCP workload. Which load balancer should be used?",
+      "options": ["Application Load Balancer", "Network Load Balancer", "Gateway Load Balancer", "Classic Load Balancer"],
+      "answer": 1,
+      "explanation": "The Network Load Balancer operates at Layer 4, offers ultra-low latency, and provides a static IP per AZ (and Elastic IP support). ALB is Layer 7 with changing IPs, and GLB is for inline appliances."
+    },
+
+    {
+      "id": "aif-001",
+      "cert": "AIF-C01",
+      "domain": "Fundamentals of AI and ML",
+      "question": "Which type of machine learning trains a model on labeled input-output pairs to predict outcomes for new inputs?",
+      "options": ["Unsupervised learning", "Supervised learning", "Reinforcement learning", "Federated learning"],
+      "answer": 1,
+      "explanation": "Supervised learning uses labeled data (inputs paired with known outputs) to learn a mapping for prediction. Unsupervised learning finds structure in unlabeled data, and reinforcement learning learns from rewards."
+    },
+    {
+      "id": "aif-002",
+      "cert": "AIF-C01",
+      "domain": "Applications of Foundation Models",
+      "question": "Which AWS service provides access to foundation models (such as Anthropic Claude and Amazon Titan) through a single API for building generative AI applications?",
+      "options": ["Amazon SageMaker", "Amazon Bedrock", "Amazon Comprehend", "Amazon Rekognition"],
+      "answer": 1,
+      "explanation": "Amazon Bedrock offers foundation models from multiple providers via one API, plus features like knowledge bases and agents. SageMaker is a full ML platform; Comprehend and Rekognition are task-specific AI services."
+    },
+    {
+      "id": "aif-003",
+      "cert": "AIF-C01",
+      "domain": "Applications of Foundation Models",
+      "question": "A company wants a generative AI chatbot to answer using their own internal documents without retraining the model. Which technique should they use?",
+      "options": ["Fine-tuning the base model", "Retrieval Augmented Generation (RAG)", "Reducing the temperature parameter", "Increasing the token limit"],
+      "answer": 1,
+      "explanation": "RAG retrieves relevant company documents (often from a vector store) and adds them to the prompt as context, so the model answers from private data without retraining. Fine-tuning changes model weights and is heavier."
+    },
+    {
+      "id": "aif-004",
+      "cert": "AIF-C01",
+      "domain": "Guidelines for Responsible AI",
+      "question": "Which Amazon Bedrock feature helps block harmful content and restrict topics in generative AI application responses?",
+      "options": ["Bedrock Guardrails", "Bedrock Knowledge Bases", "Bedrock Agents", "Provisioned Throughput"],
+      "answer": 0,
+      "explanation": "Guardrails for Amazon Bedrock let you define denied topics and content filters to promote safe, responsible outputs. Knowledge Bases add RAG, Agents orchestrate tasks, and Provisioned Throughput reserves capacity."
+    },
+
+    {
+      "id": "dea-001",
+      "cert": "DEA-C01",
+      "domain": "Data Ingestion & Transformation",
+      "question": "A team needs a serverless ETL service to crawl data in S3, infer schema into a catalog, and run Spark transformations. Which service fits?",
+      "options": ["Amazon Athena", "AWS Glue", "Amazon EMR", "Amazon Redshift"],
+      "answer": 1,
+      "explanation": "AWS Glue is serverless ETL with crawlers, a Data Catalog, and Spark-based jobs. Athena queries data in place with SQL, EMR runs managed big-data clusters you size, and Redshift is a data warehouse."
+    },
+    {
+      "id": "dea-002",
+      "cert": "DEA-C01",
+      "domain": "Data Store Management",
+      "question": "Analysts want to run ad-hoc SQL queries directly against data in S3 without loading it into a database, paying only per data scanned. Which service is BEST?",
+      "options": ["Amazon Redshift", "Amazon Athena", "Amazon RDS", "Amazon DynamoDB"],
+      "answer": 1,
+      "explanation": "Amazon Athena runs serverless SQL directly on S3 data and charges per data scanned, ideal for ad-hoc analysis. Reducing scanned data with partitioning and columnar formats (Parquet) lowers cost."
+    },
+    {
+      "id": "dea-003",
+      "cert": "DEA-C01",
+      "domain": "Data Ingestion & Transformation",
+      "question": "A pipeline must reliably load streaming data into Amazon S3 and Redshift with minimal management and near-real-time delivery. Which service is designed for this?",
+      "options": ["Amazon Kinesis Data Streams", "Amazon Data Firehose", "Amazon MSK", "AWS DataSync"],
+      "answer": 1,
+      "explanation": "Amazon Data Firehose (formerly Kinesis Data Firehose) is fully managed and delivers streaming data to destinations like S3, Redshift, and OpenSearch with buffering. Kinesis Data Streams requires you to manage consumers."
+    },
+    {
+      "id": "dea-004",
+      "cert": "DEA-C01",
+      "domain": "Data Store Management",
+      "question": "To reduce Athena cost and improve performance on a large S3 dataset, which optimization is MOST effective?",
+      "options": ["Store data as uncompressed CSV", "Partition data and use a columnar format like Parquet", "Increase the S3 bucket size limit", "Enable S3 Transfer Acceleration"],
+      "answer": 1,
+      "explanation": "Partitioning prunes the data scanned, and columnar formats like Parquet (with compression) reduce bytes read, directly lowering Athena cost and improving query speed. CSV scans far more data."
+    },
+
+    {
+      "id": "mla-001",
+      "cert": "MLA-C01",
+      "domain": "ML Model Development",
+      "question": "Which SageMaker capability performs automatic hyperparameter optimization to find the best model configuration?",
+      "options": ["SageMaker Ground Truth", "SageMaker Automatic Model Tuning", "SageMaker Feature Store", "SageMaker Clarify"],
+      "answer": 1,
+      "explanation": "Automatic Model Tuning runs many training jobs with different hyperparameters (Bayesian/random search) to optimize a chosen metric. Ground Truth labels data, Feature Store manages features, and Clarify detects bias."
+    },
+    {
+      "id": "mla-002",
+      "cert": "MLA-C01",
+      "domain": "Deployment & Orchestration of ML Workflows",
+      "question": "A model receives sporadic, unpredictable traffic and the team wants to avoid paying for idle inference infrastructure. Which SageMaker inference option is BEST?",
+      "options": ["Real-time endpoint (always on)", "SageMaker Serverless Inference", "Batch Transform", "Multi-model endpoint on a large instance"],
+      "answer": 1,
+      "explanation": "Serverless Inference automatically scales to zero when idle and handles intermittent traffic without provisioning instances. Always-on real-time endpoints cost money while idle, and Batch Transform is for offline bulk scoring."
+    },
+    {
+      "id": "mla-003",
+      "cert": "MLA-C01",
+      "domain": "ML Solution Monitoring, Maintenance & Security",
+      "question": "After deployment, a model's accuracy degrades as incoming data distribution changes over time. Which SageMaker feature detects this drift?",
+      "options": ["SageMaker Model Monitor", "SageMaker Pipelines", "SageMaker Data Wrangler", "SageMaker Neo"],
+      "answer": 0,
+      "explanation": "SageMaker Model Monitor detects data-quality and model-quality drift in production. Pipelines orchestrate MLOps, Data Wrangler prepares data, and Neo compiles models for edge/optimized runtimes."
+    },
+
+    {
+      "id": "aip-001",
+      "cert": "AIP-C01",
+      "domain": "Generative AI Application Design",
+      "question": "A generative AI application must ground responses in a company's proprietary knowledge base stored as documents. Which Bedrock capability provides managed retrieval augmentation?",
+      "options": ["Bedrock Knowledge Bases", "Bedrock Guardrails", "Provisioned Throughput", "Model evaluation"],
+      "answer": 0,
+      "explanation": "Bedrock Knowledge Bases provide managed RAG: ingesting documents, creating embeddings, and retrieving relevant context at query time. Guardrails enforce safety, and Provisioned Throughput reserves capacity."
+    },
+    {
+      "id": "aip-002",
+      "cert": "AIP-C01",
+      "domain": "Generative AI Application Design",
+      "question": "To make a foundation model call external tools or APIs and complete multi-step tasks autonomously, which Bedrock feature should be used?",
+      "options": ["Bedrock Agents", "Bedrock Guardrails", "Prompt templates only", "Batch inference"],
+      "answer": 0,
+      "explanation": "Bedrock Agents orchestrate multi-step tasks, calling APIs/tools and using knowledge bases to fulfill user requests. Guardrails handle safety, and prompt templates alone cannot invoke external actions."
+    },
+    {
+      "id": "aip-003",
+      "cert": "AIP-C01",
+      "domain": "Responsible & Secure Generative AI",
+      "question": "Lowering the 'temperature' setting when calling a foundation model generally results in what?",
+      "options": ["More random, creative output", "More deterministic, focused output", "Longer responses", "Faster token generation only"],
+      "answer": 1,
+      "explanation": "Lower temperature reduces randomness, producing more deterministic and focused output, useful for factual tasks. Higher temperature increases diversity and creativity. Temperature does not directly set length."
     }
   ]
 }

@@ -1,0 +1,12 @@
+{
+  "name": "AWS Study Hub",
+  "short_name": "AWS Study Hub",
+  "description": "Free, open-source study platform for every AWS certification.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f1117",
+  "theme_color": "#ff9900",
+  "icons": [
+    { "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
