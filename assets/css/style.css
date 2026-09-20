@@ -410,3 +410,12 @@ footer { background: var(--bg-card); border-top: 1px solid var(--border); paddin
   .container { max-width: 100%; padding: 0; }
   .section { padding: 1rem 0; }
 }
+
+/* ── Mermaid diagrams ─────────────────────────────────────── */
+figure.diagram { margin: 1.5rem 0; text-align: center; }
+figure.diagram .mermaid {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1.25rem; overflow-x: auto; margin: 0;
+}
+figure.diagram .diagram-caption { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem; }
+@media print { figure.diagram .mermaid { border-color: #ccc; } }
