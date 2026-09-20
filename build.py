@@ -14,6 +14,7 @@ def seo_tags(title, desc, root):
     full_title = f"{title} - AWS Study Hub"
     return f"""  <meta name="robots" content="index,follow">
   <meta name="author" content="AWS Study Hub">
+  <meta name="impact-site-verification" content="6f8fc4a9-3cdc-44d9-a455-52af8c26f184">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="AWS Study Hub">
   <meta property="og:title" content="{full_title}">
@@ -2849,6 +2850,37 @@ services_html = HEAD("AWS Service Deep Dives","In-depth, exam-focused guides to 
 </div>
 """ + FOOT
 write(f"{DOCS}/services.html", services_html)
+
+# ── affiliate-disclosure.html ───────────────────────────────
+disclosure_html = HEAD("Affiliate Disclosure","How AWS Study Hub uses affiliate links, and our commitment to honest, official-first recommendations.") + """
+<div class="container" style="padding-top:2rem"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Affiliate Disclosure</span></div></div>
+<div class="page-header"><div class="container">
+  <span class="badge badge-teal">Transparency</span>
+  <h1 style="margin-top:0.75rem">&#129309; Affiliate Disclosure</h1>
+  <p>How we keep AWS Study Hub free, and our promise to recommend honestly.</p>
+</div></div>
+<div class="container" style="padding:2rem 0 4rem"><div style="max-width:760px;margin:0 auto">
+  <p>AWS Study Hub is free and open source. To help cover hosting and development, some outbound links to third-party courses and tools are <strong>affiliate links</strong>. If you click one and make a purchase, we may earn a small commission <strong>at no additional cost to you</strong>.</p>
+
+  <h2>Our commitments</h2>
+  <ul>
+    <li><strong>Official and free first.</strong> We always point you to official AWS resources (Skill Builder, exam guides, whitepapers) and free options before any paid one.</li>
+    <li><strong>Honest recommendations.</strong> We only link to courses and tools we believe are genuinely useful. A commission never changes what we recommend or how we rank it.</li>
+    <li><strong>No extra cost to you.</strong> Affiliate links never increase the price you pay.</li>
+    <li><strong>You are never required to use them.</strong> You can search for any resource directly instead of using our links.</li>
+  </ul>
+
+  <h2>Which links are affiliate links?</h2>
+  <p>Primarily some links to paid third-party courses (for example, Udemy instructors such as Stephane Maarek) and similar learning tools. Links to official AWS pages and free resources are <strong>not</strong> affiliate links.</p>
+
+  <h2>Programs we participate in</h2>
+  <p>We participate in affiliate programs via partners such as Impact.com (which powers the Udemy affiliate program). Participation may change over time.</p>
+
+  <div class="callout info"><div class="callout-title">&#128172; Questions?</div><p>If you have any questions about this disclosure, please <a href="https://github.com/motoraif/aws-study-hub/issues/new" target="_blank" rel="noopener">open an issue</a>.</p></div>
+  <p style="color:var(--text-muted);font-size:0.85rem">This site is not affiliated with or endorsed by Amazon Web Services. All AWS trademarks belong to Amazon.com, Inc.</p>
+</div></div>
+""" + FOOT
+write(f"{DOCS}/affiliate-disclosure.html", disclosure_html)
 
 # ── dashboard.html (progress) ───────────────────────────────
 dashboard_html = HEAD("My Progress","Your personal AWS study dashboard: quiz readiness per certification and study-checklist completion, all saved privately in your browser.") + """

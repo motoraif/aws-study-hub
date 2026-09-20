@@ -35,6 +35,16 @@
 ]
 },
 {
+"title": "Affiliate Disclosure",
+"url": "docs/affiliate-disclosure.html",
+"desc": "How AWS Study Hub uses affiliate links, and our commitment to honest, official-first recommendations.",
+"headings": [
+"Our commitments",
+"Which links are affiliate links?",
+"Programs we participate in"
+]
+},
+{
 "title": "AIF-C01 - AWS Certified AI Practitioner",
 "url": "docs/aif-c01.html",
 "desc": "AIF-C01 study guide. Foundational AI, ML, and generative AI concepts, Amazon Bedrock, SageMaker, responsible AI, and prompt engineering basics.",
