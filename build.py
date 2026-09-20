@@ -61,6 +61,21 @@ HEAD_ROOT = lambda t,d: f"""<!DOCTYPE html>
 FOOT      = '<script src="../assets/js/main.js"></script></body></html>'
 FOOT_ROOT = '<script src="assets/js/main.js"></script></body></html>'
 
+# Mermaid.js diagram support (loaded only on pages that use it, theme-aware).
+def mermaid_block(diagram_src, caption=""):
+    """Wrap a Mermaid diagram definition. diagram_src is Mermaid syntax (no HTML escaping)."""
+    cap = f'<figcaption class="diagram-caption">{caption}</figcaption>' if caption else ''
+    return f'<figure class="diagram"><pre class="mermaid">{diagram_src}</pre>{cap}</figure>'
+
+# Appended before FOOT on pages containing Mermaid diagrams. Initializes with a
+# theme matching the site's dark/light mode.
+MERMAID_LOADER = """
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  var light = document.documentElement.getAttribute('data-theme') === 'light';
+  mermaid.initialize({ startOnLoad: true, theme: light ? 'default' : 'dark', securityLevel: 'strict' });
+</script>"""
+
 def crumb(cert):
     return f'<div class="container" style="padding-top:2rem;"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Certifications</span> / <span>{cert}</span></div></div>'
 
@@ -2095,7 +2110,25 @@ fe80::/10           # Link-local
   <li><strong>Elastic Network Interface (ENI)</strong> - a virtual NIC attached to instances.</li>
   <li><strong>Elastic IP (EIP)</strong> - a static public IPv4 you own.</li>
 </ul>
-<div class="callout tip"><div class="callout-title">&#128161; Public vs Private Subnet</div><p>A <strong>public subnet</strong> has a route <code>0.0.0.0/0 → igw-xxx</code>. A <strong>private subnet</strong> has no direct route to an IGW. The difference lives entirely in the route table.</p></div></section>
+<div class="callout tip"><div class="callout-title">&#128161; Public vs Private Subnet</div><p>A <strong>public subnet</strong> has a route <code>0.0.0.0/0 → igw-xxx</code>. A <strong>private subnet</strong> has no direct route to an IGW. The difference lives entirely in the route table.</p></div>
+""" + mermaid_block("""flowchart TB
+  Internet((Internet)) --- IGW[Internet Gateway]
+  IGW --- ALB[Application Load Balancer]
+  subgraph VPC["VPC 10.0.0.0/16"]
+    subgraph AZA["AZ us-east-1a"]
+      PubA[Public Subnet 10.0.0.0/24<br/>NAT Gateway] --> WebA[EC2 Web Tier]
+      WebA --> AppA[EC2 App Tier<br/>Private Subnet]
+      AppA --> DBA[(RDS Primary<br/>DB Subnet)]
+    end
+    subgraph AZB["AZ us-east-1b"]
+      PubB[Public Subnet 10.0.1.0/24<br/>NAT Gateway] --> WebB[EC2 Web Tier]
+      WebB --> AppB[EC2 App Tier<br/>Private Subnet]
+      AppB --> DBB[(RDS Standby<br/>DB Subnet)]
+    end
+    ALB --- WebA
+    ALB --- WebB
+    DBA -. Multi-AZ replication .- DBB
+  end""", "A typical multi-AZ VPC: public subnets host the ALB and NAT gateways; private subnets hold the app tier; a separate DB subnet runs RDS Multi-AZ.") + """</section>
 
 <section id="vpc-connect"><h2>VPC Connectivity Options</h2>
 <div class="table-wrap"><table><thead><tr><th>Option</th><th>Connects</th><th>Notes</th></tr></thead><tbody>
@@ -2121,7 +2154,7 @@ fe80::/10           # Link-local
   <tr><td>Intermittent packet loss</td><td>MTU mismatch (jumbo frames)? Check with <code>ping -M do -s 8972</code></td></tr>
 </tbody></table></div>
 <div class="callout tip"><div class="callout-title">&#128161; Use VPC tooling</div><p><strong>VPC Reachability Analyzer</strong> traces the configured path between two resources and tells you exactly which SG, NACL, or route blocks it. <strong>VPC Flow Logs</strong> show ACCEPT/REJECT per flow - invaluable for diagnosing silent drops.</p></div></section>
-""" + chk(["Map the 7 OSI layers to the 4 TCP/IP layers","Explain encapsulation and MTU / jumbo frames","Explain the difference between TCP and UDP","Describe the TCP 3-way handshake and connection states","Identify private IP ranges (RFC 1918) and special addresses","Calculate the number of IPs in a CIDR block","Know why AWS reserves 5 IPs per subnet","Design a multi-AZ public/private subnet layout without overlaps","Understand IPv6 basics and the Egress-Only Internet Gateway","Know common ports: 22, 80, 443, 53, 3306, 5432, 2049, 3389","Explain DNS record types: A, AAAA, CNAME, MX, TXT, NS, Alias","Describe how a recursive DNS lookup works and the role of TTL","Compare Route 53 routing policies (weighted, latency, failover, geo)","Explain CNAME vs Alias and the zone apex rule","Understand DHCP (DORA) and ARP","Explain NAT Gateway vs NAT Instance and the per-AZ HA pattern","Read a route table and apply longest-prefix match","Explain ALB vs NLB vs GLB and their layers","Explain Security Groups vs Network ACLs (stateful vs stateless)","Understand ephemeral ports for stateless NACL return traffic","Understand TLS handshake, ACM, and TLS termination","Know the CloudFront us-east-1 certificate requirement","Understand core VPC components: IGW, route tables, subnets, ENI, EIP","Compare VPC Peering, Transit Gateway, and VPC Endpoints","Explain Site-to-Site VPN vs Direct Connect and hybrid failover","Know that VPC Peering is non-transitive","Use Reachability Analyzer and VPC Flow Logs to troubleshoot"],"clf-c02.html","Cloud Practitioner (CLF-C02)")) + FOOT
+""" + chk(["Map the 7 OSI layers to the 4 TCP/IP layers","Explain encapsulation and MTU / jumbo frames","Explain the difference between TCP and UDP","Describe the TCP 3-way handshake and connection states","Identify private IP ranges (RFC 1918) and special addresses","Calculate the number of IPs in a CIDR block","Know why AWS reserves 5 IPs per subnet","Design a multi-AZ public/private subnet layout without overlaps","Understand IPv6 basics and the Egress-Only Internet Gateway","Know common ports: 22, 80, 443, 53, 3306, 5432, 2049, 3389","Explain DNS record types: A, AAAA, CNAME, MX, TXT, NS, Alias","Describe how a recursive DNS lookup works and the role of TTL","Compare Route 53 routing policies (weighted, latency, failover, geo)","Explain CNAME vs Alias and the zone apex rule","Understand DHCP (DORA) and ARP","Explain NAT Gateway vs NAT Instance and the per-AZ HA pattern","Read a route table and apply longest-prefix match","Explain ALB vs NLB vs GLB and their layers","Explain Security Groups vs Network ACLs (stateful vs stateless)","Understand ephemeral ports for stateless NACL return traffic","Understand TLS handshake, ACM, and TLS termination","Know the CloudFront us-east-1 certificate requirement","Understand core VPC components: IGW, route tables, subnets, ENI, EIP","Compare VPC Peering, Transit Gateway, and VPC Endpoints","Explain Site-to-Site VPN vs Direct Connect and hybrid failover","Know that VPC Peering is non-transitive","Use Reachability Analyzer and VPC Flow Logs to troubleshoot"],"clf-c02.html","Cloud Practitioner (CLF-C02)")) + MERMAID_LOADER + FOOT
 write(f"{DOCS}/foundations-networking.html", net_html)
 
 # ── resources.html ──────────────────────────────────────────
