@@ -42,6 +42,7 @@
 <a href="#security">Security & Identity</a>
 <a href="#deployment">Deployment & DR</a>
 <a href="#analytics">Analytics & AI</a>
+<a href="#decisions">Decision Trees</a>
 </aside><main>
 <section id="compute"><h2>&#128187; Compute</h2>
 <h3>ALB vs NLB vs GLB</h3>
@@ -205,4 +206,50 @@
 </tbody></table></div>
 <div class="callout tip"><div class="callout-title">&#128221; Contribute</div><p>Spot a missing pair? Add it to the cheat sheet source in <code>build.py</code> and open a pull request.</p></div>
 </section>
-</main></div></div><script src="../assets/js/main.js"></script></body></html>
+
+<section id="decisions"><h2>&#127817; Decision Trees</h2>
+<p>Fast "which service?" flowcharts for the most common exam decision points.</p>
+<h3>Which compute service?</h3>
+<figure class="diagram"><pre class="mermaid">flowchart TD
+  A{Need to run code?} --> B{Event-driven &<br/>short-lived under 15 min?}
+  B -->|Yes| L[AWS Lambda]
+  B -->|No| C{Containers?}
+  C -->|Yes| D{Want to manage servers?}
+  D -->|No| F[Fargate]
+  D -->|Yes, Kubernetes| K[EKS]
+  D -->|Yes, AWS-native| E[ECS on EC2]
+  C -->|No| G{Full OS control /<br/>legacy app?}
+  G -->|Yes| H[EC2]
+  G -->|No| I[Elastic Beanstalk /<br/>App Runner]</pre><figcaption class="diagram-caption">Choosing a compute service based on workload shape.</figcaption></figure>
+<h3>Which database?</h3>
+<figure class="diagram"><pre class="mermaid">flowchart TD
+  A{Data model?} --> B{Relational?}
+  B -->|Yes| C{Need MySQL/PostgreSQL<br/>high performance?}
+  C -->|Yes| AU[Aurora]
+  C -->|Standard engine| RDS[RDS]
+  C -->|Data warehouse / OLAP| RS[Redshift]
+  B -->|No| D{Access pattern?}
+  D -->|Key-value, massive scale| DDB[DynamoDB]
+  D -->|In-memory cache| EC[ElastiCache]
+  D -->|Document| DOC[DocumentDB]
+  D -->|Graph| NEP[Neptune]
+  D -->|Time series| TS[Timestream]</pre><figcaption class="diagram-caption">Picking the right AWS database for the data model and access pattern.</figcaption></figure>
+<h3>Which S3 storage class?</h3>
+<figure class="diagram"><pre class="mermaid">flowchart TD
+  A{Access frequency?} --> B{Frequently accessed?}
+  B -->|Yes| STD[S3 Standard]
+  B -->|Unknown / changing| INT[S3 Intelligent-Tiering]
+  B -->|Infrequent| C{Need multi-AZ<br/>durability?}
+  C -->|Yes| IA[S3 Standard-IA]
+  C -->|Reproducible data| OZ[S3 One Zone-IA]
+  A --> D{Archive?}
+  D -->|Minutes retrieval| GIR[Glacier Instant Retrieval]
+  D -->|Hours retrieval| GFR[Glacier Flexible Retrieval]
+  D -->|12+ hours, lowest cost| GDA[Glacier Deep Archive]</pre><figcaption class="diagram-caption">Selecting an S3 storage class by access frequency and durability needs.</figcaption></figure>
+</section>
+</main></div></div>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  var light = document.documentElement.getAttribute('data-theme') === 'light';
+  mermaid.initialize({ startOnLoad: true, theme: light ? 'default' : 'dark', securityLevel: 'strict' });
+</script><script src="../assets/js/main.js"></script></body></html>
