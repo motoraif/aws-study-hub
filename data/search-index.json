@@ -483,6 +483,101 @@
 ]
 },
 {
+"title": "Amazon DynamoDB",
+"url": "docs/service-dynamodb.html",
+"desc": "Amazon DynamoDB deep dive: keys, indexes, capacity modes, streams, DAX, and exam tips.",
+"headings": [
+"Core Concepts",
+"Indexes",
+"GSI",
+"LSI",
+"Capacity & Performance",
+"Features",
+"Exam Tips",
+"Related"
+]
+},
+{
+"title": "Amazon EC2",
+"url": "docs/service-ec2.html",
+"desc": "Amazon EC2 deep dive: instance types, pricing models, storage, networking, Auto Scaling, and exam tips.",
+"headings": [
+"Core Concepts",
+"Pricing Models",
+"Storage & Networking",
+"Auto Scaling & HA",
+"Exam Tips",
+"Related"
+]
+},
+{
+"title": "AWS IAM",
+"url": "docs/service-iam.html",
+"desc": "AWS IAM deep dive: users, roles, policies, evaluation logic, federation, and exam tips.",
+"headings": [
+"Core Concepts",
+"Policy Evaluation",
+"Roles & Federation",
+"Best Practices",
+"Exam Tips",
+"Related"
+]
+},
+{
+"title": "AWS Lambda",
+"url": "docs/service-lambda.html",
+"desc": "AWS Lambda deep dive: invocation types, limits, concurrency, layers, and exam tips.",
+"headings": [
+"Core Concepts",
+"Invocation Types",
+"Concurrency & Scaling",
+"Features",
+"Exam Tips",
+"Related"
+]
+},
+{
+"title": "Amazon S3",
+"url": "docs/service-s3.html",
+"desc": "Amazon S3 deep dive: storage classes, security, versioning, lifecycle, encryption, and exam tips for AWS certifications.",
+"headings": [
+"Core Concepts",
+"Storage Classes",
+"Security",
+"Key Features",
+"Exam Tips",
+"Related"
+]
+},
+{
+"title": "Amazon VPC",
+"url": "docs/service-vpc.html",
+"desc": "Amazon VPC deep dive: subnets, route tables, IGW/NAT, security groups vs NACLs, endpoints, and exam tips.",
+"headings": [
+"Core Concepts",
+"Gateways & Routing",
+"Security Groups vs NACLs",
+"Security Group",
+"Network ACL",
+"Connectivity",
+"Exam Tips",
+"Related"
+]
+},
+{
+"title": "AWS Service Deep Dives",
+"url": "docs/services.html",
+"desc": "In-depth, exam-focused guides to core AWS services: S3, EC2, VPC, IAM, Lambda, DynamoDB, and more.",
+"headings": [
+"Amazon S3",
+"Amazon EC2",
+"Amazon VPC",
+"AWS IAM",
+"AWS Lambda",
+"Amazon DynamoDB"
+]
+},
+{
 "title": "SOA-C02 - AWS Certified SysOps Administrator Associate",
 "url": "docs/soa-c02.html",
 "desc": "Deploy, manage, and operate workloads on AWS at scale. Monitoring, automation, reliability, compliance.",
