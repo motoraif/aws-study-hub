@@ -63,7 +63,9 @@ FOOT_ROOT = '<script src="assets/js/main.js"></script></body></html>'
 
 # Mermaid.js diagram support (loaded only on pages that use it, theme-aware).
 def mermaid_block(diagram_src, caption=""):
-    """Wrap a Mermaid diagram definition. diagram_src is Mermaid syntax (no HTML escaping)."""
+    """Wrap a Mermaid diagram definition. diagram_src is Mermaid syntax (not HTML-escaped),
+    so avoid raw '<' or '>' in label text (use words like 'under'/'over'); '<br/>' for line
+    breaks is fine. Otherwise html-validate will parse the '<' as an HTML tag."""
     cap = f'<figcaption class="diagram-caption">{caption}</figcaption>' if caption else ''
     return f'<figure class="diagram"><pre class="mermaid">{diagram_src}</pre>{cap}</figure>'
 
@@ -2496,7 +2498,7 @@ write(f"{DOCS}/quiz.html", quiz_html)
 cheat_toc = [("compute","Compute"),("storage","Storage"),("databases","Databases"),
              ("networking","Networking"),("integration","Messaging & Integration"),
              ("security","Security & Identity"),("deployment","Deployment & DR"),
-             ("analytics","Analytics & AI")]
+             ("analytics","Analytics & AI"),("decisions","Decision Trees")]
 cheatsheets_html = HEAD("Confusing Pairs Cheat Sheet","Side-by-side comparisons of commonly confused AWS services: SG vs NACL, SQS vs SNS vs EventBridge, EBS vs EFS vs FSx, ALB vs NLB, and more.") + """
 <div class="container" style="padding-top:2rem"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Cheat Sheets</span></div></div>
 <div class="page-header"><div class="container">
@@ -2668,7 +2670,48 @@ cheatsheets_html = HEAD("Confusing Pairs Cheat Sheet","Side-by-side comparisons 
 </tbody></table></div>
 <div class="callout tip"><div class="callout-title">&#128221; Contribute</div><p>Spot a missing pair? Add it to the cheat sheet source in <code>build.py</code> and open a pull request.</p></div>
 </section>
-""") + FOOT
+
+<section id="decisions"><h2>&#127817; Decision Trees</h2>
+<p>Fast "which service?" flowcharts for the most common exam decision points.</p>
+<h3>Which compute service?</h3>
+""" + mermaid_block("""flowchart TD
+  A{Need to run code?} --> B{Event-driven &<br/>short-lived under 15 min?}
+  B -->|Yes| L[AWS Lambda]
+  B -->|No| C{Containers?}
+  C -->|Yes| D{Want to manage servers?}
+  D -->|No| F[Fargate]
+  D -->|Yes, Kubernetes| K[EKS]
+  D -->|Yes, AWS-native| E[ECS on EC2]
+  C -->|No| G{Full OS control /<br/>legacy app?}
+  G -->|Yes| H[EC2]
+  G -->|No| I[Elastic Beanstalk /<br/>App Runner]""", "Choosing a compute service based on workload shape.") + """
+<h3>Which database?</h3>
+""" + mermaid_block("""flowchart TD
+  A{Data model?} --> B{Relational?}
+  B -->|Yes| C{Need MySQL/PostgreSQL<br/>high performance?}
+  C -->|Yes| AU[Aurora]
+  C -->|Standard engine| RDS[RDS]
+  C -->|Data warehouse / OLAP| RS[Redshift]
+  B -->|No| D{Access pattern?}
+  D -->|Key-value, massive scale| DDB[DynamoDB]
+  D -->|In-memory cache| EC[ElastiCache]
+  D -->|Document| DOC[DocumentDB]
+  D -->|Graph| NEP[Neptune]
+  D -->|Time series| TS[Timestream]""", "Picking the right AWS database for the data model and access pattern.") + """
+<h3>Which S3 storage class?</h3>
+""" + mermaid_block("""flowchart TD
+  A{Access frequency?} --> B{Frequently accessed?}
+  B -->|Yes| STD[S3 Standard]
+  B -->|Unknown / changing| INT[S3 Intelligent-Tiering]
+  B -->|Infrequent| C{Need multi-AZ<br/>durability?}
+  C -->|Yes| IA[S3 Standard-IA]
+  C -->|Reproducible data| OZ[S3 One Zone-IA]
+  A --> D{Archive?}
+  D -->|Minutes retrieval| GIR[Glacier Instant Retrieval]
+  D -->|Hours retrieval| GFR[Glacier Flexible Retrieval]
+  D -->|12+ hours, lowest cost| GDA[Glacier Deep Archive]""", "Selecting an S3 storage class by access frequency and durability needs.") + """
+</section>
+""") + MERMAID_LOADER + FOOT
 write(f"{DOCS}/cheatsheets.html", cheatsheets_html)
 
 # ── dashboard.html (progress) ───────────────────────────────
