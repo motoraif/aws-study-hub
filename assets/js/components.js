@@ -118,6 +118,7 @@
   </div>
   <div class="footer-bottom">
     <span>&copy; 2026 AWS Study Hub - MIT License</span>
+    <span><a href="${root}docs/affiliate-disclosure.html">Affiliate Disclosure</a></span>
     <span>Not affiliated with Amazon Web Services.</span>
   </div>
 </div></footer>
