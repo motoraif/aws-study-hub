@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>AWS IAM - AWS Study Hub</title>
+  <meta name="description" content="AWS IAM deep dive: users, roles, policies, evaluation logic, federation, and exam tips.">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="AWS Study Hub">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="AWS Study Hub">
+  <meta property="og:title" content="AWS IAM - AWS Study Hub">
+  <meta property="og:description" content="AWS IAM deep dive: users, roles, policies, evaluation logic, federation, and exam tips.">
+  <meta property="og:image" content="https://toraif.com/aws-study-hub/assets/og-image.svg">
+  <meta property="og:url" content="https://toraif.com/aws-study-hub/docs/service-iam.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AWS IAM - AWS Study Hub">
+  <meta name="twitter:description" content="AWS IAM deep dive: users, roles, policies, evaluation logic, federation, and exam tips.">
+  <meta name="twitter:image" content="https://toraif.com/aws-study-hub/assets/og-image.svg">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://toraif.com/aws-study-hub/#website","name":"AWS Study Hub","url":"https://toraif.com/aws-study-hub/","description":"Free, open-source study platform for every AWS certification.","inLanguage":"en","publisher":{"@id":"https://toraif.com/aws-study-hub/#org"}},{"@type":"EducationalOrganization","@id":"https://toraif.com/aws-study-hub/#org","name":"AWS Study Hub","url":"https://toraif.com/aws-study-hub/","description":"Free, community-driven study resources for AWS certifications."}]}</script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
+  <link rel="canonical" href="https://toraif.com/aws-study-hub/docs/service-iam.html">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/components.js"></script>
+  <script src="../assets/js/search.js" defer></script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://toraif.com/aws-study-hub/"}, {"@type": "ListItem", "position": 2, "name": "AWS IAM", "item": "https://toraif.com/aws-study-hub/docs/service-iam.html"}]}</script>
+</head><body><div class="container" style="padding-top:2rem"><div class="breadcrumb"><a href="../index.html">Home</a> / <a href="services.html">Services</a> / <span>AWS IAM</span></div></div><div class="page-header"><div class="container"><span class="badge badge-orange">Service Deep Dive</span><h1 style="margin-top:0.75rem">&#128272; AWS IAM</h1><p>Identity and access management - who can do what on which resources across your AWS accounts.</p></div></div><div class="container" style="padding-bottom:4rem;"><div class="doc-layout"><aside class="sidebar"><h4>Contents</h4><a href="#basics">Core Concepts</a>
+<a href="#eval">Policy Evaluation</a>
+<a href="#roles">Roles & Federation</a>
+<a href="#best">Best Practices</a>
+<a href="#exam-tips">Exam Tips</a>
+<a href="#related">Related</a>
+</aside><main><section id="basics"><h2>Core Concepts</h2><ul><li><strong>Users / Groups</strong> - long-term identities (avoid for apps).</li><li><strong>Roles</strong> - temporary credentials assumed by services/users.</li><li><strong>Policies</strong> - JSON documents (identity-based, resource-based).</li><li><strong>Principals</strong> - the entity making a request.</li></ul></section>
+<section id="eval"><h2>Policy Evaluation</h2><ul><li>Default is <strong>implicit deny</strong>.</li><li>An <strong>explicit Deny</strong> always overrides any Allow.</li><li>Order: explicit Deny &gt; SCP &gt; resource/identity Allow &gt; implicit deny.</li><li><strong>Permission boundaries</strong> cap a principal's max permissions.</li></ul></section>
+<section id="roles"><h2>Roles & Federation</h2><ul><li><strong>Instance profiles</strong> - roles for EC2.</li><li><strong>STS AssumeRole</strong> - cross-account and temporary access.</li><li><strong>Identity federation</strong> - SAML, OIDC, IAM Identity Center.</li><li><strong>Web identity</strong> - Cognito for mobile/web apps.</li></ul></section>
+<section id="best"><h2>Best Practices</h2><ul><li>Least privilege; use roles over long-term keys.</li><li>Enable MFA, especially on root; lock away root.</li><li>Use IAM Access Analyzer to find overly broad access.</li><li>Rotate credentials; prefer temporary via STS.</li></ul></section>
+<section id="exam-tips"><h2>&#127891; Exam Tips</h2><div class="callout warn"><div class="callout-title">&#9888; Frequently tested</div><ul><li>An explicit Deny always wins - even over an Allow in another policy.</li><li>Use IAM roles for EC2/Lambda; never embed long-term access keys.</li><li>SCPs limit maximum permissions org-wide but never grant access by themselves.</li><li>Permission boundaries cap what a principal can do, useful for delegated admin.</li><li>Cross-account access = a role in account B trusts account A via sts:AssumeRole.</li></ul></div></section>
+<section id="related"><h2>&#128279; Related</h2><p><a href="scs-c02.html" class="badge badge-blue" style="text-decoration:none;margin:0.2rem">SCS-C02</a><a href="sap-c02.html" class="badge badge-blue" style="text-decoration:none;margin:0.2rem">SAP-C02</a><a href="saa-c03.html" class="badge badge-blue" style="text-decoration:none;margin:0.2rem">SAA-C03</a><a href="cheatsheets.html" class="badge badge-blue" style="text-decoration:none;margin:0.2rem">Cheat Sheets</a></p><div class="quiz-cta" style="margin-top:1rem"><span>&#129513; Test your knowledge</span><span class="quiz-cta-actions"><a class="btn btn-primary" href="quiz.html">Take a quiz &rarr;</a><a class="btn btn-outline" href="cheatsheets.html">Cheat sheets</a></span></div></section>
+</main></div></div><script src="../assets/js/main.js"></script></body></html>

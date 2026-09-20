@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Amazon VPC - AWS Study Hub</title>
+  <meta name="description" content="Amazon VPC deep dive: subnets, route tables, IGW/NAT, security groups vs NACLs, endpoints, and exam tips.">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="AWS Study Hub">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="AWS Study Hub">
+  <meta property="og:title" content="Amazon VPC - AWS Study Hub">
+  <meta property="og:description" content="Amazon VPC deep dive: subnets, route tables, IGW/NAT, security groups vs NACLs, endpoints, and exam tips.">
+  <meta property="og:image" content="https://toraif.com/aws-study-hub/assets/og-image.svg">
+  <meta property="og:url" content="https://toraif.com/aws-study-hub/docs/service-vpc.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Amazon VPC - AWS Study Hub">
+  <meta name="twitter:description" content="Amazon VPC deep dive: subnets, route tables, IGW/NAT, security groups vs NACLs, endpoints, and exam tips.">
+  <meta name="twitter:image" content="https://toraif.com/aws-study-hub/assets/og-image.svg">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://toraif.com/aws-study-hub/#website","name":"AWS Study Hub","url":"https://toraif.com/aws-study-hub/","description":"Free, open-source study platform for every AWS certification.","inLanguage":"en","publisher":{"@id":"https://toraif.com/aws-study-hub/#org"}},{"@type":"EducationalOrganization","@id":"https://toraif.com/aws-study-hub/#org","name":"AWS Study Hub","url":"https://toraif.com/aws-study-hub/","description":"Free, community-driven study resources for AWS certifications."}]}</script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
+  <link rel="canonical" href="https://toraif.com/aws-study-hub/docs/service-vpc.html">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/components.js"></script>
+  <script src="../assets/js/search.js" defer></script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://toraif.com/aws-study-hub/"}, {"@type": "ListItem", "position": 2, "name": "Amazon VPC", "item": "https://toraif.com/aws-study-hub/docs/service-vpc.html"}]}</script>
+</head><body><div class="container" style="padding-top:2rem"><div class="breadcrumb"><a href="../index.html">Home</a> / <a href="services.html">Services</a> / <span>Amazon VPC</span></div></div><div class="page-header"><div class="container"><span class="badge badge-orange">Service Deep Dive</span><h1 style="margin-top:0.75rem">&#127760; Amazon VPC</h1><p>Your logically isolated virtual network in AWS - subnets, routing, gateways, and security.</p></div></div><div class="container" style="padding-bottom:4rem;"><div class="doc-layout"><aside class="sidebar"><h4>Contents</h4><a href="#basics">Core Concepts</a>
+<a href="#gateways">Gateways & Routing</a>
+<a href="#security">Security Groups vs NACLs</a>
+<a href="#connect">Connectivity</a>
+<a href="#exam-tips">Exam Tips</a>
+<a href="#related">Related</a>
+</aside><main><section id="basics"><h2>Core Concepts</h2><ul><li><strong>VPC</strong> - CIDR block (/16 to /28); regional.</li><li><strong>Subnets</strong> - one AZ each; public (route to IGW) vs private.</li><li><strong>Route tables</strong> - longest-prefix match wins.</li><li>AWS reserves 5 IPs per subnet.</li></ul></section>
+<section id="gateways"><h2>Gateways & Routing</h2><ul><li><strong>Internet Gateway</strong> - inbound + outbound for public subnets.</li><li><strong>NAT Gateway</strong> - outbound-only for private subnets (IPv4).</li><li><strong>Egress-Only IGW</strong> - outbound-only for IPv6.</li><li><strong>VPC Endpoints</strong> - Gateway (S3/DynamoDB) and Interface (PrivateLink).</li></ul></section>
+<section id="security"><h2>Security Groups vs NACLs</h2><div class="grid-2"><div class="card"><h3>Security Group</h3><ul><li>Instance/ENI level</li><li>Stateful</li><li>Allow rules only</li></ul></div><div class="card"><h3>Network ACL</h3><ul><li>Subnet level</li><li>Stateless (open ephemeral ports)</li><li>Allow + Deny, ordered</li></ul></div></div></section>
+<section id="connect"><h2>Connectivity</h2><ul><li><strong>VPC Peering</strong> - 1:1, non-transitive.</li><li><strong>Transit Gateway</strong> - hub-and-spoke, transitive.</li><li><strong>PrivateLink</strong> - expose a service privately (works with overlapping CIDRs).</li><li><strong>Site-to-Site VPN</strong> / <strong>Direct Connect</strong> - hybrid.</li></ul></section>
+<section id="exam-tips"><h2>&#127891; Exam Tips</h2><div class="callout warn"><div class="callout-title">&#9888; Frequently tested</div><ul><li>Public subnet = has a route 0.0.0.0/0 to an IGW; nothing else makes it public.</li><li>NACLs are stateless - you must allow ephemeral ports (1024-65535) for return traffic.</li><li>VPC Peering is NOT transitive; use Transit Gateway for any-to-any at scale.</li><li>Gateway Endpoints (S3/DynamoDB) are free; Interface Endpoints cost per hour + data.</li><li>Overlapping CIDRs block peering/TGW - use PrivateLink to share a specific service.</li></ul></div></section>
+<section id="related"><h2>&#128279; Related</h2><p><a href="saa-c03.html" class="badge badge-blue" style="text-decoration:none;margin:0.2rem">SAA-C03</a><a href="ans-c01.html" class="badge badge-blue" style="text-decoration:none;margin:0.2rem">ANS-C01</a><a href="foundations-networking.html" class="badge badge-blue" style="text-decoration:none;margin:0.2rem">Networking</a><a href="cheatsheets.html" class="badge badge-blue" style="text-decoration:none;margin:0.2rem">Cheat Sheets</a></p><div class="quiz-cta" style="margin-top:1rem"><span>&#129513; Test your knowledge</span><span class="quiz-cta-actions"><a class="btn btn-primary" href="quiz.html">Take a quiz &rarr;</a><a class="btn btn-outline" href="cheatsheets.html">Cheat sheets</a></span></div></section>
+</main></div></div><script src="../assets/js/main.js"></script></body></html>

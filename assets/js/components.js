@@ -54,6 +54,7 @@
     <a href="${root}docs/resources.html">Resources</a>
     <a href="${root}docs/labs.html">Labs</a>
     <a href="${root}docs/quiz.html">Quiz <span class="nav-pill nav-pill-new">New</span></a>
+    <a href="${root}docs/services.html">Services <span class="nav-pill nav-pill-new">New</span></a>
     <a href="${root}docs/cheatsheets.html">Cheat Sheets <span class="nav-pill nav-pill-new">New</span></a>
     <a href="${root}docs/dashboard.html">My Progress <span class="nav-pill nav-pill-new">New</span></a>
     <a href="${root}docs/news.html">News</a>
@@ -105,6 +106,7 @@
         <li><a href="${root}docs/resources.html">All Resources</a></li>
         <li><a href="${root}docs/labs.html">Labs &amp; Practice</a></li>
         <li><a href="${root}docs/quiz.html">Practice Quiz</a></li>
+        <li><a href="${root}docs/services.html">Service Deep Dives</a></li>
         <li><a href="${root}docs/cheatsheets.html">Cheat Sheets</a></li>
         <li><a href="${root}docs/dashboard.html">My Progress</a></li>
         <li><a href="${root}docs/news.html">AWS News</a></li>

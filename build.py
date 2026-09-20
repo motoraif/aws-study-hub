@@ -2714,6 +2714,142 @@ cheatsheets_html = HEAD("Confusing Pairs Cheat Sheet","Side-by-side comparisons 
 """) + MERMAID_LOADER + FOOT
 write(f"{DOCS}/cheatsheets.html", cheatsheets_html)
 
+# ── Service deep-dive pages (cross-cert "service encyclopedia") ──
+def service_page(slug, name, icon, tagline, meta_desc, sections, exam_tips, related):
+    toc = [(sid, stitle) for sid, stitle, _ in sections] + [("exam-tips","Exam Tips"),("related","Related")]
+    body = ""
+    for sid, stitle, shtml in sections:
+        body += f'<section id="{sid}"><h2>{stitle}</h2>{shtml}</section>\n'
+    tips = "".join(f"<li>{t}</li>" for t in exam_tips)
+    body += f'<section id="exam-tips"><h2>&#127891; Exam Tips</h2><div class="callout warn"><div class="callout-title">&#9888; Frequently tested</div><ul>{tips}</ul></div></section>\n'
+    rel = "".join(f'<a href="{u}" class="badge badge-blue" style="text-decoration:none;margin:0.2rem">{t}</a>' for t, u in related)
+    body += f'<section id="related"><h2>&#128279; Related</h2><p>{rel}</p><div class="quiz-cta" style="margin-top:1rem"><span>&#129513; Test your knowledge</span><span class="quiz-cta-actions"><a class="btn btn-primary" href="quiz.html">Take a quiz &rarr;</a><a class="btn btn-outline" href="cheatsheets.html">Cheat sheets</a></span></div></section>\n'
+    header = (f'<div class="container" style="padding-top:2rem"><div class="breadcrumb"><a href="../index.html">Home</a> / '
+              f'<a href="services.html">Services</a> / <span>{name}</span></div></div>'
+              f'<div class="page-header"><div class="container"><span class="badge badge-orange">Service Deep Dive</span>'
+              f'<h1 style="margin-top:0.75rem">{icon} {name}</h1><p>{tagline}</p></div></div>')
+    return HEAD(name, meta_desc) + header + wrap(toc, body) + FOOT
+
+SERVICES = [
+  ("s3","Amazon S3","&#128230;",
+   "Object storage built for 11 nines of durability - the backbone of data lakes, static sites, backups, and content delivery.",
+   "Amazon S3 deep dive: storage classes, security, versioning, lifecycle, encryption, and exam tips for AWS certifications.",
+   [
+     ("basics","Core Concepts","<ul><li><strong>Buckets</strong> - globally unique names; region-scoped.</li><li><strong>Objects</strong> - up to 5 TB; key + value + metadata.</li><li><strong>Durability</strong> - 99.999999999% (11 nines) across multiple AZs.</li><li><strong>Consistency</strong> - strong read-after-write for all operations.</li></ul>"),
+     ("classes","Storage Classes","<div class=\"table-wrap\"><table><thead><tr><th>Class</th><th>Use</th></tr></thead><tbody><tr><td>Standard</td><td>Frequent access</td></tr><tr><td>Intelligent-Tiering</td><td>Unknown/changing access; auto-tiers</td></tr><tr><td>Standard-IA</td><td>Infrequent, multi-AZ, ms retrieval</td></tr><tr><td>One Zone-IA</td><td>Infrequent, single AZ, reproducible</td></tr><tr><td>Glacier Instant</td><td>Archive, ms retrieval</td></tr><tr><td>Glacier Flexible</td><td>Archive, minutes-hours</td></tr><tr><td>Glacier Deep Archive</td><td>Lowest cost, 12+ hours</td></tr></tbody></table></div>"),
+     ("security","Security","<ul><li><strong>Block Public Access</strong> - on by default; overrides ACLs/policies.</li><li><strong>Bucket policies</strong> vs <strong>IAM policies</strong> vs <strong>ACLs</strong> (legacy).</li><li><strong>Pre-signed URLs</strong> - time-limited access to private objects.</li><li><strong>Encryption</strong>: SSE-S3, SSE-KMS, SSE-C, or client-side.</li><li><strong>VPC Gateway Endpoint</strong> - private access, no internet.</li></ul>"),
+     ("features","Key Features","<ul><li><strong>Versioning</strong> - keep every version; protects against overwrite/delete.</li><li><strong>Lifecycle rules</strong> - transition to cheaper classes or expire.</li><li><strong>Replication</strong> - CRR (cross-region) / SRR (same-region).</li><li><strong>Event notifications</strong> - to Lambda, SQS, SNS, EventBridge.</li><li><strong>Static website hosting</strong>; front with CloudFront + OAC.</li><li><strong>Object Lock</strong> - WORM for compliance.</li></ul>"),
+   ],
+   ["Block Public Access overrides any bucket policy or ACL that grants public access.",
+    "Use OAC (not the legacy OAI) to let only CloudFront read a private bucket.",
+    "Pre-signed URLs grant temporary access without changing bucket permissions.",
+    "SSE-KMS adds audit trails and key control; SSE-S3 is the simplest default.",
+    "Use a Gateway VPC Endpoint for S3 (free) to keep traffic off the internet."],
+   [("SAA-C03","saa-c03.html"),("DVA-C02","dva-c02.html"),("SCS-C02","scs-c02.html"),("Cheat Sheets","cheatsheets.html")]),
+
+  ("ec2","Amazon EC2","&#128421;&#65039;",
+   "Resizable virtual servers in the cloud - the foundational compute service behind much of AWS.",
+   "Amazon EC2 deep dive: instance types, pricing models, storage, networking, Auto Scaling, and exam tips.",
+   [
+     ("basics","Core Concepts","<ul><li><strong>Instance types</strong> - families for general (M/T), compute (C), memory (R/X), storage (I/D), accelerated (P/G).</li><li><strong>AMI</strong> - template for the root volume + launch permissions.</li><li><strong>Instance metadata (IMDS)</strong> - 169.254.169.254; prefer IMDSv2.</li><li><strong>User data</strong> - bootstrap script run at first boot.</li></ul>"),
+     ("pricing","Pricing Models","<div class=\"table-wrap\"><table><thead><tr><th>Model</th><th>Use</th></tr></thead><tbody><tr><td>On-Demand</td><td>Short-term, unpredictable</td></tr><tr><td>Reserved / Savings Plans</td><td>Steady, 1-3 yr commit, big discount</td></tr><tr><td>Spot</td><td>Interruptible, up to 90% off</td></tr><tr><td>Dedicated Hosts/Instances</td><td>Compliance, licensing</td></tr></tbody></table></div>"),
+     ("storage","Storage & Networking","<ul><li><strong>EBS</strong> - persistent block volumes (gp3, io2, st1, sc1).</li><li><strong>Instance store</strong> - ephemeral, high IOPS, lost on stop.</li><li><strong>ENI / EIP</strong> - virtual NIC / static public IP.</li><li><strong>Placement groups</strong> - cluster (low latency), spread, partition.</li></ul>"),
+     ("scaling","Auto Scaling & HA","<ul><li><strong>Auto Scaling Groups</strong> - min/desired/max; scale on metrics.</li><li><strong>Launch templates</strong> - versioned instance config.</li><li><strong>ELB health checks</strong> vs EC2 status checks.</li><li>Spread across AZs for fault tolerance.</li></ul>"),
+   ],
+   ["Spot is best for fault-tolerant, interruptible work; never for stateful single instances.",
+    "Use IMDSv2 (token-based) to mitigate SSRF attacks against instance metadata.",
+    "gp3 lets you provision IOPS/throughput independently of size (cheaper than gp2 often).",
+    "Auto Scaling + ELB across multiple AZs is the standard HA answer.",
+    "Placement groups: cluster = lowest latency, spread = max fault isolation."],
+   [("SAA-C03","saa-c03.html"),("SOA-C02","soa-c02.html"),("Linux","foundations-linux.html"),("Cheat Sheets","cheatsheets.html")]),
+
+  ("vpc","Amazon VPC","&#127760;",
+   "Your logically isolated virtual network in AWS - subnets, routing, gateways, and security.",
+   "Amazon VPC deep dive: subnets, route tables, IGW/NAT, security groups vs NACLs, endpoints, and exam tips.",
+   [
+     ("basics","Core Concepts","<ul><li><strong>VPC</strong> - CIDR block (/16 to /28); regional.</li><li><strong>Subnets</strong> - one AZ each; public (route to IGW) vs private.</li><li><strong>Route tables</strong> - longest-prefix match wins.</li><li>AWS reserves 5 IPs per subnet.</li></ul>"),
+     ("gateways","Gateways & Routing","<ul><li><strong>Internet Gateway</strong> - inbound + outbound for public subnets.</li><li><strong>NAT Gateway</strong> - outbound-only for private subnets (IPv4).</li><li><strong>Egress-Only IGW</strong> - outbound-only for IPv6.</li><li><strong>VPC Endpoints</strong> - Gateway (S3/DynamoDB) and Interface (PrivateLink).</li></ul>"),
+     ("security","Security Groups vs NACLs","<div class=\"grid-2\"><div class=\"card\"><h3>Security Group</h3><ul><li>Instance/ENI level</li><li>Stateful</li><li>Allow rules only</li></ul></div><div class=\"card\"><h3>Network ACL</h3><ul><li>Subnet level</li><li>Stateless (open ephemeral ports)</li><li>Allow + Deny, ordered</li></ul></div></div>"),
+     ("connect","Connectivity","<ul><li><strong>VPC Peering</strong> - 1:1, non-transitive.</li><li><strong>Transit Gateway</strong> - hub-and-spoke, transitive.</li><li><strong>PrivateLink</strong> - expose a service privately (works with overlapping CIDRs).</li><li><strong>Site-to-Site VPN</strong> / <strong>Direct Connect</strong> - hybrid.</li></ul>"),
+   ],
+   ["Public subnet = has a route 0.0.0.0/0 to an IGW; nothing else makes it public.",
+    "NACLs are stateless - you must allow ephemeral ports (1024-65535) for return traffic.",
+    "VPC Peering is NOT transitive; use Transit Gateway for any-to-any at scale.",
+    "Gateway Endpoints (S3/DynamoDB) are free; Interface Endpoints cost per hour + data.",
+    "Overlapping CIDRs block peering/TGW - use PrivateLink to share a specific service."],
+   [("SAA-C03","saa-c03.html"),("ANS-C01","ans-c01.html"),("Networking","foundations-networking.html"),("Cheat Sheets","cheatsheets.html")]),
+
+  ("iam","AWS IAM","&#128272;",
+   "Identity and access management - who can do what on which resources across your AWS accounts.",
+   "AWS IAM deep dive: users, roles, policies, evaluation logic, federation, and exam tips.",
+   [
+     ("basics","Core Concepts","<ul><li><strong>Users / Groups</strong> - long-term identities (avoid for apps).</li><li><strong>Roles</strong> - temporary credentials assumed by services/users.</li><li><strong>Policies</strong> - JSON documents (identity-based, resource-based).</li><li><strong>Principals</strong> - the entity making a request.</li></ul>"),
+     ("eval","Policy Evaluation","<ul><li>Default is <strong>implicit deny</strong>.</li><li>An <strong>explicit Deny</strong> always overrides any Allow.</li><li>Order: explicit Deny &gt; SCP &gt; resource/identity Allow &gt; implicit deny.</li><li><strong>Permission boundaries</strong> cap a principal's max permissions.</li></ul>"),
+     ("roles","Roles & Federation","<ul><li><strong>Instance profiles</strong> - roles for EC2.</li><li><strong>STS AssumeRole</strong> - cross-account and temporary access.</li><li><strong>Identity federation</strong> - SAML, OIDC, IAM Identity Center.</li><li><strong>Web identity</strong> - Cognito for mobile/web apps.</li></ul>"),
+     ("best","Best Practices","<ul><li>Least privilege; use roles over long-term keys.</li><li>Enable MFA, especially on root; lock away root.</li><li>Use IAM Access Analyzer to find overly broad access.</li><li>Rotate credentials; prefer temporary via STS.</li></ul>"),
+   ],
+   ["An explicit Deny always wins - even over an Allow in another policy.",
+    "Use IAM roles for EC2/Lambda; never embed long-term access keys.",
+    "SCPs limit maximum permissions org-wide but never grant access by themselves.",
+    "Permission boundaries cap what a principal can do, useful for delegated admin.",
+    "Cross-account access = a role in account B trusts account A via sts:AssumeRole."],
+   [("SCS-C02","scs-c02.html"),("SAP-C02","sap-c02.html"),("SAA-C03","saa-c03.html"),("Cheat Sheets","cheatsheets.html")]),
+
+  ("lambda","AWS Lambda","&#9889;",
+   "Run code without provisioning servers - event-driven, auto-scaling, pay-per-use compute.",
+   "AWS Lambda deep dive: invocation types, limits, concurrency, layers, and exam tips.",
+   [
+     ("basics","Core Concepts","<ul><li><strong>Function</strong> - code + runtime + config; event-driven.</li><li><strong>Limits</strong> - 15 min timeout, 128 MB-10 GB memory (CPU scales with it), 512 MB-10 GB /tmp.</li><li><strong>Package</strong> - 50 MB zipped / 250 MB unzipped, or 10 GB container image.</li></ul>"),
+     ("invoke","Invocation Types","<div class=\"table-wrap\"><table><thead><tr><th>Type</th><th>Source</th></tr></thead><tbody><tr><td>Synchronous</td><td>API Gateway, ALB</td></tr><tr><td>Asynchronous (retries 2x, DLQ)</td><td>S3, SNS, EventBridge</td></tr><tr><td>Poll-based (event source mapping)</td><td>SQS, Kinesis, DynamoDB Streams</td></tr></tbody></table></div>"),
+     ("concurrency","Concurrency & Scaling","<ul><li><strong>Reserved concurrency</strong> - guarantee/limit for a function.</li><li><strong>Provisioned concurrency</strong> - pre-warmed to avoid cold starts.</li><li>Default account limit: 1,000 concurrent (soft).</li></ul>"),
+     ("features","Features","<ul><li><strong>Versions & aliases</strong> - immutable snapshots + pointers.</li><li><strong>Layers</strong> - shared dependencies.</li><li><strong>Destinations</strong> - route async success/failure.</li><li>Run in a VPC to reach private resources (RDS).</li></ul>"),
+   ],
+   ["Max timeout is 15 minutes - long jobs need Fargate, Step Functions, or Batch.",
+    "S3/SNS invoke Lambda asynchronously with 2 retries; add a DLQ for failures.",
+    "Provisioned concurrency removes cold starts for latency-sensitive functions.",
+    "Put Lambda in a VPC to reach private RDS; it needs ENIs and a NAT for internet.",
+    "CPU scales with memory - raising memory can speed up CPU-bound functions."],
+   [("DVA-C02","dva-c02.html"),("SAA-C03","saa-c03.html"),("DOP-C02","dop-c02.html"),("Cheat Sheets","cheatsheets.html")]),
+
+  ("dynamodb","Amazon DynamoDB","&#9878;&#65039;",
+   "Fully managed NoSQL key-value and document database with single-digit millisecond latency at any scale.",
+   "Amazon DynamoDB deep dive: keys, indexes, capacity modes, streams, DAX, and exam tips.",
+   [
+     ("basics","Core Concepts","<ul><li><strong>Table</strong> - items (rows) with attributes; schemaless beyond keys.</li><li><strong>Partition key</strong> (simple) or <strong>partition + sort key</strong> (composite).</li><li>Single-digit ms latency; virtually unlimited scale.</li></ul>"),
+     ("indexes","Indexes","<div class=\"grid-2\"><div class=\"card\"><h3>GSI</h3><ul><li>Different partition key</li><li>Add anytime</li><li>Eventually consistent</li></ul></div><div class=\"card\"><h3>LSI</h3><ul><li>Same partition, different sort key</li><li>Only at table creation</li><li>Strongly consistent option</li></ul></div></div>"),
+     ("capacity","Capacity & Performance","<ul><li><strong>On-demand</strong> - pay per request; unpredictable traffic.</li><li><strong>Provisioned</strong> - set RCU/WCU; auto scaling available.</li><li><strong>DAX</strong> - in-memory cache; microsecond reads.</li><li>Reads: eventually (cheap) vs strongly consistent.</li></ul>"),
+     ("features","Features","<ul><li><strong>Streams</strong> - ordered change log; trigger Lambda.</li><li><strong>TTL</strong> - auto-expire items (free).</li><li><strong>Transactions</strong> - ACID across items/tables.</li><li><strong>Global Tables</strong> - multi-region active-active.</li></ul>"),
+   ],
+   ["Choose a partition key with high cardinality to avoid hot partitions.",
+    "GSI = different partition key, added anytime; LSI = at creation only.",
+    "Use on-demand capacity for spiky/unknown traffic; provisioned for steady.",
+    "DAX gives microsecond reads for read-heavy, repeated-key workloads.",
+    "Global Tables provide multi-region active-active replication."],
+   [("DVA-C02","dva-c02.html"),("SAA-C03","saa-c03.html"),("DEA-C01","dea-c01.html"),("Cheat Sheets","cheatsheets.html")]),
+]
+
+for slug, name, icon, tagline, meta_desc, sections, tips, related in SERVICES:
+    write(f"{DOCS}/service-{slug}.html", service_page(slug, name, icon, tagline, meta_desc, sections, tips, related))
+
+# Services index hub
+svc_cards = "".join(
+    f'<a href="service-{slug}.html" class="card" style="text-decoration:none;color:var(--text)">'
+    f'<div class="card-icon">{icon}</div><h3>{name}</h3>'
+    f'<p style="color:var(--text-muted);font-size:0.92rem">{tagline}</p></a>'
+    for slug, name, icon, tagline, _, _, _, _ in SERVICES)
+services_html = HEAD("AWS Service Deep Dives","In-depth, exam-focused guides to core AWS services: S3, EC2, VPC, IAM, Lambda, DynamoDB, and more.") + f"""
+<div class="container" style="padding-top:2rem"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Services</span></div></div>
+<div class="page-header"><div class="container">
+  <span class="badge badge-orange">Service Encyclopedia</span>
+  <h1 style="margin-top:0.75rem">&#128218; AWS Service Deep Dives</h1>
+  <p>Focused, exam-oriented guides to the AWS services that show up across every certification. Each page covers core concepts, key features, and the details examiners love to test.</p>
+</div></div>
+<div class="container" style="padding:2rem 0 4rem"><div class="grid-3">{svc_cards}</div>
+<div class="callout info" style="margin-top:2rem"><div class="callout-title">&#128161; More coming</div><p>This encyclopedia is growing. Suggest a service or contribute one by editing <code>build.py</code> and opening a pull request.</p></div>
+</div>
+""" + FOOT
+write(f"{DOCS}/services.html", services_html)
+
 # ── dashboard.html (progress) ───────────────────────────────
 dashboard_html = HEAD("My Progress","Your personal AWS study dashboard: quiz readiness per certification and study-checklist completion, all saved privately in your browser.") + """
 <div class="container" style="padding-top:2rem"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>My Progress</span></div></div>

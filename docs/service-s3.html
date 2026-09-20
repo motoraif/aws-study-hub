@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Amazon S3 - AWS Study Hub</title>
+  <meta name="description" content="Amazon S3 deep dive: storage classes, security, versioning, lifecycle, encryption, and exam tips for AWS certifications.">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="AWS Study Hub">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="AWS Study Hub">
+  <meta property="og:title" content="Amazon S3 - AWS Study Hub">
+  <meta property="og:description" content="Amazon S3 deep dive: storage classes, security, versioning, lifecycle, encryption, and exam tips for AWS certifications.">
+  <meta property="og:image" content="https://toraif.com/aws-study-hub/assets/og-image.svg">
+  <meta property="og:url" content="https://toraif.com/aws-study-hub/docs/service-s3.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Amazon S3 - AWS Study Hub">
+  <meta name="twitter:description" content="Amazon S3 deep dive: storage classes, security, versioning, lifecycle, encryption, and exam tips for AWS certifications.">
+  <meta name="twitter:image" content="https://toraif.com/aws-study-hub/assets/og-image.svg">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://toraif.com/aws-study-hub/#website","name":"AWS Study Hub","url":"https://toraif.com/aws-study-hub/","description":"Free, open-source study platform for every AWS certification.","inLanguage":"en","publisher":{"@id":"https://toraif.com/aws-study-hub/#org"}},{"@type":"EducationalOrganization","@id":"https://toraif.com/aws-study-hub/#org","name":"AWS Study Hub","url":"https://toraif.com/aws-study-hub/","description":"Free, community-driven study resources for AWS certifications."}]}</script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
+  <link rel="canonical" href="https://toraif.com/aws-study-hub/docs/service-s3.html">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/components.js"></script>
+  <script src="../assets/js/search.js" defer></script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://toraif.com/aws-study-hub/"}, {"@type": "ListItem", "position": 2, "name": "Amazon S3", "item": "https://toraif.com/aws-study-hub/docs/service-s3.html"}]}</script>
+</head><body><div class="container" style="padding-top:2rem"><div class="breadcrumb"><a href="../index.html">Home</a> / <a href="services.html">Services</a> / <span>Amazon S3</span></div></div><div class="page-header"><div class="container"><span class="badge badge-orange">Service Deep Dive</span><h1 style="margin-top:0.75rem">&#128230; Amazon S3</h1><p>Object storage built for 11 nines of durability - the backbone of data lakes, static sites, backups, and content delivery.</p></div></div><div class="container" style="padding-bottom:4rem;"><div class="doc-layout"><aside class="sidebar"><h4>Contents</h4><a href="#basics">Core Concepts</a>
+<a href="#classes">Storage Classes</a>
+<a href="#security">Security</a>
+<a href="#features">Key Features</a>
+<a href="#exam-tips">Exam Tips</a>
+<a href="#related">Related</a>
+</aside><main><section id="basics"><h2>Core Concepts</h2><ul><li><strong>Buckets</strong> - globally unique names; region-scoped.</li><li><strong>Objects</strong> - up to 5 TB; key + value + metadata.</li><li><strong>Durability</strong> - 99.999999999% (11 nines) across multiple AZs.</li><li><strong>Consistency</strong> - strong read-after-write for all operations.</li></ul></section>
+<section id="classes"><h2>Storage Classes</h2><div class="table-wrap"><table><thead><tr><th>Class</th><th>Use</th></tr></thead><tbody><tr><td>Standard</td><td>Frequent access</td></tr><tr><td>Intelligent-Tiering</td><td>Unknown/changing access; auto-tiers</td></tr><tr><td>Standard-IA</td><td>Infrequent, multi-AZ, ms retrieval</td></tr><tr><td>One Zone-IA</td><td>Infrequent, single AZ, reproducible</td></tr><tr><td>Glacier Instant</td><td>Archive, ms retrieval</td></tr><tr><td>Glacier Flexible</td><td>Archive, minutes-hours</td></tr><tr><td>Glacier Deep Archive</td><td>Lowest cost, 12+ hours</td></tr></tbody></table></div></section>
+<section id="security"><h2>Security</h2><ul><li><strong>Block Public Access</strong> - on by default; overrides ACLs/policies.</li><li><strong>Bucket policies</strong> vs <strong>IAM policies</strong> vs <strong>ACLs</strong> (legacy).</li><li><strong>Pre-signed URLs</strong> - time-limited access to private objects.</li><li><strong>Encryption</strong>: SSE-S3, SSE-KMS, SSE-C, or client-side.</li><li><strong>VPC Gateway Endpoint</strong> - private access, no internet.</li></ul></section>
+<section id="features"><h2>Key Features</h2><ul><li><strong>Versioning</strong> - keep every version; protects against overwrite/delete.</li><li><strong>Lifecycle rules</strong> - transition to cheaper classes or expire.</li><li><strong>Replication</strong> - CRR (cross-region) / SRR (same-region).</li><li><strong>Event notifications</strong> - to Lambda, SQS, SNS, EventBridge.</li><li><strong>Static website hosting</strong>; front with CloudFront + OAC.</li><li><strong>Object Lock</strong> - WORM for compliance.</li></ul></section>
+<section id="exam-tips"><h2>&#127891; Exam Tips</h2><div class="callout warn"><div class="callout-title">&#9888; Frequently tested</div><ul><li>Block Public Access overrides any bucket policy or ACL that grants public access.</li><li>Use OAC (not the legacy OAI) to let only CloudFront read a private bucket.</li><li>Pre-signed URLs grant temporary access without changing bucket permissions.</li><li>SSE-KMS adds audit trails and key control; SSE-S3 is the simplest default.</li><li>Use a Gateway VPC Endpoint for S3 (free) to keep traffic off the internet.</li></ul></div></section>
+<section id="related"><h2>&#128279; Related</h2><p><a href="saa-c03.html" class="badge badge-blue" style="text-decoration:none;margin:0.2rem">SAA-C03</a><a href="dva-c02.html" class="badge badge-blue" style="text-decoration:none;margin:0.2rem">DVA-C02</a><a href="scs-c02.html" class="badge badge-blue" style="text-decoration:none;margin:0.2rem">SCS-C02</a><a href="cheatsheets.html" class="badge badge-blue" style="text-decoration:none;margin:0.2rem">Cheat Sheets</a></p><div class="quiz-cta" style="margin-top:1rem"><span>&#129513; Test your knowledge</span><span class="quiz-cta-actions"><a class="btn btn-primary" href="quiz.html">Take a quiz &rarr;</a><a class="btn btn-outline" href="cheatsheets.html">Cheat sheets</a></span></div></section>
+</main></div></div><script src="../assets/js/main.js"></script></body></html>
