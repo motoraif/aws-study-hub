@@ -1,8 +1,158 @@
 {
-  "updated": "2026-09-13 13:13 UTC",
+  "updated": "2026-09-20 12:58 UTC",
   "note": "Cumulative AWS What's New archive. Auto-appended weekly by GitHub Actions. Do not edit manually.",
-  "count": 95,
+  "count": 120,
   "items": [
+    {
+      "title": "AWS Continuum now supports credential testing and accessible domain suggestions",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/aws-security-agent/",
+      "date": "2026-09-18",
+      "summary": "AWS Continuum for penetration testing is a frontier agent that proactively secures applications throughout the development lifecycle by offering on-demand, customized penetration testing with real exploitability testing. Developers and security teams can now test login credentials and receive sugges"
+    },
+    {
+      "title": "Amazon ECS Express Mode now supports AWS Graviton (ARM64) workloads",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-ecs-express-mode-arm-architecture/",
+      "date": "2026-09-18",
+      "summary": "Amazon Elastic Container Service Express Mode now supports specifying ARM64 as the CPU architecture for your service, making it easy to deploy ARM-based container images on AWS Graviton-powered compute and benefit from up to 40% better price-performance compared to x86-based instances. \nAmazon ECS E"
+    },
+    {
+      "title": "AWS Resilience Hub adds three new capabilities",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/resilience-hub-eks-dependency-policy/",
+      "date": "2026-09-18",
+      "summary": "The next generation of AWS Resilience Hub is a central location in the AWS that helps platform engineering and site reliability teams assess and strengthen the resilience of their workloads running on AWS. It provides automated dependency discovery, generative AI-powered failure mode analysis, modul"
+    },
+    {
+      "title": "AWS RTB Fabric now supports configurable Availability Zone affinity",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/aws-rtb-fabric-configurable-availability-zone-affinity/",
+      "date": "2026-09-18",
+      "summary": "AWS RTB Fabric now supports configurable Availability Zone (AZ) affinity for responder gateways. With this capability, you can configure how your partners connect to your responder gateway: either in their own Availability Zone or to any Availability Zone that the gateway spans. This launch helps ad"
+    },
+    {
+      "title": "Kimi K3 by Moonshot AI is now generally available on Amazon Bedrock",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/moonshot-ai-kimi-k3-on-amazon-bedrock/",
+      "date": "2026-09-18",
+      "summary": "Amazon Bedrock continues to expand its open weight model portfolio with the same security and governance that customers rely on.&nbsp;Today, Kimi K3 from Moonshot AI is generally available on Amazon Bedrock, giving you a powerful new option for coding and knowledge work. \nAccording to Moonshot AI, K"
+    },
+    {
+      "title": "Amazon SNS now supports message payloads up to 1 MiB",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-sns-1mib-support",
+      "date": "2026-09-18",
+      "summary": "Amazon Simple Notification Service (Amazon SNS)&nbsp;now supports message payloads up to 1 MiB, a 4x increase from the previous 256 KiB limit, so you can publish larger messages to your SNS topics. \nAmazon SNS is a fully managed pub/sub messaging service that enables you to decouple and scale micros"
+    },
+    {
+      "title": "The new AgentCore Runtime is now available in Amazon Bedrock AgentCore",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/new-agentcore-runtime-generally-available",
+      "date": "2026-09-18",
+      "summary": "Today, AWS announces the availability of&nbsp;the next generation of AgentCore Runtime, the serverless microVM compute within Amazon Bedrock AgentCore. The new Runtime delivers elastic memory management that reclaims unused memory throughout the session so you pay for actual usage rather than the pe"
+    },
+    {
+      "title": "AWS PrivateLink announces Tunnel Endpoints to access network segments",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/9/privatelink-tunnel-endpoint/",
+      "date": "2026-09-18",
+      "summary": "AWS PrivateLink customers can now use VPC endpoint to privately and securely access network segments in another VPC/account. They can use a \u2018tunnel\u2019 endpoint, a new type of VPC endpoint, to tunnel into the network segment and access resources located within it. \nAWS PrivateLink is a highly available"
+    },
+    {
+      "title": "AWS Transfer Family now supports source IP preservation for SFTP servers behind a Network Load Balancer (NLB)",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/transfer-family-sftp-source-ip-nlb/",
+      "date": "2026-09-17",
+      "summary": "AWS Transfer Family now preserves the client's source IP address using Proxy Protocol v2 (PPv2) when you place a Network Load Balancer (NLB) in front of your SFTP server that uses a VPC-hosted endpoint. You can now retain visibility of the client's source IP for IP-based auditing, access controls, a"
+    },
+    {
+      "title": "AWS HealthOmics now supports IAM session policies",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/omics-iam-session-policy/",
+      "date": "2026-09-17",
+      "summary": "AWS HealthOmics now supports IAM session policies, enabling you to restrict permissions for individual runs without creating and managing multiple IAM roles. Until now, there was no way to dynamically scope down permissions for a single run, requiring you to create a separate IAM role for each tenan"
+    },
+    {
+      "title": "AWS Batch now supports bulk job cancellation and termination",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/aws-batch-bulk-cancellation/",
+      "date": "2026-09-17",
+      "summary": "AWS Batch now supports bulk job cancellation and termination, enabling you to cancel or terminate up to 50 jobs with a single API call. The new CancelJobs, TerminateJobs, and TerminateServiceJobs APIs reduce the operational complexity of managing large-scale batch workloads, letting you act on group"
+    },
+    {
+      "title": "Introducing Amazon EC2 T8i instances",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/ec2-t8i-instances-ga/",
+      "date": "2026-09-17",
+      "summary": "AWS is announcing the general availability of new low-cost burstable Amazon EC2 T8i instances. These instances are powered by custom sixth generation Intel Xeon 6 processors, available exclusively on AWS, and built on the latest sixth generation AWS Nitro cards. T8i instances deliver up to 30% bette"
+    },
+    {
+      "title": "AWS Elastic Beanstalk introduces Cluster Mode to run multiple applications on shared infrastructure",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/elastic-beanstalk-cluster-mode/",
+      "date": "2026-09-17",
+      "summary": "AWS Elastic Beanstalk introduces Cluster Mode, a new deployment mode that lets you run and manage multiple applications on shared infrastructure in your account. Provide your source code, a Dockerfile, or a container image in Amazon ECR, and Elastic Beanstalk handles containerization, provisioning, "
+    },
+    {
+      "title": "Amazon S3 Express One Zone is now available in 7 additional AWS Regions",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/s3-express-one-zone-7-regions/",
+      "date": "2026-09-17",
+      "summary": "The Amazon S3 Express One Zone storage class is now available in 7 additional AWS Regions: Asia Pacific (Singapore), South America (Sao Paulo), US West (N. California), Canada (Central), Europe (Paris), Asia Pacific (Sydney), and Asia Pacific (Seoul). \nAmazon S3 Express One Zone is a high-performanc"
+    },
+    {
+      "title": "AWS Builder Center now available as mobile app on iOS and Android",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/aws-builder-center-now-available-as-mobile-app/",
+      "date": "2026-09-17",
+      "summary": "AWS Builder Center is a platform that brings together the global builder community, offering articles, workshops, sandbox environments, events, and learning resources in one place. Previously limited to desktop and web access, the experience is now available as a mobile app on iOS and Android. Build"
+    },
+    {
+      "title": "Amazon SES now supports tenant-level deliverability insights",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-ses-vdm-tenants/",
+      "date": "2026-09-17",
+      "summary": "Amazon Simple Email Service (SES) now supports tenant-level deliverability insights in Virtual Deliverability Manager (VDM). Tenant management allows email senders to isolate email sending across customers, business units, or applications. Previously, VDM provided deliverability metrics at the accou"
+    },
+    {
+      "title": "Amazon Quick now generates individual sheets and builds analyses from an image",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/generate-sheet-and-generate-analysis-from-an-image/",
+      "date": "2026-09-17",
+      "summary": "Amazon Quick now expands Generate Analysis with two new ways to create dashboards faster. You can generate a single sheet inside an existing analysis by describing it in natural language, and you can generate a new analysis from an image of an existing dashboard. \n&nbsp; \nWith Generate Sheet, you de"
+    },
+    {
+      "title": "Amazon Corretto 27 is now generally available",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-corretto-27-generally-available/",
+      "date": "2026-09-17",
+      "summary": "Amazon Corretto 27, a Feature Release (FR) version, is now available for download. Amazon Corretto is a no-cost, multi-platform, production-ready distribution of OpenJDK. You can download Corretto 27 for Linux, Windows, and macOS from our downloads page. Corretto 27 will be supported through April 2"
+    },
+    {
+      "title": "Amazon SageMaker AI now supports serverless model customization for NVIDIA Nemotron 3.5 Lightning",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-sagemaker-ft-nemotron-3-5-lightning/",
+      "date": "2026-09-16",
+      "summary": "Amazon SageMaker AI now supports serverless model customization for the NVIDIA Nemotron 3.5 Lightning model using supervised fine-tuning (SFT), Direct Preference Optimization (DPO), and reinforcement fine-tuning (RFT). This is one of the latest open-weight models from NVIDIA and employs a hybrid Mix"
+    },
+    {
+      "title": "Amazon ECS deployment observability for Amazon ECS Managed Daemons in AWS Management Console",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-ecs-daemon-deployment-console/",
+      "date": "2026-09-16",
+      "summary": "Amazon Elastic Container Service (Amazon ECS) now provides a consolidated deployment view for Amazon ECS Managed Daemons, giving you a single place to see how far a deployment has progressed, what is failing, and what could stop it. This helps you monitor Managed Daemon deployments at a glance and r"
+    },
+    {
+      "title": "AWS Client VPN is now supporting MacOS 27 Golden Gate",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/aws-client-vpn-macos-golden-gate/",
+      "date": "2026-09-16",
+      "summary": "AWS Client VPN now supports MacOS 27 Golden Gate client with versions 6.0+ You can now run the AWS supplied VPN client on the latest MacOS versions. AWS Client VPN desktop clients are available free of charge, and can be downloaded here.  AWS Client VPN is a managed service that securely connects yo"
+    },
+    {
+      "title": "New AWS experience helps builders get started and ship faster",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/New-AWS-Builder-Experience",
+      "date": "2026-09-16",
+      "summary": "Builders can now sign up for a new simplified experience that makes it faster to turn ideas into running code on AWS. AWS services provide an array of configuration options so that the largest enterprises can customize settings for their distinct needs. Until now, builders with a new project idea ha"
+    },
+    {
+      "title": "Amazon WorkSpaces adds support for NVIDIA Blackwell GPU instances",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-workspaces-nvidia-blackwell-gpu-instances/",
+      "date": "2026-09-16",
+      "summary": "Amazon WorkSpaces Personal and Amazon WorkSpaces Core now support Graphics G7 bundles, built on NVIDIA RTX PRO 4500 Blackwell Server Edition GPUs and Intel Xeon 6 processors. Graphics G7 delivers up to 2.1x better performance for graphics-intensive workloads compared to previous generation Graphics "
+    },
+    {
+      "title": "Amazon Connect Customer can now import evaluation form PDFs using AI",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-connect-customer-import-evaluation-form-PDF/",
+      "date": "2026-09-16",
+      "summary": "Amazon Connect Customer now lets managers import a PDF of an evaluation form from a third-party quality management application, and automatically recreates it in Connect using AI, making it easier to migrate an existing quality program into Connect. Instead of rebuilding an existing form question by"
+    },
+    {
+      "title": "Amazon Connect Customer custom metrics now supports tag-based access control",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/connect-customer-custom-metrics-tag/",
+      "date": "2026-09-16",
+      "summary": "Amazon Connect Customer now supports tag-based access control for custom metrics, so you can govern which users and roles can view, create, or modify each custom metric. \nAs more teams across your organization adopt custom metrics, they end up editing the same shared library. Without controls, one p"
+    },
     {
       "title": "AWS Elemental MediaLive enables frame-accurate pipeline locking for streams without timecode",
       "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/medialive-pipeline-locking/",
