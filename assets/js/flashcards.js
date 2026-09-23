@@ -87,8 +87,12 @@
     var t = today(), due = 0, fresh = 0, learned = 0;
     pool.forEach(function (q) {
       var c = sched[q.id];
-      if (!c) fresh++;
-      else { if (c.due <= t) due++; if (c.reps >= 3) learned++; }
+      if (!c) { fresh++; return; }
+      if (c.due <= t) due++;
+      // "Learned" = graduated out of the initial learning steps (SM-2 reps >= 2,
+      // i.e. interval has reached 6+ days). This is reachable within normal use,
+      // unlike the old reps>=3 which only ever counted after several days.
+      if (c.reps >= 2) learned++;
     });
     return { total: pool.length, due: due, fresh: fresh, learned: learned };
   }
@@ -143,62 +147,80 @@
     });
   }
 
+  // Render the full card shell once per question. The flip is then a pure
+  // CSS transition (toggling .flipped on the existing element) so the 3D
+  // animation actually plays instead of the DOM being rebuilt each time.
   function renderCard() {
     if (state.idx >= state.queue.length) { renderDone(false); return; }
     var q = state.queue[state.idx];
     var correct = q.options[q.answer];
-    var remaining = state.queue.length - state.idx;
+    var total = state.queue.length;
+    var remaining = total - state.idx;
+    var progressPct = Math.round((state.idx) / total * 100);
 
     root.innerHTML =
-      '<div class="fc-meta">' +
-        '<span class="badge badge-blue">' + esc(q.cert) + '</span>' +
-        '<span class="badge">' + esc(q.domain) + '</span>' +
-        '<span class="quiz-progress-text">' + remaining + ' card' + (remaining === 1 ? '' : 's') + ' left</span>' +
+      '<div class="fc-topbar">' +
+        '<div class="fc-meta">' +
+          '<span class="badge badge-orange">' + esc(q.cert) + '</span>' +
+          '<span class="badge">' + esc(q.domain) + '</span>' +
+        '</div>' +
+        '<span class="fc-remaining">' + remaining + ' / ' + total + '</span>' +
       '</div>' +
+      '<div class="fc-progress"><div class="fc-progress-fill" style="width:' + progressPct + '%"></div></div>' +
       '<div class="flashcard' + (state.flipped ? ' flipped' : '') + '" id="fc-card" tabindex="0" role="button" ' +
-        'aria-label="Flashcard, press Space or Enter to flip">' +
+        'aria-label="Flashcard. Press Space or Enter to flip.">' +
         '<div class="flashcard-inner">' +
           '<div class="flashcard-face flashcard-front">' +
-            '<div class="fc-face-label">Question</div>' +
+            '<span class="fc-face-label">&#10067; Question</span>' +
             '<p class="fc-q">' + esc(q.question) + '</p>' +
-            '<div class="fc-hint">Tap or press Space to reveal</div>' +
+            '<span class="fc-hint">Tap card or press <kbd>Space</kbd> to flip</span>' +
           '</div>' +
           '<div class="flashcard-face flashcard-back">' +
-            '<div class="fc-face-label">Answer</div>' +
+            '<span class="fc-face-label">&#9989; Answer</span>' +
             '<p class="fc-a">' + esc(correct) + '</p>' +
             '<p class="fc-exp">' + esc(q.explanation) + '</p>' +
           '</div>' +
         '</div>' +
       '</div>' +
-      (state.flipped ?
-        '<div class="fc-rate">' +
-          '<p class="fc-rate-prompt">How well did you recall it?</p>' +
-          '<div class="fc-rate-btns">' +
-            '<button class="btn fc-again" data-q="0">Again</button>' +
-            '<button class="btn fc-hard" data-q="3">Hard</button>' +
-            '<button class="btn fc-good" data-q="4">Good</button>' +
-            '<button class="btn fc-easy" data-q="5">Easy</button>' +
-          '</div>' +
-          '<p class="fc-rate-hint">Keys: 1 Again &middot; 2 Hard &middot; 3 Good &middot; 4 Easy</p>' +
-        '</div>'
-        : '<div class="fc-flip-row"><button class="btn btn-primary" id="fc-flip">Reveal Answer</button>' +
-          '<button class="btn btn-outline" id="fc-end">End session</button></div>');
+      '<div class="fc-controls" id="fc-controls"></div>';
 
-    var card = document.getElementById('fc-card');
-    if (card) card.addEventListener('click', flip);
-    var flipBtn = document.getElementById('fc-flip');
-    if (flipBtn) flipBtn.addEventListener('click', function (e) { e.stopPropagation(); flip(); });
-    var endBtn = document.getElementById('fc-end');
-    if (endBtn) endBtn.addEventListener('click', function () { renderDone(false); });
+    document.getElementById('fc-card').addEventListener('click', flip);
+    renderControls();
+  }
 
-    root.querySelectorAll('.fc-rate-btns button').forEach(function (b) {
-      b.addEventListener('click', function () { rate(parseInt(b.dataset.q, 10)); });
-    });
+  // Swap only the controls area (Reveal button vs. rating buttons) so the
+  // card element itself is never re-created and the flip keeps animating.
+  function renderControls() {
+    var el = document.getElementById('fc-controls');
+    if (!el) return;
+    if (state.flipped) {
+      el.innerHTML =
+        '<p class="fc-rate-prompt">How well did you recall it?</p>' +
+        '<div class="fc-rate-btns">' +
+          '<button class="btn fc-again" data-q="0"><span class="fc-rate-key">1</span>Again</button>' +
+          '<button class="btn fc-hard" data-q="3"><span class="fc-rate-key">2</span>Hard</button>' +
+          '<button class="btn fc-good" data-q="4"><span class="fc-rate-key">3</span>Good</button>' +
+          '<button class="btn fc-easy" data-q="5"><span class="fc-rate-key">4</span>Easy</button>' +
+        '</div>';
+      el.querySelectorAll('.fc-rate-btns button').forEach(function (b) {
+        b.addEventListener('click', function () { rate(parseInt(b.dataset.q, 10)); });
+      });
+    } else {
+      el.innerHTML =
+        '<div class="fc-flip-row">' +
+          '<button class="btn btn-primary" id="fc-flip">&#128260; Reveal Answer</button>' +
+          '<button class="btn btn-outline" id="fc-end">End session</button>' +
+        '</div>';
+      el.querySelector('#fc-flip').addEventListener('click', function (e) { e.stopPropagation(); flip(); });
+      el.querySelector('#fc-end').addEventListener('click', function () { renderDone(false); });
+    }
   }
 
   function flip() {
     state.flipped = !state.flipped;
-    renderCard();
+    var card = document.getElementById('fc-card');
+    if (card) card.classList.toggle('flipped', state.flipped);
+    renderControls();
   }
 
   function rate(quality) {
@@ -241,7 +263,7 @@
 
   // Keyboard shortcuts: Space/Enter to flip; 1-4 to rate when flipped
   document.addEventListener('keydown', function (e) {
-    if (!document.getElementById('fc-card') && !document.querySelector('.fc-rate')) return;
+    if (!document.getElementById('fc-card')) return;
     var tag = (document.activeElement && document.activeElement.tagName) || '';
     if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return;
     if ((e.key === ' ' || e.key === 'Enter') && !state.flipped) { e.preventDefault(); flip(); }

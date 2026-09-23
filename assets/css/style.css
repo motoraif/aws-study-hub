@@ -429,64 +429,116 @@ figure.diagram .diagram-caption { color: var(--text-muted); font-size: 0.85rem; 
 @media print { figure.diagram .mermaid { border-color: #ccc; } }
 
 /* =========================================================
-   Flashcards (spaced repetition)
-   Built entirely from theme CSS variables so light/dark both work.
+   Flashcards (spaced repetition) - real card w/ 3D flip
+   Built from theme CSS variables so light/dark both adapt.
    ========================================================= */
-.fc-stats { display: flex; gap: 1rem; margin: 1rem 0 1.25rem; flex-wrap: wrap; }
+#flashcards-app { max-width: 640px; margin: 0 auto; }
+
+/* Deck status tiles on the start screen */
+.fc-stats { display: flex; gap: 0.9rem; margin: 1.25rem 0 1.5rem; flex-wrap: wrap; }
 .fc-stat {
-  flex: 1; min-width: 90px; text-align: center; background: var(--bg-hover);
-  border: 1px solid var(--border); border-radius: var(--radius); padding: 0.75rem 0.5rem;
+  flex: 1; min-width: 92px; text-align: center; background: var(--bg-hover);
+  border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 0.5rem;
 }
-.fc-stat-num { font-size: 1.6rem; font-weight: 800; color: var(--aws-orange); line-height: 1; }
-.fc-stat-lbl { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 0.25rem; }
+.fc-stat-num { font-size: 1.8rem; font-weight: 800; color: var(--aws-orange); line-height: 1; }
+.fc-stat-lbl { font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.3rem; }
 
-.fc-meta { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.9rem; }
+/* Top bar above the card: cert/domain + position */
+.fc-topbar { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; margin-bottom: 0.6rem; flex-wrap: wrap; }
+.fc-meta { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.fc-remaining { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; font-variant-numeric: tabular-nums; }
 
-/* Card with 3D flip */
-.flashcard { perspective: 1600px; cursor: pointer; outline: none; }
-.flashcard:focus-visible .flashcard-inner { box-shadow: 0 0 0 3px var(--aws-orange); border-radius: var(--radius); }
+/* Thin progress bar */
+.fc-progress { height: 6px; background: var(--bg-hover); border-radius: 999px; overflow: hidden; margin-bottom: 1.1rem; }
+.fc-progress-fill { height: 100%; background: linear-gradient(90deg, var(--aws-orange), #ffc46b); border-radius: 999px; transition: width 0.4s ease; }
+
+/* The card itself - 3D flip */
+.flashcard {
+  perspective: 1800px; cursor: pointer; outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
 .flashcard-inner {
-  position: relative; width: 100%; min-height: 260px;
-  transition: transform 0.55s cubic-bezier(0.4,0.2,0.2,1); transform-style: preserve-3d;
+  position: relative; width: 100%; min-height: 320px;
+  transition: transform 0.6s cubic-bezier(0.4, 0.15, 0.2, 1);
+  transform-style: preserve-3d;
 }
 .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+
 .flashcard-face {
-  position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
-  display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
-  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 2rem 1.75rem; box-shadow: var(--shadow);
+  position: absolute; inset: 0;
+  -webkit-backface-visibility: hidden; backface-visibility: hidden;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center; padding: 2.5rem 2rem 2.75rem;
+  border-radius: 16px; border: 1px solid var(--border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.28), 0 2px 6px rgba(0,0,0,0.2);
 }
-.flashcard-back { transform: rotateY(180deg); }
+/* Front: subtle branded gradient. Back: distinct answer-side tint. */
+.flashcard-front {
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(255,153,0,0.10), transparent 60%),
+    var(--bg-card);
+}
+.flashcard-back {
+  transform: rotateY(180deg);
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(63,179,79,0.12), transparent 60%),
+    var(--bg-card);
+}
+.flashcard:hover .flashcard-inner { box-shadow: none; }
+.flashcard:hover:not(.flipped) .flashcard-front,
+.flashcard:hover.flipped .flashcard-back { border-color: var(--aws-orange); }
+.flashcard:focus-visible .flashcard-face { box-shadow: 0 0 0 3px var(--aws-orange); }
+
 .fc-face-label {
-  position: absolute; top: 0.9rem; left: 1.1rem; font-size: 0.68rem; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.06em; color: var(--aws-orange);
+  position: absolute; top: 1rem; left: 50%; transform: translateX(-50%);
+  font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--text-muted);
 }
-.fc-q { font-size: 1.15rem; font-weight: 600; line-height: 1.5; color: var(--text); }
-.fc-a { font-size: 1.2rem; font-weight: 700; color: var(--aws-green); margin-bottom: 0.75rem; }
-.fc-exp { font-size: 0.95rem; color: var(--text-muted); line-height: 1.55; }
-.fc-hint { position: absolute; bottom: 0.9rem; font-size: 0.78rem; color: var(--text-muted); }
+.flashcard-front .fc-face-label { color: var(--aws-orange); }
+.flashcard-back .fc-face-label { color: var(--aws-green); }
 
-.fc-flip-row { display: flex; gap: 0.75rem; justify-content: center; margin-top: 1.25rem; flex-wrap: wrap; }
+.fc-q { font-size: 1.25rem; font-weight: 600; line-height: 1.55; color: var(--text); max-width: 34ch; }
+.fc-a { font-size: 1.3rem; font-weight: 800; color: var(--aws-green); line-height: 1.4; margin-bottom: 0.8rem; max-width: 34ch; }
+.fc-exp { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; max-width: 42ch; }
+.fc-hint { position: absolute; bottom: 1rem; left: 0; right: 0; font-size: 0.78rem; color: var(--text-muted); }
+.fc-hint kbd {
+  background: var(--bg-hover); border: 1px solid var(--border); border-radius: 4px;
+  padding: 0.05em 0.4em; font-size: 0.85em;
+}
 
-.fc-rate { margin-top: 1.25rem; text-align: center; }
-.fc-rate-prompt { font-weight: 600; margin-bottom: 0.6rem; }
+/* Controls area under the card (never re-creates the card, so flip animates) */
+.fc-controls { margin-top: 1.4rem; text-align: center; min-height: 96px; }
+.fc-flip-row { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+
+.fc-rate-prompt { font-weight: 600; margin-bottom: 0.7rem; color: var(--text); }
 .fc-rate-btns { display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; }
-.fc-rate-btns .btn { color: #fff; min-width: 84px; }
+.fc-rate-btns .btn {
+  color: #fff; min-width: 96px; display: inline-flex; align-items: center; justify-content: center;
+  gap: 0.4rem; font-weight: 700; border: none;
+}
+.fc-rate-key {
+  display: inline-grid; place-items: center; width: 1.25rem; height: 1.25rem;
+  border-radius: 5px; background: rgba(255,255,255,0.25); font-size: 0.7rem; font-weight: 800;
+}
 .fc-again { background: var(--aws-red); }
 .fc-hard  { background: #C9761A; }
 .fc-good  { background: var(--aws-blue); }
 .fc-easy  { background: var(--aws-green); }
-.fc-rate-btns .btn:hover { filter: brightness(1.1); text-decoration: none; }
-.fc-rate-hint { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.6rem; }
+.fc-rate-btns .btn:hover { filter: brightness(1.12); text-decoration: none; }
 
 .fc-done { text-align: center; }
-.fc-done .card-icon { font-size: 2.5rem; }
+.fc-done .card-icon { font-size: 2.75rem; }
 
 @media (max-width: 600px) {
-  .flashcard-inner { min-height: 300px; }
-  .fc-rate-btns .btn { min-width: 68px; flex: 1; }
+  .flashcard-inner { min-height: 360px; }
+  .flashcard-face { padding: 2.25rem 1.35rem 2.75rem; }
+  .fc-q { font-size: 1.12rem; }
+  .fc-rate-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem; }
+  .fc-rate-btns .btn { min-width: 0; width: 100%; }
 }
-/* Respect reduced-motion preferences */
+
+/* Respect reduced-motion: no flip animation, just swap faces */
 @media (prefers-reduced-motion: reduce) {
   .flashcard-inner { transition: none; }
+  .fc-progress-fill { transition: none; }
 }
