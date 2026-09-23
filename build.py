@@ -1,17 +1,61 @@
 #!/usr/bin/env python3
 """Build all AWS Study Hub HTML pages."""
-import os, textwrap
+import os, textwrap, json as _json_stats
 BASE = os.path.dirname(os.path.abspath(__file__))
 DOCS = f"{BASE}/docs"
 os.makedirs(DOCS, exist_ok=True)
+
+# ── Dynamic site stats ──────────────────────────────────────
+# Compute headline numbers from real data so the homepage never drifts
+# out of sync with the actual content (no more hard-coded "500+").
+def _compute_stats():
+    stats = {"questions": 0, "quiz_certs": 0, "cert_pages": 0}
+    try:
+        with open(f"{BASE}/data/quiz-questions.json", encoding="utf-8") as f:
+            qdata = _json_stats.load(f)
+        qs = qdata.get("questions", [])
+        stats["questions"] = len(qs)
+        stats["quiz_certs"] = len({q.get("cert") for q in qs if q.get("cert")})
+    except Exception:
+        pass
+    # Count certification guide pages already generated in docs/ (e.g. saa-c03.html).
+    # Excludes service-* and foundations-* helper pages.
+    import re as _re_stats
+    try:
+        stats["cert_pages"] = len([
+            n for n in os.listdir(DOCS)
+            if _re_stats.match(r"^[a-z]+-c\d+\.html$", n)
+        ])
+    except Exception:
+        pass
+    return stats
+
+STATS = _compute_stats()
+
+def _stat_str(n, step=10):
+    """Round down to a friendly '30+' style figure; small counts shown exactly."""
+    if n <= 0:
+        return "0"
+    if n < step:
+        return str(n)
+    return f"{(n // step) * step}+"
 
 # Canonical site URL (custom domain). Used for SEO tags and sitemap.
 SITE_URL = "https://toraif.com/aws-study-hub"
 OG_IMAGE = f"{SITE_URL}/assets/og-image.svg"
 
 # Shared social / SEO meta tags injected into every page's <head>.
+# Compose the page title, avoiding a doubled " - AWS Study Hub" suffix
+# when the caller already included the site name in the title.
+SITE_NAME = "AWS Study Hub"
+def _full_title(title):
+    t = title.strip()
+    if t == SITE_NAME or t.endswith(f" - {SITE_NAME}") or SITE_NAME in t:
+        return t
+    return f"{t} - {SITE_NAME}"
+
 def seo_tags(title, desc, root):
-    full_title = f"{title} - AWS Study Hub"
+    full_title = _full_title(title)
     return f"""  <meta name="robots" content="index,follow">
   <meta name="author" content="AWS Study Hub">
   <meta name="impact-site-verification" content="6f8fc4a9-3cdc-44d9-a455-52af8c26f184">
@@ -31,7 +75,7 @@ HEAD = lambda t,d: f"""<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>{t} - AWS Study Hub</title>
+  <title>{_full_title(t)}</title>
   <meta name="description" content="{d}">
 {seo_tags(t, d, "../")}
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
@@ -47,7 +91,7 @@ HEAD_ROOT = lambda t,d: f"""<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>{t} - AWS Study Hub</title>
+  <title>{_full_title(t)}</title>
   <meta name="description" content="{d}">
 {seo_tags(t, d, "")}
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
@@ -189,9 +233,9 @@ index_html = HEAD_ROOT("AWS Study Hub - Ultimate AWS Certification Study Platfor
     <a href="https://github.com/motoraif/aws-study-hub" target="_blank" class="btn btn-outline">&#11088; Star on GitHub</a>
   </div>
   <div class="hero-stats">
-    <div class="stat-item"><div class="stat-number">12+</div><div class="stat-label">AWS Certifications</div></div>
+    <div class="stat-item"><div class="stat-number">""" + _stat_str(max(STATS["cert_pages"], STATS["quiz_certs"]), step=1) + """</div><div class="stat-label">AWS Certifications</div></div>
     <div class="stat-item"><div class="stat-number">200+</div><div class="stat-label">Study Topics</div></div>
-    <div class="stat-item"><div class="stat-number">500+</div><div class="stat-label">Practice Questions</div></div>
+    <div class="stat-item"><div class="stat-number">""" + _stat_str(STATS["questions"]) + """</div><div class="stat-label">Practice Questions</div></div>
     <div class="stat-item"><div class="stat-number">100%</div><div class="stat-label">Free Forever</div></div>
   </div>
 </div></section>
@@ -208,9 +252,10 @@ index_html = HEAD_ROOT("AWS Study Hub - Ultimate AWS Certification Study Platfor
 </div></div></section>
 
 <section class="section" style="background:var(--bg-card);border-top:1px solid var(--border);border-bottom:1px solid var(--border)"><div class="container">
-  <div class="text-center mb-2"><h2>&#128640; Interactive Study Tools</h2><p style="color:var(--text-muted);max-width:620px;margin:0 auto">Go beyond reading. Test yourself, review the tricky comparisons, and track your readiness - all free and saved privately in your browser.</p></div>
-  <div class="grid-3">
-    <a href="docs/quiz.html" class="card" style="text-decoration:none;color:var(--text)"><div class="card-icon">&#129513;</div><h3>Practice Quiz</h3><p style="color:var(--text-muted);font-size:0.92rem">Timed, randomized questions per certification with instant scoring, a domain breakdown, and explanations for every answer.</p><div class="flex-wrap mt-1"><span class="badge badge-blue">63+ questions</span><span class="badge badge-green">Instant scoring</span></div></a>
+  <div class="text-center mb-2"><h2>&#128640; Interactive Study Tools</h2><p style="color:var(--text-muted);max-width:620px;margin:0 auto">Go beyond reading. Test yourself, drill with spaced-repetition flashcards, review the tricky comparisons, and track your readiness - all free and saved privately in your browser.</p></div>
+  <div class="grid-4">
+    <a href="docs/quiz.html" class="card" style="text-decoration:none;color:var(--text)"><div class="card-icon">&#129513;</div><h3>Practice Quiz</h3><p style="color:var(--text-muted);font-size:0.92rem">Timed, randomized questions per certification with instant scoring, a domain breakdown, and explanations for every answer.</p><div class="flex-wrap mt-1"><span class="badge badge-blue">""" + _stat_str(STATS["questions"]) + """ questions</span><span class="badge badge-green">Instant scoring</span></div></a>
+    <a href="docs/flashcards.html" class="card" style="text-decoration:none;color:var(--text)"><div class="card-icon">&#128218;</div><h3>Flashcards</h3><p style="color:var(--text-muted);font-size:0.92rem">Spaced-repetition flashcards that resurface each concept at the optimal time. Rate your recall and let the SM-2 scheduler do the rest.</p><div class="flex-wrap mt-1"><span class="badge badge-purple">Spaced repetition</span><span class="badge badge-green">Adaptive</span></div></a>
     <a href="docs/cheatsheets.html" class="card" style="text-decoration:none;color:var(--text)"><div class="card-icon">&#128221;</div><h3>Confusing Pairs Cheat Sheet</h3><p style="color:var(--text-muted);font-size:0.92rem">Side-by-side comparisons of the look-alike services that trip people up: SG vs NACL, SQS vs SNS, EBS vs EFS vs FSx, and more.</p><div class="flex-wrap mt-1"><span class="badge badge-teal">Quick reference</span><span class="badge badge-orange">Exam gold</span></div></a>
     <a href="docs/dashboard.html" class="card" style="text-decoration:none;color:var(--text)"><div class="card-icon">&#128202;</div><h3>My Progress</h3><p style="color:var(--text-muted);font-size:0.92rem">Your quiz readiness per certification and study-checklist completion in one dashboard. Private and local - no account needed.</p><div class="flex-wrap mt-1"><span class="badge badge-green">Track readiness</span><span class="badge badge-blue">Saved locally</span></div></a>
   </div>
@@ -2494,6 +2539,23 @@ quiz_html = HEAD("Practice Quiz","Interactive AWS certification practice quiz wi
 <script src="../assets/js/quiz.js"></script>
 """ + FOOT
 write(f"{DOCS}/quiz.html", quiz_html)
+
+# ── flashcards.html ─────────────────────────────────────────
+flashcards_html = HEAD("Flashcards","Study AWS certification concepts with spaced-repetition flashcards. Rate your recall and the scheduler shows cards at the optimal time. Free and open source.") + """
+<div class="container" style="padding-top:2rem"><div class="breadcrumb"><a href="../index.html">Home</a> / <span>Flashcards</span></div></div>
+<div class="page-header"><div class="container">
+  <span class="badge badge-green">Interactive</span>
+  <h1 style="margin-top:0.75rem">&#128218; Flashcards</h1>
+  <p>Study with spaced repetition (SM-2). Flip each card, rate how well you recalled it, and the scheduler brings it back at the right time to move it into long-term memory. Your progress is saved privately in your browser - no account needed.</p>
+  <div class="flex-wrap mt-1"><span class="badge badge-blue">Spaced Repetition</span><span class="badge badge-orange">Self-Rated Recall</span><span class="badge badge-green">Progress Saved Locally</span></div>
+</div></div>
+<div class="container" style="padding:2rem 0 4rem">
+  <div id="flashcards-app"></div>
+  <div class="callout info" style="margin-top:2rem"><div class="callout-title">&#128161; How it works</div><p>Cards are generated from the same open-source question bank as the quiz (<code>data/quiz-questions.json</code>). Rating a card <strong>Again</strong>, <strong>Hard</strong>, <strong>Good</strong>, or <strong>Easy</strong> adjusts when you'll see it next using the SM-2 algorithm. Add or improve cards by contributing questions via a pull request.</p></div>
+</div>
+<script src="../assets/js/flashcards.js"></script>
+""" + FOOT
+write(f"{DOCS}/flashcards.html", flashcards_html)
 
 # ── cheatsheets.html (confusing pairs) ──────────────────────
 cheat_toc = [("compute","Compute"),("storage","Storage"),("databases","Databases"),
