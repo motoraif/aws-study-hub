@@ -381,6 +381,14 @@ footer { background: var(--bg-card); border-top: 1px solid var(--border); paddin
 .search-result-desc { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.15rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .search-result-sub { color: var(--aws-orange); font-size: 0.78rem; margin-top: 0.2rem; }
 .search-empty { padding: 1.5rem 1.25rem; color: var(--text-muted); text-align: center; }
+.search-suggest { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; padding: 0 1.25rem 1.1rem; }
+.search-suggest-label { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+.search-chip {
+  display: inline-block; font-size: 0.82rem; font-weight: 600; padding: 0.3em 0.8em;
+  border-radius: 999px; background: var(--bg-hover); border: 1px solid var(--border);
+  color: var(--text); text-decoration: none;
+}
+.search-chip:hover { border-color: var(--aws-orange); color: var(--aws-orange); text-decoration: none; }
 .search-hint { padding: 0.6rem 1.25rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.75rem; }
 .search-hint kbd { background: var(--bg-hover); border: 1px solid var(--border); border-radius: 4px; padding: 0.05em 0.4em; font-family: inherit; margin: 0 0.1em; }
 @media (max-width: 600px) { .search-overlay { padding-top: 5vh; } }
@@ -419,3 +427,66 @@ figure.diagram .mermaid {
 }
 figure.diagram .diagram-caption { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem; }
 @media print { figure.diagram .mermaid { border-color: #ccc; } }
+
+/* =========================================================
+   Flashcards (spaced repetition)
+   Built entirely from theme CSS variables so light/dark both work.
+   ========================================================= */
+.fc-stats { display: flex; gap: 1rem; margin: 1rem 0 1.25rem; flex-wrap: wrap; }
+.fc-stat {
+  flex: 1; min-width: 90px; text-align: center; background: var(--bg-hover);
+  border: 1px solid var(--border); border-radius: var(--radius); padding: 0.75rem 0.5rem;
+}
+.fc-stat-num { font-size: 1.6rem; font-weight: 800; color: var(--aws-orange); line-height: 1; }
+.fc-stat-lbl { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 0.25rem; }
+
+.fc-meta { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.9rem; }
+
+/* Card with 3D flip */
+.flashcard { perspective: 1600px; cursor: pointer; outline: none; }
+.flashcard:focus-visible .flashcard-inner { box-shadow: 0 0 0 3px var(--aws-orange); border-radius: var(--radius); }
+.flashcard-inner {
+  position: relative; width: 100%; min-height: 260px;
+  transition: transform 0.55s cubic-bezier(0.4,0.2,0.2,1); transform-style: preserve-3d;
+}
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+.flashcard-face {
+  position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 2rem 1.75rem; box-shadow: var(--shadow);
+}
+.flashcard-back { transform: rotateY(180deg); }
+.fc-face-label {
+  position: absolute; top: 0.9rem; left: 1.1rem; font-size: 0.68rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.06em; color: var(--aws-orange);
+}
+.fc-q { font-size: 1.15rem; font-weight: 600; line-height: 1.5; color: var(--text); }
+.fc-a { font-size: 1.2rem; font-weight: 700; color: var(--aws-green); margin-bottom: 0.75rem; }
+.fc-exp { font-size: 0.95rem; color: var(--text-muted); line-height: 1.55; }
+.fc-hint { position: absolute; bottom: 0.9rem; font-size: 0.78rem; color: var(--text-muted); }
+
+.fc-flip-row { display: flex; gap: 0.75rem; justify-content: center; margin-top: 1.25rem; flex-wrap: wrap; }
+
+.fc-rate { margin-top: 1.25rem; text-align: center; }
+.fc-rate-prompt { font-weight: 600; margin-bottom: 0.6rem; }
+.fc-rate-btns { display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; }
+.fc-rate-btns .btn { color: #fff; min-width: 84px; }
+.fc-again { background: var(--aws-red); }
+.fc-hard  { background: #C9761A; }
+.fc-good  { background: var(--aws-blue); }
+.fc-easy  { background: var(--aws-green); }
+.fc-rate-btns .btn:hover { filter: brightness(1.1); text-decoration: none; }
+.fc-rate-hint { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.6rem; }
+
+.fc-done { text-align: center; }
+.fc-done .card-icon { font-size: 2.5rem; }
+
+@media (max-width: 600px) {
+  .flashcard-inner { min-height: 300px; }
+  .fc-rate-btns .btn { min-width: 68px; flex: 1; }
+}
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .flashcard-inner { transition: none; }
+}

@@ -85,8 +85,24 @@
   function renderResults(q) {
     currentResults = search(q);
     activeIdx = currentResults.length ? 0 : -1;
-    if (!q) { resultsEl.innerHTML = '<div class="search-empty">Start typing to search across all pages.</div>'; return; }
-    if (!currentResults.length) { resultsEl.innerHTML = '<div class="search-empty">No results for "' + esc(q) + '".</div>'; return; }
+    if (!q) {
+      resultsEl.innerHTML =
+        '<div class="search-empty">Start typing to search across all pages.</div>' +
+        '<div class="search-suggest"><span class="search-suggest-label">Popular:</span>' +
+          quickLinks(['clf-c02', 'saa-c03', 'quiz', 'flashcards', 'cheatsheets']) +
+        '</div>';
+      bindQuickLinks();
+      return;
+    }
+    if (!currentResults.length) {
+      resultsEl.innerHTML =
+        '<div class="search-empty">No results for "' + esc(q) + '".</div>' +
+        '<div class="search-suggest"><span class="search-suggest-label">Try:</span>' +
+          quickLinks(['clf-c02', 'saa-c03', 'quiz', 'flashcards', 'resources']) +
+        '</div>';
+      bindQuickLinks();
+      return;
+    }
     resultsEl.innerHTML = currentResults.map(function (d, i) {
       var subs = matchedHeadings(d, q);
       return '<a class="search-result' + (i === 0 ? ' active' : '') + '" href="' + rootPath + esc(d.url) + '" data-i="' + i + '">' +
@@ -95,6 +111,27 @@
         (subs.length ? '<div class="search-result-sub">' + subs.map(esc).join(' &middot; ') + '</div>' : '') +
         '</a>';
     }).join('');
+  }
+
+  // Small quick-link chips shown on empty / no-result states.
+  var QUICK = {
+    'clf-c02': { label: 'CLF-C02', url: 'docs/clf-c02.html' },
+    'saa-c03': { label: 'SAA-C03', url: 'docs/saa-c03.html' },
+    'quiz': { label: 'Practice Quiz', url: 'docs/quiz.html' },
+    'flashcards': { label: 'Flashcards', url: 'docs/flashcards.html' },
+    'cheatsheets': { label: 'Cheat Sheets', url: 'docs/cheatsheets.html' },
+    'resources': { label: 'Resources', url: 'docs/resources.html' }
+  };
+  function quickLinks(keys) {
+    return keys.map(function (k) {
+      var q = QUICK[k]; if (!q) return '';
+      return '<a class="search-chip" href="' + rootPath + q.url + '">' + esc(q.label) + '</a>';
+    }).join('');
+  }
+  function bindQuickLinks() {
+    resultsEl.querySelectorAll('.search-chip').forEach(function (el) {
+      el.addEventListener('click', function () { close(); });
+    });
   }
 
   function setActive(i) {
