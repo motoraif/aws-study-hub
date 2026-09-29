@@ -1077,7 +1077,7 @@ write(f"{DOCS}/aif-c01.html", newcert_page(
   </ul></div>
   <div class="card"><h3>&#127891; Official Resources</h3><ul>
     <li><a href="https://aws.amazon.com/certification/certified-ai-practitioner/" target="_blank" rel="noopener">Official Certification Page</a></li>
-    <li><a href="https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/ai-practitioner-01.html" target="_blank" rel="noopener">Official Exam Guide</a></li>
+    <li><a href="https://docs.aws.amazon.com/aws-certification/latest/examguides/ai-practitioner-01.html" target="_blank" rel="noopener">Official Exam Guide</a></li>
     <li><a href="https://explore.skillbuilder.aws/" target="_blank" rel="noopener">AWS Skill Builder - AI Practitioner path</a></li>
     <li><a href="https://aws.amazon.com/certification/" target="_blank" rel="noopener">Schedule Your Exam</a></li>
     <li><a href="https://tutorialsdojo.com/" target="_blank" rel="noopener">Tutorials Dojo Practice Exams</a></li>
@@ -1182,7 +1182,7 @@ write(f"{DOCS}/dea-c01.html", newcert_page(
   </ul></div>
   <div class="card"><h3>&#127891; Official Resources</h3><ul>
     <li><a href="https://aws.amazon.com/certification/certified-data-engineer-associate/" target="_blank" rel="noopener">Official Certification Page</a></li>
-    <li><a href="https://docs.aws.amazon.com/aws-certification/latest/data-engineer-associate-01/data-engineer-associate-01.html" target="_blank" rel="noopener">Official Exam Guide</a></li>
+    <li><a href="https://docs.aws.amazon.com/aws-certification/latest/examguides/data-engineer-associate-01.html" target="_blank" rel="noopener">Official Exam Guide</a></li>
     <li><a href="https://d1.awsstatic.com/training-and-certification/docs-data-engineer-associate/AWS-Certified-Data-Engineer-Associate_Exam-Guide.pdf" target="_blank" rel="noopener">Exam Guide (PDF)</a></li>
     <li><a href="https://explore.skillbuilder.aws/" target="_blank" rel="noopener">AWS Skill Builder - Data Engineer path</a></li>
     <li><a href="https://tutorialsdojo.com/" target="_blank" rel="noopener">Tutorials Dojo Practice Exams</a></li>
@@ -1284,7 +1284,7 @@ write(f"{DOCS}/mla-c01.html", newcert_page(
   </ul></div>
   <div class="card"><h3>&#127891; Official Resources</h3><ul>
     <li><a href="https://aws.amazon.com/certification/certified-machine-learning-engineer-associate/" target="_blank" rel="noopener">Official Certification Page</a></li>
-    <li><a href="https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-01/machine-learning-engineer-associate-01.html" target="_blank" rel="noopener">Official Exam Guide</a></li>
+    <li><a href="https://docs.aws.amazon.com/aws-certification/latest/examguides/machine-learning-engineer-associate-01.html" target="_blank" rel="noopener">Official Exam Guide</a></li>
     <li><a href="https://explore.skillbuilder.aws/" target="_blank" rel="noopener">AWS Skill Builder - ML Engineer path</a></li>
     <li><a href="https://aws.amazon.com/certification/" target="_blank" rel="noopener">Schedule Your Exam</a></li>
     <li><a href="https://tutorialsdojo.com/" target="_blank" rel="noopener">Tutorials Dojo Practice Exams</a></li>
@@ -1383,7 +1383,7 @@ write(f"{DOCS}/aip-c01.html", newcert_page(
   </ul></div>
   <div class="card"><h3>&#127891; Official Resources</h3><ul>
     <li><a href="https://aws.amazon.com/certification/certified-generative-ai-developer-professional/" target="_blank" rel="noopener">Official Certification Page</a></li>
-    <li><a href="https://docs.aws.amazon.com/aws-certification/latest/ai-professional-01.html" target="_blank" rel="noopener">Official Exam Guide</a></li>
+    <li><a href="https://docs.aws.amazon.com/aws-certification/latest/examguides/ai-professional-01.html" target="_blank" rel="noopener">Official Exam Guide</a></li>
     <li><a href="https://explore.skillbuilder.aws/" target="_blank" rel="noopener">AWS Skill Builder - Generative AI Developer path</a></li>
     <li><a href="https://aws.amazon.com/certification/" target="_blank" rel="noopener">Schedule Your Exam</a></li>
     <li><a href="https://tutorialsdojo.com/" target="_blank" rel="noopener">Tutorials Dojo Practice Exams</a></li>
