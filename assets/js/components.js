@@ -51,13 +51,18 @@
         </div>
       </div>
     </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Study Tools <span class="caret">&#9662;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="${root}docs/quiz.html">&#129513; Practice Quiz</a>
+        <a href="${root}docs/flashcards.html">&#128218; Flashcards</a>
+        <a href="${root}docs/cheatsheets.html">&#128221; Cheat Sheets</a>
+        <a href="${root}docs/services.html">&#129513; Service Deep Dives</a>
+        <a href="${root}docs/labs.html">&#128300; Labs &amp; Practice</a>
+        <a href="${root}docs/dashboard.html">&#128202; My Progress</a>
+      </div>
+    </div>
     <a href="${root}docs/resources.html">Resources</a>
-    <a href="${root}docs/labs.html">Labs</a>
-    <a href="${root}docs/quiz.html">Quiz <span class="nav-pill nav-pill-new">New</span></a>
-    <a href="${root}docs/flashcards.html">Flashcards <span class="nav-pill nav-pill-new">New</span></a>
-    <a href="${root}docs/services.html">Services <span class="nav-pill nav-pill-new">New</span></a>
-    <a href="${root}docs/cheatsheets.html">Cheat Sheets <span class="nav-pill nav-pill-new">New</span></a>
-    <a href="${root}docs/dashboard.html">My Progress <span class="nav-pill nav-pill-new">New</span></a>
     <a href="${root}docs/news.html">News</a>
     <a href="https://github.com/motoraif/aws-study-hub" target="_blank" rel="noopener">GitHub &#11088;</a>
     <button class="theme-toggle" id="search-toggle" aria-label="Search (press /)" title="Search (/)">&#128269;</button>
@@ -160,8 +165,8 @@
     }
 
     // Dropdown behaviour: hover on desktop (CSS), click/tap on mobile (JS).
-    // MOBILE_BP must match the CSS nav breakpoint (max-width:1200px).
-    const MOBILE_BP = 1200;
+    // MOBILE_BP must match the CSS nav breakpoint (max-width:1024px).
+    const MOBILE_BP = 1024;
     document.querySelectorAll('.nav-dropdown-btn').forEach(btn=>{
       btn.addEventListener('click',e=>{
         if(window.innerWidth<=MOBILE_BP){
