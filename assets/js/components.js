@@ -159,10 +159,12 @@
       });
     }
 
-    // Dropdown behaviour: hover on desktop (CSS), click/tap on mobile (JS)
+    // Dropdown behaviour: hover on desktop (CSS), click/tap on mobile (JS).
+    // MOBILE_BP must match the CSS nav breakpoint (max-width:1200px).
+    const MOBILE_BP = 1200;
     document.querySelectorAll('.nav-dropdown-btn').forEach(btn=>{
       btn.addEventListener('click',e=>{
-        if(window.innerWidth<=900){
+        if(window.innerWidth<=MOBILE_BP){
           e.preventDefault();
           const dd=btn.closest('.nav-dropdown');
           const wasOpen=dd.classList.contains('open');
@@ -175,7 +177,7 @@
     // Close mobile menu when a real link is clicked
     links&&links.querySelectorAll('a').forEach(a=>{
       a.addEventListener('click',()=>{
-        if(window.innerWidth<=900){
+        if(window.innerWidth<=MOBILE_BP){
           links.classList.remove('open');
           toggle&&toggle.classList.remove('open');
           toggle&&toggle.setAttribute('aria-expanded','false');

@@ -18,8 +18,8 @@
   --shadow:     0 4px 24px rgba(0,0,0,0.4);
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; }
 a { color: var(--aws-orange); text-decoration: none; }
 a:hover { text-decoration: underline; }
 h1 { font-size: 2.4rem; font-weight: 800; line-height: 1.2; }
@@ -73,7 +73,7 @@ pre code { background: none; color: #A8D8A8; padding: 0; }
 .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* Responsive nav */
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
   .nav-toggle { display: flex; }
   .nav-links { position: fixed; top: 0; right: 0; height: 100vh; width: min(320px, 85vw); background: var(--bg-card); border-left: 1px solid var(--border); flex-direction: column; align-items: stretch; gap: 0.15rem; padding: 5rem 1rem 2rem; overflow-y: auto; transform: translateX(100%); transition: transform 0.28s ease; box-shadow: -12px 0 30px rgba(0,0,0,0.4); }
   .nav-links.open { transform: translateX(0); }
@@ -82,6 +82,13 @@ pre code { background: none; color: #A8D8A8; padding: 0; }
   .nav-dropdown-menu { position: static; opacity: 1; visibility: hidden; transform: none; box-shadow: none; border: none; background: transparent; margin: 0; padding: 0 0 0 0.75rem; min-width: 0; max-height: 0; overflow: hidden; transition: max-height 0.25s; }
   .nav-dropdown.open .nav-dropdown-menu { visibility: visible; max-height: 900px; }
   .nav-dropdown-menu-wide { flex-direction: column; min-width: 0; gap: 0; }
+}
+/* Desktop nav safety net: never let the link row cause horizontal page scroll.
+   Above 1200px the full row is shown; constrain it and reduce spacing so it
+   fits comfortably on standard laptop/desktop widths. */
+@media (min-width: 1201px) {
+  .nav-links { flex: 1 1 auto; justify-content: flex-end; flex-wrap: wrap; row-gap: 0.2rem; min-width: 0; }
+  .nav-links > a, .nav-dropdown-btn { padding: 0.45rem 0.6rem; }
 }
 /* Cards */
 .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; transition: transform 0.2s,border-color 0.2s,box-shadow 0.2s; }
