@@ -73,7 +73,7 @@ pre code { background: none; color: #A8D8A8; padding: 0; }
 .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* Responsive nav */
-@media (max-width: 1200px) {
+@media (max-width: 1024px) {
   .nav-toggle { display: flex; }
   .nav-links { position: fixed; top: 0; right: 0; height: 100vh; width: min(320px, 85vw); background: var(--bg-card); border-left: 1px solid var(--border); flex-direction: column; align-items: stretch; gap: 0.15rem; padding: 5rem 1rem 2rem; overflow-y: auto; transform: translateX(100%); transition: transform 0.28s ease; box-shadow: -12px 0 30px rgba(0,0,0,0.4); }
   .nav-links.open { transform: translateX(0); }
@@ -84,11 +84,11 @@ pre code { background: none; color: #A8D8A8; padding: 0; }
   .nav-dropdown-menu-wide { flex-direction: column; min-width: 0; gap: 0; }
 }
 /* Desktop nav safety net: never let the link row cause horizontal page scroll.
-   Above 1200px the full row is shown; constrain it and reduce spacing so it
+   Above 1024px the full row is shown; constrain it and reduce spacing so it
    fits comfortably on standard laptop/desktop widths. */
-@media (min-width: 1201px) {
+@media (min-width: 1025px) {
   .nav-links { flex: 1 1 auto; justify-content: flex-end; flex-wrap: wrap; row-gap: 0.2rem; min-width: 0; }
-  .nav-links > a, .nav-dropdown-btn { padding: 0.45rem 0.6rem; }
+  .nav-links > a, .nav-dropdown-btn { padding: 0.45rem 0.7rem; }
 }
 /* Cards */
 .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; transition: transform 0.2s,border-color 0.2s,box-shadow 0.2s; }
