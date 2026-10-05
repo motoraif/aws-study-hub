@@ -184,16 +184,24 @@ def exam(cn,cu,egu,sq,dur,q,ps,domains):
 <div class="table-wrap"><table><thead><tr><th>Domain</th><th>Weight</th></tr></thead><tbody>{dr}</tbody></table></div>
 </section>"""
 
+def _canonical_rel(rel):
+    """Map a repo-relative path to its canonical URL suffix.
+
+    The homepage canonicalizes to the clean directory URL ("") rather than
+    "index.html" so Google does not treat "/" and "/index.html" as duplicates.
+    """
+    return "" if rel == "index.html" else rel
+
 def _page_url(path):
     """Absolute canonical URL for a written file, based on its path relative to BASE."""
     rel = os.path.relpath(path, BASE).replace(os.sep, "/")
-    return f"{SITE_URL}/{rel}"
+    return f"{SITE_URL}/{_canonical_rel(rel)}"
 
 def _breadcrumb_jsonld(path, content):
     """BreadcrumbList JSON-LD for a page, using its <title> as the page name."""
     import json as _j, re as _re, html as _h
     rel = os.path.relpath(path, BASE).replace(os.sep, "/")
-    url = f"{SITE_URL}/{rel}"
+    url = f"{SITE_URL}/{_canonical_rel(rel)}"
     items = [{"@type": "ListItem", "position": 1, "name": "Home", "item": f"{SITE_URL}/"}]
     if rel != "index.html":
         m = _re.search(r"<title>(.*?)</title>", content, _re.S)
@@ -3069,7 +3077,7 @@ def _priority(path):
     return "0.7"
 
 urls = "".join(
-    f'  <url><loc>{SITE_URL}/{p}</loc><lastmod>{today}</lastmod>'
+    f'  <url><loc>{SITE_URL}/{_canonical_rel(p)}</loc><lastmod>{today}</lastmod>'
     f'<changefreq>weekly</changefreq><priority>{_priority(p)}</priority></url>\n'
     for p in sitemap_pages
 )
@@ -3077,6 +3085,33 @@ sitemap = ('<?xml version="1.0" encoding="UTF-8"?>\n'
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
            f"{urls}</urlset>\n")
 write(f"{BASE}/sitemap.xml", sitemap)
+
+# ── Custom 404 page (GitHub Pages serves this with HTTP 404) ──
+# Keeps old/removed URLs returning a proper 404 with a friendly, noindex page
+# so Search Console can drop stale entries cleanly.
+_404 = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Page Not Found - AWS Study Hub</title>
+  <meta name="robots" content="noindex,follow">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2601;</text></svg>">
+  <link rel="stylesheet" href="/aws-study-hub/assets/css/style.css">
+</head><body>
+<div class="container" style="padding:5rem 1rem;text-align:center">
+  <div style="font-size:4rem">&#9729;&#65039;</div>
+  <h1 style="margin:1rem 0 .5rem">404 - Page Not Found</h1>
+  <p style="color:var(--text-muted);max-width:40rem;margin:0 auto 2rem">
+    This page may have been moved or retired. Head back to the study hub to find what you need.
+  </p>
+  <a href="/aws-study-hub/" class="btn btn-primary">&#127968; Back to AWS Study Hub</a>
+</div>
+</body></html>
+"""
+with open(f"{BASE}/404.html", "w") as _f404:
+    _f404.write(_404)
+print("  Written: 404.html")
+
 
 # ── Search index (client-side search, no external deps) ──────
 import re as _re, json as _json, html as _html
