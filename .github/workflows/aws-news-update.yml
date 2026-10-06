@@ -49,7 +49,7 @@ jobs:
           # Fetch the latest feed and merge in any new items
           feed = feedparser.parse("https://aws.amazon.com/about-aws/whats-new/recent/feed/")
           new_count = 0
-          for entry in feed.entries[:25]:
+          for entry in feed.entries:
               try: date = dp.parse(entry.get('published','')).strftime('%Y-%m-%d')
               except: date = 'Unknown'
               desc = re.sub(r'<[^>]+>','',entry.get('summary','')).strip()[:300]
