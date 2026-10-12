@@ -1,8 +1,158 @@
 {
-  "updated": "2026-10-06 08:11 UTC",
+  "updated": "2026-10-12 17:18 UTC",
   "note": "Cumulative AWS What's New archive. Auto-appended weekly by GitHub Actions. Do not edit manually.",
-  "count": 235,
+  "count": 264,
   "items": [
+    {
+      "title": "Amazon OpenSearch Service now supports index-level encryption",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/opensearch-index-level-encryption",
+      "date": "2026-10-12",
+      "summary": "Amazon OpenSearch Service now supports index-level encryption, letting you encrypt each index at rest with its own AWS Key Management Service (AWS KMS) customer managed key.&nbsp;This helps you protect data with different ownership or sensitivity under separate keys on the same domain. For example, "
+    },
+    {
+      "title": "AWS Security Hub now exports findings to S3 in CSV or JSON format",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/security-hub-exports-s3-csv-json/",
+      "date": "2026-10-09",
+      "summary": "Today, AWS Security Hub announces support for exporting findings to Amazon S3 in CSV or JSON (OCSF) format. Security teams that need findings outside the console for use cases such as compliance reporting and audit evidence can now export findings from every findings page in the Security Hub console"
+    },
+    {
+      "title": "Amazon EC2 R8gd instances are now available in additional regions",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-ec2-r8gd-thf/",
+      "date": "2026-10-09",
+      "summary": "Amazon Elastic Compute Cloud (Amazon EC2) R8gd instances are available in AWS European Sovereign Cloud (Germany) region. These instances feature up to 11.4 TB of local NVMe-based SSD block-level storage and are powered by AWS Graviton4 processors, delivering up to 30% better performance over Gravito"
+    },
+    {
+      "title": "Amazon EC2 R8g instances now available in additional regions",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-ec2-r8g-instances-thf/",
+      "date": "2026-10-09",
+      "summary": "Starting today, Amazon Elastic Compute Cloud (Amazon EC2) R8g instances are available in the AWS European Sovereign Cloud (Germany) region. These instances are powered by AWS Graviton4 processors and deliver up to 30% better performance compared to AWS Graviton3-based instances. Amazon EC2 R8g insta"
+    },
+    {
+      "title": "Amazon Bedrock now supports reasoning summaries for OpenAI models",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-bedrock-reasoning-summaries-openai/",
+      "date": "2026-10-09",
+      "summary": "Amazon Bedrock now supports the reasoning.summary parameter for OpenAI models through the Responses API. This capability lets you request a human-readable summary of a model\u2019s reasoning alongside its response, helping you understand its approach to complex tasks such as coding, analysis, and multi-s"
+    },
+    {
+      "title": "Anthropic Claude Sonnet 5.5 and Claude Opus 5.5 are now available on Kiro in AWS GovCloud (US)",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/06/kiro-claude-5-5-aws-govcloud-us/",
+      "date": "2026-10-09",
+      "summary": "Two new Anthropic models are now available in the Kiro IDE and CLI for the AWS GovCloud (US) Regions.\nClaude Opus 5.5 is Anthropic's most capable Opus model yet and a step up from Opus 5 on long-running agentic coding work. Opus 5.5 thinks adaptively on every request, deciding how much effort each t"
+    },
+    {
+      "title": "Amazon Connect Customer now provides automated checks to improve performance evaluation forms",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-connect-customer-automated-checks-evaluation-forms/",
+      "date": "2026-10-09",
+      "summary": "Amazon Connect Customer now suggests changes to performance evaluation forms that improve the accuracy of evaluations automatically filled by AI. While setting up an evaluation form, managers can run an automated check that compares the form against best practices with a single click. Managers then "
+    },
+    {
+      "title": "Amazon S3 Vectors metadata pre-filtering is now available in AWS GovCloud (US) Regions",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/s3-vectors-metadata-pre-filtering-in-govcloud-regions/",
+      "date": "2026-10-09",
+      "summary": "Amazon S3 Vectors metadata pre-filtering is now available in the AWS GovCloud (US-East) and AWS GovCloud (US-West) Regions. Pre-filtering evaluates metadata filters before running similarity search, returning up to 5x more of the matching vectors when your filter is selective. S3 Vectors also adds a"
+    },
+    {
+      "title": "AWS Lambda supports OAuth authentication for self-managed Apache Kafka event sources",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-Lambda-supports-oauth-kafka-esm/",
+      "date": "2026-10-09",
+      "summary": "AWS Lambda now supports OAuth authentication for self-managed Apache Kafka event source mappings (ESM), including&nbsp;Kafka clusters that customers run themselves and managed offerings such as Confluent Cloud, Aiven, and Redpanda. With this launch, customers can authenticate their Lambda Kafka cons"
+    },
+    {
+      "title": "Amazon Quick now supports brand templates for on-brand presentations and documents",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-quick-brand-templates-on-brand-presentations-documents/",
+      "date": "2026-10-09",
+      "summary": "Starting today, you can upload brand templates in Amazon Quick, allowing you to create presentations and documents that match your approved visual identity. Brand managers set up a template once and everyone gets on-brand output, without hunting for the right file in each chat.\nBrand managers upload"
+    },
+    {
+      "title": "Amazon SageMaker Unified Studio now supports custom Tooling blueprints",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/sagemaker-custom-tooling-blueprints/",
+      "date": "2026-10-09",
+      "summary": "Amazon SageMaker Unified Studio now supports custom Tooling blueprints, giving domain administrators the ability to define the foundation of every project by using their own AWS CloudFormation templates. Administrators can tailor project environments to meet organization-specific requirements, such "
+    },
+    {
+      "title": "TwelveLabs Pegasus 1.5 model now available on Amazon Bedrock",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/twelve-labs-pegasus-1-5-aws/",
+      "date": "2026-10-09",
+      "summary": "Amazon Bedrock now supports TwelveLabs Pegasus 1.5, a video-to-text model that generates structured, time-coded metadata from video. Until now, finding a moment in a large video library meant knowing where to look before you could ask about it. Pegasus 1.5 reads an entire video and labels what happe"
+    },
+    {
+      "title": "OpenAI GPT-6.1 Sol now supports Ultrafast mode on Amazon Bedrock",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/openai-gpt-sol-ultrafast-amazon/",
+      "date": "2026-10-08",
+      "summary": "Today, AWS announces the availability of Ultrafast mode for GPT-6.1 Sol from OpenAI on Amazon Bedrock.&nbsp;Ultrafast mode provides faster inference for workloads where speed matters most. The Amazon Bedrock inference engine delivers the performance, security, and reliability required for production"
+    },
+    {
+      "title": "AWS Cost Explorer, Budgets, and Dashboards now support Amazon Bedrock product attributes",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-bedrock-attributes-in-cost-explorer/",
+      "date": "2026-10-08",
+      "summary": "AWS Cost Explorer, AWS Budgets, and AWS Cost Management Dashboards now let you analyze Amazon Bedrock costs by product attributes, a new dimension that breaks down Bedrock cost by model, model provider, inference type, and feature. In Cost Explorer and Dashboards, you can group and filter costs by t"
+    },
+    {
+      "title": "Amazon RDS for Oracle now supports minor version upgrade prechecks and a new RDS event to help reduce patching downtime",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-rds-oracle-minor-version-upgrade-precheck-new-patching-rds-event/",
+      "date": "2026-10-08",
+      "summary": "Amazon Relational Database Service (Amazon RDS) for Oracle now lets you run a minor version upgrade precheck yourself, before you start an upgrade or before your scheduled maintenance window. RDS for Oracle now also emits a new event during patching that tells you when your DB instance is accepting "
+    },
+    {
+      "title": "AWS Network Firewall adds wildcard support for container attribute filters",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-network-firewall-container-attributes-wildcard",
+      "date": "2026-10-08",
+      "summary": "AWS Network Firewall now supports wildcard matching in container attribute-based inspection filters for Amazon Elastic Kubernetes Service (Amazon EKS) and Amazon Elastic Container Service (Amazon ECS). This enhancement allows you to define attribute filters using wildcard patterns to match multiple "
+    },
+    {
+      "title": "Amazon GameLift Servers adds CPU burstability for container fleets",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-gamelift-servers-cpu-burstability",
+      "date": "2026-10-08",
+      "summary": "Amazon GameLift Servers now supports CPU burstability for container fleets, giving game developers greater flexibility in how compute resources are allocated and consumed at runtime. Previously, container fleets relied on a fixed CPU value that simultaneously controlled both container packing densit"
+    },
+    {
+      "title": "Amazon GuardDuty RDS Protection now detects data exfiltration and destruction in Aurora and RDS databases",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/guardduty-rds-data-exfiltration/",
+      "date": "2026-10-08",
+      "summary": "Amazon GuardDuty announces an expansion of RDS Protection that extends threat detection beyond login anomalies to identify data exfiltration and data destruction attacks targeting Amazon Aurora PostgreSQL and Amazon RDS for PostgreSQL databases. Available as RDS Protection for data activity, this ne"
+    },
+    {
+      "title": "Amazon EC2 C8gb instances now generally available in additional regions",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-ec2-c8gb/",
+      "date": "2026-10-07",
+      "summary": "Starting today, Amazon Elastic Compute Cloud (Amazon EC2) C8gb instances, powered by the latest-generation AWS Graviton4 processors, are available in the US East (Ohio), US West (N. California), EU (Frankfurt, Ireland, Paris, Stockholm), and Africa (Cape Town) regions. The new instances provide up t"
+    },
+    {
+      "title": "AWS Capabilities by Region now offers availability notifications for individual features and advanced filters",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/awscapabilities-enhancements/",
+      "date": "2026-10-07",
+      "summary": "Today, AWS announces feature-level availability notifications and advanced filters for AWS Capabilities by Region in AWS Builder Center. You can now set availability notifications for AWS service, or to an individual feature of an AWS service, in the AWS Regions you are interested in, and receive an"
+    },
+    {
+      "title": "AWS Config now supports 77 new resource types",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-config-new-resource-types",
+      "date": "2026-10-07",
+      "summary": "AWS Config now supports 77 additional AWS resource types across key services including Amazon EC2, Amazon S3 Files, and Amazon Q Business. This expansion provides greater coverage over your AWS environment, enabling you to more effectively discover, assess, audit, and remediate an even broader range"
+    },
+    {
+      "title": "Claude Haiku 5.5 is now available on AWS",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/claude-haiku-5-5-aws/",
+      "date": "2026-10-07",
+      "summary": "AWS now offers Claude Haiku 5.5, the fastest and most efficient model in the Claude 5.5 family, built for subagents and high-volume, cost-sensitive work. According to Anthropic, it costs around 75% less than Claude Haiku 4.5 for most tasks.\nClaude Haiku 5.5 is Anthropic's most capable Haiku yet, a s"
+    },
+    {
+      "title": "Claude Haiku 5.5 is now available on AWS GovCloud (US)",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/claude-haiku-5-5-aws-govcloud/",
+      "date": "2026-10-07",
+      "summary": "AWS GovCloud (US) now offers Claude Haiku 5.5, the fastest and most efficient model in the Claude 5.5 family, built for subagents and high-volume, cost-sensitive work. According to Anthropic, it costs around 75% less than Claude Haiku 4.5 for most tasks.\nClaude Haiku 5.5 is Anthropic's most capable "
+    },
+    {
+      "title": "AWS Batch now publishes job metrics to Amazon CloudWatch",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-batch-job-cloudwatch-metrics/",
+      "date": "2026-10-06",
+      "summary": "AWS Batch now publishes job metrics to Amazon CloudWatch, providing native observability for batch workloads. AWS Batch emits metrics throughout the job lifecycle, giving you visibility into job queue health, failure rates, and job durations.\nAWS Batch automatically publishes job state transition an"
+    },
+    {
+      "title": "AWS Certificate Manager now supports ACME issuance through AWS PrivateLink",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/AWS-Certificate-Manager-ACME-Privatelink",
+      "date": "2026-10-06",
+      "summary": "AWS Certificate Manager (ACM) now supports AWS PrivateLink for ACME public certificate issuance, allowing you to request and renew public TLS certificates over a private network path that stays within the AWS network. You can now create a VPC interface endpoint to the ACM ACME service and route issu"
+    },
     {
       "title": "Amazon Redshift adds support for creating and refreshing Apache Iceberg materialized views",
       "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/redshift-iceberg-materialized-views",
@@ -58,6 +208,24 @@
       "summary": "Today, we announce the general availability of Amazon Nova 2.5 Sonic, our latest speech-to-speech model for natural, real-time voice agents. This release brings improved reasoning, instruction following, and tool-calling accuracy to real-time voice applications. The model also delivers lower latency"
     },
     {
+      "title": "Amazon EC2 Hpc8a instances are now available in Asia Pacific (Singapore)",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-ec2-hpc8a-asia-pacific/",
+      "date": "2026-10-05",
+      "summary": "Starting today, Amazon EC2 Hpc8a instances are available in&nbsp;Asia Pacific (Singapore) region. These instances are powered by 5th Gen AMD EPYC processors (formerly code named Turin). With a maximum frequency of 4.5GHz, Hpc8a instances deliver up to 40% higher performance and up to 25% better pric"
+    },
+    {
+      "title": "AWS Control Tower AFT now supports plan-only customization runs",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/aws-control-tower-aft/",
+      "date": "2026-10-05",
+      "summary": "AWS Control Tower Account Factory for Terraform (AFT) now supports plan-only customization runs, giving administrators the ability to preview Terraform changes before applying them across their managed accounts.\n \n AFT is an open-source Terraform module that automates account provisioning and custom"
+    },
+    {
+      "title": "Amazon EC2 introduces shared tags for Amazon Machine Images",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/ec2-ami-shared-tags",
+      "date": "2026-10-05",
+      "summary": "Amazon EC2 now supports AMI tag sharing, a new feature that lets AMI owners make selected tags visible to all AWS accounts an AMI is shared with. Whether an AMI is shared with an account, across an organization, or made public, a shared tag is automatically shared alongside the AMI, eliminating the "
+    },
+    {
       "title": "Amazon ECS adds Amazon VPC Lattice support for blue/green, linear, and canary deployments",
       "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-ecs-vpc-lattice-blue-green-deployments",
       "date": "2026-10-02",
@@ -110,6 +278,12 @@
       "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-security-hub-runtime-monitoring/",
       "date": "2026-10-02",
       "summary": "Today, AWS announces that Amazon GuardDuty Runtime Monitoring is now included in the AWS Security Hub Threat Analytics plan. Runtime Monitoring inspects operating system, network, and file activity to surface threats such as container escapes, privilege escalation, and cryptomining on Amazon EC2 ins"
+    },
+    {
+      "title": "Amazon OpenSearch Service introduces validation advisory for domain configuration changes",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/opensearch-validation-advisory/",
+      "date": "2026-10-02",
+      "summary": "Amazon OpenSearch Service now provides validation advisory for domain configuration changes, which helps you make informed decisions about changes that carry risk but can still be applied. Each configuration validation is now classified as either Critical, which blocks the change, or Warning, which "
     },
     {
       "title": "AWS Well-Architected Agent is now available in preview",
