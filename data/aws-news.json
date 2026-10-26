@@ -1,8 +1,332 @@
 {
-  "updated": "2026-10-19 15:14 UTC",
+  "updated": "2026-10-26 14:48 UTC",
   "note": "Cumulative AWS What's New archive. Auto-appended weekly by GitHub Actions. Do not edit manually.",
-  "count": 332,
+  "count": 387,
   "items": [
+    {
+      "title": "Web Search on Amazon Bedrock now supports domain filtering and user location controls",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/bedrock-web-search-domain-user-location/",
+      "date": "2026-10-23",
+      "summary": "Web Search on&nbsp;Amazon Bedrock now supports two new controls that give you more precision over the results that ground a model's response: domain filtering and user location. Both are configured directly on the web_search tool in your existing OpenAI Responses API request. \nWith domain filtering,"
+    },
+    {
+      "title": "Amazon Connect Customer Global Resiliency now supports persistent chat across linked AWS Regions",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-connect-global-resiliency-persistent-chat",
+      "date": "2026-10-23",
+      "summary": "Amazon Connect Customer Global Resiliency now provides customers a mechanism to deliver long, persistent chat experiences across linked AWS Regions. With this capability, end users can resume previous conversations with full context, metadata, and transcripts carried over across Regions, eliminating"
+    },
+    {
+      "title": "AWS Transit Gateway and AWS Cloud WAN now support 1:1 NAT",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-transit-gateway-cloud-wan-1-1-nat/",
+      "date": "2026-10-23",
+      "summary": "AWS Transit Gateway and AWS Cloud WAN now provide managed one-to-one network address translation (NAT) directly on their attachments, through integration with Regional Private NAT Gateway. This enables customers to connect private networks that share the same IP address ranges without renumbering ei"
+    },
+    {
+      "title": "Amazon Corretto October 2026 Quarterly Updates",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-corretto-october-2026-quarterly-updates",
+      "date": "2026-10-23",
+      "summary": "On October 22, 2026 Amazon announced quarterly security and critical updates for Amazon Corretto Long-Term Supported (LTS) versions of OpenJDK. Corretto 27.0.1.0.10, 25.0.5.0.9, 21.0.13.0.10, 17.0.21.0.10, 11.0.33.0.9, and 8u512 are now available for download. Amazon Corretto is a no-cost, multi-pla"
+    },
+    {
+      "title": "Amazon MWAA now available in Mexico (Central) Region",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-mwaa-mexico-central/",
+      "date": "2026-10-23",
+      "summary": "Amazon Managed Workflows for Apache Airflow (Amazon MWAA) Provisioned environments are now available in the Mexico (Central) Region (mx-central-1). Amazon MWAA Serverless was already available in this Region, and customers can now also use Amazon MWAA Provisioned environments for their Apache Airflo"
+    },
+    {
+      "title": "Amazon EMR on EKS reduces EMR charge by 30 percent",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/emr-eks-reduces-emr-charge-30-percent/",
+      "date": "2026-10-23",
+      "summary": "Amazon EMR announces a reduction of 30 percent in the EMR charge added to EKS when running EMR on EKS. This price decrease applies to both the per-vCPU-hour charge and the per-GB-hour charge, while the underlying Amazon EKS charges remain unchanged. All EMR workloads running on the EKS deployment op"
+    },
+    {
+      "title": "Amazon Connect Customer now supports customizing the Customer Profiles app on the agent workspace",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/connect-customer-customize-cp",
+      "date": "2026-10-22",
+      "summary": "Amazon Connect Customer Profiles now allows administrators to customize which customer data that agents see in the agent workspace, and how it is displayed, using layouts they build in Profile Explorer. Customer Profiles provides agents with a real-time, unified view of each customer during interact"
+    },
+    {
+      "title": "AWS Continuum for code vulnerabilities is now generally available",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-continuum-for-code-vulnerabilities-is-now-generally-available",
+      "date": "2026-10-22",
+      "summary": "Today, AWS announces the general availability of AWS Continuum for code vulnerabilities. Continuum for code vulnerabilities&nbsp;discovers, validates, prioritizes, and remediates code vulnerabilities at machine speed. \nContinuum for code vulnerabilities builds a context graph from your AWS environme"
+    },
+    {
+      "title": "Amazon OpenSearch Service introduces intelligent ingestion for logs and documents in Amazon S3",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-opensearch-intelligent-ingestion-logs-documents-s3",
+      "date": "2026-10-22",
+      "summary": "Amazon OpenSearch Serverless now offers intelligent ingestion, a fully managed feature that turns logs and documents stored in Amazon S3 into searchable content in Amazon OpenSearch Serverless (NextGen) collections . With intelligent ingestion, you can set up ingestion with a few clicks in the AWS M"
+    },
+    {
+      "title": "Amazon OpenSearch Serverless now supports a 5-second default refresh interval",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-opensearch-serverless-supports-5-second-refresh-interval/",
+      "date": "2026-10-22",
+      "summary": "Starting today, Amazon OpenSearch Serverless reduces the default refresh interval to 5 seconds for both search and vector collections. The refresh interval controls how quickly newly ingested documents become available for search. By lowering the default from 10 seconds to 5 seconds, newly written d"
+    },
+    {
+      "title": "AWS CloudFormation now simplifies stack update rollback operations",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-cloudformation-cdk/",
+      "date": "2026-10-22",
+      "summary": "AWS CloudFormation&nbsp;now makes it simpler to complete an update rollback and get back to deploying. An update rollback returns your stack to a known good state. Starting today, if some resources cannot roll back automatically, force rollback enables you to complete the rollback in a single operat"
+    },
+    {
+      "title": "Amazon SageMaker AI announces training session APIs for serverless model customization",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/training-session-apis-on-sagemaker-ai",
+      "date": "2026-10-22",
+      "summary": "Amazon SageMaker AI serverless model customization now supports training session APIs, giving customers full control over their post-training algorithm without provisioning or managing GPU infrastructure. Managed techniques, including SFT, DPO, and other reinforcement learning methods, let customers"
+    },
+    {
+      "title": "AWS Direct Connect announces 100G expansion in Bangalore, India",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-direct-connect-100g-bangalore/",
+      "date": "2026-10-22",
+      "summary": "Today, AWS announced the expansion of 100 Gbps dedicated connections at the existing AWS Direct Connect location in the Netmagic DC2 data center near Bangalore, India. You can now establish private, direct network access to all public AWS Regions (except those in China), AWS GovCloud Regions, and AW"
+    },
+    {
+      "title": "Amazon MSK Connect now supports pausing and resuming connectors",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-msk-connect-pause-resume",
+      "date": "2026-10-22",
+      "summary": "Amazon MSK Connect (Amazon Managed Streaming for Apache Kafka Connect) now supports pausing and resuming connectors, letting you temporarily pause a connector from processing records and resume it later. This is useful when you need to stop data flow during maintenance on a source database or a sink"
+    },
+    {
+      "title": "AWS announces AWS Interconnect - last mile preview with Megaport",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-announces-AWS-interconnect-last-mile-megaport-preview/",
+      "date": "2026-10-22",
+      "summary": "AWS launches AWS Interconnect - last mile preview with Megaport, a fully managed connectivity offering that allows customers to connect their branch offices, data centers, and remote locations to AWS with just a few clicks, eliminating the friction and complexity of network setup. As a milestone col"
+    },
+    {
+      "title": "Amazon SageMaker AI now supports serverless model customization for Muse Glimmer, Qwen 3.8 and Ministral 3 models",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-sagemaker-muse-qwen-ministral/",
+      "date": "2026-10-22",
+      "summary": "Amazon SageMaker AI now supports serverless model customization for Muse Glimmer, Qwen3.8 27B, and Ministral 3 3B, 8B, and 14B models. In addition to deploying these models on SageMaker AI, you can now adapt them to your specific domains and workflows, using supervised fine-tuning (SFT), direct pref"
+    },
+    {
+      "title": "AgentCore Gateway now supports Bedrock InvokeModel APIs and model fallback",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/agentcore-gateway-invokemodel-fallback/",
+      "date": "2026-10-22",
+      "summary": "Amazon Bedrock AgentCore Gateway now supports the Amazon Bedrock InvokeModel and InvokeModelWithResponseStream APIs on its inference endpoint, along with model fallback routing for inference traffic. With InvokeModel support, you can point your existing Amazon Bedrock SDK integration at the gateway "
+    },
+    {
+      "title": "AWS Lambda MicroVMs is now available in 4 additional AWS regions",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/lambda-microvms-4-additional-regions",
+      "date": "2026-10-22",
+      "summary": "AWS Lambda MicroVMs is now available in 4 additional AWS Regions: Asia Pacific (Hong Kong), Asia Pacific (Malaysia), Asia Pacific (Thailand), and Europe (Spain). With this launch, you can use Lambda MicroVMs in a total of 14 AWS Regions. \nLambda MicroVMs is a serverless compute primitive that provid"
+    },
+    {
+      "title": "Amazon Quick Now Available in the AWS Singapore Region",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-quick-now-available-in-the-aws-singapore-region/",
+      "date": "2026-10-22",
+      "summary": "Amazon Quick is now available in the AWS Asia Pacific (Singapore) region (ap-southeast-1). This launch allows customers in Singapore to access the full power of Amazon Quick while meeting local requirements for data sovereignty. \nAmazon Quick provides business users an agentic teammate that quickly "
+    },
+    {
+      "title": "AWS Transform adds storage migration assessments for Amazon S3, EBS, EFS, and FSx",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/transform-assess-s3-ebs-efs-fsx/",
+      "date": "2026-10-21",
+      "summary": "Migration assessments in AWS Transform now evaluate on-premises storage for migration to AWS. Instead of manually analyzing thousands of volumes across protocols, capacity, and performance, you upload a storage inventory and AWS Transform does the mapping for you. It matches each workload to the bes"
+    },
+    {
+      "title": "AWS Service Reference Information now supports global condition keys, service names, and data plane classification",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-service-reference-information-global-condition-keys-service-names-data-plane/",
+      "date": "2026-10-21",
+      "summary": "AWS is expanding programmatic service reference information to help you automate IAM policy management and keep your policies aligned with the latest service updates. The service reference now includes all aws:-prefixed global condition keys in a single machine-readable file, a ServiceName field map"
+    },
+    {
+      "title": "AWS Direct Connect announces 100G expansion in Manchester, England",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-direct-connect-100g-manchester/",
+      "date": "2026-10-21",
+      "summary": "Today, AWS announced the expansion of 10 Gbps and 100 Gbps dedicated connections with MACsec encryption capabilities at the existing AWS Direct Connect location in the Equinix MA3 data center near Manchester, England. You can now establish private, direct network access to all public AWS Regions (ex"
+    },
+    {
+      "title": "Amazon Aurora and Amazon RDS now support On-Demand Capacity Reservations",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-aurora-rds-on-demand-capacity-reservations/",
+      "date": "2026-10-21",
+      "summary": "Starting today, you can reserve compute capacity for your Amazon Aurora and Amazon RDS DB instances in one or more Availability Zones for as long as you need it. Reserving capacity helps ensure that DB instance create, restore, scale-compute, and start operations don't fail because of insufficient c"
+    },
+    {
+      "title": "Amazon Cognito extends multi-Region replication to AWS GovCloud (US) Regions",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/cognito-multi-region-us-govcloud/",
+      "date": "2026-10-21",
+      "summary": "Amazon Cognito multi-Region replication (MRR) now supports AWS GovCloud (US) Regions, extending the resilience benefits of MRR to more workloads. MRR lets you synchronize user and machine identity data, including credentials, user pool configurations, and federation setups, to a secondary user pool "
+    },
+    {
+      "title": "AWS Neuron 2.33 adds native PyTorch support, Neuron Observer, and other new features",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-announce-neuron-2-33-0",
+      "date": "2026-10-21",
+      "summary": "AWS Neuron 2.33 is now available, introducing TorchNeuron, the native PyTorch backend for AWS Trainium, in public beta. You can run models written with the standard PyTorch APIs on Amazon EC2 Trn2 and Trn3 instances, in eager mode or with torch.compile. This release also introduces Neuron Observer i"
+    },
+    {
+      "title": "Amazon Connect Customer launches two new layouts for agent workspace",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/connect-customer-new-layouts-agent-workspace",
+      "date": "2026-10-21",
+      "summary": "Amazon Connect Customer now offers two different layouts that optimize screen space on the agent workspace. Contact center agents spend hours each day in the agent workspace, which includes all of the contact controls and applications they need to resolve customer issues. Agents who handle different"
+    },
+    {
+      "title": "Amazon S3 server access log delivery to Amazon CloudWatch Logs now available in five additional AWS Regions",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-s3-server-access-logs-cloudwatch-logs-regions/",
+      "date": "2026-10-21",
+      "summary": "Amazon S3 server access log delivery to Amazon CloudWatch Logs is now available in the AWS GovCloud (US) Regions, AWS European Sovereign Cloud, and AWS China Regions. With your access logs in CloudWatch Logs, you can query them as they arrive, set alarms, and encrypt them with AWS Key Management Ser"
+    },
+    {
+      "title": "AWS Network Firewall now supports Route 53 Resolved IP Validation",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/network-firewall-route-53-ip-validation/",
+      "date": "2026-10-21",
+      "summary": "AWS Network Firewall now supports IP validation, extending domain-based filtering beyond HTTP/HTTPS to protocols such as SFTP and SSH. This new capability validates that a connection's destination IP address was resolved through your VPC's Amazon Route 53 VPC Resolver, closing security gaps where cl"
+    },
+    {
+      "title": "Amazon SageMaker AI now supports custom sequence lengths for serverless model customization jobs",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/sagemaker-custom-sequence-lengths/",
+      "date": "2026-10-21",
+      "summary": "Today, Amazon SageMaker AI announces the ability to configure the sequence length used during your serverless model customization job. Amazon SageMaker AI serverless model customization supports fine-tuning for many open-weight models, including models from popular families including gpt-oss, Gemma,"
+    },
+    {
+      "title": "AWS Transform now builds new networks and modernizes security groups",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-transform-new-networks/",
+      "date": "2026-10-21",
+      "summary": "AWS Transform for migrations now gives you three ways to bring your network to AWS. In addition to migrating and modernizing your existing network, you can build a new network from scratch or convert your on-premises access rules into optimized security groups and deploy them into existing VPCs. Whi"
+    },
+    {
+      "title": "Announcing Amazon ECS Gateway, a managed ingress solution for your ECS services",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/announcing-amazon-ecs-gateway/",
+      "date": "2026-10-20",
+      "summary": "AWS announces Amazon Elastic Container Service (Amazon ECS) Gateway, a new resource that simplifies ingress networking for containerized applications by dynamically provisioning and managing Application Load Balancers (ALBs) and their supporting resources directly in your account. \nWith ECS Gateway,"
+    },
+    {
+      "title": "Amazon DynamoDB global tables now support disassociating replicas",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/dynamodb-global-tables-disassociate/",
+      "date": "2026-10-20",
+      "summary": "Amazon DynamoDB global tables now support disassociating a replica without deleting its table or data. Global tables provide fully managed, multi-Region, multi-active replication. You can now stop replication to and from a replica and continue using the same table as a single-Region table. \nAn accou"
+    },
+    {
+      "title": "Amazon WorkSpaces simplifies secure AI agent access to enterprise cloud desktops with less infrastructure to operate and manage",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/workspaces-ai-agents-oauth-connection-management",
+      "date": "2026-10-20",
+      "summary": "WorkSpaces for AI agents now handles authentication and desktop connections as part of the managed Model Context Protocol (MCP) service, so you can connect agents to governed cloud desktops, removing the need to write custom code. This makes it easy to use WorkSpaces with any client that supports MC"
+    },
+    {
+      "title": "Polly Generative engine upgraded with more natural speech, 14 new voices, and 2 new languages",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/polly-generative/",
+      "date": "2026-10-20",
+      "summary": "Today, we are introducing a new model behind the Amazon Polly Generative engine that delivers more natural-sounding, accurate speech output with low latency. With this upgrade, you get access to an enhanced voice portfolio with higher overall quality, 14 new voices across nine locales, and two new l"
+    },
+    {
+      "title": "AWS announces TorchNeuron: Native PyTorch Support for AWS Trainium (Public Beta)",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-announce-native-pytorch-support-trainium",
+      "date": "2026-10-20",
+      "summary": "Today, AWS launched the public beta of TorchNeuron, an open source native PyTorch backend for AWS Trainium. Trainium is a portfolio of AI chips designed to deliver high performance and cost efficiency for deep learning AI training and inference workloads. TorchNeuron enables AI scientists and resear"
+    },
+    {
+      "title": "Structured outputs for Claude models available on Amazon Bedrock",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/claude-structured-outputs-bedrock/",
+      "date": "2026-10-20",
+      "summary": "Amazon Bedrock now supports structured outputs for all Anthropic Claude models across both the bedrock-runtime and the bedrock-mantle endpoint. Whether you call Claude through boto3 and the bedrock-runtime APIs or through the Messages API and the bedrock-mantle endpoint, you can now receive schema-c"
+    },
+    {
+      "title": "AWS Clean Rooms now supports Databricks as a data source",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-clean-rooms-supports-databricks",
+      "date": "2026-10-20",
+      "summary": "AWS Clean Rooms now supports Databricks as a data source, so collaboration members and their partners can securely analyze data managed in Databricks without moving or revealing the source data. Members query a Databricks table shared through Delta Sharing directly in a collaboration. Databricks joi"
+    },
+    {
+      "title": "Amazon Bedrock Guardrails now supports Standard tier for contextual grounding checks",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/bedrock-guardrails-grounding-standard/",
+      "date": "2026-10-20",
+      "summary": "Amazon Bedrock Guardrails now offers a Standard tier for contextual grounding checks, which detect and filter hallucinations by checking whether a model response is grounded in your reference source and relevant to the user's query. The Standard tier is more robust than the Classic tier. It supports"
+    },
+    {
+      "title": "AWS Partner Central launches Program Navigator, Case Study Generator, and streamlined specialization review",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/partner-central-program-navigator/",
+      "date": "2026-10-20",
+      "summary": "AWS Partner Central now features Program Navigator, a unified experience that lets partners discover, apply for, and track AWS Specialization program applications in one place. Partners can browse specialization designations, view requirements and benefits, and submit applications through a guided, "
+    },
+    {
+      "title": "AWS IAM Identity Center simplifies identity source changes from Active Directory",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/iam-identity-center-chg-id-src-from-ad/",
+      "date": "2026-10-20",
+      "summary": "AWS IAM Identity Center now retains your workforce identities and their assignments when you change your identity source from Active Directory to an external identity provider (IdP), such as Okta or Microsoft Entra ID, or to the Identity Center directory. Specifically, it preserves your users, group"
+    },
+    {
+      "title": "Amazon Bedrock Advanced Prompt Optimization now supports prompt shortening",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/bedrock-prompt-optimization-shortening/",
+      "date": "2026-10-20",
+      "summary": "Amazon Bedrock Advanced Prompt Optimization now supports prompt shortening, an optional setting that reduces the length of your prompt while maintaining or improving your evaluation scores. Advanced Prompt Optimization optimizes prompts for any model on Amazon Bedrock against your own evaluation cri"
+    },
+    {
+      "title": "AWS Transform for migrations expands support for existing landing zones",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-transform-migrations-landing-zones/",
+      "date": "2026-10-20",
+      "summary": "AWS Transform now supports more types of existing AWS environments when building landing zones for your migration, including AWS Control Tower landing zones and landing zones built with AWS Organizations. AWS Transform runs a foundation gap analysis of your current environment against AWS best pract"
+    },
+    {
+      "title": "Amazon CloudWatch Alarms now supports tags in alarm actions payload",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-cloudwatch-tags-on-alarm-actions-payload",
+      "date": "2026-10-20",
+      "summary": "Today, Amazon CloudWatch announces support for including alarm tags in action payloads and Amazon EventBridge events, enabling customers to route and filter alarm notifications by tag without additional lookups. When enabled on an alarm, CloudWatch adds the alarm tags to the messages it sends to Ama"
+    },
+    {
+      "title": "Amazon ElastiCache Serverless for Valkey now supports online migration with zero downtime",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-elasticache-serverless-valkey-online-migration/",
+      "date": "2026-10-20",
+      "summary": "Amazon ElastiCache Serverless for Valkey now supports online migration from self-managed Valkey and Redis OSS on Amazon EC2 with zero downtime. Zero downtime means zero Errors returned to the client during migration, measured the same way the ElastiCache SLA measures availability. Your application c"
+    },
+    {
+      "title": "Amazon Connect Customer Global Resiliency now provides business users visibility into resiliency readiness across linked Regions",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-connect-global-resiliency-readiness-overview",
+      "date": "2026-10-19",
+      "summary": "Amazon Connect Customer Global Resiliency now provides a Global Resiliency page in the admin website, giving administrators a single place to review their Region switch readiness. The page shows an overall readiness status and lists the resources that Global Resiliency natively replicates, including"
+    },
+    {
+      "title": "Amazon CloudWatch Omni is now available in additional AWS Regions",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-cloudwatch-omni-8-regions/",
+      "date": "2026-10-19",
+      "summary": "AWS announces that Amazon CloudWatch Omni is now available in eight additional AWS Regions. CloudWatch Omni is an AI-powered observability experience, organized around your teams and the applications they run, that helps you observe and troubleshoot your applications and agents in one place. It comb"
+    },
+    {
+      "title": "EC2 Image Builder now integrates with ASG for faster image builds",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/ec2-image-builder-asg-faster-builds/",
+      "date": "2026-10-19",
+      "summary": "EC2 Image Builder now supports using existing instances from an Auto Scaling Group (ASG) for building images, enabling faster builds by eliminating the time spent in launching and bootstrapping new instances and reusing already running EC2 instances. \nWith this feature, you can provide an ASG in you"
+    },
+    {
+      "title": "Amazon GuardDuty adds optional threat detection rules for Runtime Monitoring",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/guardduty-runtime-optional-detection-rules/",
+      "date": "2026-10-19",
+      "summary": "Amazon GuardDuty now supports optional detection rules for Runtime Monitoring. You can enable more than 50 Runtime Monitoring rules that help detect process, file, and network activity that might be routine in one environment but a sign of compromise in another, such as modifying sudoers files or di"
+    },
+    {
+      "title": "Grok 4.7 is now available on Amazon Bedrock in AWS GovCloud (US)",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-bedrock-grok-4-7-govcloud/",
+      "date": "2026-10-19",
+      "summary": "Amazon Bedrock now supports SpaceXAI Grok 4.7, a frontier model built for coding, agentic tasks, and knowledge work in AWS GovCloud (US). \nGrok 4.7 builds on Grok 4.6 with better mixed-document handling, more dependable repo-scale coding with planning and error recovery, and enhanced browser-use age"
+    },
+    {
+      "title": "AWS IAM Identity Center now supports optimistic locking for users and groups in its identity store",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/iam-identity-store-optimistic-locking/",
+      "date": "2026-10-19",
+      "summary": "IAM Identity Center helps you configure the single sign-on experience of your workforce to AWS accounts and applications. You can now use optimistic locking for users and groups in the identity store, so that update and delete requests succeed only if the user or group hasn't changed since you last "
+    },
+    {
+      "title": "AWS Elemental MediaConnect Router now supports high bitrate mode",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/mediaconnect-router-high-bitrate/",
+      "date": "2026-10-19",
+      "summary": "AWS Elemental MediaConnect Router now supports high bitrate modes with two new tiers: 250 Mbps and 500 Mbps. This allows professional broadcasters that need higher bitrates to transport high-value content without compromising quality or reliability.\nThis enhancement enables industry-standard workflo"
+    },
+    {
+      "title": "Amazon RDS Custom now supports the latest Cumulative Update and GDR updates for Microsoft SQL Server",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-rds-custom-supports-latest-cumulative-update-gdr-microsoft-sql-server/",
+      "date": "2026-10-19",
+      "summary": "Amazon Relational Database Service (Amazon RDS) Custom for SQL Server now supports the latest Cumulative Updates (CU) and General Distribution Release (GDR) updates for Microsoft SQL Server. This release includes support for SQL Server 2019 CU32+GDR KB5122772(RDS version 15.00.4490.9.v1) and SQL Ser"
+    },
+    {
+      "title": "Amazon RDS for SQL Server now supports snapshots on read replicas",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/rds-sqlserver-supports-snapshots-on-read-replicas",
+      "date": "2026-10-19",
+      "summary": "Amazon Relational Database Service (Amazon RDS) for SQL Server now supports creating DB snapshots directly on read replica instances. Previously, you could create snapshots only on standalone and primary DB instances. You can now snapshot a read replica without promoting it first, giving you more fl"
+    },
+    {
+      "title": "AWS Partner Central adds Solution Matching Engine performance insights",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/solution-matching-engine-performance",
+      "date": "2026-10-17",
+      "summary": "AWS Partner Central now gives AWS Partners more visibility into how the Solution Matching Engine (SME) contributes to their co-sell pipeline. The Solution Matching Engine performance section in Partner Analytics helps partners understand how SME performs for their company and AWS Marketplace listing"
+    },
     {
       "title": "Amazon CloudWatch log centralization now available in AWS GovCloud and additional commercial Regions",
       "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-cloudwatch-centralization-region-expansion",
@@ -68,6 +392,12 @@
       "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-end-user-messaging-adds-guided-wizard-rcs-registration-videos",
       "date": "2026-10-16",
       "summary": "Today, AWS End User Messaging adds a wizard that orchestrates the entire video capture for your RCS agent registration. RCS registrations in multiple countries, including the United States, require a screen recording that demonstrates your messaging experience. To record it, you have to send a speci"
+    },
+    {
+      "title": "Amazon EMR Serverless now supports IPv6 and dual-stack connectivity",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-emr-serverless/",
+      "date": "2026-10-16",
+      "summary": "Amazon EMR Serverless now supports IPv6 and dual-stack connectivity, expanding beyond the IPv4-only connectivity that was previously available. You can now run your Apache Spark and Apache Hive jobs over IPv6 in your Amazon Virtual Private Cloud (VPC) by supplying dual-stack (IPv4 and IPv6) or IPv6-"
     },
     {
       "title": "Web Search on Amazon Bedrock AgentCore expands to AWS GovCloud and 3 Regions",
