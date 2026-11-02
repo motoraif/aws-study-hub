@@ -1,8 +1,386 @@
 {
-  "updated": "2026-10-26 14:48 UTC",
+  "updated": "2026-11-02 17:45 UTC",
   "note": "Cumulative AWS What's New archive. Auto-appended weekly by GitHub Actions. Do not edit manually.",
-  "count": 387,
+  "count": 450,
   "items": [
+    {
+      "title": "Amazon Bedrock expands API support and introduces Cross-Region Inferencing for OpenAI models in AWS GovCloud (US)",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/bedrock-openai-runtime-govcloud/",
+      "date": "2026-10-30",
+      "summary": "Amazon Bedrock now supports the OpenAI GPT-5.6 models (Terra and Luna) on the bedrock-runtime endpoint, with support for the Responses, Converse, and Chat Completions APIs in AWS GovCloud (US). It also adds support for Cross-Region Inference, allowing customers to use Cross-Region Inference within A"
+    },
+    {
+      "title": "Web Search now available on Kiro in AWS GovCloud (US)",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/kiro-web-search-aws-govcloud-us/",
+      "date": "2026-10-30",
+      "summary": "Kiro web search gives the agent real-time access to current information on the internet, so its answers draw on up-to-date search results and page content. The agent uses web search automatically when a question involves recent changes or topics beyond the model's training data. Answers that use web"
+    },
+    {
+      "title": "Amazon Connect Customer automatically saves in-progress emails as drafts",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-connect-email-draft-save/",
+      "date": "2026-10-30",
+      "summary": "Amazon Connect Customer automatically saves in-progress emails as drafts, helping agents resume work without losing progress when connectivity is interrupted or when their browser is accidentally closed or refreshed. When agents return, their drafts are restored with the message body, recipients, su"
+    },
+    {
+      "title": "Daybreak Red from OpenAI now available to eligible customers on Amazon Bedrock in AWS GovCloud (US-East)",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/openai-daybreak-red-govcloud-east/",
+      "date": "2026-10-30",
+      "summary": "Security teams need powerful tools to find vulnerabilities, test exploits, and build defenses. Daybreak Red from OpenAI is now available to eligible customers on Amazon Bedrock in AWS GovCloud (US-East), bringing advanced AI to this work. \n&nbsp; \nPart of OpenAI\u2019s Daybreak cyber defense initiative, "
+    },
+    {
+      "title": "Amazon CloudFront now provides viewer ISP and post-quantum TLS details",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/cloudfront-viewer-isp-post-quantum-visbility/",
+      "date": "2026-10-30",
+      "summary": "Amazon CloudFront can now forward two new optional headers to your origin. The CloudFront-Viewer-ISP header contains the name of the viewer's internet service provider (ISP), so you can see which network a request came from. The CloudFront-Viewer-TLS-Details header describes the cryptography used on"
+    },
+    {
+      "title": "Amazon MSK now supports TLS 1.3 for data in transit",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-msk-tls/",
+      "date": "2026-10-30",
+      "summary": "Amazon MSK now supports version 1.3 of Transport Layer Security (TLS) protocol for MSK Provisioned clusters through encryption policies. TLS 1.3 delivers faster, more secure encryption for streaming data and is increasingly required by compliance frameworks and enterprise security standards. It is a"
+    },
+    {
+      "title": "Amazon RDS for Oracle no longer requires automatic minor version upgrades for JVM, Spatial, Locator, and OLAP options",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/oracle-jvm-spatial-locator-olap-options-amvu-optional/",
+      "date": "2026-10-30",
+      "summary": "Amazon Relational Database Service (Amazon RDS) for Oracle now lets you turn off automatic minor version upgrades on new and existing DB instances that use the JVM, Spatial, Locator, or OLAP option. Previously, these options required automatic minor version upgrades to be enabled. \nWith this change,"
+    },
+    {
+      "title": "AWS WAF announces automatic SDK integration for Amazon CloudFront distributions",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-waf-automatic-sdk-integration-amazon-cloudfront/",
+      "date": "2026-10-30",
+      "summary": "AWS WAF announces automatic SDK integration for Amazon CloudFront distributions. When you enable it, CloudFront adds the script tag for the AWS WAF JavaScript SDK to the HTML it serves, with no change to your application code, build process, or deployment. The SDK supplies the client-side signals us"
+    },
+    {
+      "title": "Amazon Connect Customer now supports versioning and aliasing for flows",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/connect-flows-versioning-aliasing/",
+      "date": "2026-10-30",
+      "summary": "Amazon Connect Customer now supports versioning and aliasing for flows and flow modules, simplifying how you build, test, and deploy customer experience flows while minimizing impact to live end-customer traffic. With this launch, you can now create immutable versions of a flow and attach one or mor"
+    },
+    {
+      "title": "Managed Prometheus collectors now support Amazon MSK consumer-group metrics",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/prometheus-collectors-msk-metrics/",
+      "date": "2026-10-30",
+      "summary": "Managed Prometheus collectors now support Amazon MSK consumer-group metrics for Amazon Managed Service for Prometheus and Amazon CloudWatch. The integration collects Kafka exporter metrics and consumer-group lag metrics from your Amazon MSK clusters.\nManaged Prometheus collectors discover and collec"
+    },
+    {
+      "title": "Amazon Quick Introduces Quick Essentials",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-quick-essentials/",
+      "date": "2026-10-30",
+      "summary": "Amazon Quick introduces Quick Essentials for enterprises. The plan makes it easier for organizations to get started with all the features of Quick such as AI-powered chat, Research, Flows, and Apps, and lets users view and interact with Quick Sight dashboards and reports and then manage adoption at "
+    },
+    {
+      "title": "AWS Glue Data Catalog now supports Apache Iceberg table optimization in the US West (N. California) Region",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/glue-data-catalog-optimizers-us-west-1/",
+      "date": "2026-10-30",
+      "summary": "AWS Glue Data Catalog now supports automatic table optimization for Apache Iceberg tables in the US West (N. California) Region. Apache Iceberg is an open table format that delivers fast query performance over large tables in data lakes. With this launch, you can enable table optimization for indivi"
+    },
+    {
+      "title": "Amazon SageMaker AI inference now supports GPU partitioning for real-time endpoints",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/sagemaker-gpu-partitioning/",
+      "date": "2026-10-30",
+      "summary": "Amazon SageMaker AI inference now supports GPU partitioning, enabling you to run several models on a single GPU instead of dedicating a whole accelerator to each one. Using NVIDIA Multi-Instance GPU (MIG) technology, SageMaker AI divides a GPU into as many as seven isolated partitions, each with its"
+    },
+    {
+      "title": "AWS Marketplace now enables partners to list once and sell through multiple subsidiary accounts",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-marketplace-subsidiary-account-authorization",
+      "date": "2026-10-29",
+      "summary": "Today, AWS announces that AWS partners who operate multiple legal entities can publish a product listing once in their primary account and enable their local subsidiaries to sell it through direct private offers \u2014 eliminating the need to recreate and maintain duplicate listings across every account."
+    },
+    {
+      "title": "Amazon RDS for Oracle and SQL Server now support storage autoscaling on additional storage volumes",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-rds-oracle-sqlserver-autoscaling-additional-storage-volumes",
+      "date": "2026-10-29",
+      "summary": "Amazon RDS for SQL Server and Amazon RDS for Oracle now support RDS storage autoscaling on additional storage volumes. RDS storage autoscaling automatically scales storage capacity in response to growing database workloads, with zero downtime. \nAdditional storage volumes allow you to add up to three"
+    },
+    {
+      "title": "Amazon Aurora now supports post-quantum TLS key exchange",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aurora-postgresql-post-quantum-tls-key-exchange/",
+      "date": "2026-10-29",
+      "summary": "Starting today, Amazon Aurora PostgreSQL-Compatible Edition&nbsp;introduces support for post-quantum TLS (PQ-TLS) key exchange, providing you with post-quantum cryptography options for encrypting your data in transit. \nAmazon Aurora PostgreSQL versions 18 and higher support modification of the ssl_g"
+    },
+    {
+      "title": "Amazon MSK Connect now supports updating connector plugins and worker configurations",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-msk-connect-update-plugin-worker-configurations",
+      "date": "2026-10-29",
+      "summary": "Amazon MSK Connect (Amazon Managed Streaming for Apache Kafka Connect) now lets you update the custom plugin and worker configuration of an existing connector. This is useful when you need to update the custom plugin to run a new version of your connector code, for example one with updated dependenc"
+    },
+    {
+      "title": "AWS Step Functions workflows now available as AI agent tools",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/step-functions-workflows-ai-agent-tools/",
+      "date": "2026-10-29",
+      "summary": "You can now use your AWS Step Functions workflows as tools for AI agents through Amazon Bedrock AgentCore Gateway. Your agent decides when to run a workflow and what input to pass, and Step Functions runs each step exactly as you defined it. Agents can use your existing Standard and Express workflow"
+    },
+    {
+      "title": "Amazon DynamoDB Accelerator (DAX) is now available in additional Regions",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/dax-additional-regions/",
+      "date": "2026-10-29",
+      "summary": "Amazon DynamoDB Accelerator (DAX) is now available in two additional AWS Regions: Canada (Central) and Africa (Cape Town). DAX is a fully managed, highly available, in-memory cache for Amazon DynamoDB that delivers up to ten times performance improvement, from single-digit milliseconds to microsecon"
+    },
+    {
+      "title": "Amazon Managed Grafana now supports in-place upgrade to Grafana version 13.2",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/managed-grafana-upgrade-version-13-2/",
+      "date": "2026-10-29",
+      "summary": "Amazon Managed Grafana now supports in-place upgrade from Grafana version 12.4 to 13.2. Upgrading to version 13.2 brings features launched as part of open-source Grafana versions 13.0 to 13.2. These include Git Sync for dashboards, dynamic dashboards, and PromQL query support in the Amazon CloudWatc"
+    },
+    {
+      "title": "AWS DataSync Enhanced mode now supports Amazon FSx for Windows File Server, FSx for NetApp ONTAP, and Red Hat OpenShift Virtualization",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/datasync-enhanced-fsx-openshift/",
+      "date": "2026-10-29",
+      "summary": "AWS DataSync Enhanced mode now supports Amazon FSx for Windows File Server and Amazon FSx for NetApp ONTAP as source or destination locations. You can now run Windows to Windows transfers, such as from an on-premises file server to FSx for Windows File Server. Additionally, Enhanced mode agents can "
+    },
+    {
+      "title": "ACM now supports ACME for public certificates in AWS GovCloud (US)",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/acm-acme-support-govcloud-us/",
+      "date": "2026-10-29",
+      "summary": "AWS Certificate Manager (ACM) ACME protocol support is now available in AWS GovCloud (US-East) and AWS GovCloud (US-West), providing a fully managed ACME server endpoint that issues public TLS certificates from Amazon Trust Services using any ACMEv2-compatible client, including Certbot, cert-manager"
+    },
+    {
+      "title": "Amazon SageMaker AI now supports SOCI-indexed images to start training jobs in seconds",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/sagemaker-ai-soci-images-training/",
+      "date": "2026-10-29",
+      "summary": "Today, Amazon SageMaker AI announces support for Seekable OCI (SOCI)-indexed container images for training and processing jobs, so your jobs start running your code sooner. SOCI-indexed images start Amazon SageMaker AI training containers in seconds, cutting GPU idle time during image pulls by up to"
+    },
+    {
+      "title": "Amazon Redshift announces hands-off automated cross-region backups",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/redshift-automated-cross-region-backups/",
+      "date": "2026-10-29",
+      "summary": "Amazon Redshift announces automated cross-region snapshot copy for Amazon Redshift. You can now have your Amazon Redshift provisioned cluster or serverless workgroup automatically backed up to the target AWS region(s) you choose. The automated cross-region snapshot copy feature will automatically, a"
+    },
+    {
+      "title": "AWS Backup now supports cross-account management and cross-account backup in the AWS European Sovereign Cloud",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-backup-cross-account-esc/",
+      "date": "2026-10-29",
+      "summary": "AWS Backup now supports cross-account management, cross-account backup, and delegated administrators in the AWS European Sovereign Cloud (Germany) Region. These capabilities help you centrally manage, monitor, and copy backups across the accounts in your organization using AWS Organizations. \nWith c"
+    },
+    {
+      "title": "Amazon SageMaker Unified Studio now supports custom designations",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/sagemaker-custom-designations/",
+      "date": "2026-10-29",
+      "summary": "Amazon SageMaker Unified Studio now supports custom designations, named permission sets that control what actions individual project members can perform. Previously, project members could only be assigned Owner or Contributor designations, which provided nearly identical permissions. With custom des"
+    },
+    {
+      "title": "Amazon RDS for Oracle now supports September 2026 Monthly Recommended Patch",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-rds-oracle-september-mrp",
+      "date": "2026-10-28",
+      "summary": "Amazon Relational Database Service (Amazon RDS) for Oracle now supports the September 2026 Monthly Recommended Patch (MRP) for Oracle Database version 19c and 26ai. An MRP is a minor engine version that builds on a quarterly Release Update (RU), bundling Oracle's Critical Security Patch Update (CSPU"
+    },
+    {
+      "title": "Amazon Bedrock AgentCore CLI version 1.0 is now available",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-bedrock-agentcore-cli-version-1-0-available/",
+      "date": "2026-10-28",
+      "summary": "AWS announces the general availability of Amazon Bedrock AgentCore CLI version 1.0 (@aws/agentcore 1.0.0), rebuilt with faster startup, a consistent command structure, and support for more AgentCore resources. The CLI helps developers create, develop, deploy, and operate AI agents and supporting res"
+    },
+    {
+      "title": "Public endpoints for Amazon ElastiCache Serverless now in AWS GovCloud (US)",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-elasticache-serverless-public-endpoints-govcloud/",
+      "date": "2026-10-28",
+      "summary": "Amazon ElastiCache Serverless for Valkey now supports public endpoints in the AWS GovCloud (US) Regions. A public endpoint lets you connect to your cache from a serverless function or any application running outside a VPC, without setting up a VPN, a bastion host, or an SSH tunnel. \nWith a public en"
+    },
+    {
+      "title": "AWS Lambda supports Seekable OCI (SOCI) lazy loading for Lambda Managed Instances",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-lambda-seekable-oci-soci/",
+      "date": "2026-10-28",
+      "summary": "AWS Lambda now supports Seekable OCI (SOCI)&nbsp;for lazy loading Event Functions packaged as Open Container Initiative (OCI) images running on Lambda Managed Instances. With SOCI support, Lambda fetches only the files needed at each stage of the execution environment startup rather than downloading"
+    },
+    {
+      "title": "Introducing time series collections for the next generation of Amazon OpenSearch Serverless",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/time-series-collection-next-generation-opensearch-serverless/",
+      "date": "2026-10-28",
+      "summary": "Today, we're announcing support for time series collections on the next generation of Amazon OpenSearch Serverless. With time series collections, you can ingest, store, and analyze logs, metrics, traces, and event data without provisioning or managing clusters. They absorb ingest spikes automaticall"
+    },
+    {
+      "title": "Quick now supports smart approvals for agentic actions",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/quick-smart-approvals-agentic-actions/",
+      "date": "2026-10-28",
+      "summary": "Amazon Quick now supports smart approvals, a review layer that reduces unnecessary approval prompts while preserving human oversight of the actions that matter most. As agents take more actions on a user's behalf, such as sending email, updating records, and creating tickets, asking a person to appr"
+    },
+    {
+      "title": "Amazon EKS Dashboard now provides fleet-wide visibility into certificate authority (CA) rotation",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-eks-dashboard-fleet-wide-visibility-certificate-authority-ca-rotation/",
+      "date": "2026-10-28",
+      "summary": "Today, Amazon Elastic Kubernetes Service (Amazon EKS) announces certificate authority (CA) rotation visibility in the Amazon EKS Dashboard, giving you a consolidated view of CA rotation across your clusters. The Amazon EKS Dashboard already provides centralized visibility into your clusters across A"
+    },
+    {
+      "title": "Amazon ECS Managed Instances adds cross-instance and Spot consolidation",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/ecs-managed-instances-consolidation/",
+      "date": "2026-10-28",
+      "summary": "Today, Amazon Elastic Container Service (Amazon ECS) Managed Instances introduces two infrastructure optimization updates: cross-instance and Spot consolidation. Cross-instance consolidation evaluates tasks running across multiple underutilized instances together, packing them onto fewer instances t"
+    },
+    {
+      "title": "AWS Lambda durable functions now exports live telemetry for execution insights",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/lambda-durable-telemetry/",
+      "date": "2026-10-28",
+      "summary": "AWS Lambda announces the Durable Execution Telemetry Exporter plugin for Lambda durable functions. This new observability plugin captures the step-by-step history of your durable executions and sends them to one or more destinations of your choice. You can use the exported data to gather operational"
+    },
+    {
+      "title": "Amazon EKS Auto Mode now supports Kubernetes Gateway API",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-eks-auto-mode-kubernetes-gateway-api/",
+      "date": "2026-10-28",
+      "summary": "Amazon EKS Auto Mode now supports the Kubernetes Gateway API, giving customers a standard, portable way to define how traffic reaches their applications. Customers can configure application load balancing using Gateway and HTTPRoute resources, and EKS Auto Mode provisions and manages the underlying "
+    },
+    {
+      "title": "AWS Backup adds restore testing support for Amazon Redshift",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-backup-adds-redshift-restore-testing/",
+      "date": "2026-10-28",
+      "summary": "AWS Backup restore testing now supports Amazon Redshift. Restore testing helps you automate and periodically run restore tests of your backups, so you can confirm that your Amazon Redshift backups restore successfully and measure how long the restores take. \nYou can now include Amazon Redshift in yo"
+    },
+    {
+      "title": "Announcing the AWS Marketplace and Amazon Business unified storefront",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/marketplace-business-storefront/",
+      "date": "2026-10-28",
+      "summary": "Today, AWS Marketplace and Amazon Business announced the unified storefront. Organizations can now give their teams one curated catalog that puts software, data, and AI tools from AWS Marketplace alongside physical goods and supplies from Amazon Business. Many enterprises already buy from both, but "
+    },
+    {
+      "title": "AWS Agent Registry is now available in four additional AWS Regions",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-agent-registry-four-regions/",
+      "date": "2026-10-28",
+      "summary": "AWS Agent Registry, available through Amazon Bedrock AgentCore, is now available in four additional AWS Regions: Europe (London) eu-west-2, Europe (Frankfurt) eu-central-1, US East (Ohio) us-east-2, and Canada (Central) ca-central-1.\nAWS Agent Registry is a fully managed discovery service that provi"
+    },
+    {
+      "title": "AWS IAM Identity Center's Identity Store now supports change notifications through Amazon EventBridge",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-identity-store-change-notifications/",
+      "date": "2026-10-28",
+      "summary": "AWS IAM Identity Center's Identity Store now delivers real-time events to Amazon EventBridge when users, groups, or group memberships or the identity store itself is created, updated, or deleted. AWS IAM Identity Center Identity Store is a central repository that allows you to manage identities and "
+    },
+    {
+      "title": "Amazon ECS now supports GPU sharing with NVIDIA Multi-Process Service (MPS)",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-ecs-gpu-sharing-nvidia-mps/",
+      "date": "2026-10-27",
+      "summary": "Amazon Elastic Container Service (Amazon ECS) now supports GPU sharing with NVIDIA Multi-Process Service (MPS), enabling you to run multiple Amazon ECS tasks concurrently on a single NVIDIA GPU. GPU sharing helps you increase GPU utilization and reduce infrastructure costs for workloads that use onl"
+    },
+    {
+      "title": "SageMaker MLflow Apps now support MLflow 3.16",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/mflow-version-3-16/",
+      "date": "2026-10-27",
+      "summary": "Amazon SageMaker AI MLflow Apps now support MLflow 3.16, bringing a redesigned tracing experience and faster experiment tracking to your generative AI and machine learning workflows. \nMLflow 3.16 improves debugging and analysis of generative AI applications and agents. The redesigned trace explorer "
+    },
+    {
+      "title": "Amazon Connect Customer supports inline attachment previews",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/connect-attachment-previews/",
+      "date": "2026-10-27",
+      "summary": "Amazon Connect Customer lets agents preview attachments directly in the agent workspace, reducing contact handling time and limiting the need to download sensitive customer information. Agents can preview PDFs, images, and text files across email, chat, and cases, navigate between attachments, and v"
+    },
+    {
+      "title": "Amazon Aurora serverless now supports up to 384 ACUs",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aurora-serverless-supports-384-acu/",
+      "date": "2026-10-27",
+      "summary": "Amazon Aurora serverless now supports database capacity of up to 384 Aurora Capacity Units (ACUs) for Aurora PostgreSQL-Compatible Edition, a 50% increase from the previous maximum of 256 ACUs. Each ACU provides approximately 2 gibibytes (GiB) of memory with corresponding CPU and networking, so a si"
+    },
+    {
+      "title": "Amazon ElastiCache expands data tiering to R8gd and R7gd nodes in Europe (Spain) and Asia Pacific (Hyderabad)",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/09/elasticache-data-tiering-spain/",
+      "date": "2026-10-27",
+      "summary": "Amazon ElastiCache for Valkey data tiering is now available on Graviton4-based R8gd nodes in the AWS Europe (Spain) Region, and on Graviton3-based R7gd nodes in the Europe (Spain) and Asia Pacific (Hyderabad) Regions. Data tiering is a lower-cost way to scale your Valkey clusters to hundreds of tera"
+    },
+    {
+      "title": "Amazon ElastiCache for Valkey now supports changing durability on existing clusters",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/elasticache-changing-durability/",
+      "date": "2026-10-27",
+      "summary": "Amazon ElastiCache for Valkey now lets you enable or disable durability on your existing node-based clusters. Previously, you couldn't change the durability configuration of an existing cluster in place. This made it harder to move from caching to persistent data store use cases, or to adapt as your"
+    },
+    {
+      "title": "Amazon Corretto October 2026 Patch Updates",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-corretto-oct-2026-patch-updates",
+      "date": "2026-10-27",
+      "summary": "On October 26, 2026 Amazon announced a patch update for the following Amazon Corretto Long-Term Support (LTS) and Feature Release (FR) versions of OpenJDK. Corretto 27.0.1.0.11, 25.0.5.0.10, 21.0.13.0.11, 17.0.21.0.11, 11.0.33.0.10, and 8u512 are now available for download. Amazon Corretto is a no-c"
+    },
+    {
+      "title": "Amazon Neptune now supports online index rebuild to reclaim storage",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/neptune-online-index-rebuild/",
+      "date": "2026-10-27",
+      "summary": "Amazon Neptune Database now supports online index rebuild, a new capability that helps database administrators and application teams defragment Neptune indexes and reclaim unused storage space without taking their database offline. Over time, insert, update, and delete operations create gaps of unus"
+    },
+    {
+      "title": "Amazon Bedrock now offers Canada cross-Region inference for Claude Haiku 5.5",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/claude-haiku-5-5-canada-cris/",
+      "date": "2026-10-27",
+      "summary": "Amazon Bedrock now offers Canada cross-Region inference (CRIS) for Anthropic's Claude Haiku 5.5. Customers with strict data residency requirements can now keep inference processing entirely within Canada. Canada CRIS routes requests only between ca-central-1 (Canada Central) and ca-west-1 (Canada We"
+    },
+    {
+      "title": "Amazon ECR now supports replication backfill for existing container images",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/replication-backfill-amazon-ecr",
+      "date": "2026-10-26",
+      "summary": "Amazon Elastic Container Registry (Amazon ECR) now supports replication backfill, enabling you to replicate existing images in your private registry to your configured replication registry destinations. Previously, replication only applied to images pushed after the replication configuration was ena"
+    },
+    {
+      "title": "OpenAI GPT-6.1 Terra is now generally available on Amazon Bedrock",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/openai-gpt-6-1-terra-on-amazon-bedrock/",
+      "date": "2026-10-26",
+      "summary": "Today, AWS announces the general availability of OpenAI GPT-6.1 Terra on Amazon Bedrock. GPT-6.1 Terra expands the GPT-6 family with a balance of capability, speed, and cost efficiency for everyday workloads.&nbsp; \nAs the newest model in the Terra line, GPT-6.1 Terra combines detailed visual reason"
+    },
+    {
+      "title": "Amazon WorkSpaces Core Managed Instances now supports ModifyVolume API",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-workspaces-cmi-modifyvolume/",
+      "date": "2026-10-26",
+      "summary": "Amazon WorkSpaces Core Managed Instances now supports the ModifyVolume API, which lets you change volume size, volume type, IOPS, or throughput in place, without detaching the volume or restarting the instance. Previously, changing storage capacity or performance on a deployed managed instance requi"
+    },
+    {
+      "title": "Amazon IVS Low-Latency Streaming now provides a failover slate",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-ivs-low-latency-streaming-failover-slate",
+      "date": "2026-10-26",
+      "summary": "Amazon Interactive Video Service (Amazon IVS) Low-Latency Streaming now provides a failover slate, an animated image that IVS displays to viewers when a broadcaster's stream is unexpectedly interrupted. Instead of a buffering wheel or frozen frame, viewers see the slate until the broadcaster reconne"
+    },
+    {
+      "title": "Amazon SageMaker Unified Studio adds light mode support for IDC-based domains",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/smus-light-mode",
+      "date": "2026-10-26",
+      "summary": "Today, AWS announces light mode support in Amazon SageMaker Unified Studio for Identity Center (IDC) based domains. Customers can now configure the visual interface mode to match their preference, choosing between dark and light themes. With this launch, customers can set this visual preference in b"
+    },
+    {
+      "title": "Amazon Connect Customer expands testing and simulation to validate flow action outcomes",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/connect-customer-validate-flow-actions/",
+      "date": "2026-10-26",
+      "summary": "Amazon Connect Customer now enables you to validate the outcomes of your customer experience flow actions during testing and simulation. In addition to confirming that an action started, you can now verify the data it returns when it completes, such as a Lambda function response, an Amazon Lex resol"
+    },
+    {
+      "title": "Amazon Connect Customer now lets you view metrics by customer lifetime value and repeat-caller status",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/connect-customer-boma-segment/",
+      "date": "2026-10-26",
+      "summary": "Now you can view your metrics across customer segments: customer lifetime value (LTV) and repeat callers. See how any metric differs for repeat callers versus the rest of your contacts, or how results hold up among your highest-LTV customers; so you can spot the groups trending the wrong way before "
+    },
+    {
+      "title": "Amazon Connect Customer now measures the outcomes that drive retention and revenue",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/connect-customer-boma-metrics/",
+      "date": "2026-10-26",
+      "summary": "Amazon Connect Customer now scores the outcome of your customer interactions. It shows whether the customer left satisfied, is at risk of churning, made a purchase, or resolved their need in self-service. You can now see whether an interaction worked, not just how efficiently it ran. Each metric com"
+    },
+    {
+      "title": "AWS Key Management Service now supports ML-KEM for post-quantum key encapsulation",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/kms-ml-kem-post-quantum/",
+      "date": "2026-10-26",
+      "summary": "AWS Key Management Service (KMS) now supports Module-Lattice-Based Key-Encapsulation Mechanism (ML-KEM), a post-quantum cryptography standard under NIST FIPS 203, which&nbsp;enables two parties to establish a shared secret.&nbsp;NIST designed ML-KEM to replace the classical key-establishment schemes"
+    },
+    {
+      "title": "AWS Elemental MediaConnect Router now supports endpoint connection management",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/mediaconnect-cross-account-endpoints/",
+      "date": "2026-10-26",
+      "summary": "AWS Elemental MediaConnect Router&nbsp;now supports managing connections through a new endpoint registry, which allows you to register devices or software external to MediaConnect and connect those endpoints to your router inputs and outputs. You can share registered endpoints directly with other AW"
+    },
+    {
+      "title": "AWS EC2 Auto Scaling now supports Launch Before Terminate at account-level to replace instances",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/ec2-auto-scaling-launch-before-terminate/",
+      "date": "2026-10-26",
+      "summary": "AWS EC2 Auto Scaling now lets you enable Launch Before Terminate as the default replacement behavior across all Auto Scaling groups in your account. When enabled, Auto Scaling launches a replacement instance and waits for it to pass health checks before terminating the instance it replaces, helping "
+    },
+    {
+      "title": "AWS IAM Identity Center now supports cross-Region trusted identity propagation",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/aws-iam-identity-center-cross-region-tip/",
+      "date": "2026-10-26",
+      "summary": "Trusted identity propagation carries a user's identity with their request, so AWS services can grant permissions based on who the user is and their underlying group associations, and log that user's access for auditing. With cross-Region support, this identity context can now be propagated to AWS se"
+    },
+    {
+      "title": "Amazon RDS now supports the latest Cumulative Update and GDR updates for Microsoft SQL Server",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-rds-supports-latest-cumulative-update-gdr-microsoft-sql-server/",
+      "date": "2026-10-26",
+      "summary": "Amazon Relational Database Service (Amazon RDS) for SQL Server now supports the latest Cumulative Updates (CU) and General Distribution Release (GDR) updates for Microsoft SQL Server. This release includes support for Microsoft SQL Server 2017 CU31+GDR KB5122774 (RDS version 14.00.3550.4.v1), SQL Se"
+    },
+    {
+      "title": "AWS Glue Data Catalog now supports OAuth for Apache Iceberg REST Catalog APIs",
+      "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/glue-catalog-oauth-iceberg-rest/",
+      "date": "2026-10-26",
+      "summary": "AWS Glue Data Catalog now supports OAuth 2.0 bearer token authentication for Apache Iceberg REST Catalog (IRC) APIs using AWS Sign-In. The Apache Iceberg REST Catalog specification defines OAuth 2.0 as its standard authentication mechanism, and query engines such as Apache Spark, Trino, and Apache F"
+    },
     {
       "title": "Web Search on Amazon Bedrock now supports domain filtering and user location controls",
       "link": "https://aws.amazon.com/about-aws/whats-new/2026/10/bedrock-web-search-domain-user-location/",
